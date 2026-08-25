@@ -8,19 +8,22 @@
 
 [FACT] 다음 Workflow는 Solution Discovery이며 아직 시작하지 않았습니다.
 
+[FACT] Git 기본 branch는 `main`이며 GitHub의 `origin/main`과 동기화해 운영합니다.
+
 [FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
 
 [FACT] `docs/01-product/problem.md`는 사용자가 제공한 확정 정보와 아직 검증할 항목을 분리해 기록한 초기 Problem Definition입니다.
 
 ## Current Task
 
-[FACT] Research / JTBD 사용자 승인과 Repository Context 동기화.
+[FACT] Repository 단계 종료 Git 운영 규칙 정비와 실제 Git 상태 동기화.
 
 ## Completed
 
 - [FACT] `C:\project`가 빈 새 프로젝트 위치임을 확인했습니다.
-- [FACT] Git Repository를 `master` 브랜치로 초기화했습니다.
-- [FACT] 실제 브랜치 이름과 README 및 AI Context의 기록을 `master`로 동기화했습니다.
+- [FACT] Git Repository를 처음 `master` 브랜치로 초기화한 뒤 기본 branch를 `main`으로 변경했습니다.
+- [FACT] 최초 commit `ed74291`에 Problem Definition과 Research / JTBD 문서를 기록하고 GitHub의 `origin/main`에 push했습니다.
+- [FACT] GitHub remote Repository를 `https://github.com/rleoprleop/news-data-pipeline.git`로 연결했습니다.
 - [FACT] Problem Definition의 사용자, JTBD, MVP 범위, 출력, Retention, 비용, 용량과 지연 목표가 사용자 확정 요구사항과 충돌하지 않음을 검토했습니다.
 - [FACT] 남은 검증·결정 항목을 Research / JTBD, Product Specification, Technical Requirements 및 Data / Interface Design 단계에서 다룰 항목으로 확인했습니다.
 - [FACT] 사용자가 2026-08-25에 `docs/01-product/problem.md`를 명시적으로 승인했습니다.
@@ -38,6 +41,8 @@
 - [FACT] 사용자가 News, Ask와 Show를 모두 데이터 파이프라인의 일반 후보로 처리하고 source type만으로 조기 제외하지 않기로 결정했습니다.
 - [FACT] RSS 표본 50개 전체를 title과 content만으로 검토한 결과, 48개는 보수적인 2문장 요약에 충분하고 1개는 제한적이며 1개는 불충분하다고 평가했습니다.
 - [FACT] 사용자가 2026-08-25에 `docs/01-product/research.md`의 refined JTBD와 Research conclusion을 승인했습니다.
+- [FACT] 사용자가 각 Workflow 단계 종료 시 commit 및 push 안내 절차를 수행하는 Git 운영 기준을 확정했습니다.
+- [FACT] 문서 중심 단계는 `main`, 구현 이후 코드 변경은 기능 또는 수정 단위의 작업 branch와 Pull Request를 사용하기로 확정했습니다.
 
 ## In Progress
 
@@ -58,6 +63,18 @@
 - [FACT] `docs/01-product/research.md`는 2026-08-25에 사용자 승인을 받았습니다.
 - [FACT] 승인된 문제, 목표와 MVP 범위를 변경하려면 사용자 승인이 필요합니다.
 - [FACT] 승인된 Research / JTBD conclusion을 변경하려면 사용자 승인이 필요합니다.
+
+### Git Workflow
+
+- [FACT] 각 Workflow 단계는 사용자 승인과 관련 문서 동기화 후 commit 및 push 안내 절차로 마감합니다.
+- [FACT] 단계 종료 시 변경 범위, 테스트 결과, 문서 동기화와 남은 위험을 먼저 보고합니다.
+- [FACT] 사용자가 직접 Git 명령을 실행하면 Agent가 명령을 순서대로 안내하고 결과를 확인합니다.
+- [FACT] Agent가 commit 또는 push를 실행하려면 사용자의 명시적 승인이 필요합니다.
+- [FACT] Commit과 push가 완료되거나 사용자가 명시적으로 연기하기 전에는 다음 Workflow 단계로 넘어가지 않습니다.
+- [FACT] 문서 중심의 Product 및 Design 단계는 승인된 변경을 단계별로 `main`에 commit하고 push합니다.
+- [FACT] Feature Implementation 이후의 코드 변경은 기능 또는 수정 단위의 작업 branch에서 진행하고 Pull Request로 `main`에 병합합니다.
+- [FACT] 작업 branch는 대화마다 만들지 않으며 독립적으로 검토하거나 되돌릴 변경 단위로 만듭니다.
+- [FACT] 일반적인 단계 종료 절차에서는 force push를 사용하지 않습니다.
 
 ### User and Job
 
@@ -146,7 +163,7 @@
 - [FACT] 무료 한도 초과 시 유료 호출로 자동 전환하지 않습니다.
 - [FACT] 13시간 지연 목표를 누락 복구 조회 범위로 사용하지 않습니다.
 - [FACT] 월별 Insight 보존이 보장되기 전에 관련 원천 데이터를 삭제하는 설계를 승인하지 않습니다.
-- [FACT] 사용자 승인 없이 배포하거나 Git commit을 생성하지 않습니다.
+- [FACT] 사용자 승인 없이 배포하거나 Git commit 또는 Git push를 실행하지 않습니다.
 - [FACT] News, Ask와 Show를 source type 또는 title prefix만으로 수집·처리 후보에서 조기 제외하지 않습니다.
 
 ## Known Issues
@@ -163,7 +180,6 @@
 - [UNKNOWN] 월별 Insight의 전달 채널과 실행 시각이 정해지지 않았습니다.
 - [UNKNOWN] 월 경계, 발송 경계와 재수집 중첩 범위의 정확한 상태 관리 방식이 정해지지 않았습니다.
 - [FACT] 애플리케이션 코드, 데이터베이스, 테스트와 배포 환경이 없습니다.
-- [FACT] 아직 Git commit이 없습니다.
 
 ## Technical Debt
 
@@ -184,7 +200,9 @@
 
 [FACT] 2026-08-25 Asia/Seoul 기준 Repository 초기 상태와 사용자 제공 요구사항을 확인했습니다.
 
-[FACT] 현재 Git 브랜치는 `master`이며 로컬 `init.defaultBranch` 설정은 별도로 구성되지 않았습니다.
+[FACT] 현재 Git branch는 `main`이며 GitHub remote는 `https://github.com/rleoprleop/news-data-pipeline.git`입니다.
+
+[FACT] 최초 commit `ed74291`이 local `main`과 `origin/main`에 반영됐음을 확인했습니다.
 
 [FACT] 2026-08-25 Asia/Seoul 기준 `docs/01-product/problem.md`와 확정 요구사항 사이에 범위 또는 목표 충돌이 없음을 확인했습니다.
 

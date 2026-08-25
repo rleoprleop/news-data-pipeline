@@ -45,12 +45,16 @@
 
 - [FACT] Design Before Code: 요구사항과 설계 승인 전에는 구현하지 않습니다.
 - [FACT] Small Changes: 현재 Task와 관련된 최소 범위만 변경합니다.
-- [FACT] Human in the Loop: Scope, 핵심 Architecture, 데이터 손실 가능 작업, 배포와 Git commit은 사용자 승인 없이 수행하지 않습니다.
+- [FACT] Human in the Loop: Scope, 핵심 Architecture, 데이터 손실 가능 작업, 배포, Git commit과 Git push는 사용자 승인 없이 수행하지 않습니다.
 - [FACT] Documentation and Context Sync: 중요 결정과 구현 변경을 관련 문서와 `ai-context.md`에 반영합니다.
+- [FACT] Stage Closure: 각 Workflow 단계는 사용자 승인과 문서 동기화 후 commit 및 push 절차로 마감합니다.
+- [FACT] Branch Strategy: 문서 중심 단계는 `main`을 사용하고, 구현 이후 코드 변경은 기능 또는 수정 단위의 작업 branch와 Pull Request를 사용합니다.
 - [FACT] Kafka와 Spark는 실제 데이터 규모와 요구사항으로 필요성이 입증되기 전까지 도입하지 않습니다.
 
 ## Repository State
 
-[FACT] 2026-08-25에 `C:\project`에서 새 Git Repository를 `master` 브랜치로 초기화했습니다.
+[FACT] 2026-08-25에 `C:\project`에서 새 Git Repository를 `master` 브랜치로 초기화한 뒤 기본 branch를 `main`으로 변경했습니다.
 
-[FACT] 초기 문서 생성 시점에는 Git commit을 만들지 않았습니다.
+[FACT] Problem Definition과 Research / JTBD 문서를 최초 commit `ed74291`로 기록하고 `origin/main`에 push했습니다.
+
+[FACT] GitHub remote Repository는 `https://github.com/rleoprleop/news-data-pipeline.git`입니다.
