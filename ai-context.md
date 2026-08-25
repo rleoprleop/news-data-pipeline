@@ -1,0 +1,209 @@
+# AI Context
+
+## Project Status
+
+[FACT] 프로젝트는 전체 Workflow 1단계인 Problem Definition과 2단계인 Research / JTBD를 사용자 승인으로 완료한 상태입니다.
+
+[FACT] `docs/01-product/research.md`는 2026-08-25에 사용자 승인을 받았습니다.
+
+[FACT] 다음 Workflow는 Solution Discovery이며 아직 시작하지 않았습니다.
+
+[FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
+
+[FACT] `docs/01-product/problem.md`는 사용자가 제공한 확정 정보와 아직 검증할 항목을 분리해 기록한 초기 Problem Definition입니다.
+
+## Current Task
+
+[FACT] Research / JTBD 사용자 승인과 Repository Context 동기화.
+
+## Completed
+
+- [FACT] `C:\project`가 빈 새 프로젝트 위치임을 확인했습니다.
+- [FACT] Git Repository를 `master` 브랜치로 초기화했습니다.
+- [FACT] 실제 브랜치 이름과 README 및 AI Context의 기록을 `master`로 동기화했습니다.
+- [FACT] Problem Definition의 사용자, JTBD, MVP 범위, 출력, Retention, 비용, 용량과 지연 목표가 사용자 확정 요구사항과 충돌하지 않음을 검토했습니다.
+- [FACT] 남은 검증·결정 항목을 Research / JTBD, Product Specification, Technical Requirements 및 Data / Interface Design 단계에서 다룰 항목으로 확인했습니다.
+- [FACT] 사용자가 2026-08-25에 `docs/01-product/problem.md`를 명시적으로 승인했습니다.
+- [FACT] 프로젝트 작업 규칙을 `AGENTS.md`에 기록했습니다.
+- [FACT] 제품 개요와 현재 상태를 `README.md`에 기록했습니다.
+- [FACT] 사용자, JTBD, MVP 범위, 출력, Retention, 용량, 비용 및 지연 목표를 `docs/01-product/problem.md`에 기록했습니다.
+- [FACT] 검증이 필요한 RSS, AI, 분류 품질과 운영 항목을 문서에 분리했습니다.
+- [FACT] 승인된 문제를 바탕으로 핵심 JTBD, 기능적 Job과 desired outcome을 구체화했습니다.
+- [FACT] GeekNews의 공식 RSS URL, Atom 응답 형식, News·Ask·Show 전체 포함과 시간순 노출 특성을 확인했습니다.
+- [FACT] GeekNews 이용약관에서 과도한 자동 접근 금지와 서비스 변경·중단 가능성을 확인했습니다.
+- [FACT] 확인된 RSS 사실과 직접 원본 관찰이 필요한 항목을 `docs/01-product/research.md`에 분리했습니다.
+- [FACT] 사용자가 2026-08-25에 제공한 RSS XML 표본을 정상적으로 파싱하고 feed-level metadata와 50개 entry 구조를 확인했습니다.
+- [FACT] 표본의 모든 entry가 GeekNews topic link, 동일 값의 `id`, `published`, `updated`, `author`와 HTML `content`를 제공함을 확인했습니다.
+- [FACT] 사용자가 외부 원문 직접 URL은 MVP 결과의 필수 조건이 아니며 RSS가 제공한 GeekNews topic link를 사용할 수 있다고 확인했습니다.
+- [FACT] 사용자가 News, Ask와 Show를 모두 데이터 파이프라인의 일반 후보로 처리하고 source type만으로 조기 제외하지 않기로 결정했습니다.
+- [FACT] RSS 표본 50개 전체를 title과 content만으로 검토한 결과, 48개는 보수적인 2문장 요약에 충분하고 1개는 제한적이며 1개는 불충분하다고 평가했습니다.
+- [FACT] 사용자가 2026-08-25에 `docs/01-product/research.md`의 refined JTBD와 Research conclusion을 승인했습니다.
+
+## In Progress
+
+- [FACT] 현재 진행 중인 Research, 설계 또는 구현 작업은 없습니다.
+- [UNKNOWN] 월별 Insight의 전달 채널과 생성 시점은 아직 결정되지 않았습니다.
+
+## Next Task
+
+[INFERENCE] 다음 Task 하나는 Solution Discovery에서 승인된 Problem Definition과 Research / JTBD를 바탕으로 가능한 solution approach를 탐색하는 것입니다.
+
+[FACT] Solution Discovery는 아직 시작하지 않았으며 이번 승인 동기화 작업에서 진행하지 않습니다.
+
+## Important Decisions
+
+### Workflow Approval
+
+- [FACT] `docs/01-product/problem.md`는 2026-08-25에 사용자 승인을 받았습니다.
+- [FACT] `docs/01-product/research.md`는 2026-08-25에 사용자 승인을 받았습니다.
+- [FACT] 승인된 문제, 목표와 MVP 범위를 변경하려면 사용자 승인이 필요합니다.
+- [FACT] 승인된 Research / JTBD conclusion을 변경하려면 사용자 승인이 필요합니다.
+
+### User and Job
+
+- [FACT] 사용자는 프로젝트 소유자 한 명입니다.
+- [FACT] 사용자는 매일 10:00와 22:00 KST에 Discord 결과를 확인합니다.
+- [FACT] 결과는 중요 기사 선별, 원문 확인과 기술 트렌드 파악에 사용합니다.
+- [FACT] 뉴스 페이지 순회와 별도 정리 시간을 줄이고 광고성·홍보성 기사를 걸러내는 것이 목적입니다.
+
+### MVP Scope
+
+- [FACT] MVP는 한국어 IT 뉴스만 다룹니다.
+- [FACT] 관심 주제는 데이터 엔지니어링, 클라우드, AI, 백엔드, 개발 도구와 데이터베이스입니다.
+- [FACT] 첫 수집원은 GeekNews RSS 하나입니다.
+- [FACT] GeekNews RSS의 News, Ask와 Show를 모두 수집·처리 후보에 포함합니다.
+- [FACT] source type 또는 title prefix만으로 Ask와 Show를 조기 제외하지 않습니다.
+- [INFERENCE] 최종 출력 포함 여부는 이후 관심 주제·중요도·홍보성 처리 결과로 판단합니다.
+- [FACT] 시사·경제 뉴스와 네이버 RSS 후보는 현재 MVP 범위가 아닙니다.
+- [FACT] RSS 제목, 설명, 링크와 관련 메타데이터만 저장·처리합니다.
+- [FACT] 외부 원문 기사 본문은 수집하지 않습니다.
+- [FACT] RSS만으로 요약 품질이 부족하다는 검증 결과가 있을 때만 GeekNews 상세 페이지 수집을 검토합니다.
+
+### Delivery
+
+- [FACT] Discord 발송 시각은 매일 10:00와 22:00 KST입니다.
+- [FACT] 이전 발송 이후 수집된 기사 중 중요도순 최대 10개를 선택합니다.
+- [FACT] 각 항목은 한국어 제목, 2~3문장 요약, 키워드와 링크를 포함합니다.
+- [FACT] 원문 접근 가능 여부와 무관하게 기사 링크를 제공합니다.
+- [FACT] 외부 원문 직접 URL은 필수가 아니며 RSS가 제공한 GeekNews topic link를 기사 링크로 사용할 수 있습니다.
+- [FACT] 외부 자료 기반 항목과 GeekNews 직접 작성 항목이 혼재하므로 외부 원문 URL이 항상 존재한다고 가정하지 않습니다.
+- [FACT] 홍보성 의심 기사는 주요 목록에서 제외하고 제외 건수만 표시합니다.
+- [FACT] 신규 기사가 없으면 Discord 메시지를 발송하지 않습니다.
+
+### Monthly Insight and Retention
+
+- [FACT] 월별 Insight는 주제 비중, 전월 대비 주제 비중 증감, 새롭게 떠오르거나 급증한 키워드와 주요 주제별 대표 기사를 포함합니다.
+- [FACT] 첫 달에는 전월 비교를 생략하고 두 번째 달부터 비교합니다.
+- [FACT] Raw RSS 데이터는 3개월간 보존합니다.
+- [FACT] 기사별 AI 요약, 키워드와 판정 결과는 12개월간 보존합니다.
+- [FACT] 월별 Insight는 기간 제한 없이 보존합니다.
+- [FACT] 보존 기간은 나중에 쉽게 변경할 수 있는 설정값으로 분리합니다.
+
+### Capacity, Cost and Reliability
+
+- [FACT] 초기 처리 용량 기준은 최대 100건/일입니다.
+- [FACT] 실제 기사량과 API 사용량을 첫 2~4주 동안 측정한 뒤 기준을 조정합니다.
+- [FACT] 추가 월 운영비 상한은 0원입니다.
+- [FACT] 기사 전달 목표는 게시 후 최대 13시간 이내입니다.
+- [FACT] 각 발송 배치는 30분 이내 완료하는 것이 목표입니다.
+- [FACT] 13시간은 전달 지연 목표이며 누락 복구 범위가 아닙니다.
+- [INFERENCE] 누락 복구의 출발 방향은 마지막 성공 수집 시점과 충분한 중첩 범위를 이용한 재수집, 그리고 `link UNIQUE + ON CONFLICT`를 이용한 중복 제거입니다.
+- [UNKNOWN] 충분한 중첩 범위와 GeekNews 링크의 안정성·정규화 규칙은 설계 전에 검증해야 합니다.
+
+### AI Provider
+
+- [FACT] AI 제공자는 Gemini로 고정하지 않습니다.
+- [FACT] MVP에서는 무료 제공자 하나만 연동합니다.
+- [FACT] 이후 교체 가능한 경계를 마련하되 여러 제공자를 동시에 구현하지 않습니다.
+- [FACT] 공개된 GeekNews RSS 제목과 설명이 무료 AI 제공자의 약관에 따라 서비스 개선 등에 이용될 가능성은 허용합니다.
+- [FACT] Gemini 무료 API는 우선 검증 후보입니다.
+- [FACT] ChatGPT Pro 사용량을 OpenAI API 무료 사용량으로 간주하지 않습니다.
+- [FACT] OpenAI Platform의 별도 무료 API credit이 공식적으로 확인될 때만 월 0원 후보가 될 수 있습니다.
+- [FACT] 무료 할당량이 소진돼도 유료 호출로 자동 전환하면 안 됩니다.
+
+### GeekNews Research
+
+- [FACT] 공식 RSS URL은 `https://news.hada.io/rss/news`입니다.
+- [FACT] endpoint는 2026-08-25 기준 `application/atom+xml` 형식으로 응답합니다.
+- [FACT] 공식 설명상 feed는 News뿐 아니라 Ask와 Show를 모두 포함하며, 첫 화면 순위가 아니라 시간순으로 노출합니다.
+- [FACT] 사용자 제공 표본의 50개 entry는 모두 `title`, `link`, `id`, `updated`, `published`, `author`와 `content`를 제공합니다.
+- [FACT] 모든 entry link는 GeekNews topic page를 가리키며 `id`는 같은 link 값입니다.
+- [FACT] 표본에는 외부 원문 전용 link와 entry-level type/category가 없습니다.
+- [FACT] 외부 원문 직접 URL은 MVP 필수 조건이 아니며 RSS의 GeekNews topic link를 결과 링크로 사용할 수 있습니다.
+- [FACT] 모든 `content`는 한국어 HTML이고, tag 제거 후 53~208자이며 40개가 말줄임표로 끝납니다.
+- [INFERENCE] 50개 전체의 입력 충분성 검토에서 48개는 보수적인 2문장 요약이 가능하고 1개는 제한적이며 1개는 불충분합니다.
+- [INFERENCE] 표본 기준 RSS 정보는 MVP 요약 입력으로 대체로 충분하며 GeekNews 상세 페이지 수집을 추가할 근거는 없습니다.
+- [FACT] 모든 entry의 `published`와 `updated`는 같고 `+09:00`이며 최신순입니다.
+- [FACT] GeekNews 이용약관은 서비스에 과도한 부하를 주는 자동화 접근, crawling과 script 실행을 금지합니다.
+- [UNKNOWN] 허용 polling 기준, ID의 장기 안정성, 시각의 업무 의미, 고정 항목 수, 갱신 및 과거 노출 범위는 확인하지 못했습니다.
+
+## Do Not Change
+
+- [FACT] 사용자 승인 없이 MVP에 외부 원문 기사 본문 수집을 추가하지 않습니다.
+- [FACT] 사용자 승인 없이 시사·경제 뉴스 또는 네이버 RSS를 MVP에 추가하지 않습니다.
+- [FACT] 사용자 승인 없이 다중 AI 제공자 구현, Kafka 또는 Spark를 추가하지 않습니다.
+- [FACT] 검증 없이 특정 AI 제공자를 확정하지 않습니다.
+- [FACT] 무료 한도 초과 시 유료 호출로 자동 전환하지 않습니다.
+- [FACT] 13시간 지연 목표를 누락 복구 조회 범위로 사용하지 않습니다.
+- [FACT] 월별 Insight 보존이 보장되기 전에 관련 원천 데이터를 삭제하는 설계를 승인하지 않습니다.
+- [FACT] 사용자 승인 없이 배포하거나 Git commit을 생성하지 않습니다.
+- [FACT] News, Ask와 Show를 source type 또는 title prefix만으로 수집·처리 후보에서 조기 제외하지 않습니다.
+
+## Known Issues
+
+- [UNKNOWN] 정보가 부족한 항목을 1문장으로 허용할지, 표시할지, 주요 후보에서 제외할지 결정되지 않았습니다.
+- [UNKNOWN] 실제 무료 AI 후보의 한국어 요약 품질은 검증하지 않았습니다.
+- [UNKNOWN] 제공된 표본에 Ask가 없어 Ask 항목의 요약 충분성은 검증하지 못했습니다.
+- [UNKNOWN] GeekNews topic link와 Atom `id`의 장기 안정성, 시각의 업무 의미, 갱신 특성과 과거 노출 범위를 확인하지 못했습니다.
+- [UNKNOWN] source type을 추론해 metadata로 보존할지 결정되지 않았습니다.
+- [UNKNOWN] GeekNews RSS의 허용 polling 빈도와 conditional request 지원 여부를 확인하지 못했습니다.
+- [UNKNOWN] 중요도 산정 기준, 홍보성 판정 기준과 제외 임계값이 없습니다.
+- [UNKNOWN] 제외 판정의 사유와 점수를 보존할지 결정되지 않았습니다.
+- [UNKNOWN] 무료 AI 후보별 현재 할당량, 데이터 조건, 유료 전환 차단 방식과 한국어 품질을 검증하지 않았습니다.
+- [UNKNOWN] 월별 Insight의 전달 채널과 실행 시각이 정해지지 않았습니다.
+- [UNKNOWN] 월 경계, 발송 경계와 재수집 중첩 범위의 정확한 상태 관리 방식이 정해지지 않았습니다.
+- [FACT] 애플리케이션 코드, 데이터베이스, 테스트와 배포 환경이 없습니다.
+- [FACT] 아직 Git commit이 없습니다.
+
+## Technical Debt
+
+- [FACT] 구현이 시작되지 않아 코드 수준 Technical Debt는 없습니다.
+- [INFERENCE] README와 Context 문서는 Problem Definition 이후 각 단계의 문서 링크와 승인 상태를 계속 갱신해야 합니다.
+
+## Current Risks
+
+- [INFERENCE] 표본의 2개 저정보 항목이나 말줄임표 뒤의 내용을 억지로 2~3문장으로 확장하면 반복 또는 근거 없는 추론이 발생할 수 있습니다.
+- [INFERENCE] 중요도와 홍보성 판정 기준이 불명확하면 유용한 기사가 제외되거나 광고성 기사가 포함될 수 있습니다.
+- [INFERENCE] 무료 AI의 할당량·약관·모델 제공 조건 변경은 월 운영비 0원 목표를 위협합니다.
+- [INFERENCE] 표본에서는 GeekNews topic link와 `id`가 같지만 장기 안정성이 확인되지 않아 이를 검증 없이 고유 식별자로 사용하면 중복 방지 또는 갱신 처리에서 오류가 발생할 수 있습니다.
+- [INFERENCE] News, Ask와 Show를 모두 후보로 처리하므로 관심 주제·중요도·홍보성 기준이 불명확하면 최종 큐레이션과 월별 통계의 품질이 낮아질 수 있습니다.
+- [INFERENCE] 월별 Insight 생성과 Raw 삭제 순서를 잘못 설계하면 장기 데이터가 손실될 수 있습니다.
+- [INFERENCE] 신규 기사 0건, 부분 실패와 재실행 시 발송 구간을 잘못 관리하면 누락 또는 중복 전달이 발생할 수 있습니다.
+
+## Last Verified
+
+[FACT] 2026-08-25 Asia/Seoul 기준 Repository 초기 상태와 사용자 제공 요구사항을 확인했습니다.
+
+[FACT] 현재 Git 브랜치는 `master`이며 로컬 `init.defaultBranch` 설정은 별도로 구성되지 않았습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 `docs/01-product/problem.md`와 확정 요구사항 사이에 범위 또는 목표 충돌이 없음을 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 사용자가 Problem Definition을 명시적으로 승인했음을 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 GeekNews 공식 RSS URL, Atom 응답 형식, 콘텐츠 범위, 정렬 특성과 이용약관을 공식 자료로 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 사용자 제공 RSS XML 표본의 feed-level metadata와 50개 entry fields, link, ID, content 및 시각 구조를 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 사용자가 외부 원문 직접 URL은 필수가 아니며 RSS의 GeekNews topic link를 결과 링크로 사용할 수 있다고 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 사용자가 News, Ask와 Show를 모두 데이터 파이프라인 후보로 처리하기로 결정했음을 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 RSS 표본 50개의 요약 입력 충분성을 검토해 48개 Sufficient, 1개 Limited, 1개 Insufficient로 평가했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 사용자가 `docs/01-product/research.md`의 Research / JTBD 결과를 승인했음을 확인했습니다.
+
+[FACT] live HTTP header와 시간에 따른 update behavior는 확인하지 못했으며, AI 제공자의 변동 가능한 외부 정보도 아직 공식 자료로 검증하지 않았습니다. 구현 시점의 공식 정보를 다시 확인해야 합니다.
+
+## Last Updated
+
+[FACT] 2026-08-25 Asia/Seoul
