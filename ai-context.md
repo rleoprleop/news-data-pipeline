@@ -2,11 +2,11 @@
 
 ## Project Status
 
-[FACT] 프로젝트는 전체 Workflow 1단계인 Problem Definition과 2단계인 Research / JTBD를 사용자 승인으로 완료한 상태입니다.
+[FACT] 프로젝트는 전체 Workflow 1단계인 Problem Definition, 2단계인 Research / JTBD와 3단계인 Solution Discovery를 사용자 승인으로 완료했습니다.
 
 [FACT] `docs/01-product/research.md`는 2026-08-25에 사용자 승인을 받았습니다.
 
-[FACT] 다음 Workflow는 Solution Discovery이며 아직 시작하지 않았습니다.
+[FACT] `docs/01-product/solution-discovery.md`는 2026-08-25에 사용자 승인을 받았습니다.
 
 [FACT] Git 기본 branch는 `main`이며 GitHub의 `origin/main`과 동기화해 운영합니다.
 
@@ -16,7 +16,7 @@
 
 ## Current Task
 
-[FACT] Repository 단계 종료 Git 운영 규칙 정비와 실제 Git 상태 동기화.
+[FACT] Solution Discovery 승인 상태 동기화와 단계 종료 Git 검토.
 
 ## Completed
 
@@ -43,17 +43,25 @@
 - [FACT] 사용자가 2026-08-25에 `docs/01-product/research.md`의 refined JTBD와 Research conclusion을 승인했습니다.
 - [FACT] 사용자가 각 Workflow 단계 종료 시 commit 및 push 안내 절차를 수행하는 Git 운영 기준을 확정했습니다.
 - [FACT] 문서 중심 단계는 `main`, 구현 이후 코드 변경은 기능 또는 수정 단위의 작업 branch와 Pull Request를 사용하기로 확정했습니다.
+- [FACT] 규칙 중심, AI 중심과 근거 제한형 하이브리드의 세 가지 Solution Approach 및 각각의 Trade-off를 `docs/01-product/solution-discovery.md`에 비교했습니다.
+- [FACT] 사용자가 2026-08-25에 근거 제한형 AI 판단과 결정적 하드 가드레일을 결합한 Approach C를 MVP Solution 방향으로 승인했습니다.
+- [FACT] 사용자가 2026-08-25에 모든 News, Ask와 Show entry를 일반 후보로 유지하고 source type이나 단순 keyword만으로 AI 분석 전에 조기 제외하지 않는 원칙을 승인했습니다.
+- [FACT] 사용자가 2026-08-25에 AI 의미 판단과 하드 가드레일을 결합하는 3B를 승인했습니다.
+- [FACT] 사용자가 2026-08-25에 기사별 공통 결과를 재사용하고 월별 기준으로 별도 정규화·집계하는 4C를 승인했습니다.
+- [FACT] 사용자가 기존 계획과 Repository 승인 기준이 충돌할 때 현재 승인 기준을 적용한다고 확인했습니다.
 
 ## In Progress
 
-- [FACT] 현재 진행 중인 Research, 설계 또는 구현 작업은 없습니다.
+- [FACT] Solution Discovery 단계 종료 commit/push가 남아 있습니다.
 - [UNKNOWN] 월별 Insight의 전달 채널과 생성 시점은 아직 결정되지 않았습니다.
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 Solution Discovery에서 승인된 Problem Definition과 Research / JTBD를 바탕으로 가능한 solution approach를 탐색하는 것입니다.
+[INFERENCE] 다음 Task 하나는 Solution Discovery 변경 범위를 검토한 뒤 승인된 문서를 `main`에 commit하고 `origin/main`에 push할지 사용자가 결정하는 것입니다.
 
-[FACT] Solution Discovery는 아직 시작하지 않았으며 이번 승인 동기화 작업에서 진행하지 않습니다.
+[FACT] Solution Discovery 문서 상태 동기화는 완료됐으며 commit/push는 아직 실행하지 않았습니다.
+
+[FACT] Commit/push가 완료되거나 사용자가 명시적으로 연기하기 전에는 Feature Prioritization으로 이동하지 않습니다.
 
 ## Important Decisions
 
@@ -61,8 +69,19 @@
 
 - [FACT] `docs/01-product/problem.md`는 2026-08-25에 사용자 승인을 받았습니다.
 - [FACT] `docs/01-product/research.md`는 2026-08-25에 사용자 승인을 받았습니다.
+- [FACT] `docs/01-product/solution-discovery.md`는 2026-08-25에 사용자 승인을 받았습니다.
 - [FACT] 승인된 문제, 목표와 MVP 범위를 변경하려면 사용자 승인이 필요합니다.
 - [FACT] 승인된 Research / JTBD conclusion을 변경하려면 사용자 승인이 필요합니다.
+- [FACT] 승인된 Solution Discovery 결정을 변경하려면 사용자 승인이 필요합니다.
+
+### Solution Discovery
+
+- [FACT] 근거 제한형 AI 판단과 결정적 하드 가드레일을 결합한 Approach C를 MVP Solution 방향으로 채택합니다.
+- [FACT] 모든 News, Ask와 Show entry를 일반 후보로 유지하고 source type이나 단순 keyword만으로 AI 분석 전에 조기 제외하지 않습니다.
+- [FACT] AI가 포함 추천, 상대적 중요도와 홍보성 판단을 제안하고 후속 정책은 RSS 근거, 필수 형식, 최대 10개, 실패와 비용 제한 같은 하드 가드레일을 적용하는 3B를 채택합니다.
+- [FACT] 기사별 요약, 근거, 주제·keyword 후보를 재사용하고 월별 단계에서 공통 taxonomy와 집계 기준으로 정규화해 월별 결과를 별도 보존하는 4C를 채택합니다.
+- [FACT] 기존 계획과 Repository의 승인 기준이 충돌할 때 현재 승인된 Problem Definition, Research / JTBD와 Current Product Guardrails를 적용합니다.
+- [FACT] Feature 우선순위, 합격선, 점수 공식, 임계값, AI 제공자, Architecture, 데이터 모델과 구현 방식은 이번 단계에서 결정하지 않습니다.
 
 ### Git Workflow
 
@@ -177,6 +196,7 @@
 - [UNKNOWN] 중요도 산정 기준, 홍보성 판정 기준과 제외 임계값이 없습니다.
 - [UNKNOWN] 제외 판정의 사유와 점수를 보존할지 결정되지 않았습니다.
 - [UNKNOWN] 무료 AI 후보별 현재 할당량, 데이터 조건, 유료 전환 차단 방식과 한국어 품질을 검증하지 않았습니다.
+- [UNKNOWN] AI 분석 실패 또는 무료 한도 소진 시 기사를 보류할지 제한된 결과를 제공할지 정해지지 않았습니다.
 - [UNKNOWN] 월별 Insight의 전달 채널과 실행 시각이 정해지지 않았습니다.
 - [UNKNOWN] 월 경계, 발송 경계와 재수집 중첩 범위의 정확한 상태 관리 방식이 정해지지 않았습니다.
 - [FACT] 애플리케이션 코드, 데이터베이스, 테스트와 배포 환경이 없습니다.
@@ -221,6 +241,8 @@
 [FACT] 2026-08-25 Asia/Seoul 기준 사용자가 `docs/01-product/research.md`의 Research / JTBD 결과를 승인했음을 확인했습니다.
 
 [FACT] live HTTP header와 시간에 따른 update behavior는 확인하지 못했으며, AI 제공자의 변동 가능한 외부 정보도 아직 공식 자료로 검증하지 않았습니다. 구현 시점의 공식 정보를 다시 확인해야 합니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 사용자가 Solution Discovery의 네 가지 결정을 승인했고, Approach C 설명이 선택된 3B·4C와 일치하며, 기존 계획과 충돌할 때 현재 승인된 Problem Definition, Research / JTBD와 Current Product Guardrails를 적용함을 확인했습니다.
 
 ## Last Updated
 
