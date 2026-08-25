@@ -12,9 +12,13 @@
 
 [FACT] **Feature Prioritization**은 2026-08-25에 사용자 승인을 받아 완료됐습니다.
 
-[FACT] Feature Prioritization 승인 상태 동기화는 완료됐으며 단계 종료 commit/push는 아직 실행하지 않았습니다.
+[FACT] Feature Prioritization 단계 종료 commit `bd4b359`가 local `main`과 `origin/main`에 반영됐습니다.
 
-[FACT] commit/push가 완료되거나 사용자가 명시적으로 연기하기 전에는 **Product Specification**을 시작하지 않습니다.
+[FACT] 사용자가 2026-08-25의 비판적 제품 검토 후 MVP-A/MVP-B 범위 분리, 중요 기사 누락 우선, 모든 후보 자격 유지와 비무음 fallback 방향을 승인했습니다.
+
+[FACT] 위 보완 결정의 관련 문서와 Context 동기화는 완료됐으며 현재 Task는 변경 범위와 commit/push 여부를 검토하는 것입니다.
+
+[FACT] 보완 결정 동기화의 commit/push가 완료되거나 사용자가 명시적으로 연기하기 전에는 **Product Specification**을 시작하지 않습니다.
 
 [FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
 
@@ -35,6 +39,12 @@
 - [FACT] RSS 제목, 설명, 링크와 관련 메타데이터만 저장·처리합니다.
 - [FACT] 외부 원문 기사 본문은 수집하지 않습니다.
 - [FACT] Discord에는 이전 발송 이후 수집된 기사 중 중요도순 최대 10개를 한국어로 제공합니다.
+- [FACT] MVP-A는 일일 큐레이션 P0와 최소 판단 근거·결과 version, 사용자 feedback 및 초기 사용량·지연·품질 측정을 포함합니다.
+- [FACT] 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 다룹니다.
+- [FACT] News, Ask와 Show는 모두 후보 자격을 유지하되 모든 항목에 동일한 수준의 AI 처리를 보장하지 않으며 처리하지 못한 후보를 조용히 제외하지 않습니다.
+- [FACT] 후보 처리 정책은 후보 자격 유지, 실제 무료 AI 후보 검증, 검증 결과에 따른 fallback 명세 순서로 진행합니다.
+- [FACT] 장애나 한도 소진에 따른 미발송은 신규 기사 0건 미발송과 구분해 실패 사실과 미처리 건수를 확인할 수 있어야 합니다.
+- [FACT] 월별 Insight, 장기 결과 재사용·normalization과 자동 Retention lifecycle은 MVP-A 검증 후 MVP-B에서 다룹니다.
 - [FACT] 초기 처리 기준은 최대 100건/일입니다.
 - [FACT] 추가 월 운영비 상한은 0원입니다.
 
@@ -64,5 +74,7 @@
 [FACT] 2026-08-25에 `C:\project`에서 새 Git Repository를 `master` 브랜치로 초기화한 뒤 기본 branch를 `main`으로 변경했습니다.
 
 [FACT] Problem Definition과 Research / JTBD 문서를 최초 commit `ed74291`로 기록하고 `origin/main`에 push했습니다.
+
+[FACT] Solution Discovery commit `d377f1e`와 Feature Prioritization commit `bd4b359`를 `origin/main`에 반영했습니다.
 
 [FACT] GitHub remote Repository는 `https://github.com/rleoprleop/news-data-pipeline.git`입니다.

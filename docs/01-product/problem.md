@@ -16,6 +16,8 @@
 
 [FACT] 승인된 문제, 목표 또는 MVP 범위를 변경하려면 사용자 승인이 필요합니다.
 
+[FACT] 사용자가 2026-08-25의 비판적 제품 검토 후 최초 검증 범위를 MVP-A와 후속 MVP-B로 분리하고, 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 다루며, 모든 News·Ask·Show의 후보 자격을 유지하되 모든 항목에 동일한 수준의 AI 처리를 보장하지 않는 방향을 승인했습니다.
+
 ## Problem Statement
 
 [FACT] 사용자는 여러 IT 뉴스 페이지를 직접 방문하고 중요한 기사를 선별한 뒤 내용을 별도로 정리하는 데 시간과 노력을 사용하고 있습니다.
@@ -54,7 +56,7 @@
 
 ## MVP Scope
 
-### Included
+### MVP-A — Initial Daily Validation
 
 - [FACT] 언어: 한국어
 - [FACT] 수집원: GeekNews RSS 하나
@@ -62,8 +64,17 @@
 - [FACT] 처리 데이터: RSS 제목, 설명, 링크와 관련 메타데이터
 - [FACT] 결과 채널: Discord
 - [FACT] 일일 큐레이션: 이전 발송 이후 수집된 기사 중 중요도순 최대 10개
+- [FACT] P0 일일 가치 loop: 수집·입력 검증, 신규 구간·중복·재처리 상태, 근거 제한형 기사 분석, 하드 가드레일, 일일 선정과 Discord 발송
+- [FACT] 최소 추적·학습 capability: 기사별 판단을 검토할 최소 근거와 결과 version, 사용자 feedback, 기사량·AI 사용량·배치 시간과 품질 측정
+- [FACT] News, Ask와 Show는 모두 후보 자격을 유지하며 source type이나 단순 keyword만으로 조용히 제외하지 않습니다.
+
+### MVP-B — Follow-up after MVP-A Validation
+
 - [FACT] 월별 Insight: 주제 비중, 전월 대비 주제 비중 증감, 신규·급증 키워드, 주요 주제별 대표 기사
-- [FACT] Retention: Raw RSS 3개월, 기사별 AI 결과 12개월, 월별 Insight 무기한
+- [FACT] 기사별 결과의 장기 보존·재사용과 월별 별도 normalization·aggregation
+- [FACT] Raw RSS 3개월, 기사별 AI 결과 12개월, 월별 Insight 무기한이라는 목표 Retention을 적용하는 자동 lifecycle
+- [FACT] MVP-B는 MVP-A의 최초 사용자 가치 검증을 완료하기 위한 선행조건이 아닙니다.
+- [UNKNOWN] MVP-A의 임시 보존·삭제 정책과 MVP-B 진입 조건은 Product Specification에서 결정해야 합니다.
 
 ### Explicitly Excluded
 
@@ -89,6 +100,8 @@
 - [FACT] 발송 시각은 매일 10:00와 22:00 KST입니다.
 - [FACT] 이전 발송 이후 수집된 기사 중 중요도순으로 최대 10개를 선택합니다.
 - [FACT] 신규 기사가 없으면 Discord 메시지를 발송하지 않습니다.
+- [FACT] 장애, 무료 한도 소진 또는 처리 실패에 따른 미발송은 신규 기사 0건 미발송과 구분하며, 사용자가 실패 사실과 미처리 건수를 확인할 수 있어야 합니다.
+- [UNKNOWN] Discord 자체 장애를 포함한 실패 알림의 채널과 형식은 Product Specification에서 결정해야 합니다.
 - [FACT] 기사 전달 목표는 게시 후 최대 13시간 이내입니다.
 - [FACT] 각 발송 배치는 30분 이내 완료해야 합니다.
 
@@ -108,11 +121,15 @@
 - [FACT] 홍보성으로 의심되는 기사는 주요 기사 목록에서 제외합니다.
 - [FACT] 제외된 기사가 있으면 `홍보성 의심 제외 N건` 형식으로 개수만 표시합니다.
 - [UNKNOWN] 중요도 산정 기준은 아직 정의되지 않았습니다.
+- [FACT] 중요 기사 누락은 비중요 기사 포함보다 더 심각한 오류로 다룹니다.
 - [UNKNOWN] 홍보성 의심 판정 기준과 제외 임계값은 아직 정의되지 않았습니다.
+- [UNKNOWN] 홍보성 판정의 False Positive와 False Negative 중 어느 오류를 더 엄격히 제한할지는 아직 결정되지 않았습니다.
 - [UNKNOWN] 오판 검토를 위해 판정 사유, 점수와 모델 정보를 보존할지 결정되지 않았습니다.
 - [INFERENCE] 포트폴리오의 추적 가능성과 품질 검증을 위해 판정 근거를 재검토할 수 있는 정보가 필요할 가능성이 높습니다.
 
 ## Monthly Insight
+
+[FACT] 월별 Insight는 장기 제품 목표와 MVP-B 범위이며 MVP-A 완료 조건이 아닙니다.
 
 ### Required Content
 
@@ -136,6 +153,8 @@
 - [UNKNOWN] 신규·급증 키워드를 판단할 최소 빈도와 비교 공식은 결정되지 않았습니다.
 
 ## Data Retention
+
+[FACT] 아래 기간은 MVP-B의 목표 Retention이며 자동 lifecycle은 MVP-A 이후로 연기됐습니다.
 
 - [FACT] Raw RSS 데이터 보존 기간은 3개월입니다.
 - [FACT] 기사별 AI 요약, 키워드와 판정 결과의 보존 기간은 12개월입니다.
@@ -193,6 +212,11 @@
 - [FACT] 공개된 GeekNews RSS 제목과 설명이 무료 AI 제공자의 약관에 따라 서비스 개선 등에 이용될 가능성은 허용합니다.
 - [FACT] Gemini 무료 API를 우선 검증 후보로 사용할 수 있습니다.
 - [FACT] 무료 할당량 소진 시 유료 호출로 자동 전환하지 않습니다.
+- [FACT] 모든 News, Ask와 Show는 AI 처리 가능 후보로 남지만 모든 항목에 동일한 수준의 AI 처리를 무조건 보장하지 않습니다.
+- [FACT] 무료 한도나 처리 제약 때문에 전체 분석을 수행하지 못한 항목을 source type이나 단순 keyword 기준으로 조용히 제외하지 않습니다.
+- [FACT] 후보 처리 정책은 후보 자격과 비무음 원칙을 먼저 유지하고, 실제 무료 AI 후보의 품질·한도·rate limit·재시도 가능성을 검증한 뒤, 검증 결과에 따라 Product Specification에서 fallback 조건을 명세하는 순서로 진행합니다.
+- [UNKNOWN] AI 처리가 불가능하거나 제한될 때 보류, 제한 결과 또는 미발송 중 어떤 명시적 fallback을 적용할지는 Product Specification과 Technical Requirements에서 결정해야 합니다.
+- [UNKNOWN] 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위는 실제 무료 AI 후보 검증 전에는 확정하지 않습니다.
 - [UNKNOWN] 제공자 선정 기준과 실패 시 AI 처리를 보류하는 동작은 Technical Requirements 단계에서 결정해야 합니다.
 
 ## Validation Required Before Implementation
@@ -227,18 +251,25 @@
 
 [FACT] 위 외부 정보는 구현 시점의 공식 자료를 기준으로 확인합니다.
 
-## Initial Success Criteria
+## MVP-A Initial Success Criteria
 
 [INFERENCE] 다음 기준은 Product Specification 단계에서 측정 방법과 합격선을 구체화해야 하는 초기 성공 기준입니다.
 
 - [FACT] 사용자가 하루 두 번 결과로 중요한 기사를 선별하고 원문으로 이동할 수 있습니다.
 - [FACT] 신규 기사가 없을 때 불필요한 Discord 메시지를 받지 않습니다.
+- [FACT] 처리 실패로 결과를 발송하지 못한 경우 신규 기사 0건과 구분된 실패 사실과 미처리 건수를 확인할 수 있습니다.
 - [FACT] 홍보성 의심 기사가 주요 목록에서 제외되고 제외 건수를 확인할 수 있습니다.
 - [FACT] 기사 게시 후 최대 13시간 이내 전달과 발송 배치 30분 이내 완료를 목표로 합니다.
 - [FACT] 최대 100건/일의 초기 처리 기준을 검증할 수 있습니다.
 - [FACT] 추가 월 운영비가 0원을 초과하지 않으며 무료 한도 소진 시 유료 호출이 차단됩니다.
-- [FACT] 월별 Insight가 생성되고 설정된 Retention 이후에도 기간 제한 없이 남습니다.
+- [FACT] 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 평가할 수 있습니다.
+- [FACT] 기사별 판단을 검토할 최소 근거·version과 초기 사용자 feedback·품질 측정 결과를 확인할 수 있습니다.
 - [INFERENCE] 재실행과 외부 API 부분 실패에도 기사 누락·중복 저장·중복 전달을 식별하고 복구할 수 있어야 합니다.
+
+### MVP-B Follow-up Criteria
+
+- [FACT] 월별 Insight가 사용자가 확인할 수 있는 방식으로 생성되고 설정된 Retention 이후에도 기간 제한 없이 남습니다.
+- [FACT] 기사별 결과의 장기 재사용, 월별 normalization과 자동 Retention lifecycle이 MVP-A 검증 결과를 바탕으로 추가됩니다.
 
 ## Problem Definition Exit Criteria
 

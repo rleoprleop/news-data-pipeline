@@ -14,13 +14,19 @@
 
 [FACT] Solution Discovery 단계 종료 commit `d377f1e`가 local `main`과 `origin/main`에 반영됐습니다.
 
+[FACT] Feature Prioritization 단계 종료 commit `bd4b359`가 local `main`과 `origin/main`에 반영됐습니다.
+
+[FACT] 사용자가 2026-08-25의 비판적 제품 검토 후 MVP-A/MVP-B 범위 분리, 중요 기사 누락 우선, 모든 후보 자격 유지와 비무음 fallback 방향을 승인했습니다.
+
+[FACT] 사용자가 후보 자격 유지, 실제 무료 AI 후보 검증, 검증 결과에 따른 fallback 명세 순서로 진행하고 장애 미발송을 신규 기사 0건과 구분하는 방향을 확인했습니다.
+
 [FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
 
 [FACT] `docs/01-product/problem.md`는 사용자가 제공한 확정 정보와 아직 검증할 항목을 분리해 기록한 초기 Problem Definition입니다.
 
 ## Current Task
 
-[FACT] Feature Prioritization 승인 상태 동기화와 단계 종료 Git 검토.
+[FACT] 비판적 제품 검토에서 보완 승인된 범위와 처리 원칙의 문서·Context 동기화 및 단계 종료 Git 검토.
 
 ## Completed
 
@@ -56,20 +62,32 @@
 - [FACT] Solution Discovery 변경을 commit `d377f1e`로 기록하고 `origin/main`에 반영했습니다.
 - [FACT] Required Start-of-Task Check에서 Repository 구조, 모든 문서, 코드·테스트 부재, Git 상태·최근 history와 TODO/FIXME 부재를 확인했습니다.
 - [FACT] 승인된 이전 단계에서 기능 후보를 도출하고 사용자 가치, MVP 필수성, 의존성, 비용 압력, 운영 복잡도와 위험을 `docs/01-product/feature-prioritization.md`에 비교했습니다.
-- [FACT] 사용자가 2026-08-25에 P0·P1 MVP 포함, 후순위 기능, 기존 제외 범위와 주요 Trade-off 전체를 승인했습니다.
+- [FACT] 사용자가 2026-08-25에 최초 P0·P1 MVP 포함, 후순위 기능, 기존 제외 범위와 주요 Trade-off 전체를 승인했고 이후 비판적 제품 검토에서 MVP-A/MVP-B로 범위를 개정했습니다.
 - [FACT] `docs/01-product/feature-prioritization.md`와 `ai-context.md`를 Feature Prioritization 승인 상태로 동기화했습니다.
 - [FACT] 프로젝트 전체 파일 정합성 검토에서 확인된 README 현재 상태·문서 링크와 Feature Prioritization의 승인 전 표현·L05 분류를 현재 승인 상태에 맞게 정리했습니다.
+- [FACT] Feature Prioritization 변경을 commit `bd4b359`로 기록하고 `origin/main`에 반영했습니다.
+- [FACT] 현재 Repository 파일과 Git history를 기준으로 승인된 제품 결정을 비판적으로 검토했습니다.
+- [FACT] 사용자가 최초 MVP를 일일 P0와 최소 추적·feedback·측정의 MVP-A로 제한하고 월별 Insight, 장기 재사용·normalization과 자동 Retention lifecycle을 MVP-B로 이동하는 범위 개정을 승인했습니다.
+- [FACT] 사용자가 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 다루기로 승인했습니다.
+- [FACT] 사용자가 모든 News·Ask·Show의 후보 자격을 유지하되 모든 항목에 동일한 수준의 AI 처리를 보장하지 않고, 처리하지 못한 후보를 조용히 제외하지 않는 추천 방향을 승인했습니다.
+- [FACT] 사용자가 후보 처리 정책을 후보 자격 유지, 실제 무료 AI 후보 검증, 검증 결과에 따른 fallback 명세 순서로 진행하기로 확인했습니다.
+- [FACT] 사용자가 장애나 한도 소진에 따른 미발송을 신규 기사 0건 미발송과 구분하고 실패 사실과 미처리 건수를 확인할 수 있어야 한다는 방향을 확인했습니다.
+- [FACT] 위 보완 승인 내용을 `AGENTS.md`, `README.md`, `docs/01-product/problem.md`, `docs/01-product/research.md`, `docs/01-product/solution-discovery.md`, `docs/01-product/feature-prioritization.md`와 이 Context에 동기화했습니다.
 
 ## In Progress
 
-- [FACT] Feature Prioritization 단계 종료 commit/push가 남아 있습니다.
+- [FACT] 비판적 제품 검토의 보완 승인 내용 동기화는 완료됐으며 변경 범위의 Git commit/push 검토가 남아 있습니다.
 - [UNKNOWN] 월별 Insight의 전달 채널과 생성 시점은 아직 결정되지 않았습니다.
+- [UNKNOWN] 모든 후보에 동일한 수준의 AI 처리를 수행하지 못할 때 적용할 구체적인 fallback과 표시 방식은 아직 결정되지 않았습니다.
+- [UNKNOWN] 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위는 실제 무료 AI 후보 검증 후 결정해야 합니다.
+- [UNKNOWN] Discord 자체 장애를 포함한 실패 알림의 채널과 형식은 아직 결정되지 않았습니다.
+- [UNKNOWN] 홍보성 False Positive와 False Negative 중 어느 오류를 더 엄격히 제한할지는 아직 결정되지 않았습니다.
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 Feature Prioritization 변경 범위를 검토한 뒤 승인된 문서를 `main`에 commit하고 `origin/main`에 push할지 사용자가 결정하는 것입니다.
+[INFERENCE] 다음 Task 하나는 비판적 제품 검토의 보완 승인 내용을 반영한 변경 범위와 문서 정합성을 검토한 뒤 `main`에 commit하고 `origin/main`에 push할지 사용자가 결정하는 것입니다.
 
-[FACT] Feature Prioritization 문서 상태 동기화는 완료됐으며 commit/push는 아직 실행하지 않았습니다.
+[FACT] 최초 Feature Prioritization 단계 종료 commit/push는 완료됐고 현재 보완 결정 동기화 변경의 commit/push는 아직 실행하지 않았습니다.
 
 [FACT] Commit/push가 완료되거나 사용자가 명시적으로 연기하기 전에는 Product Specification으로 이동하지 않습니다.
 
@@ -87,7 +105,11 @@
 ### Solution Discovery
 
 - [FACT] 근거 제한형 AI 판단과 결정적 하드 가드레일을 결합한 Approach C를 MVP Solution 방향으로 채택합니다.
-- [FACT] 모든 News, Ask와 Show entry를 일반 후보로 유지하고 source type이나 단순 keyword만으로 AI 분석 전에 조기 제외하지 않습니다.
+- [FACT] 모든 News, Ask와 Show entry를 일반 후보로 유지하고 source type이나 단순 keyword만으로 후보 자격과 최종 결과에서 조용히 제외하지 않습니다.
+- [FACT] 후보 자격 유지는 모든 항목에 동일한 수준의 AI 처리를 보장한다는 뜻이 아닙니다.
+- [FACT] 무료 한도나 처리 제약으로 전체 분석을 수행하지 못한 후보를 source type이나 단순 keyword 기준으로 조용히 제외하지 않고 Product Specification에서 정할 명시적 fallback을 적용합니다.
+- [FACT] fallback은 실제 무료 AI 후보의 품질·한도·rate limit·재시도 가능성을 검증한 뒤 Product Specification에서 명세합니다.
+- [FACT] 장애나 한도 소진으로 결과를 발송하지 못한 경우 신규 기사 0건과 구분하고 사용자가 실패 사실과 미처리 건수를 확인할 수 있어야 합니다.
 - [FACT] AI가 포함 추천, 상대적 중요도와 홍보성 판단을 제안하고 후속 정책은 RSS 근거, 필수 형식, 최대 10개, 실패와 비용 제한 같은 하드 가드레일을 적용하는 3B를 채택합니다.
 - [FACT] 기사별 요약, 근거, 주제·keyword 후보를 재사용하고 월별 단계에서 공통 taxonomy와 집계 기준으로 정규화해 월별 결과를 별도 보존하는 4C를 채택합니다.
 - [FACT] 기존 계획과 Repository의 승인 기준이 충돌할 때 현재 승인된 Problem Definition, Research / JTBD와 Current Product Guardrails를 적용합니다.
@@ -96,11 +118,12 @@
 ### Feature Prioritization
 
 - [FACT] `docs/01-product/feature-prioritization.md`는 2026-08-25에 사용자 승인을 받았습니다.
-- [FACT] P0 MVP 포함 기능은 RSS 수집·입력 검증, 신규 구간·중복·재처리 상태, 근거 제한형 기사 분석, 하드 가드레일, 일일 선정·홍보성 제외와 Discord 발송입니다.
-- [FACT] P1 MVP 포함 기능은 기사별 결과 재사용·추적, 월별 정규화·Insight, Retention lifecycle과 초기 사용량·지연·품질 측정입니다.
+- [FACT] MVP-A는 RSS 수집·입력 검증, 신규 구간·중복·재처리 상태, 근거 제한형 기사 분석, 하드 가드레일, 일일 선정·홍보성 제외, Discord 발송, 최소 판단 근거·결과 version, 사용자 feedback과 초기 사용량·지연·품질 측정을 포함합니다.
+- [FACT] MVP-B는 MVP-A 검증 후 기사별 결과의 장기 보존·재사용, 월별 정규화·Insight와 자동 Retention lifecycle을 확장합니다.
+- [FACT] MVP-B는 MVP-A 완료의 선행조건이 아닙니다.
 - [FACT] 별도 검토·설정·검색·운영 UI, source type 표시, 월별 자동 전달과 실시간 알림은 후순위입니다.
 - [FACT] 외부 원문·상세 페이지 수집, 추가 뉴스원, 다중 AI, 자동 유료 전환, 다중 사용자, Kafka와 Spark에 관한 기존 제외·조건부 범위는 변경하지 않았습니다.
-- [FACT] 사용자는 모든 일반 후보의 AI 분석에 따른 무료 할당량 압력, AI 판단의 비결정성, 추적 정보 보존의 운영 복잡도와 초기 전용 검토 UI 부재를 포함한 주요 Trade-off를 승인했습니다.
+- [FACT] 사용자는 모든 일반 후보의 자격을 유지하면서 동일한 수준의 AI 처리를 보장하지 않는 Trade-off, AI 판단의 비결정성, 최소 추적 정보 보존과 초기 전용 검토 UI 부재를 승인했습니다.
 - [UNKNOWN] 중요도·홍보성 기준, AI 실패 동작, 월별 집계와 전달 방식 등 상세 제품 정책은 아직 결정되지 않았습니다.
 
 ### Git Workflow
@@ -129,6 +152,8 @@
 - [FACT] 첫 수집원은 GeekNews RSS 하나입니다.
 - [FACT] GeekNews RSS의 News, Ask와 Show를 모두 수집·처리 후보에 포함합니다.
 - [FACT] source type 또는 title prefix만으로 Ask와 Show를 조기 제외하지 않습니다.
+- [FACT] 모든 후보에 동일한 수준의 AI 처리를 무조건 보장하지 않으며 처리하지 못한 후보를 조용히 제외하지 않습니다.
+- [FACT] 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 다룹니다.
 - [INFERENCE] 최종 출력 포함 여부는 이후 관심 주제·중요도·홍보성 처리 결과로 판단합니다.
 - [FACT] 시사·경제 뉴스와 네이버 RSS 후보는 현재 MVP 범위가 아닙니다.
 - [FACT] RSS 제목, 설명, 링크와 관련 메타데이터만 저장·처리합니다.
@@ -145,9 +170,11 @@
 - [FACT] 외부 자료 기반 항목과 GeekNews 직접 작성 항목이 혼재하므로 외부 원문 URL이 항상 존재한다고 가정하지 않습니다.
 - [FACT] 홍보성 의심 기사는 주요 목록에서 제외하고 제외 건수만 표시합니다.
 - [FACT] 신규 기사가 없으면 Discord 메시지를 발송하지 않습니다.
+- [FACT] 장애나 처리 실패에 따른 미발송은 신규 기사 0건과 구분하며 실패 사실과 미처리 건수를 확인할 수 있어야 합니다.
 
-### Monthly Insight and Retention
+### MVP-B Monthly Insight and Retention
 
+- [FACT] 월별 Insight, 기사별 결과의 장기 재사용·normalization과 자동 Retention lifecycle은 MVP-A 검증 후 MVP-B에서 다룹니다.
 - [FACT] 월별 Insight는 주제 비중, 전월 대비 주제 비중 증감, 새롭게 떠오르거나 급증한 키워드와 주요 주제별 대표 기사를 포함합니다.
 - [FACT] 첫 달에는 전월 비교를 생략하고 두 번째 달부터 비교합니다.
 - [FACT] Raw RSS 데이터는 3개월간 보존합니다.
@@ -204,10 +231,13 @@
 - [FACT] 월별 Insight 보존이 보장되기 전에 관련 원천 데이터를 삭제하는 설계를 승인하지 않습니다.
 - [FACT] 사용자 승인 없이 배포하거나 Git commit 또는 Git push를 실행하지 않습니다.
 - [FACT] News, Ask와 Show를 source type 또는 title prefix만으로 수집·처리 후보에서 조기 제외하지 않습니다.
+- [FACT] 사용자 승인 없이 MVP-B 기능을 MVP-A 완료 조건으로 되돌리지 않습니다.
+- [FACT] 무료 한도나 처리 제약으로 전체 AI 분석을 수행하지 못한 후보를 조용히 제외하지 않습니다.
+- [FACT] 실제 무료 AI 후보 검증 전에 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위를 고정하지 않습니다.
+- [FACT] 장애 미발송을 신규 기사 0건 미발송과 같은 정상 상태로 기록하지 않습니다.
 
 ## Known Issues
 
-- [FACT] `docs/01-product/solution-discovery.md`의 마지막 commit/push 대기 문구는 해당 단계 승인 시점의 상태 기록이며, 실제 완료 상태는 이 Context의 Project Status와 Completed를 기준으로 확인합니다.
 - [UNKNOWN] 정보가 부족한 항목을 1문장으로 허용할지, 표시할지, 주요 후보에서 제외할지 결정되지 않았습니다.
 - [UNKNOWN] 실제 무료 AI 후보의 한국어 요약 품질은 검증하지 않았습니다.
 - [UNKNOWN] 제공된 표본에 Ask가 없어 Ask 항목의 요약 충분성은 검증하지 못했습니다.
@@ -218,6 +248,9 @@
 - [UNKNOWN] 제외 판정의 사유와 점수를 보존할지 결정되지 않았습니다.
 - [UNKNOWN] 무료 AI 후보별 현재 할당량, 데이터 조건, 유료 전환 차단 방식과 한국어 품질을 검증하지 않았습니다.
 - [UNKNOWN] AI 분석 실패 또는 무료 한도 소진 시 기사를 보류할지 제한된 결과를 제공할지 정해지지 않았습니다.
+- [UNKNOWN] 동일한 수준의 AI 처리를 수행하지 못한 후보에 보류, 제한 결과 또는 미발송 중 어떤 fallback을 적용하고 어떻게 표시할지 결정되지 않았습니다.
+- [UNKNOWN] 장애 미발송의 알림 채널과 형식, 미처리 건수 표시 범위가 정해지지 않았습니다.
+- [UNKNOWN] MVP-A의 최소 사용자 feedback 수집 방식과 품질 합격선이 정해지지 않았습니다.
 - [UNKNOWN] 월별 Insight의 전달 채널과 실행 시각이 정해지지 않았습니다.
 - [UNKNOWN] 월 경계, 발송 경계와 재수집 중첩 범위의 정확한 상태 관리 방식이 정해지지 않았습니다.
 - [FACT] 애플리케이션 코드, 데이터베이스, 테스트와 배포 환경이 없습니다.
@@ -234,6 +267,7 @@
 - [INFERENCE] 무료 AI의 할당량·약관·모델 제공 조건 변경은 월 운영비 0원 목표를 위협합니다.
 - [INFERENCE] 표본에서는 GeekNews topic link와 `id`가 같지만 장기 안정성이 확인되지 않아 이를 검증 없이 고유 식별자로 사용하면 중복 방지 또는 갱신 처리에서 오류가 발생할 수 있습니다.
 - [INFERENCE] News, Ask와 Show를 모두 후보로 처리하므로 관심 주제·중요도·홍보성 기준이 불명확하면 최종 큐레이션과 월별 통계의 품질이 낮아질 수 있습니다.
+- [INFERENCE] 모든 후보의 자격을 유지하면서 동일한 수준의 AI 처리를 보장하지 않으므로 fallback과 미처리 상태를 명확히 하지 않으면 중요한 기사 누락이 보이지 않을 수 있습니다.
 - [INFERENCE] 월별 Insight 생성과 Raw 삭제 순서를 잘못 설계하면 장기 데이터가 손실될 수 있습니다.
 - [INFERENCE] 신규 기사 0건, 부분 실패와 재실행 시 발송 구간을 잘못 관리하면 누락 또는 중복 전달이 발생할 수 있습니다.
 
@@ -271,9 +305,17 @@
 
 [FACT] 2026-08-25 Asia/Seoul 기준 Feature Prioritization 제안이 승인된 Problem Definition, Research / JTBD, Solution Discovery의 범위와 Guardrail을 변경하지 않고 기능 후보·평가·추천·Trade-off와 `[UNKNOWN]`을 구분하는지 검토했습니다.
 
-[FACT] 2026-08-25 Asia/Seoul 기준 사용자가 Feature Prioritization의 P0·P1 MVP 포함, 후순위 기능, 기존 제외 범위와 주요 Trade-off 전체를 승인했음을 확인했습니다.
+[FACT] 2026-08-25 Asia/Seoul 기준 사용자가 최초 Feature Prioritization의 P0·P1 MVP 포함, 후순위 기능, 기존 제외 범위와 주요 Trade-off 전체를 승인했고 이후 비판적 제품 검토에서 MVP-A/MVP-B로 범위를 개정했음을 확인했습니다.
 
 [FACT] 2026-08-25 Asia/Seoul 기준 README, Feature Prioritization과 AI Context의 현재 단계·승인 상태·다음 Task 표기가 서로 일치하도록 동기화했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 commit `bd4b359`가 local `main`과 `origin/main`의 현재 tip이며 비판적 제품 검토 시작 당시 working tree가 깨끗했음을 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 사용자가 MVP-A/MVP-B 분리, 중요 기사 누락 우선, 모든 후보 자격 유지와 비무음 fallback 방향을 승인했음을 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 사용자가 후보 자격 유지, 무료 AI 후보 검증, fallback 명세 순서와 장애 미발송 구분 원칙을 확인했음을 검증했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 위 보완 결정이 Repository 운영 규칙, 현재 상태와 네 단계 제품 문서에 일관되게 반영됐는지 검토했습니다.
 
 ## Last Updated
 

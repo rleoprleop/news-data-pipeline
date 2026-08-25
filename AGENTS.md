@@ -117,11 +117,17 @@
 
 - [FACT] MVP 수집원은 GeekNews RSS 하나입니다.
 - [FACT] MVP는 한국어 IT 뉴스만 다룹니다.
+- [FACT] MVP-A는 일일 P0와 최소 판단 근거·결과 version, 사용자 feedback 및 초기 사용량·지연·품질 측정을 포함합니다.
+- [FACT] 월별 Insight, 장기 결과 재사용·normalization과 자동 Retention lifecycle은 MVP-A 검증 후 MVP-B에서 다룹니다.
 - [FACT] 외부 원문 기사 본문은 수집하지 않습니다.
 - [FACT] 무료 AI 제공자 하나만 연동하며 여러 제공자를 동시에 구현하지 않습니다.
 - [FACT] AI 제공자는 아직 확정되지 않았습니다. Gemini 무료 API는 우선 검증 후보입니다.
 - [FACT] 유료 API 호출로 자동 전환하면 안 됩니다.
 - [FACT] 추가 월 운영비 상한은 0원입니다.
+- [FACT] 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 다룹니다.
+- [FACT] News, Ask와 Show는 모두 후보 자격을 유지하되 모든 항목에 동일한 수준의 AI 처리를 보장하지 않으며 처리하지 못한 후보를 조용히 제외하지 않습니다.
+- [FACT] 후보 처리 정책은 후보 자격과 비무음 원칙 유지, 실제 무료 AI 후보 검증, 검증 결과에 따른 fallback 명세 순서로 진행합니다.
+- [FACT] 장애나 한도 소진에 따른 미발송은 신규 기사 0건 미발송과 구분하고 실패 사실과 미처리 건수를 확인할 수 있어야 합니다.
 - [FACT] Raw RSS, 기사별 AI 결과와 월별 Insight의 Retention 정책을 구분합니다.
 
 [FACT] 상세 범위와 검증 항목은 `docs/01-product/problem.md`를 기준으로 확인합니다.

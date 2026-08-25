@@ -80,7 +80,7 @@
 ### JTBD Validation Gaps
 
 - [UNKNOWN] 현재 뉴스 확인과 정리에 실제로 드는 기준 시간과 목표 절감 시간
-- [UNKNOWN] 사용자가 중요 기사 누락과 비중요 기사 포함 중 어느 오류를 더 크게 보는지
+- [FACT] 2026-08-25의 후속 비판적 제품 검토에서 사용자가 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 다루기로 승인했습니다.
 - [UNKNOWN] 관심 주제 안에서 중요도를 가르는 신호와 우선순위
 - [UNKNOWN] 홍보성 판정의 False Positive와 False Negative 허용 수준
 - [UNKNOWN] GeekNews topic 링크가 접근 불가할 때 제공된 요약만으로도 결과가 유용한지

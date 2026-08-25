@@ -16,9 +16,11 @@
 
 [FACT] 이 문서는 Feature Prioritization, Product Specification, Technical Requirements, Architecture, 데이터 모델, 구현 기술 또는 AI 제공자를 확정하지 않습니다.
 
-[FACT] 사용자가 2026-08-25에 아래 네 가지 Solution 결정을 모두 승인했습니다.
+[FACT] 사용자가 2026-08-25에 최초 네 가지 Solution 결정을 승인했고 이후 비판적 제품 검토에서 5~6번 보완 결정을 추가 승인했습니다.
 
 [FACT] 사용자는 기존 계획과 이 Repository의 승인 기준이 충돌할 때 현재 승인된 Problem Definition, Research / JTBD와 Current Product Guardrails를 적용한다고 확인했습니다.
+
+[FACT] 사용자가 2026-08-25의 비판적 제품 검토 후 모든 News·Ask·Show의 후보 자격은 유지하되 모든 항목에 동일한 수준의 AI 처리를 무조건 보장하지 않고, 처리하지 못한 항목을 조용히 제외하지 않는 방향으로 Solution 결정을 보완 승인했습니다.
 
 ## Discovery Question
 
@@ -110,7 +112,9 @@
 
 ### Concept
 
-[INFERENCE] News, Ask와 Show를 포함한 모든 RSS entry를 후보로 유지하고 먼저 필수 field와 입력 안전성을 확인합니다. 단일 AI 제공자는 RSS에 명시된 title과 content 안에서 보수적인 요약, 주제, keyword, 포함 추천, 상대적 중요도, 홍보성 판단과 근거를 구조화해 제안합니다. 후속 하드 가드레일은 RSS 근거 범위, 필수 결과와 형식, 최대 10개, 신규 기사 0건 시 미발송, 무료 한도와 잘못된 응답·실패의 처리 경계를 통제합니다.
+[INFERENCE] News, Ask와 Show를 포함한 모든 RSS entry의 후보 자격을 유지하고 먼저 필수 field와 입력 안전성을 확인합니다. 단일 AI 제공자는 RSS에 명시된 title과 content 안에서 보수적인 요약, 주제, keyword, 포함 추천, 상대적 중요도, 홍보성 판단과 근거를 구조화해 제안합니다. 모든 후보에 동일한 수준의 AI 처리를 보장하지는 않으며, 무료 한도나 처리 제약으로 분석하지 못한 후보를 source type이나 단순 keyword 기준으로 조용히 제외하지 않습니다. 후속 하드 가드레일은 필수 결과와 형식, 최대 10개, 신규 기사 0건 시 미발송, 무료 한도와 잘못된 응답·실패의 처리 경계를 통제합니다.
+
+[FACT] 후보 처리 정책은 후보 자격과 비무음 원칙 유지, 실제 무료 AI 후보 검증, 검증 결과에 따른 Product Specification fallback 명세 순서로 진행합니다. 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위는 검증 전에 고정하지 않습니다.
 
 [INFERENCE] 기사별 요약, 근거와 주제·keyword 후보를 일일 발송과 월별 Insight의 공통 입력으로 재사용하고, 월별 단계에서 공통 taxonomy와 집계 기준으로 별도 정규화하면 반복 분석 요청과 월별 label 불일치를 줄일 수 있습니다.
 
@@ -163,7 +167,7 @@
 
 ### Recommendation Rationale
 
-1. [INFERENCE] 중요한 기사 누락을 줄이는 JTBD 때문에 불투명한 keyword gate로 AI 처리 전 후보를 좁히는 Approach A보다 모든 RSS entry를 후보로 유지하는 편이 적합합니다.
+1. [INFERENCE] 중요한 기사 누락을 줄이는 JTBD 때문에 불투명한 keyword gate로 후보 자격을 좁히는 Approach A보다 모든 RSS entry의 후보 자격을 유지하는 편이 적합합니다. 후보 자격 유지는 모든 항목에 동일한 수준의 AI 처리를 보장한다는 뜻은 아닙니다.
 2. [INFERENCE] 홍보성 제외와 중요도순 최대 10개 선정은 사용자 경험에 직접 영향을 주므로 AI의 의미 판단 근거를 보존하고 RSS 근거, 필수 형식, 출력 개수와 비용은 하드 가드레일로 통제하는 편이 안전합니다.
 3. [INFERENCE] 사용자 제공 표본의 96%는 RSS 정보만으로 보수적인 2문장 요약이 가능했으므로 외부 원문 수집 없이 근거 제한형 분석을 적용할 실질적 근거가 있습니다.
 4. [INFERENCE] 기사별 요약, 근거와 주제·keyword 후보를 12개월 보존해 재사용하고 월별로 별도 정규화하면 추가 호출을 줄이면서 일일 결과와 월별 추세의 추적 가능성을 유지할 수 있습니다.
@@ -172,11 +176,13 @@
 ## Approved Solution Decisions
 
 1. [FACT] MVP Solution 방향으로 Approach C를 채택합니다.
-2. [FACT] 모든 News, Ask와 Show entry를 일반 후보로 유지하고 source type이나 단순 keyword만으로 AI 분석 전에 조기 제외하지 않습니다.
+2. [FACT] 모든 News, Ask와 Show entry를 일반 후보로 유지하고 source type이나 단순 keyword만으로 AI 처리 대상과 최종 결과에서 조용히 제외하지 않습니다.
 3. [FACT] AI가 포함 추천, 상대적 중요도와 홍보성 판단을 제안하고, 후속 정책은 RSS 근거, 필수 형식, 최대 10개, 실패와 비용 제한 같은 하드 가드레일을 적용하는 3B를 채택합니다.
 4. [FACT] 기사별 요약, 근거, 주제·keyword 후보는 재사용하되 월별 단계에서 공통 taxonomy와 집계 기준으로 정규화하고 월별 결과를 별도 보존하는 4C를 채택합니다.
+5. [FACT] 모든 후보에 동일한 수준의 AI 처리를 무조건 보장하지 않으며, 무료 한도나 처리 제약으로 전체 분석을 수행하지 못한 항목에는 Product Specification에서 정한 명시적 fallback을 적용합니다.
+6. [FACT] 장애나 한도 소진으로 결과를 발송하지 못한 경우 신규 기사 0건과 구분하고 사용자가 실패 사실과 미처리 건수를 확인할 수 있어야 합니다.
 
-[FACT] 사용자가 2026-08-25에 위 네 항목을 승인했습니다.
+[FACT] 사용자가 2026-08-25에 최초 네 항목과 비판적 제품 검토 후 추가된 5~6번 보완 결정을 승인했습니다.
 
 ### Decision 3 — Alternatives and Selection
 
@@ -204,7 +210,7 @@
 | 4B. Independent daily and monthly analysis | 일일 큐레이션과 월별 Insight가 같은 기사를 각 목적에 맞게 별도로 분석 | 각 작업에 최적화된 prompt와 분류 체계를 사용할 수 있음 | 기사별 재호출이 늘고 일일·월별 label이 달라질 수 있으며 월 0원 목표에 가장 불리함 | 높음 | 높음 |
 | 4C. Layered reuse with monthly normalization | 기사별 요약, 근거, 주제·keyword 후보는 재사용하되 월별 단계가 공통 taxonomy와 집계 기준으로 정규화하고 월별 결과를 별도 보존 | 반복 기사 분석을 억제하면서 월별 비교 기준과 불변 monthly snapshot을 만들 수 있음 | 정규화 규칙과 결과 version 경계를 정의해야 하며 4A보다 운영 개념이 추가됨 | 낮음~보통 | 보통 |
 
-[INFERENCE] MVP에는 **4C**를 추천합니다. 기사별 AI 결과 12개월 보존과 월별 Insight 무기한 보존 요구를 활용하면서도, 일일 분류를 월별 통계에 무비판적으로 복사하는 문제를 줄일 수 있습니다.
+[INFERENCE] MVP-B에는 **4C**를 적용합니다. 기사별 AI 결과 12개월 보존과 월별 Insight 무기한 보존 요구를 활용하면서도, 일일 분류를 월별 통계에 무비판적으로 복사하는 문제를 줄일 수 있습니다.
 
 [INFERENCE] 4C는 월말에 모든 기사를 AI로 다시 분석한다는 뜻이 아닙니다. 기본 방향은 보존된 기사별 결과를 입력으로 재사용하고 월별 비교에 필요한 normalization·aggregation만 별도로 수행하는 것입니다.
 
@@ -216,13 +222,16 @@
 
 ### Deferred to Later Workflow Stages
 
-- [UNKNOWN] 중요한 기사 누락과 비중요 기사 포함 중 어느 오류를 더 크게 볼지는 Product Specification에서 결정해야 합니다.
+- [FACT] 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 봅니다.
 - [UNKNOWN] 홍보성 False Positive와 False Negative 중 어느 오류를 더 엄격히 제한할지는 Product Specification에서 결정해야 합니다.
 - [UNKNOWN] 저정보 entry를 1문장으로 허용할지, 요약 불충분으로 표시할지, 주요 후보에서 제외할지는 Product Specification에서 결정해야 합니다.
 - [UNKNOWN] 관심 주제, 중요도와 홍보성 판단 기준, 결과 label, 근거 형식 및 필요한 경우 사용할 confidence·임계값은 Product Specification에서 결정해야 합니다.
 - [UNKNOWN] 판정 근거, 점수, model·prompt 정보를 어떤 수준으로 보존할지는 Product Specification과 Data / Interface Design에서 결정해야 합니다.
 - [UNKNOWN] 실제 무료 AI 후보의 한국어 품질, 무료 할당량, rate limit, 데이터 이용 조건과 유료 전환 차단 방법은 Technical Requirements 전에 공식 자료와 표본으로 검증해야 합니다.
 - [UNKNOWN] 무료 AI 실패·한도 소진 시 기사 처리를 보류할지 제한된 결과를 제공할지는 Product Specification과 Technical Requirements에서 결정해야 합니다.
+- [UNKNOWN] 동일한 수준의 AI 처리를 수행하지 못한 후보에 보류, 제한 결과 또는 미발송 중 어떤 fallback을 적용하고 사용자에게 어떻게 표시할지는 Product Specification에서 결정해야 합니다.
+- [UNKNOWN] 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위는 실제 무료 AI 후보 검증 후 결정해야 합니다.
+- [UNKNOWN] Discord 자체 장애를 포함한 실패 사실과 미처리 건수의 알림 채널과 형식은 Product Specification에서 결정해야 합니다.
 - [UNKNOWN] 월별 Insight의 전달 채널, 생성 시점, 집계 공식과 대표 기사 기준은 Product Specification에서 결정해야 합니다.
 - [UNKNOWN] GeekNews polling 허용 기준, conditional request, ID·link 안정성, 시각 의미와 갱신 동작은 Technical Requirements와 Data / Interface Design 전에 검증해야 합니다.
 - [UNKNOWN] Approach C가 최대 100건/일을 월 0원과 배치 30분 이내에 처리할 수 있는지는 AI 후보 검증 전에는 확정할 수 없습니다.
@@ -232,7 +241,8 @@
 - [FACT] 이번 단계에서는 Feature 우선순위를 정하지 않습니다.
 - [FACT] 이번 단계에서는 acceptance criteria, 점수 공식, 임계값, 수집 주기, 데이터 schema, component 구조, 기술 stack 또는 배포 방식을 정하지 않습니다.
 - [FACT] 구현, 코드와 테스트는 작성하지 않습니다.
-- [FACT] 사용자 승인과 단계 종료 commit/push 완료 또는 명시적 연기 전에는 Feature Prioritization으로 이동하지 않습니다.
+- [FACT] 최초 Solution Discovery 승인과 단계 종료 commit/push 이후 Feature Prioritization으로 이동했습니다.
+- [FACT] 2026-08-25 보완 승인 내용의 문서 동기화 commit/push 완료 또는 명시적 연기 전에는 Product Specification으로 이동하지 않습니다.
 
 ## Solution Discovery Exit Criteria
 
@@ -240,5 +250,6 @@
 - [FACT] 각 Approach의 장단점, Trade-off, MVP Guardrail 적합성, 비용 압력, 운영 복잡도와 주요 위험을 비교했습니다.
 - [FACT] 추천안과 추천 근거를 분리해 제시했습니다.
 - [FACT] 미결정 사항을 `[UNKNOWN]`으로 유지하고 이후 단계에서 다룰 항목을 구분했습니다.
-- [FACT] 사용자가 2026-08-25에 네 가지 Solution 결정을 확인하고 Solution Discovery를 승인했습니다.
-- [UNKNOWN] 단계 종료 commit/push 절차가 남아 있습니다.
+- [FACT] 사용자가 2026-08-25에 최초 네 가지 Solution 결정과 이후 5~6번 보완 결정을 승인했습니다.
+- [FACT] Solution Discovery 단계 종료 commit/push는 commit `d377f1e`로 완료됐습니다.
+- [UNKNOWN] 2026-08-25 보완 승인 내용을 반영한 문서 동기화 commit/push가 남아 있습니다.
