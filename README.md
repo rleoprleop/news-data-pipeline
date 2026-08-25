@@ -10,7 +10,11 @@
 
 [FACT] **Solution Discovery**는 2026-08-25에 사용자 승인을 받아 완료됐습니다.
 
-[FACT] 단계 종료 commit/push는 아직 실행하지 않았으며 **Feature Prioritization**은 시작하지 않았습니다.
+[FACT] **Feature Prioritization**은 2026-08-25에 사용자 승인을 받아 완료됐습니다.
+
+[FACT] Feature Prioritization 승인 상태 동기화는 완료됐으며 단계 종료 commit/push는 아직 실행하지 않았습니다.
+
+[FACT] commit/push가 완료되거나 사용자가 명시적으로 연기하기 전에는 **Product Specification**을 시작하지 않습니다.
 
 [FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
 
@@ -43,6 +47,7 @@
 - [docs/01-product/problem.md](docs/01-product/problem.md): 사용자 문제, MVP 범위, 성공 기준과 검증 항목
 - [docs/01-product/research.md](docs/01-product/research.md): JTBD 구체화, GeekNews RSS 조사 결과와 남은 검증 항목
 - [docs/01-product/solution-discovery.md](docs/01-product/solution-discovery.md): Solution Approach 비교, 승인된 Solution 결정과 남은 미결정 사항
+- [docs/01-product/feature-prioritization.md](docs/01-product/feature-prioritization.md): 승인된 MVP 기능 우선순위, 후순위·제외 범위와 남은 미결정 사항
 
 ## Working Principles
 

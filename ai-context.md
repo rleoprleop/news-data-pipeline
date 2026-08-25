@@ -4,11 +4,15 @@
 
 [FACT] 프로젝트는 전체 Workflow 1단계인 Problem Definition, 2단계인 Research / JTBD와 3단계인 Solution Discovery를 사용자 승인으로 완료했습니다.
 
+[FACT] 전체 Workflow 4단계인 Feature Prioritization을 2026-08-25에 사용자 승인으로 완료했습니다.
+
 [FACT] `docs/01-product/research.md`는 2026-08-25에 사용자 승인을 받았습니다.
 
 [FACT] `docs/01-product/solution-discovery.md`는 2026-08-25에 사용자 승인을 받았습니다.
 
 [FACT] Git 기본 branch는 `main`이며 GitHub의 `origin/main`과 동기화해 운영합니다.
+
+[FACT] Solution Discovery 단계 종료 commit `d377f1e`가 local `main`과 `origin/main`에 반영됐습니다.
 
 [FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
 
@@ -16,7 +20,7 @@
 
 ## Current Task
 
-[FACT] Solution Discovery 승인 상태 동기화와 단계 종료 Git 검토.
+[FACT] Feature Prioritization 승인 상태 동기화와 단계 종료 Git 검토.
 
 ## Completed
 
@@ -49,19 +53,25 @@
 - [FACT] 사용자가 2026-08-25에 AI 의미 판단과 하드 가드레일을 결합하는 3B를 승인했습니다.
 - [FACT] 사용자가 2026-08-25에 기사별 공통 결과를 재사용하고 월별 기준으로 별도 정규화·집계하는 4C를 승인했습니다.
 - [FACT] 사용자가 기존 계획과 Repository 승인 기준이 충돌할 때 현재 승인 기준을 적용한다고 확인했습니다.
+- [FACT] Solution Discovery 변경을 commit `d377f1e`로 기록하고 `origin/main`에 반영했습니다.
+- [FACT] Required Start-of-Task Check에서 Repository 구조, 모든 문서, 코드·테스트 부재, Git 상태·최근 history와 TODO/FIXME 부재를 확인했습니다.
+- [FACT] 승인된 이전 단계에서 기능 후보를 도출하고 사용자 가치, MVP 필수성, 의존성, 비용 압력, 운영 복잡도와 위험을 `docs/01-product/feature-prioritization.md`에 비교했습니다.
+- [FACT] 사용자가 2026-08-25에 P0·P1 MVP 포함, 후순위 기능, 기존 제외 범위와 주요 Trade-off 전체를 승인했습니다.
+- [FACT] `docs/01-product/feature-prioritization.md`와 `ai-context.md`를 Feature Prioritization 승인 상태로 동기화했습니다.
+- [FACT] 프로젝트 전체 파일 정합성 검토에서 확인된 README 현재 상태·문서 링크와 Feature Prioritization의 승인 전 표현·L05 분류를 현재 승인 상태에 맞게 정리했습니다.
 
 ## In Progress
 
-- [FACT] Solution Discovery 단계 종료 commit/push가 남아 있습니다.
+- [FACT] Feature Prioritization 단계 종료 commit/push가 남아 있습니다.
 - [UNKNOWN] 월별 Insight의 전달 채널과 생성 시점은 아직 결정되지 않았습니다.
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 Solution Discovery 변경 범위를 검토한 뒤 승인된 문서를 `main`에 commit하고 `origin/main`에 push할지 사용자가 결정하는 것입니다.
+[INFERENCE] 다음 Task 하나는 Feature Prioritization 변경 범위를 검토한 뒤 승인된 문서를 `main`에 commit하고 `origin/main`에 push할지 사용자가 결정하는 것입니다.
 
-[FACT] Solution Discovery 문서 상태 동기화는 완료됐으며 commit/push는 아직 실행하지 않았습니다.
+[FACT] Feature Prioritization 문서 상태 동기화는 완료됐으며 commit/push는 아직 실행하지 않았습니다.
 
-[FACT] Commit/push가 완료되거나 사용자가 명시적으로 연기하기 전에는 Feature Prioritization으로 이동하지 않습니다.
+[FACT] Commit/push가 완료되거나 사용자가 명시적으로 연기하기 전에는 Product Specification으로 이동하지 않습니다.
 
 ## Important Decisions
 
@@ -82,6 +92,16 @@
 - [FACT] 기사별 요약, 근거, 주제·keyword 후보를 재사용하고 월별 단계에서 공통 taxonomy와 집계 기준으로 정규화해 월별 결과를 별도 보존하는 4C를 채택합니다.
 - [FACT] 기존 계획과 Repository의 승인 기준이 충돌할 때 현재 승인된 Problem Definition, Research / JTBD와 Current Product Guardrails를 적용합니다.
 - [FACT] Feature 우선순위, 합격선, 점수 공식, 임계값, AI 제공자, Architecture, 데이터 모델과 구현 방식은 이번 단계에서 결정하지 않습니다.
+
+### Feature Prioritization
+
+- [FACT] `docs/01-product/feature-prioritization.md`는 2026-08-25에 사용자 승인을 받았습니다.
+- [FACT] P0 MVP 포함 기능은 RSS 수집·입력 검증, 신규 구간·중복·재처리 상태, 근거 제한형 기사 분석, 하드 가드레일, 일일 선정·홍보성 제외와 Discord 발송입니다.
+- [FACT] P1 MVP 포함 기능은 기사별 결과 재사용·추적, 월별 정규화·Insight, Retention lifecycle과 초기 사용량·지연·품질 측정입니다.
+- [FACT] 별도 검토·설정·검색·운영 UI, source type 표시, 월별 자동 전달과 실시간 알림은 후순위입니다.
+- [FACT] 외부 원문·상세 페이지 수집, 추가 뉴스원, 다중 AI, 자동 유료 전환, 다중 사용자, Kafka와 Spark에 관한 기존 제외·조건부 범위는 변경하지 않았습니다.
+- [FACT] 사용자는 모든 일반 후보의 AI 분석에 따른 무료 할당량 압력, AI 판단의 비결정성, 추적 정보 보존의 운영 복잡도와 초기 전용 검토 UI 부재를 포함한 주요 Trade-off를 승인했습니다.
+- [UNKNOWN] 중요도·홍보성 기준, AI 실패 동작, 월별 집계와 전달 방식 등 상세 제품 정책은 아직 결정되지 않았습니다.
 
 ### Git Workflow
 
@@ -187,6 +207,7 @@
 
 ## Known Issues
 
+- [FACT] `docs/01-product/solution-discovery.md`의 마지막 commit/push 대기 문구는 해당 단계 승인 시점의 상태 기록이며, 실제 완료 상태는 이 Context의 Project Status와 Completed를 기준으로 확인합니다.
 - [UNKNOWN] 정보가 부족한 항목을 1문장으로 허용할지, 표시할지, 주요 후보에서 제외할지 결정되지 않았습니다.
 - [UNKNOWN] 실제 무료 AI 후보의 한국어 요약 품질은 검증하지 않았습니다.
 - [UNKNOWN] 제공된 표본에 Ask가 없어 Ask 항목의 요약 충분성은 검증하지 못했습니다.
@@ -204,7 +225,7 @@
 ## Technical Debt
 
 - [FACT] 구현이 시작되지 않아 코드 수준 Technical Debt는 없습니다.
-- [INFERENCE] README와 Context 문서는 Problem Definition 이후 각 단계의 문서 링크와 승인 상태를 계속 갱신해야 합니다.
+- [INFERENCE] 단계 문서의 종료 시점 상태와 프로젝트의 현재 상태를 혼동하지 않도록 이후 문서에는 historical snapshot과 current status를 더 명시적으로 구분하는 편이 안전합니다.
 
 ## Current Risks
 
@@ -243,6 +264,16 @@
 [FACT] live HTTP header와 시간에 따른 update behavior는 확인하지 못했으며, AI 제공자의 변동 가능한 외부 정보도 아직 공식 자료로 검증하지 않았습니다. 구현 시점의 공식 정보를 다시 확인해야 합니다.
 
 [FACT] 2026-08-25 Asia/Seoul 기준 사용자가 Solution Discovery의 네 가지 결정을 승인했고, Approach C 설명이 선택된 3B·4C와 일치하며, 기존 계획과 충돌할 때 현재 승인된 Problem Definition, Research / JTBD와 Current Product Guardrails를 적용함을 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 commit `d377f1e`가 local `main`과 `origin/main`의 현재 tip이며 Start-of-Task Check 당시 working tree가 깨끗했음을 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 Repository에는 문서 외 애플리케이션 코드와 테스트가 없고 TODO/FIXME도 없음을 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 Feature Prioritization 제안이 승인된 Problem Definition, Research / JTBD, Solution Discovery의 범위와 Guardrail을 변경하지 않고 기능 후보·평가·추천·Trade-off와 `[UNKNOWN]`을 구분하는지 검토했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 사용자가 Feature Prioritization의 P0·P1 MVP 포함, 후순위 기능, 기존 제외 범위와 주요 Trade-off 전체를 승인했음을 확인했습니다.
+
+[FACT] 2026-08-25 Asia/Seoul 기준 README, Feature Prioritization과 AI Context의 현재 단계·승인 상태·다음 Task 표기가 서로 일치하도록 동기화했습니다.
 
 ## Last Updated
 
