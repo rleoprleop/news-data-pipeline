@@ -198,7 +198,7 @@
 - [FACT] 2026-08-25 비판적 제품 검토 후 사용자가 승인한 MVP-A/MVP-B 분리와 후보 처리 원칙 개정을 현재 우선순위에 적용합니다.
 - [FACT] 코드, 테스트와 배포 구성은 작성하지 않습니다.
 - [FACT] 사용자 승인으로 확정된 우선순위만 `[FACT]`로 기록했습니다.
-- [FACT] 단계 종료 commit/push 완료 또는 사용자의 명시적 연기 전에는 Product Specification으로 이동하지 않습니다.
+- [FACT] 2026-08-25 우선순위 개정 내용의 문서 동기화와 commit/push는 commit `40d1dc8`로 완료됐으며 이후 Product Specification으로 이동했습니다.
 
 ## Feature Prioritization Exit Criteria
 
@@ -209,4 +209,4 @@
 - [FACT] 상세 정책과 기술 검증 항목을 `[UNKNOWN]`으로 유지했습니다.
 - [FACT] 사용자가 2026-08-25에 Feature Prioritization을 명시적으로 승인했습니다.
 - [FACT] 최초 Feature Prioritization 단계 종료 commit/push는 commit `bd4b359`로 완료됐습니다.
-- [UNKNOWN] 2026-08-25 우선순위 개정 내용을 반영한 문서 동기화 commit/push가 남아 있습니다.
+- [FACT] 2026-08-25 우선순위 개정 내용을 반영한 문서 동기화 commit/push는 commit `40d1dc8`로 완료됐습니다.

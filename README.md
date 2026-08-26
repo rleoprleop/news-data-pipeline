@@ -16,9 +16,13 @@
 
 [FACT] 사용자가 2026-08-25의 비판적 제품 검토 후 MVP-A/MVP-B 범위 분리, 중요 기사 누락 우선, 모든 후보 자격 유지와 비무음 fallback 방향을 승인했습니다.
 
-[FACT] 위 보완 결정의 관련 문서와 Context 동기화는 완료됐으며 현재 Task는 변경 범위와 commit/push 여부를 검토하는 것입니다.
+[FACT] 위 보완 결정의 문서·Context 동기화는 commit `40d1dc8`로 local `main`과 `origin/main`에 반영됐습니다.
 
-[FACT] 보완 결정 동기화의 commit/push가 완료되거나 사용자가 명시적으로 연기하기 전에는 **Product Specification**을 시작하지 않습니다.
+[FACT] 전체 Workflow 5단계인 **Product Specification**은 2026-08-26에 사용자 최종 승인을 받아 완료됐습니다.
+
+[FACT] 사용자가 2026-08-26에 중요도·관심 주제, 홍보성, 저정보 entry, 실패 가시성, Discord 복구, feedback과 MVP-A 합격선 정책을 승인했고 `docs/01-product/product-spec.md` 작성을 요청했습니다.
+
+[FACT] 현재 Task는 Product Specification 단계 종료 변경 범위·문서 정합성·Git commit/push 검토입니다.
 
 [FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
 
@@ -58,6 +62,7 @@
 - [docs/01-product/research.md](docs/01-product/research.md): JTBD 구체화, GeekNews RSS 조사 결과와 남은 검증 항목
 - [docs/01-product/solution-discovery.md](docs/01-product/solution-discovery.md): Solution Approach 비교, 승인된 Solution 결정과 남은 미결정 사항
 - [docs/01-product/feature-prioritization.md](docs/01-product/feature-prioritization.md): 승인된 MVP 기능 우선순위, 후순위·제외 범위와 남은 미결정 사항
+- [docs/01-product/product-spec.md](docs/01-product/product-spec.md): 승인된 MVP-A 제품 정책, 사용자 시나리오, acceptance criteria, 지표와 기술 단계로 넘길 미결정 사항
 
 ## Working Principles
 
@@ -76,5 +81,7 @@
 [FACT] Problem Definition과 Research / JTBD 문서를 최초 commit `ed74291`로 기록하고 `origin/main`에 push했습니다.
 
 [FACT] Solution Discovery commit `d377f1e`와 Feature Prioritization commit `bd4b359`를 `origin/main`에 반영했습니다.
+
+[FACT] MVP-A/MVP-B 범위와 fallback 방향 보완 commit `40d1dc8`을 `origin/main`에 반영했습니다.
 
 [FACT] GitHub remote Repository는 `https://github.com/rleoprleop/news-data-pipeline.git`입니다.

@@ -16,9 +16,17 @@
 
 [FACT] Feature Prioritization 단계 종료 commit `bd4b359`가 local `main`과 `origin/main`에 반영됐습니다.
 
+[FACT] MVP-A/MVP-B 범위와 fallback 방향 보완 commit `40d1dc8`이 local `main`과 `origin/main`에 반영됐습니다.
+
 [FACT] 사용자가 2026-08-25의 비판적 제품 검토 후 MVP-A/MVP-B 범위 분리, 중요 기사 누락 우선, 모든 후보 자격 유지와 비무음 fallback 방향을 승인했습니다.
 
 [FACT] 사용자가 후보 자격 유지, 실제 무료 AI 후보 검증, 검증 결과에 따른 fallback 명세 순서로 진행하고 장애 미발송을 신규 기사 0건과 구분하는 방향을 확인했습니다.
+
+[FACT] 전체 Workflow 5단계인 Product Specification을 2026-08-26에 사용자 최종 승인으로 완료했습니다.
+
+[FACT] 사용자가 2026-08-26에 중요도·관심 주제, 홍보성, 저정보 entry, 실패 가시성, Discord 복구, feedback과 MVP-A 합격선 정책을 승인하고 `docs/01-product/product-spec.md` 작성을 요청했습니다.
+
+[FACT] `docs/01-product/product-spec.md`는 2026-08-26에 사용자 최종 승인을 받았습니다.
 
 [FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
 
@@ -26,7 +34,7 @@
 
 ## Current Task
 
-[FACT] 비판적 제품 검토에서 보완 승인된 범위와 처리 원칙의 문서·Context 동기화 및 단계 종료 Git 검토.
+[FACT] Product Specification 단계 종료 변경 범위·문서 정합성·Git commit/push 검토.
 
 ## Completed
 
@@ -73,23 +81,31 @@
 - [FACT] 사용자가 후보 처리 정책을 후보 자격 유지, 실제 무료 AI 후보 검증, 검증 결과에 따른 fallback 명세 순서로 진행하기로 확인했습니다.
 - [FACT] 사용자가 장애나 한도 소진에 따른 미발송을 신규 기사 0건 미발송과 구분하고 실패 사실과 미처리 건수를 확인할 수 있어야 한다는 방향을 확인했습니다.
 - [FACT] 위 보완 승인 내용을 `AGENTS.md`, `README.md`, `docs/01-product/problem.md`, `docs/01-product/research.md`, `docs/01-product/solution-discovery.md`, `docs/01-product/feature-prioritization.md`와 이 Context에 동기화했습니다.
+- [FACT] 위 보완 결정 동기화를 commit `40d1dc8`로 기록하고 `origin/main`에 반영했습니다.
+- [FACT] 2026-08-26 Product Specification 시작 전 `HEAD`, `main`과 `origin/main`이 `40d1dc8`로 일치하고 working tree가 깨끗함을 확인했습니다.
+- [FACT] 사용자가 중요도와 관심 주제 적합성을 별도 판단하고 관심 주제 밖이어도 전체 IT 영향도가 높은 기사를 전달하기로 승인했습니다.
+- [FACT] 사용자가 홍보성 False Positive를 더 심각하게 다루고 애매한 후보를 제외하지 않는 보수적 정책을 승인했습니다.
+- [FACT] 사용자가 저정보 RSS entry를 후보로 유지하고 선정 시 `정보 제한` 결과로 표시하기로 승인했습니다.
+- [FACT] 사용자가 AI 실패 상태·처리 건수·비무음 원칙은 확정하고 fallback 세부 우선순위는 무료 AI 후보 검증 후 결정하기로 승인했습니다.
+- [FACT] 사용자가 Discord 복구 발송에서 지연 기사와 현재 기사를 구분하고 각각 최대 10개, 총 최대 20개를 허용하기로 승인했습니다.
+- [FACT] 사용자가 혼합 feedback, 최소 평가 표본, 품질 목표와 Hard Gate를 승인했습니다.
+- [FACT] 승인된 정책을 `docs/01-product/product-spec.md` Draft에 작성했습니다.
+- [FACT] 사용자가 2026-08-26에 `docs/01-product/product-spec.md`를 최종 승인했습니다.
 
 ## In Progress
 
-- [FACT] 비판적 제품 검토의 보완 승인 내용 동기화는 완료됐으며 변경 범위의 Git commit/push 검토가 남아 있습니다.
-- [UNKNOWN] 월별 Insight의 전달 채널과 생성 시점은 아직 결정되지 않았습니다.
-- [UNKNOWN] 모든 후보에 동일한 수준의 AI 처리를 수행하지 못할 때 적용할 구체적인 fallback과 표시 방식은 아직 결정되지 않았습니다.
+- [FACT] Product Specification 승인 변경의 단계 종료 Git 검토와 commit/push 여부 결정이 남아 있습니다.
 - [UNKNOWN] 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위는 실제 무료 AI 후보 검증 후 결정해야 합니다.
-- [UNKNOWN] Discord 자체 장애를 포함한 실패 알림의 채널과 형식은 아직 결정되지 않았습니다.
-- [UNKNOWN] 홍보성 False Positive와 False Negative 중 어느 오류를 더 엄격히 제한할지는 아직 결정되지 않았습니다.
+- [UNKNOWN] 두 번 이상의 발송 시각 동안 Discord 장애가 계속될 때 backlog 상한과 분할 정책은 아직 결정되지 않았습니다.
+- [UNKNOWN] Feedback 입력의 구체적인 수단은 Technical Requirements에서 결정해야 합니다.
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 비판적 제품 검토의 보완 승인 내용을 반영한 변경 범위와 문서 정합성을 검토한 뒤 `main`에 commit하고 `origin/main`에 push할지 사용자가 결정하는 것입니다.
+[INFERENCE] 다음 Task 하나는 Product Specification 단계의 변경 범위, 검증 결과와 남은 위험을 검토한 뒤 `main`에 commit하고 `origin/main`에 push할지 사용자가 결정하는 것입니다.
 
-[FACT] 최초 Feature Prioritization 단계 종료 commit/push는 완료됐고 현재 보완 결정 동기화 변경의 commit/push는 아직 실행하지 않았습니다.
+[FACT] Product Specification 문서 최종 승인은 완료됐습니다.
 
-[FACT] Commit/push가 완료되거나 사용자가 명시적으로 연기하기 전에는 Product Specification으로 이동하지 않습니다.
+[FACT] Commit/push가 완료되거나 사용자가 명시적으로 연기하기 전에는 Technical Requirements로 이동하지 않습니다.
 
 ## Important Decisions
 
@@ -98,9 +114,12 @@
 - [FACT] `docs/01-product/problem.md`는 2026-08-25에 사용자 승인을 받았습니다.
 - [FACT] `docs/01-product/research.md`는 2026-08-25에 사용자 승인을 받았습니다.
 - [FACT] `docs/01-product/solution-discovery.md`는 2026-08-25에 사용자 승인을 받았습니다.
+- [FACT] `docs/01-product/feature-prioritization.md`는 2026-08-25에 사용자 승인을 받았습니다.
+- [FACT] `docs/01-product/product-spec.md`는 2026-08-26에 사용자 최종 승인을 받았습니다.
 - [FACT] 승인된 문제, 목표와 MVP 범위를 변경하려면 사용자 승인이 필요합니다.
 - [FACT] 승인된 Research / JTBD conclusion을 변경하려면 사용자 승인이 필요합니다.
 - [FACT] 승인된 Solution Discovery 결정을 변경하려면 사용자 승인이 필요합니다.
+- [FACT] 승인된 Product Specification 정책과 acceptance criteria를 변경하려면 사용자 승인이 필요합니다.
 
 ### Solution Discovery
 
@@ -124,7 +143,24 @@
 - [FACT] 별도 검토·설정·검색·운영 UI, source type 표시, 월별 자동 전달과 실시간 알림은 후순위입니다.
 - [FACT] 외부 원문·상세 페이지 수집, 추가 뉴스원, 다중 AI, 자동 유료 전환, 다중 사용자, Kafka와 Spark에 관한 기존 제외·조건부 범위는 변경하지 않았습니다.
 - [FACT] 사용자는 모든 일반 후보의 자격을 유지하면서 동일한 수준의 AI 처리를 보장하지 않는 Trade-off, AI 판단의 비결정성, 최소 추적 정보 보존과 초기 전용 검토 UI 부재를 승인했습니다.
-- [UNKNOWN] 중요도·홍보성 기준, AI 실패 동작, 월별 집계와 전달 방식 등 상세 제품 정책은 아직 결정되지 않았습니다.
+- [FACT] 중요도·홍보성, 저정보 entry, 실패 표시, Discord 복구, feedback과 MVP-A 합격선의 상세 제품 정책은 2026-08-26 Product Specification 결정으로 구체화됐습니다.
+
+### Product Specification
+
+- [FACT] 중요도와 관심 주제 적합성을 별도 축으로 판단합니다.
+- [FACT] 관심 주제 밖이어도 전체 IT 생태계 영향도가 높으면 전달할 수 있습니다.
+- [FACT] 홍보성 False Positive를 False Negative보다 더 심각하게 다루며 애매한 후보는 제외하지 않습니다.
+- [FACT] 저정보 RSS entry는 후보 자격을 유지하고 선정 시 `정보 제한`, 근거가 허용하는 1문장 이하 설명과 GeekNews topic link를 제공합니다.
+- [FACT] 정상 발송, 정상 0건, 부분 결과, 처리 실패 미발송과 Discord 전달 실패를 사용자 관점에서 구분합니다.
+- [FACT] AI 부분 결과는 전체 Top 10으로 표현하지 않고 후보·정상 처리·미처리 건수를 표시합니다.
+- [FACT] 전체 AI 실패는 신규 0건과 구분하고 Discord가 사용 가능하면 실패 사실과 미처리 건수를 알립니다.
+- [FACT] Discord 전달 실패 기사는 다음 성공 정규 발송에서 지연 이유와 함께 제공하며 지연 기사 최대 10개와 현재 기사 최대 10개, 총 최대 20개를 허용합니다.
+- [FACT] Feedback은 전달 기사 평가, 누락 중요 기사 link·이유와 홍보성 제외 표본 검토를 결합합니다.
+- [FACT] MVP-A 검증은 최소 2주·20개 batch·50개 후보 평가를 요구하고 표본이 부족하면 `판정 불충분`으로 기록합니다.
+- [FACT] 중요 기사 recall 90%, 전달 기사 유용성 70%, RSS 근거 충실도 95%, 홍보성 False Positive 5% 이하와 False Negative 10% 이하를 초기 품질 목표로 사용합니다.
+- [FACT] 유료 AI 자동 전환, 조용한 미처리, 동일 기사 중복 발송, AI 실패의 신규 0건 오표시, Discord 미수신의 성공 기록과 중대한 근거 밖 사실은 각각 0건이어야 합니다.
+- [UNKNOWN] AI fallback 세부 우선순위는 무료 AI 후보 검증 후 결정합니다.
+- [UNKNOWN] 장기 Discord 장애 backlog와 Feedback 입력 수단은 이후 단계에서 결정합니다.
 
 ### Git Workflow
 
@@ -235,22 +271,31 @@
 - [FACT] 무료 한도나 처리 제약으로 전체 AI 분석을 수행하지 못한 후보를 조용히 제외하지 않습니다.
 - [FACT] 실제 무료 AI 후보 검증 전에 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위를 고정하지 않습니다.
 - [FACT] 장애 미발송을 신규 기사 0건 미발송과 같은 정상 상태로 기록하지 않습니다.
+- [FACT] 관심 주제 밖이라는 이유만으로 후보를 제외하지 않습니다.
+- [FACT] 홍보성이 애매한 후보를 주요 목록에서 자동 제외하지 않습니다.
+- [FACT] 저정보 entry에 근거 없는 내용을 추가해 2~3문장을 강제로 만들지 않습니다.
+- [FACT] Discord가 메시지를 받지 못한 발송 구간을 성공 처리하거나 신규 기사 구간을 전진시키지 않습니다.
 
 ## Known Issues
 
-- [UNKNOWN] 정보가 부족한 항목을 1문장으로 허용할지, 표시할지, 주요 후보에서 제외할지 결정되지 않았습니다.
+- [FACT] 정보가 부족한 항목은 후보 자격을 유지하고 선정 시 `정보 제한`과 근거가 허용하는 1문장 이하 설명으로 표시합니다.
 - [UNKNOWN] 실제 무료 AI 후보의 한국어 요약 품질은 검증하지 않았습니다.
 - [UNKNOWN] 제공된 표본에 Ask가 없어 Ask 항목의 요약 충분성은 검증하지 못했습니다.
 - [UNKNOWN] GeekNews topic link와 Atom `id`의 장기 안정성, 시각의 업무 의미, 갱신 특성과 과거 노출 범위를 확인하지 못했습니다.
 - [UNKNOWN] source type을 추론해 metadata로 보존할지 결정되지 않았습니다.
 - [UNKNOWN] GeekNews RSS의 허용 polling 빈도와 conditional request 지원 여부를 확인하지 못했습니다.
-- [UNKNOWN] 중요도 산정 기준, 홍보성 판정 기준과 제외 임계값이 없습니다.
+- [FACT] 중요도와 관심 주제 적합성은 별도 축이며 관심 주제 밖이어도 전체 IT 영향도가 높으면 전달할 수 있습니다.
+- [FACT] 홍보성 False Positive를 더 심각하게 다루고 애매한 후보를 제외하지 않습니다.
+- [UNKNOWN] 중요도 점수 공식, 홍보성 label과 정확한 제외 임계값은 결정되지 않았습니다.
 - [UNKNOWN] 제외 판정의 사유와 점수를 보존할지 결정되지 않았습니다.
 - [UNKNOWN] 무료 AI 후보별 현재 할당량, 데이터 조건, 유료 전환 차단 방식과 한국어 품질을 검증하지 않았습니다.
-- [UNKNOWN] AI 분석 실패 또는 무료 한도 소진 시 기사를 보류할지 제한된 결과를 제공할지 정해지지 않았습니다.
-- [UNKNOWN] 동일한 수준의 AI 처리를 수행하지 못한 후보에 보류, 제한 결과 또는 미발송 중 어떤 fallback을 적용하고 어떻게 표시할지 결정되지 않았습니다.
-- [UNKNOWN] 장애 미발송의 알림 채널과 형식, 미처리 건수 표시 범위가 정해지지 않았습니다.
-- [UNKNOWN] MVP-A의 최소 사용자 feedback 수집 방식과 품질 합격선이 정해지지 않았습니다.
+- [FACT] AI 실패는 정상 0건과 구분하고 부분 결과에는 후보·정상 처리·미처리 건수와 전체 Top 10이 아니라는 사실을 표시합니다.
+- [UNKNOWN] 부분 발송, 전체 미발송, 제한 결과, 보류와 재처리의 정확한 조건과 우선순위는 결정되지 않았습니다.
+- [FACT] Discord 전달 실패 기사는 다음 성공 정규 발송에서 지연 기사로 구분해 현재 기사와 함께 발송합니다.
+- [UNKNOWN] 두 번 이상의 발송 시각 동안 Discord 장애가 지속될 때 backlog 상한과 분할 정책은 결정되지 않았습니다.
+- [FACT] MVP-A의 혼합 feedback 방식, 최소 검증 표본, 품질 목표와 Hard Gate가 결정됐습니다.
+- [UNKNOWN] Feedback 입력의 구체적인 수단은 결정되지 않았습니다.
+- [UNKNOWN] MVP-A 최소 추적 정보의 품질 검토 완료 이후 임시 보존·삭제 제품 정책은 결정되지 않았습니다.
 - [UNKNOWN] 월별 Insight의 전달 채널과 실행 시각이 정해지지 않았습니다.
 - [UNKNOWN] 월 경계, 발송 경계와 재수집 중첩 범위의 정확한 상태 관리 방식이 정해지지 않았습니다.
 - [FACT] 애플리케이션 코드, 데이터베이스, 테스트와 배포 환경이 없습니다.
@@ -262,12 +307,14 @@
 
 ## Current Risks
 
-- [INFERENCE] 표본의 2개 저정보 항목이나 말줄임표 뒤의 내용을 억지로 2~3문장으로 확장하면 반복 또는 근거 없는 추론이 발생할 수 있습니다.
-- [INFERENCE] 중요도와 홍보성 판정 기준이 불명확하면 유용한 기사가 제외되거나 광고성 기사가 포함될 수 있습니다.
+- [INFERENCE] 저정보 표시 정책을 구현하더라도 말줄임표 뒤의 내용을 추정하거나 제한 결과를 정상 2~3문장 결과처럼 보이게 하면 근거 없는 확장이 발생할 수 있습니다.
+- [INFERENCE] 중요도 점수 공식과 홍보성 임계값이 검증되지 않은 상태에서 세밀한 수치를 고정하면 유용한 기사가 제외되거나 홍보성 기사가 포함될 수 있습니다.
 - [INFERENCE] 무료 AI의 할당량·약관·모델 제공 조건 변경은 월 운영비 0원 목표를 위협합니다.
 - [INFERENCE] 표본에서는 GeekNews topic link와 `id`가 같지만 장기 안정성이 확인되지 않아 이를 검증 없이 고유 식별자로 사용하면 중복 방지 또는 갱신 처리에서 오류가 발생할 수 있습니다.
-- [INFERENCE] News, Ask와 Show를 모두 후보로 처리하므로 관심 주제·중요도·홍보성 기준이 불명확하면 최종 큐레이션과 월별 통계의 품질이 낮아질 수 있습니다.
+- [INFERENCE] News, Ask와 Show를 모두 후보로 처리하므로 승인된 관심 주제·중요도·홍보성 원칙을 실제 AI 품질과 임계값으로 검증하지 않으면 최종 큐레이션의 품질이 낮아질 수 있습니다.
 - [INFERENCE] 모든 후보의 자격을 유지하면서 동일한 수준의 AI 처리를 보장하지 않으므로 fallback과 미처리 상태를 명확히 하지 않으면 중요한 기사 누락이 보이지 않을 수 있습니다.
+- [INFERENCE] Discord 장애 복구 발송이 최대 20개까지 늘어나면 한 번의 메시지에서 사용자의 검토 부담이 증가할 수 있습니다.
+- [INFERENCE] Discord 장애가 여러 발송 시각 동안 지속되면 아직 정하지 않은 backlog 상한과 분할 정책 때문에 지연 기사가 누락되거나 과도하게 누적될 수 있습니다.
 - [INFERENCE] 월별 Insight 생성과 Raw 삭제 순서를 잘못 설계하면 장기 데이터가 손실될 수 있습니다.
 - [INFERENCE] 신규 기사 0건, 부분 실패와 재실행 시 발송 구간을 잘못 관리하면 누락 또는 중복 전달이 발생할 수 있습니다.
 
@@ -317,6 +364,16 @@
 
 [FACT] 2026-08-25 Asia/Seoul 기준 위 보완 결정이 Repository 운영 규칙, 현재 상태와 네 단계 제품 문서에 일관되게 반영됐는지 검토했습니다.
 
+[FACT] 2026-08-25 Asia/Seoul 기준 보완 결정 동기화 commit `40d1dc8`이 local `main`과 `origin/main`에 반영됐습니다.
+
+[FACT] 2026-08-26 Asia/Seoul 기준 Product Specification 시작 전 `HEAD`, `main`과 `origin/main`이 `40d1dc8`로 일치하고 working tree가 깨끗했음을 확인했습니다.
+
+[FACT] 2026-08-26 Asia/Seoul 기준 사용자가 중요도·관심 주제, 홍보성, 저정보 entry, 실패 가시성, Discord 복구, feedback과 MVP-A 합격선 정책을 승인했습니다.
+
+[FACT] 2026-08-26 Asia/Seoul 기준 승인된 정책을 `docs/01-product/product-spec.md` Draft에 작성하고 이전 단계의 오래된 commit/push 대기 표현을 현재 Git history에 맞게 정리했으며 문서 정합성을 검토했습니다.
+
+[FACT] 2026-08-26 Asia/Seoul 기준 사용자가 `docs/01-product/product-spec.md`를 최종 승인했고 문서 상태와 Project Context를 Product Specification 완료 상태로 동기화했습니다.
+
 ## Last Updated
 
-[FACT] 2026-08-25 Asia/Seoul
+[FACT] 2026-08-26 Asia/Seoul

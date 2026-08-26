@@ -242,7 +242,7 @@
 - [FACT] 이번 단계에서는 acceptance criteria, 점수 공식, 임계값, 수집 주기, 데이터 schema, component 구조, 기술 stack 또는 배포 방식을 정하지 않습니다.
 - [FACT] 구현, 코드와 테스트는 작성하지 않습니다.
 - [FACT] 최초 Solution Discovery 승인과 단계 종료 commit/push 이후 Feature Prioritization으로 이동했습니다.
-- [FACT] 2026-08-25 보완 승인 내용의 문서 동기화 commit/push 완료 또는 명시적 연기 전에는 Product Specification으로 이동하지 않습니다.
+- [FACT] 2026-08-25 보완 승인 내용의 문서 동기화와 commit/push는 commit `40d1dc8`로 완료됐으며 이후 Product Specification으로 이동했습니다.
 
 ## Solution Discovery Exit Criteria
 
@@ -252,4 +252,4 @@
 - [FACT] 미결정 사항을 `[UNKNOWN]`으로 유지하고 이후 단계에서 다룰 항목을 구분했습니다.
 - [FACT] 사용자가 2026-08-25에 최초 네 가지 Solution 결정과 이후 5~6번 보완 결정을 승인했습니다.
 - [FACT] Solution Discovery 단계 종료 commit/push는 commit `d377f1e`로 완료됐습니다.
-- [UNKNOWN] 2026-08-25 보완 승인 내용을 반영한 문서 동기화 commit/push가 남아 있습니다.
+- [FACT] 2026-08-25 보완 승인 내용을 반영한 문서 동기화 commit/push는 commit `40d1dc8`로 완료됐습니다.
