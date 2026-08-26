@@ -22,7 +22,17 @@
 
 [FACT] 사용자가 2026-08-26에 중요도·관심 주제, 홍보성, 저정보 entry, 실패 가시성, Discord 복구, feedback과 MVP-A 합격선 정책을 승인했고 `docs/01-product/product-spec.md` 작성을 요청했습니다.
 
-[FACT] 현재 Task는 Product Specification 단계 종료 변경 범위·문서 정합성·Git commit/push 검토입니다.
+[FACT] Product Specification 단계 종료 commit `e9f02a0`이 local `main`과 `origin/main`에 반영됐습니다.
+
+[FACT] 전체 Workflow 6단계인 **Technical Requirements** Draft를 작성하고 검토하는 중입니다.
+
+[FACT] 사용자가 2026-08-26에 Technical Requirements 우선순위·ID 체계와 Discord reaction 기반 batch 검토 완료, 부정 feedback, 암묵적 수용률, 구조화된 누락 기사 feedback 및 recall 분류 정책을 승인했습니다.
+
+[FACT] 현재 Task는 `docs/02-technical/requirements.md` Draft 작성과 Product Specification·Context 동기화입니다.
+
+[FACT] Technical Requirements 순차 검토는 FR-001~FR-024까지 완료했으며 다음 재개 위치는 아직 미승인인 NFR-REL-001입니다.
+
+[FACT] 이번 Git 반영은 Workflow 6단계 완료가 아니라 다음 Task 재개를 위한 중간 checkpoint이며 Technical Requirements 전체 Draft는 아직 최종 승인되지 않았습니다.
 
 [FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
 
@@ -44,6 +54,7 @@
 - [FACT] 외부 원문 기사 본문은 수집하지 않습니다.
 - [FACT] Discord에는 이전 발송 이후 수집된 기사 중 중요도순 최대 10개를 한국어로 제공합니다.
 - [FACT] MVP-A는 일일 큐레이션 P0와 최소 판단 근거·결과 version, 사용자 feedback 및 초기 사용량·지연·품질 측정을 포함합니다.
+- [FACT] Feedback은 batch별 검토 완료, 기사별 세 부정 reaction, 암묵적 수용, 구조화된 누락 기사 제출·사유 회신과 후보 recall·수집 범위 누락 분리를 포함합니다.
 - [FACT] 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 다룹니다.
 - [FACT] News, Ask와 Show는 모두 후보 자격을 유지하되 모든 항목에 동일한 수준의 AI 처리를 보장하지 않으며 처리하지 못한 후보를 조용히 제외하지 않습니다.
 - [FACT] 후보 처리 정책은 후보 자격 유지, 실제 무료 AI 후보 검증, 검증 결과에 따른 fallback 명세 순서로 진행합니다.
@@ -63,6 +74,7 @@
 - [docs/01-product/solution-discovery.md](docs/01-product/solution-discovery.md): Solution Approach 비교, 승인된 Solution 결정과 남은 미결정 사항
 - [docs/01-product/feature-prioritization.md](docs/01-product/feature-prioritization.md): 승인된 MVP 기능 우선순위, 후순위·제외 범위와 남은 미결정 사항
 - [docs/01-product/product-spec.md](docs/01-product/product-spec.md): 승인된 MVP-A 제품 정책, 사용자 시나리오, acceptance criteria, 지표와 기술 단계로 넘길 미결정 사항
+- [docs/02-technical/requirements.md](docs/02-technical/requirements.md): MVP-A Functional·Non-functional·Data·External Integration·Verification Requirements와 Acceptance Criteria Traceability Matrix
 
 ## Working Principles
 
@@ -83,5 +95,7 @@
 [FACT] Solution Discovery commit `d377f1e`와 Feature Prioritization commit `bd4b359`를 `origin/main`에 반영했습니다.
 
 [FACT] MVP-A/MVP-B 범위와 fallback 방향 보완 commit `40d1dc8`을 `origin/main`에 반영했습니다.
+
+[FACT] Product Specification 완료 commit `e9f02a0`을 `origin/main`에 반영했습니다.
 
 [FACT] GitHub remote Repository는 `https://github.com/rleoprleop/news-data-pipeline.git`입니다.

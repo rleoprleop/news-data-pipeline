@@ -10,6 +10,8 @@
 
 [FACT] 문서 최종 승인일: 2026-08-26 Asia/Seoul
 
+[FACT] Feedback 정책 개정 승인일: 2026-08-26 Asia/Seoul
+
 [FACT] 승인자: 프로젝트 사용자 및 소유자
 
 [FACT] 작성 기준일: 2026-08-26 Asia/Seoul
@@ -21,6 +23,8 @@
 [FACT] 이 문서는 승인된 제품 정책과 acceptance criteria를 정의하며 AI 제공자, SDK, 데이터베이스 schema, component 구조, 인프라 또는 구현 방식을 확정하지 않습니다.
 
 [FACT] 사용자가 2026-08-26에 이 Product Specification 문서를 최종 승인했습니다.
+
+[FACT] 사용자가 2026-08-26 Technical Requirements 검토 중 Discord reaction 기반 batch 검토 완료, 부정 feedback, 암묵적 수용률, 구조화된 slash command를 통한 누락 기사 feedback과 recall 분류 정책을 추가 승인했습니다.
 
 ## Purpose
 
@@ -43,6 +47,7 @@
 | [Solution Discovery](solution-discovery.md) | [FACT] Approach C와 3B, 후보 자격 유지, 비무음 fallback, 실패와 0건 구분 | Analysis Policy, Batch States, Failure Scenarios |
 | [Feature Prioritization](feature-prioritization.md) | [FACT] F01~F07 최소 범위와 F10이 MVP-A이며 F07 확장·F08·F09는 MVP-B | End-to-end Flow, Feedback, Metrics, MVP Boundary |
 | 2026-08-26 사용자 승인 | [FACT] 중요도·적합성 분리, 홍보성 False Positive 우선, 저정보 제한 결과, Discord 복구 발송, feedback과 합격선 | Product Policies, Recovery, Quality Gate |
+| 2026-08-26 Feedback 정책 개정 승인 | [FACT] batch 검토 완료, 세 부정 reaction, 암묵적 수용률, 구조화된 누락 기사 제출·사유 회신과 후보 recall·수집 범위 누락 분리 | Feedback Scenario, Quality Metrics, AC-20, AC-21 |
 
 ## Target User and Job
 
@@ -58,7 +63,7 @@
 
 ### User-visible Success
 
-- [FACT] 사용자는 이전 성공 발송 이후의 기사 중 중요한 기사를 최대 10개로 압축해 확인합니다.
+- [FACT] 사용자는 각 완료된 신규 처리 구간의 중요한 기사를 최대 10개로 압축해 확인하며, Discord 전달 실패로 복구하는 과거 선정 결과는 현재 신규 결과와 구분해 확인합니다.
 - [FACT] 각 정상 결과에서 한국어 제목, 2~3문장 요약, keyword와 GeekNews topic link를 확인합니다.
 - [FACT] 저정보 entry가 선정되면 정보가 충분한 것처럼 보이지 않는 제한 결과를 확인합니다.
 - [FACT] 홍보성 의심 기사는 주요 목록에서 제외되고 사용자는 제외 건수를 확인합니다.
@@ -109,8 +114,9 @@
 
 ### Candidate Terms
 
-- [FACT] **후보**는 GeekNews RSS에서 확인되어 현재 또는 이후 처리 대상이 될 자격을 유지하는 entry입니다.
-- [FACT] **신규 후보**는 제품이 정의한 이전 성공 발송 이후의 신규 처리 구간에 속하는 후보입니다.
+- [FACT] **RSS 관찰 entry**는 정상적으로 parsing된 Raw RSS에서 확인한 entry이며 신규 후보, 기존·중복 관찰과 후보 생성 불가능 입력 오류를 포함합니다.
+- [FACT] **후보**는 RSS 관찰 entry 중 하나의 논리적 기사로 연결해 현재 또는 이후 처리할 자격을 확인할 수 있는 entry입니다. 후보 생성 불가능 입력 오류와 기존·중복 관찰은 신규 후보 수에 포함하지 않습니다.
+- [FACT] **신규 후보**는 직전 완료된 신규 처리 구간 이후 현재 예정 batch의 처리 범위에 처음 포함된 후보입니다. 신규 처리 구간은 Discord 성공 전달 범위와 구분하며, 과거 선정 후 미수락된 복구 기사와 과거 정상 미선정 기사는 현재 신규 후보에 다시 포함하지 않습니다.
 - [FACT] **정상 분석 후보**는 RSS 근거 안에서 정상 결과의 필수 판단을 완료한 후보입니다.
 - [FACT] **저정보 후보**는 RSS 입력 자체가 충실한 2~3문장 요약에 부족하지만 후보 자격을 유지하는 entry입니다.
 - [FACT] **미처리 후보**는 AI 실패, 무료 한도 또는 처리 제약 때문에 필요한 분석을 완료하지 못한 후보입니다.
@@ -125,7 +131,7 @@
 |---|---|---|
 | 정상 발송 | [FACT] 필요한 후보 처리를 완료하고 큐레이션을 생성함 | [FACT] 최대 10개 정상 결과 발송 |
 | 정상 미발송 — 신규 0건 | [FACT] 장애가 없고 신규 후보가 없음 | [FACT] 메시지 발송 없음 |
-| 부분 결과 | [FACT] 일부 후보만 필요한 분석을 완료함 | [FACT] 부분 결과임과 처리·미처리 건수를 표시하며 전체 Top 10으로 표현하지 않음 |
+| 부분 결과 | [FACT] 일부 RSS entry에서 후보를 생성하지 못했거나 일부 후보만 필요한 분석을 완료함 | [FACT] 부분 결과임과 존재하는 입력 오류·처리·미처리 건수를 표시하며 전체 RSS 관찰 범위의 Top 10으로 표현하지 않음 |
 | 처리 실패 미발송 | [FACT] 정상적인 기사 목록을 생성하지 못함 | [FACT] Discord가 사용 가능하면 실패 사실과 미처리 건수를 알림 |
 | Discord 전달 실패 | [FACT] 결과는 생성됐지만 Discord에 전달되지 않음 | [FACT] 발송 성공으로 처리하지 않고 다음 성공 정규 발송에서 복구 |
 
@@ -133,13 +139,14 @@
 
 ### 1. GeekNews RSS Candidate Collection
 
-- [FACT] News, Ask와 Show를 포함한 RSS entry를 일반 후보로 받아들입니다.
-- [FACT] 필수 입력이 부족하거나 잘못된 경우 후보 상태와 처리 가능 여부를 구분합니다.
+- [FACT] News, Ask와 Show를 포함한 RSS 관찰 entry의 후보 자격을 동일하게 검토합니다.
+- [FACT] 필수 입력이 부족하거나 잘못되어 후보를 생성할 수 없는 경우를 신규 후보와 구분된 명시적 입력 오류로 기록합니다.
 - [FACT] source type, title prefix 또는 단순 keyword만으로 후보 자격을 제거하지 않습니다.
 
 ### 2. Candidate State and Processability Check
 
 - [FACT] 링크 기반으로 이미 본 후보와 신규 후보를 구분하는 capability가 필요합니다.
+- [FACT] RSS 관찰 entry 수, 기존·중복 관찰 수, 후보 생성 불가능 입력 오류 수와 고유 신규 후보 수를 서로 구분합니다.
 - [FACT] 재실행과 중첩 수집이 동일 기사의 중복 사용자 전달을 만들면 안 됩니다.
 - [FACT] 이전 Discord 전달이 실패했다면 해당 발송 구간의 기사를 전달 완료로 처리하지 않습니다.
 - [UNKNOWN] 링크 정규화, ID 안정성, 신규 구간과 재수집 중첩 범위의 정확한 규칙은 Technical Requirements와 Data / Interface Design에서 결정합니다.
@@ -165,7 +172,7 @@
 
 ### 5. Selection
 
-- [FACT] 이전 성공 발송 이후의 후보 중 중요도순 최대 10개를 주요 목록으로 선정합니다.
+- [FACT] 현재 예정 batch의 신규 처리 구간에 속한 후보 중 중요도순 최대 10개를 주요 목록으로 선정합니다.
 - [FACT] 홍보성 의심 후보는 주요 목록에서 제외하고 제외 건수를 표시합니다.
 - [FACT] 홍보성 False Positive, 즉 유용한 비홍보 기사를 잘못 제외하는 오류를 False Negative보다 더 심각하게 다룹니다.
 - [FACT] 홍보성이 애매한 후보는 제외하지 않는 보수적인 정책을 적용합니다.
@@ -182,8 +189,12 @@
 
 ### 7. Feedback and Measurement
 
-- [FACT] 전달 기사에 대한 유용성·불필요함·홍보성 의심 feedback을 수집합니다.
-- [FACT] 누락된 중요 기사는 GeekNews topic link와 누락 이유로 기록합니다.
+- [FACT] 전달 기사에는 별로였음, 불필요함, 홍보성 의심의 세 부정 reaction을 복수로 수집할 수 있습니다.
+- [FACT] 사용자는 한 정규 발송 기사 세트 전체를 확인한 뒤 batch 대표 메시지에 ✅ reaction으로 검토 완료를 표시합니다.
+- [FACT] 검토 완료 batch에서 세 부정 reaction이 없는 기사는 암묵적 수용으로 기록합니다.
+- [FACT] 암묵적 수용은 명시적으로 유용하다고 평가하거나 원문을 열었다는 뜻이 아닙니다.
+- [FACT] 누락 중요 기사 후보는 구조화된 Discord slash command로 GeekNews topic link를 제출하고 실제 처리 기록에 따른 누락 이유를 회신받을 수 있습니다.
+- [FACT] 누락 link 제출 자체를 누락 검토 요청으로 취급하고 별도의 확인 feedback은 수집하지 않으며, 사용자는 회신된 이유에 해당 기사가 추천됐어야 한다는 reaction만 남길 수 있습니다.
 - [FACT] 홍보성으로 제외된 후보의 표본을 별도로 검토해 False Positive를 확인합니다.
 - [FACT] 첫 2~4주에 기사량, 처리량, AI 사용량, 지연, 실패와 품질 지표를 측정합니다.
 
@@ -223,12 +234,13 @@
 - [FACT] 전체 신규 후보 수
 - [FACT] 정상 처리 수
 - [FACT] 미처리 수
+- [FACT] 후보 생성 불가능 입력 오류가 존재하면 그 사실과 수
 - [FACT] 전체 후보의 최종 Top 10이 아니라는 경고
 - [FACT] 미처리 후보가 조용히 폐기되지 않았다는 상태
 
 [INFERENCE] 사용자 표시 예시는 다음과 같습니다.
 
-> 부분 결과 — 신규 후보 N건 중 P건을 정상 처리했습니다. U건은 처리하지 못했으며 아래 목록은 전체 후보의 최종 Top 10이 아닙니다.
+> 부분 결과 — RSS 입력 오류 E건이 있어 후보를 생성하지 못했습니다. 신규 후보 N건 중 P건을 정상 처리했고 U건은 처리하지 못했으며 아래 목록은 전체 RSS 관찰 범위의 최종 Top 10이 아닙니다.
 
 [UNKNOWN] 부분 결과 발송, 전체 미발송, 제한 결과와 보류의 정확한 조건과 우선순위는 무료 AI 후보 검증 후 결정합니다.
 
@@ -246,7 +258,7 @@
 ### Scenario 1 — Normal Scheduled Delivery
 
 1. [FACT] 10:00 또는 22:00 KST 정규 발송 시점이 됩니다.
-2. [FACT] 이전 성공 발송 이후 신규 후보를 확인합니다.
+2. [FACT] 직전 완료된 신규 처리 구간 이후 현재 예정 batch에 처음 포함된 신규 후보를 확인합니다.
 3. [FACT] 후보 상태, 입력과 중복 여부를 확인합니다.
 4. [FACT] RSS 근거 제한형 분석과 중요도·관심 주제·홍보성 판단을 수행합니다.
 5. [FACT] 홍보성 의심을 제외하고 중요도순 최대 10개를 선정합니다.
@@ -279,10 +291,12 @@
 ### Scenario 5 — Discord Delivery Failure and Recovery
 
 - [FACT] Discord가 메시지를 받지 못하면 해당 기사를 발송 완료로 처리하지 않습니다.
-- [FACT] 장애가 끝난 뒤 다음 10:00 또는 22:00 정규 발송에서 지연 기사를 다시 제공합니다.
+- [FACT] 각 batch의 선정 기사, 당시 상태와 후보·선정·최대 제한 미선정·홍보성 제외·미처리 수량을 재사용 가능한 논리적 발송 결과로 보존합니다.
+- [FACT] 장애가 끝난 뒤 다음 10:00 또는 22:00 정규 발송에서 과거 논리적 발송 결과의 미수락 선정 기사와 원래 batch 수량 요약을 재분석·재선정 없이 `지연 기사` 구간으로 다시 제공합니다.
+- [FACT] 과거 batch에서 최대 10개 제한으로 정상 미선정된 기사는 현재 신규 후보로 다시 포함하지 않지만, 해당 미선정 수는 지연 기사 구간의 원래 batch 요약에 유지합니다.
 - [FACT] 장애 직후의 별도 임시 발송은 현재 제품 정책에 포함하지 않습니다.
 - [FACT] 복구 메시지는 `이전 Discord 장애로 지연된 기사`와 `이번 발송 신규 기사`를 별도 구역으로 표시합니다.
-- [FACT] 현재 신규 기사가 0건이어도 지연 기사가 있으면 복구 메시지를 발송합니다.
+- [FACT] 현재 신규 기사가 0건이어도 지연 기사가 있으면 복구 메시지를 발송하며, 현재 신규 결과가 있으면 원래 batch와 수량 요약이 다른 별도 논리적 구간으로 표시합니다.
 - [FACT] 복구 발송은 `지연 기사 최대 10개 + 현재 기사 최대 10개`로 총 최대 20개를 허용합니다.
 - [UNKNOWN] 두 번 이상의 발송 시각 동안 장애가 계속되어 지연 기사가 10개를 초과할 때의 backlog 상한과 분할 정책은 이후 결정합니다.
 
@@ -309,38 +323,66 @@
 
 ### Scenario 9 — User Feedback
 
-- [FACT] 전달 기사에 대해 `유용함`, `불필요함`, `홍보성 의심` 의미를 구분해 feedback을 수집합니다.
-- [FACT] 반응이 없는 기사를 만족 또는 불만족으로 간주하지 않습니다.
-- [FACT] 누락 중요 기사는 GeekNews topic link와 누락 이유로 기록합니다.
+- [FACT] 전달 기사에 대해 😕 별로였음, 🚫 불필요함, 📣 홍보성 의심 reaction을 구분하고 한 기사에 복수 reaction을 허용합니다.
+- [FACT] 사용자는 한 정규 발송 기사 세트 전체를 확인한 뒤 batch 대표 메시지에 ✅ reaction으로 검토 완료를 표시합니다.
+- [FACT] ✅ reaction이 제거되면 해당 batch의 검토 완료도 취소합니다.
+- [FACT] GeekNews topic link 클릭은 Discord에서 확인 가능한 interaction이 아니며 검토 완료로 간주하지 않습니다.
+- [FACT] 검토 완료 batch에서 세 부정 reaction이 없는 기사는 암묵적 수용으로 기록합니다.
+- [FACT] 검토 완료되지 않은 batch의 기사는 암묵적 수용률 분모에서 제외합니다.
+- [FACT] 누락 중요 기사 후보는 정확한 command 이름을 고정하지 않은 구조화된 Discord slash command로 GeekNews topic link를 제출합니다.
+- [FACT] 시스템은 실제 수집·분석·선정·발송 기록을 우선해 누락 이유를 회신하고 확인할 수 없는 이유를 추측하지 않습니다.
+- [FACT] 누락 link 제출 자체를 누락 검토 요청으로 취급하고 별도의 이유 확인·이해 feedback은 수집하지 않으며, 사용자는 누락 이유 회신에 추천해야 했다 reaction만 남깁니다.
+- [FACT] 수집된 후보에 대한 추천해야 했다는 중요 기사 recall의 누락 사례로 계산합니다.
+- [FACT] 비교 기간을 포함하는 정상 Raw RSS 관찰 기록에서도 확인되지 않은 link만 수집원/수집 범위 누락으로 별도 집계하고 후보 recall 분모에서 제외합니다. Raw RSS 처리 실패, 수집 장애, 기록 부족·범위 밖과 identity 불확실은 각각 pipeline 실패 또는 원인 미확정으로 구분합니다.
+- [FACT] 이미 성공 전달된 기사는 누락으로 계산하지 않으며 원인 미확정 사례는 확정 전까지 recall 계산에서 보류합니다.
 - [FACT] 홍보성 제외 False Positive는 제외 후보 표본 검토로 확인합니다.
-- [UNKNOWN] Discord reaction, 간단한 form 또는 수동 기록 중 정확한 수집 수단은 Technical Requirements에서 결정합니다.
+- [UNKNOWN] 기사·batch·reaction의 정확한 Discord 표시와 mapping, slash command 이름·parameter와 응답 UI는 Interface Design에서 결정합니다.
 
 ## Product Metrics
 
 ### Volume and Funnel Metrics
 
-- [FACT] 발송별·일별 신규 후보 수
+- [FACT] Raw RSS 응답과 parsing된 RSS 관찰 entry 수
+- [FACT] 기존·중복 관찰과 후보 생성 불가능 입력 오류 수
+- [FACT] batch별·Asia/Seoul 일자별 신규 후보 수
 - [FACT] 정상 분석 후보 수
 - [FACT] 저정보 후보와 선정 수
 - [FACT] 미처리 후보 수
 - [FACT] 선정 기사 수
 - [FACT] 홍보성 의심 제외 수
 - [FACT] Discord 발송·미발송·실패 수
+- [FACT] 검토 완료·미검토 batch 수
+- [FACT] 별로였음, 불필요함, 홍보성 의심 reaction 수와 대상 기사 수
+- [FACT] 누락 기사 제출, 추천해야 했다 reaction과 수집원·수집 범위 누락 수
+
+[FACT] 모든 측정값은 정상 0건, 측정 불가, 해당 없음과 원인 미확정을 구분하고 실패·기록 부족을 0건으로 기록하지 않습니다.
+
+[FACT] 외부 호출·retry·reaction 변경과 복구 event 수는 논리적 기사·처리 결과·성공 전달·현재 feedback 수와 구분하며, 지연 결과의 원래 batch 수량과 현재 batch 수량을 합쳐 다시 계산하지 않습니다.
+
+[UNKNOWN] 월별 category·집계, 자동 Retention과 삭제는 MVP-A 측정값 산출 방식으로 확정하지 않고 MVP-B 범위와 MVP-A 검토 후 데이터 정책에서 결정합니다.
 
 ### Quality Metrics
 
 | 지표 | 제품 정의 | MVP-A 목표 |
 |---|---|---:|
 | 중요 기사 recall | [FACT] 사용자가 중요하다고 사후 판정한 후보 중 실제 전달된 비율 | [FACT] 90% 이상 |
-| 전달 기사 유용성 | [FACT] feedback이 있는 전달 기사 중 `유용함`으로 평가된 비율 | [FACT] 70% 이상 |
+| 암묵적 수용률 | [FACT] 검토 완료 batch의 전달 기사 중 세 부정 reaction이 하나도 없는 기사 비율 | [FACT] 70% 이상 |
 | RSS 근거 충실도 | [FACT] 검토한 요약 중 모든 핵심 주장이 RSS 근거로 확인되는 비율 | [FACT] 95% 이상 |
 | 중대한 근거 없는 사실 | [FACT] 사용자 판단을 크게 바꿀 수 있는 RSS 밖 사실의 수 | [FACT] 0건 |
 | 홍보성 False Positive | [FACT] 검토한 홍보성 제외 후보 중 실제 유용한 비홍보 기사 비율 | [FACT] 5% 이하 |
 | 홍보성 False Negative | [FACT] 검토한 전달 기사 중 홍보성으로 제외했어야 하는 기사 비율 | [FACT] 10% 이하 |
 
-[FACT] feedback이 없는 전달 기사는 전달 기사 유용성의 분모에서 제외합니다.
+[FACT] 같은 기사에 부정 reaction이 여러 개 있어도 암묵적 수용률에서는 부정 기사 한 건으로 계산하고 원인별 지표에서는 각각 계산합니다.
+
+[FACT] 검토 완료되지 않은 batch의 기사는 암묵적 수용률 분모에서 제외합니다.
+
+[FACT] 암묵적 수용은 별다른 부정 feedback이 없다는 뜻이며 명시적 유용함 또는 원문 열람을 의미하지 않습니다.
 
 [FACT] 처리되지 않았다고 표시된 중요 후보는 실패 가시성에는 기여하지만 중요 기사 recall의 전달 성공으로 계산하지 않습니다.
+
+[FACT] 수집된 후보에 대한 추천해야 했다는 사용자 사후 중요 판정으로서 중요 기사 recall 분모에 포함하고 전달되지 않았다면 누락으로 계산합니다.
+
+[FACT] 비교 기간을 포함하는 정상 Raw RSS 관찰 기록에서도 확인되지 않은 link는 수집원·수집 범위 누락으로 별도 집계하고 후보 기반 중요 기사 recall 분모에서는 제외합니다. Raw RSS 처리 실패와 수집 장애는 해당 pipeline 실패로 기록하고, 기록 부족·범위 밖과 identity 불확실은 원인 미확정으로 보류합니다.
 
 ### Reliability, Latency and Cost Metrics
 
@@ -415,16 +457,16 @@
 ### Failure Visibility
 
 - [FACT] **AC-14**: AI 실패 또는 무료 한도 소진을 신규 0건으로 표시하지 않습니다.
-- [FACT] **AC-15**: 부분 결과는 전체 Top 10으로 표현하지 않고 후보·정상 처리·미처리 건수를 표시합니다.
+- [FACT] **AC-15**: 부분 결과는 전체 RSS 관찰 범위의 Top 10으로 표현하지 않고 신규 후보·정상 처리·미처리 건수와, 존재하는 경우 후보 생성 불가능 입력 오류 수를 표시합니다.
 - [FACT] **AC-16**: 전체 AI 실패 시 Discord가 사용 가능하면 실패 사실, 미처리 수와 유료 전환이 없었다는 사실을 표시합니다.
 - [FACT] **AC-17**: Discord 전달 실패는 성공으로 처리하지 않습니다.
-- [FACT] **AC-18**: 다음 성공 정규 발송은 지연 기사와 현재 신규 기사를 분리해 표시합니다.
+- [FACT] **AC-18**: 다음 성공 정규 발송은 과거 논리적 발송 결과를 재사용한 지연 기사와 현재 신규 기사를 분리하고, 각 구간에 해당 원래 batch의 상태와 수량 요약을 표시합니다.
 - [FACT] **AC-19**: Discord 복구 발송은 지연 기사 최대 10개와 현재 기사 최대 10개, 총 최대 20개를 허용합니다.
 
 ### Feedback and Validation
 
-- [FACT] **AC-20**: 전달 기사에 대한 유용함·불필요함·홍보성 의심 feedback을 구분할 수 있습니다.
-- [FACT] **AC-21**: 누락 중요 기사를 GeekNews topic link와 누락 이유로 기록할 수 있습니다.
+- [FACT] **AC-20**: 기사별 세 부정 reaction과 batch별 검토 완료를 구분하고, 검토 완료 batch의 무부정 기사를 암묵적 수용으로 계산하며 미검토 batch를 분모에서 제외할 수 있습니다.
+- [FACT] **AC-21**: 구조화된 Discord slash command로 누락 기사 GeekNews topic link를 제출하고, 실제 처리 기록에 따른 이유와 추천해야 했다 reaction을 연결하며 후보 recall 누락과 수집원·수집 범위 누락을 구분할 수 있습니다. 별도의 이유 확인·이해 feedback은 수집하지 않으며 reaction이 없다는 사실을 동의·만족·비중요로 해석하지 않습니다.
 - [FACT] **AC-22**: 홍보성 제외 후보 표본을 검토해 False Positive를 측정할 수 있습니다.
 - [FACT] **AC-23**: 최소 2주·20개 batch·50개 후보 평가 전에는 MVP-A 품질 통과를 확정하지 않습니다.
 - [FACT] **AC-24**: Hard Gate와 승인된 품질·서비스 지표의 실제 결과를 구분해 보고할 수 있습니다.
@@ -454,7 +496,9 @@
 - [UNKNOWN] 인프라와 배포 방식
 - [UNKNOWN] 13시간 지연 측정의 정확한 시작 시각
 - [UNKNOWN] Discord 장애가 두 번 이상의 발송 시각 동안 지속될 때 backlog 상한과 분할 정책
-- [UNKNOWN] Feedback 입력의 구체적인 수단
+- [UNKNOWN] 기사·batch·reaction의 정확한 Discord 표시와 mapping
+- [UNKNOWN] slash command의 정확한 이름·parameter·표시 언어와 누락 이유 응답 UI
+- [UNKNOWN] Discord Application의 Gateway·HTTP interaction·주기 조회 선택과 월 0원 실행 방식
 
 ## Stage Boundary
 
