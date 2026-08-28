@@ -28,11 +28,12 @@
 
 [FACT] 사용자가 2026-08-26에 Technical Requirements 우선순위·ID 체계와 Discord reaction 기반 batch 검토 완료, 부정 feedback, 암묵적 수용률, 구조화된 누락 기사 feedback 및 recall 분류 정책을 승인했습니다.
 
-[FACT] 현재 Task는 `docs/02-technical/requirements.md` Draft 작성과 Product Specification·Context 동기화입니다.
 
-[FACT] Technical Requirements 순차 검토는 FR-001~FR-024까지 완료했으며 다음 재개 위치는 아직 미승인인 NFR-REL-001입니다.
+[FACT] Technical Requirements 순차 Requirement 검토와 사용자의 범주별 승인은 FR-001~FR-024, NFR 17개, DR-001~DR-014, EXT 25개와 VR-001~VR-011까지 완료했습니다.
 
-[FACT] 이번 Git 반영은 Workflow 6단계 완료가 아니라 다음 Task 재개를 위한 중간 checkpoint이며 Technical Requirements 전체 Draft는 아직 최종 승인되지 않았습니다.
+[FACT] Technical Requirements Draft 전체의 최종 정합성 점검과 사용자 최종 승인은 현재 사용 가능한 크레딧 제약으로 연기했습니다. Workflow 6단계는 최종 완료가 아니며 Architecture는 시작하지 않았습니다.
+
+[FACT] 이번 checkpoint는 작업 중단·재개를 위한 기록이며 Technical Requirements 전체 Draft는 아직 최종 승인되지 않았습니다.
 
 [FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
 
@@ -60,7 +61,7 @@
 - [FACT] 후보 처리 정책은 후보 자격 유지, 실제 무료 AI 후보 검증, 검증 결과에 따른 fallback 명세 순서로 진행합니다.
 - [FACT] 장애나 한도 소진에 따른 미발송은 신규 기사 0건 미발송과 구분해 실패 사실과 미처리 건수를 확인할 수 있어야 합니다.
 - [FACT] 월별 Insight, 장기 결과 재사용·normalization과 자동 Retention lifecycle은 MVP-A 검증 후 MVP-B에서 다룹니다.
-- [FACT] 초기 처리 기준은 최대 100건/일입니다.
+- [FACT] 초기 처리 기준 `100건/일`은 Asia/Seoul 일자별 고유 신규 후보 수이며 실제 AI 요청 수와 구분합니다.
 - [FACT] 추가 월 운영비 상한은 0원입니다.
 
 상세한 Problem Definition과 범위는 [docs/01-product/problem.md](docs/01-product/problem.md)를 확인합니다.
@@ -97,5 +98,7 @@
 [FACT] MVP-A/MVP-B 범위와 fallback 방향 보완 commit `40d1dc8`을 `origin/main`에 반영했습니다.
 
 [FACT] Product Specification 완료 commit `e9f02a0`을 `origin/main`에 반영했습니다.
+
+[FACT] Technical Requirements FR 검토 완료 checkpoint commit `52ac9ee`를 local `main`과 `origin/main`에 반영했습니다.
 
 [FACT] GitHub remote Repository는 `https://github.com/rleoprleop/news-data-pipeline.git`입니다.

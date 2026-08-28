@@ -30,15 +30,19 @@
 
 [FACT] Product Specification 단계 종료 commit `e9f02a0`이 local `main`과 `origin/main`에 반영됐습니다.
 
+[FACT] Technical Requirements FR 검토 완료 checkpoint commit `52ac9ee`가 local `main`과 `origin/main`에 반영됐습니다.
+
 [FACT] 전체 Workflow 6단계인 Technical Requirements Draft를 작성하고 검토하는 중입니다.
 
 [FACT] 사용자가 2026-08-26에 Technical Requirements의 P0-HG·P0·P1-V 우선순위와 FR·NFR·DR·EXT·VR Requirement ID 범주를 승인했습니다.
 
 [FACT] 사용자가 Discord reaction 기반 batch 검토 완료, 세 부정 feedback, 암묵적 수용률, 구조화된 누락 기사 제출·사유 회신과 후보 recall·수집 범위 누락 분리 정책을 승인했습니다.
 
-[FACT] Technical Requirements 순차 검토에서 FR-001~FR-024 Functional Requirements를 승인했으며 다음 재개 위치는 아직 미승인인 NFR-REL-001입니다.
+[FACT] 사용자가 2026-08-27에 NFR 17개 전체와 DR-001~DR-014를 순차 검토하고 승인했습니다.
 
-[FACT] 이번 종료 시 Git 반영은 Technical Requirements 단계 완료가 아니라 다음 Task 재개를 위한 중간 checkpoint입니다.
+[FACT] Technical Requirements 순차 Requirement 검토와 사용자의 범주별 승인은 FR-001~FR-024, NFR 17개, DR-001~DR-014, EXT 25개와 VR-001~VR-011까지 완료했습니다.
+
+[FACT] Technical Requirements Draft 전체의 최종 정합성 점검과 사용자 최종 승인은 현재 사용 가능한 크레딧 제약으로 연기했습니다. Workflow 6단계는 최종 완료가 아니며 Architecture는 시작하지 않았습니다.
 
 [FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
 
@@ -46,9 +50,9 @@
 
 ## Current Task
 
-[FACT] `docs/02-technical/requirements.md` Technical Requirements Draft 순차 검토와 Product Specification·README·AI Context 동기화.
+[FACT] `docs/02-technical/requirements.md`의 FR·NFR·DR·EXT·VR 91개 Requirement ID에 대한 순차 검토와 사용자 승인을 완료했습니다.
 
-[FACT] 순차 검토 checkpoint는 FR-001~FR-024 승인 완료이며 NFR-REL-001부터 재개합니다.
+[FACT] 현재 checkpoint는 최종 정합성 점검과 사용자 최종 승인이 연기된 상태를 기록합니다. Technical Requirements 단계는 진행 중이며 Architecture를 시작하지 않습니다.
 
 ## Completed
 
@@ -117,15 +121,25 @@
 - [FACT] 사용자가 Product Specification과 Context에 위 feedback 정책을 동기화하도록 승인했습니다.
 - [FACT] 승인된 Product Specification을 기준으로 Functional·Non-functional·Data·External Integration·Verification Requirements와 AC-01~AC-24 Traceability Matrix를 `docs/02-technical/requirements.md` Draft에 작성했습니다.
 - [FACT] 승인된 feedback 정책을 `docs/01-product/product-spec.md`, `README.md`와 이 Context에 동기화했습니다.
+- [FACT] NFR-REL-001에서 반복·중첩 수집·재실행 또는 자동 복구에 따른 의도되지 않은 중복 Discord 전달을 금지하고, 수락 불명확 원래 전달에 정확히 연결된 승인된 사용자의 `못 받음` 응답에 따른 1회 즉시 재전송은 별도 사용자 요청 기반 복구 예외로 기록하기로 승인했습니다.
+- [FACT] Discord 수락 여부를 확인할 수 없는 시도는 `수락 불명확`으로 유지하고 실제 확인 전 무조건 재발송하지 않으며, 확인된 미수락 기사는 승인된 복구 정책에 따라 발송할 수 있도록 승인했습니다.
+- [FACT] 기사 미발송을 확인 가능한 이유와 연결하고 정상 신규 0건, AI 처리 실패, Discord 전달 실패와 수락 불명확을 서로 다른 결과로 유지하도록 승인했습니다.
+- [FACT] NFR-REL-002를 포함한 나머지 NFR 16개를 순차 검토해 NFR 17개 전체를 승인했습니다.
+- [FACT] `100건/일`을 Asia/Seoul 일자별 고유 신규 후보 수로 정의하고 실제 AI 요청 수와 분리했으며, 100건 초과·무료 한도 미처리도 버리거나 숨기지 않도록 승인했습니다.
+- [FACT] 09:30·21:30 batch 시작, 30분 내 결과 준비 95%, 10:00·22:00 Discord 1분 이내 수락 95%, 예정 전달 시각 기준 `published` 13시간 이내 최신성과 원래 예정 시각 기준 복구 지연을 승인했습니다.
+- [FACT] 추가 월 비용·유료 호출·유료 자원 사용 0건, 단일 승인 무료 AI 경로, 비용·약관·설정 확인 불가 시 fail-closed와 원인별 미처리를 승인했습니다.
+- [FACT] RSS 근거 충실도, 단계별 배타적 결과, 원천 event 기반 관찰 가능성, Hard Gate 독립 판정, 최소 AI 전송·비밀정보 경계, 실패 단위 복구, AI provider 변경 검증·version 분리와 feedback 의미 action 안정성을 승인했습니다.
+- [FACT] DR-001~DR-014를 순차 검토해 Raw RSS 변경 불가 원본 계층, 관찰·후보·AI·선정·전달·feedback·metric·외부 설정 lineage와 이력 보존 요구를 승인했습니다.
+- [FACT] GeekNews RSS entry의 원값 `link`를 MVP-A의 단일 논리 기사 identity로 사용하고, 같은 원값 `link`만 같은 기사로 판정하며 Atom `id`·제목·내용과 URL 정규화를 identity 판정에 사용하지 않도록 승인했습니다.
+- [FACT] 2026-08-27 checkpoint 정합성 점검에서 승인된 FR·NFR·DR 사이에 사용자 정책을 다시 결정해야 하는 직접 충돌이 없음을 확인했습니다.
+- [FACT] 사용자가 2026-08-28에 EXT-GN-001을 승인했습니다. MVP-A 수집 요청 대상은 공식 GeekNews RSS endpoint만이며 GeekNews 상세 페이지·외부 원문은 MVP-A에서 수집·분석하지 않습니다. 이후 GeekNews 상세 페이지의 게시 내용을 추가 입력으로 수집하는 범위는 MVP-A 이후에 별도로 검토합니다.
 
 ## In Progress
 
-- [FACT] `docs/02-technical/requirements.md`의 FR-001~FR-024 순차 검토·승인을 완료했습니다.
-- [FACT] NFR-REL-001은 설명만 진행했으며 사용자 승인과 파일 수정은 하지 않았습니다.
-- [FACT] FR 검토 중 승인된 결정을 동기화하면서 NFR-REL-002, DR-002, DR-008, DR-009, DR-011과 일부 Traceability 문구를 보강했지만 NFR·DR 범주 순차 검토 완료로 간주하지 않습니다.
-- [FACT] 전체 91개 Requirement ID 중 Functional 24개를 순차 검토했고 NFR 17개, DR 14개, EXT 25개와 VR 11개의 범주 검토가 남아 있습니다.
-- [UNKNOWN] Technical Requirements Draft 전체에 대한 사용자 최종 승인이 필요합니다.
-- [UNKNOWN] NFR-SEC-001의 feedback 무료 AI 전달 가능 표현, 100건/일의 기준 단위, 13시간 지연의 RSS 노출·pipeline 구분, reaction 평가 snapshot과 홍보성 False Positive 검토 판정 데이터는 해당 Requirement 순서에서 검토해야 합니다.
+- [FACT] FR 24개, NFR 17개, DR 14개, EXT 25개와 VR 11개, 총 91개 Requirement ID의 순차 검토·사용자 승인을 완료했습니다.
+- [FACT] 승인된 Requirement는 Product Specification과 AC-01~AC-24 Traceability Matrix에 연결되어 있습니다. 전체 Draft의 최종 정합성·추적성 재검토는 아직 수행하지 않았습니다.
+- [FACT] 현재 사용 가능한 크레딧 제약으로 최종 정합성 점검을 연기했습니다. 이를 기술적 해결 완료, 품질 통과 또는 Technical Requirements 최종 승인으로 해석하지 않습니다.
+- [UNKNOWN] Technical Requirements Final Review와 그 뒤 사용자 최종 승인이 필요합니다.
 - [UNKNOWN] 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위는 실제 무료 AI 후보 검증 후 결정해야 합니다.
 - [UNKNOWN] 두 번 이상의 발송 시각 동안 Discord 장애가 계속될 때 backlog 상한과 분할 정책은 아직 결정되지 않았습니다.
 - [UNKNOWN] 기사·batch·reaction의 정확한 Discord 표시와 mapping, slash command 이름·parameter와 누락 이유 응답 UI는 Interface Design에서 결정해야 합니다.
@@ -133,11 +147,7 @@
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 Required Start-of-Task Check 후 NFR-REL-001부터 Technical Requirements 순차 검토를 재개하는 것입니다.
-
-[FACT] Product Specification 단계 종료 commit과 push는 완료됐습니다.
-
-[FACT] 이번 종료 Git 반영은 재개용 중간 checkpoint이며 Technical Requirements 최종 승인과 관련 문서 동기화 후 별도의 단계 종료 Git commit/push 안내 절차를 진행합니다.
+[INFERENCE] 다음 Task 하나는 “Technical Requirements Final Review: 전체 Requirement, Traceability, 문서 정합성, 미결정 사항과 단계 경계를 최종 점검하고 사용자 최종 승인을 요청한다.”입니다.
 
 ## Important Decisions
 
@@ -195,7 +205,7 @@
 - [FACT] 수집된 후보의 추천해야 했다는 중요 기사 recall 누락으로, 비교 기간을 포함하는 정상 Raw RSS 관찰 기록에서도 확인되지 않은 link만 수집원·수집 범위 누락으로 별도 집계하며 수집·처리 실패와 근거 부족은 구분합니다.
 - [FACT] MVP-A 검증은 최소 2주·20개 batch·50개 후보 평가를 요구하고 표본이 부족하면 `판정 불충분`으로 기록합니다.
 - [FACT] 중요 기사 recall 90%, 암묵적 수용률 70%, RSS 근거 충실도 95%, 홍보성 False Positive 5% 이하와 False Negative 10% 이하를 초기 품질 목표로 사용합니다.
-- [FACT] 유료 AI 자동 전환, 조용한 미처리, 동일 기사 중복 발송, AI 실패의 신규 0건 오표시, Discord 미수신의 성공 기록과 중대한 근거 밖 사실은 각각 0건이어야 합니다.
+- [FACT] 유료 AI 자동 전환, 조용한 미처리, 반복 수집·재실행 또는 자동 복구에 따른 의도되지 않은 동일 기사 중복 발송, AI 실패의 신규 0건 오표시, Discord 미수신의 성공 기록과 중대한 근거 밖 사실은 각각 0건이어야 합니다. 수락 불명확 원래 전달에 정확히 연결된 승인된 사용자의 `못 받음` 응답에 따른 1회 즉시 재전송은 별도 사용자 요청 기반 복구로 기록하며 중복 전달 Hard Gate 위반으로 계산하지 않습니다.
 - [UNKNOWN] AI fallback 세부 우선순위는 무료 AI 후보 검증 후 결정합니다.
 - [UNKNOWN] 장기 Discord 장애 backlog와 feedback Interface·Discord Application 구현 방식은 이후 단계에서 결정합니다.
 
@@ -206,7 +216,16 @@
 - [FACT] Requirement ID는 FR, NFR, DR, EXT와 VR 범주로 구분합니다.
 - [FACT] 각 요구사항은 ID, 우선순위, 내용, Product Specification 또는 Acceptance Criteria 근거, 검증 방법과 미결정 의존성을 포함합니다.
 - [FACT] AC-01~AC-24는 Technical Requirement ID와 검증 증거에 연결돼야 합니다.
-- [FACT] Technical Requirements는 AI 제공자·SDK, framework, DB schema, 상태 전이 구현, retry·polling, component 구조, identity 알고리즘, 점수·임계값, 인프라와 장기 Discord backlog 정책을 확정하지 않습니다.
+- [FACT] Technical Requirements는 AI 제공자·SDK, framework, DB schema, 상태 전이 구현, retry·polling, component 구조, 승인된 Raw RSS `link` identity의 제약·동시성 구현, 점수·임계값, 인프라와 장기 Discord backlog 정책을 확정하지 않습니다.
+- [FACT] 같은 논리적 기사는 RSS에서 반복·중첩 수집될 수 있지만, 반복·재실행 또는 자동 복구로 동일 사용자·전달 대상에 중복 전달되어서는 안 됩니다. 수락 불명확 원래 전달에 정확히 연결된 승인된 사용자의 `못 받음` 응답에 따른 1회 즉시 재전송은 원래 attempt·사용자 응답·재전송 attempt와 연결한 별도 사용자 요청 기반 복구 예외입니다.
+- [FACT] 성공 전달된 기사는 batch 재실행, 동시 실행 또는 AI 재처리로 다시 전달하지 않습니다.
+- [FACT] Discord 수락 여부가 불명확하면 성공·실패로 추정하거나 무조건 재발송하지 않고 대조 대상으로 유지합니다.
+- [FACT] 실제 확인 결과 미수락이면 승인된 복구 정책에 따라 발송할 수 있고, 수락이 확인되면 다시 발송하지 않습니다.
+- [FACT] 기사 미발송은 확인 가능한 이유와 연결하며 정상 신규 0건, AI 처리 실패, Discord 전달 실패와 수락 불명확을 서로 다른 결과로 유지합니다.
+- [FACT] 모든 파싱된 RSS 관찰과 고유 신규 후보는 입력·최신성·AI·선정·전달 단계별로 실제 근거와 일치하는 대표 결과를 가지며 서로 다른 단계의 상태를 하나의 전역 상태로 덮어쓰지 않습니다.
+- [FACT] Raw RSS 응답은 parsing 전 변경 불가 snapshot으로 원본 계층에 보존하고 이후 처리 결과가 실제 사용한 snapshot까지 역추적 가능해야 합니다.
+- [FACT] MVP-A 기사 identity는 Raw RSS `link` 원값의 정확한 일치이며 Atom `id`·제목·내용과 URL 정규화는 identity 판정에 사용하지 않습니다.
+- [FACT] 외부 provider·model·credential·비용·약관 변경은 검증과 사용자 승인 전에 운영 경로에 활성화하지 않고, 과거 성공 결과와 지표를 소급 재분석·덮어쓰기하지 않습니다.
 - [UNKNOWN] `docs/02-technical/requirements.md` Draft 전체에 대한 사용자 최종 승인은 아직 완료되지 않았습니다.
 
 ### Git Workflow
@@ -267,14 +286,16 @@
 
 ### Capacity, Cost and Reliability
 
-- [FACT] 초기 처리 용량 기준은 최대 100건/일입니다.
+- [FACT] `100건/일`은 Asia/Seoul 일자별 고유 신규 후보 수를 기준으로 하며 실제 AI 요청 수와 구분합니다.
+- [FACT] 100건 초과 또는 무료 AI 한도 부족으로 정상 분석하지 못한 후보도 버리거나 숨기지 않고 명시적인 미처리 결과로 남깁니다.
 - [FACT] 실제 기사량과 API 사용량을 첫 2~4주 동안 측정한 뒤 기준을 조정합니다.
 - [FACT] 추가 월 운영비 상한은 0원입니다.
-- [FACT] 기사 전달 목표는 게시 후 최대 13시간 이내입니다.
-- [FACT] 각 발송 배치는 30분 이내 완료하는 것이 목표입니다.
-- [FACT] 13시간은 전달 지연 목표이며 누락 복구 범위가 아닙니다.
-- [INFERENCE] 누락 복구의 출발 방향은 마지막 성공 수집 시점과 충분한 중첩 범위를 이용한 재수집, 그리고 `link UNIQUE + ON CONFLICT`를 이용한 중복 제거입니다.
-- [UNKNOWN] 충분한 중첩 범위와 GeekNews 링크의 안정성·정규화 규칙은 설계 전에 검증해야 합니다.
+- [FACT] 현재 기사 최신성은 예정 Discord 전달 시각과 RSS `published`의 차이가 13시간 이내인지로 판정하며 정확히 13시간은 포함하고 초과 후보는 명시적인 미처리 이유로 남깁니다.
+- [FACT] 예정 batch는 09:30·21:30에 시작하고 발송 가능한 결과를 30분 내 준비하는 목표의 충족률은 95% 이상이어야 합니다.
+- [FACT] 메시지가 필요한 예정 batch는 Discord 수락이 10:00:00~10:00:59 또는 22:00:00~22:00:59에 확인되는 목표의 충족률이 95% 이상이어야 합니다.
+- [FACT] Discord 복구 지연은 원래 예정 전달 시각부터 실제 복구 수락까지 측정하고, 복구 시 원래 결과를 재분석·재선정·최신성 재판정하지 않습니다.
+- [FACT] MVP-A 기사 identity는 Raw RSS `link` 원값의 정확한 일치이며 URL 정규화는 별도 승인 전 적용하지 않습니다.
+- [UNKNOWN] 충분한 재수집 중첩 범위, GeekNews link 장기 안정성·재사용과 link 유효성 검증·고유성 constraint 구현은 설계 전에 검증해야 합니다.
 
 ### AI Provider
 
@@ -310,7 +331,7 @@
 - [FACT] 사용자 승인 없이 다중 AI 제공자 구현, Kafka 또는 Spark를 추가하지 않습니다.
 - [FACT] 검증 없이 특정 AI 제공자를 확정하지 않습니다.
 - [FACT] 무료 한도 초과 시 유료 호출로 자동 전환하지 않습니다.
-- [FACT] 13시간 지연 목표를 누락 복구 조회 범위로 사용하지 않습니다.
+- [FACT] 예정 전달 시각 기준 13시간 최신성 경계를 누락 복구 조회 범위나 복구 시 재판정 기준으로 사용하지 않습니다.
 - [FACT] 월별 Insight 보존이 보장되기 전에 관련 원천 데이터를 삭제하는 설계를 승인하지 않습니다.
 - [FACT] 사용자 승인 없이 배포하거나 Git commit 또는 Git push를 실행하지 않습니다.
 - [FACT] News, Ask와 Show를 source type 또는 title prefix만으로 수집·처리 후보에서 조기 제외하지 않습니다.
@@ -321,7 +342,8 @@
 - [FACT] 관심 주제 밖이라는 이유만으로 후보를 제외하지 않습니다.
 - [FACT] 홍보성이 애매한 후보를 주요 목록에서 자동 제외하지 않습니다.
 - [FACT] 저정보 entry에 근거 없는 내용을 추가해 2~3문장을 강제로 만들지 않습니다.
-- [FACT] Discord가 메시지를 받지 못한 발송 구간을 성공 처리하거나 신규 기사 구간을 전진시키지 않습니다.
+- [FACT] Discord 수락 증거가 없는 전달을 성공 처리하지 않으며, 수락 불명확 결과를 실제 대조 전에 무조건 재발송하지 않습니다.
+- [FACT] Raw RSS `link` 외 Atom `id`·제목·내용으로 기사를 병합하거나 별도 승인 없이 URL 정규화를 적용하지 않습니다.
 
 ## Known Issues
 
@@ -349,19 +371,21 @@
 - [UNKNOWN] MVP-A 최소 추적 정보의 품질 검토 완료 이후 임시 보존·삭제 제품 정책은 결정되지 않았습니다.
 - [UNKNOWN] 월별 Insight의 전달 채널과 실행 시각이 정해지지 않았습니다.
 - [UNKNOWN] 월 경계, 발송 경계와 재수집 중첩 범위의 정확한 상태 관리 방식이 정해지지 않았습니다.
+- [UNKNOWN] 아직 미검토인 `EXT-GN-003`은 장기 검증 전 identity를 확정하지 않는 초안이어서 승인된 Raw RSS `link` 단일 identity와 충돌하며, `EXT-GN-004`와 `VR-008`은 개정 전 13시간 지연 문구를 포함하므로 각 요구사항 순차 검토에서 수정·승인이 필요합니다.
 - [FACT] 애플리케이션 코드, 데이터베이스, 테스트와 배포 환경이 없습니다.
 
 ## Technical Debt
 
 - [FACT] 구현이 시작되지 않아 코드 수준 Technical Debt는 없습니다.
 - [INFERENCE] 단계 문서의 종료 시점 상태와 프로젝트의 현재 상태를 혼동하지 않도록 이후 문서에는 historical snapshot과 current status를 더 명시적으로 구분하는 편이 안전합니다.
+- [INFERENCE] 중복 방지·상태·복구·보안 제한이 FR·NFR·DR에 계층별로 반복되어 독립 검증에는 유용하지만 문구 drift 위험이 있으므로, 전체 Draft 최종 검토에서 공통 용어를 기준으로 중복 표현을 정리하되 보장 범위와 추적성은 유지해야 합니다.
 
 ## Current Risks
 
 - [INFERENCE] 저정보 표시 정책을 구현하더라도 말줄임표 뒤의 내용을 추정하거나 제한 결과를 정상 2~3문장 결과처럼 보이게 하면 근거 없는 확장이 발생할 수 있습니다.
 - [INFERENCE] 중요도 점수 공식과 홍보성 임계값이 검증되지 않은 상태에서 세밀한 수치를 고정하면 유용한 기사가 제외되거나 홍보성 기사가 포함될 수 있습니다.
 - [INFERENCE] 무료 AI의 할당량·약관·모델 제공 조건 변경은 월 운영비 0원 목표를 위협합니다.
-- [INFERENCE] 표본에서는 GeekNews topic link와 `id`가 같지만 장기 안정성이 확인되지 않아 이를 검증 없이 고유 식별자로 사용하면 중복 방지 또는 갱신 처리에서 오류가 발생할 수 있습니다.
+- [INFERENCE] Raw RSS `link` 원값을 단일 identity로 사용하기로 승인했지만 장기 안정성·재사용은 아직 검증하지 않았으므로, 향후 실제 변화가 발견되면 과거 발송 경계를 유지한 새 정책 version과 사용자 승인이 필요합니다.
 - [INFERENCE] News, Ask와 Show를 모두 후보로 처리하므로 승인된 관심 주제·중요도·홍보성 원칙을 실제 AI 품질과 임계값으로 검증하지 않으면 최종 큐레이션의 품질이 낮아질 수 있습니다.
 - [INFERENCE] 모든 후보의 자격을 유지하면서 동일한 수준의 AI 처리를 보장하지 않으므로 fallback과 미처리 상태를 명확히 하지 않으면 중요한 기사 누락이 보이지 않을 수 있습니다.
 - [INFERENCE] Discord 장애 복구 발송이 최대 20개까지 늘어나면 한 번의 메시지에서 사용자의 검토 부담이 증가할 수 있습니다.
@@ -441,6 +465,26 @@
 
 [FACT] 2026-08-26 Asia/Seoul 기준 FR-001~FR-024 순차 검토를 완료하고 다음 재개 위치를 NFR-REL-001로 확정했으며, 전체 Draft는 최종 승인 전 상태로 유지했습니다.
 
+[FACT] 2026-08-27 Asia/Seoul 기준 사용자가 NFR-REL-001의 동일 기사 중복 전달 0건, Discord 수락 불명확 처리, 확인된 미수락 복구와 미발송 이유 상태 구분을 승인했음을 확인했습니다.
+
+[FACT] 2026-08-28 Asia/Seoul 기준 사용자가 수락 불명확 원래 전달에 정확히 연결된 승인된 사용자의 `못 받음` 응답에 따른 1회 즉시 재전송을 사용자 요청 기반 복구 예외로 승인했으며, 이후 원래 전달 수락이 확인돼도 이를 반복 수집·재실행 또는 자동 복구에 따른 의도되지 않은 중복 전달 Hard Gate 위반으로 계산하지 않도록 승인했습니다.
+
+[FACT] 2026-08-27 Asia/Seoul 기준 사용자가 NFR 17개 전체와 DR-001~DR-014를 순차 검토하고 승인했음을 확인했습니다.
+
+[FACT] 2026-08-27 Asia/Seoul checkpoint 시작 전 Repository 구조, README, AGENTS, docs, AI Context, 코드·테스트 부재, TODO·FIXME 부재, Git 상태와 최근 history를 다시 확인했습니다.
+
+[FACT] checkpoint 시작 시 branch는 `main`, `HEAD`와 `origin/main`은 `52ac9ee`로 일치했고, 기존 승인 반영분인 `ai-context.md`, `docs/01-product/product-spec.md`, `docs/02-technical/requirements.md`만 unstaged 수정 상태였으며 staged·untracked 변경은 없었습니다.
+
+[FACT] Technical Requirement ID는 총 91개이고 FR 24개, NFR 17개, DR 14개, EXT 25개와 VR 11개로 모두 고유함을 다시 확인했습니다.
+
+[FACT] 승인된 FR·NFR·DR의 정책 정합성을 Product Specification과 대조해 직접 충돌이 없음을 확인하고, 승인 전 identity·시간 표현을 현재 정책에 맞게 동기화했습니다.
+
+[FACT] 아직 미검토인 `EXT-GN-003`, `EXT-GN-004`와 `VR-008`의 초안이 승인된 identity·시간 정책과 충돌할 수 있음을 확인해 다음 순차 검토의 명시적 확인 항목으로 남겼습니다.
+
+[FACT] 2026-08-28 Asia/Seoul 기준 중단된 checkpoint 작업을 재개해 working tree 대상이 동일한 4개 문서임을 확인하고 문서 형식·Requirement ID·AC 추적성과 재개 위치를 최종 검증했습니다.
+
+[FACT] 2026-08-28 Asia/Seoul 기준 FR 24개, NFR 17개, DR 14개, EXT 25개와 VR 11개, 총 91개 Requirement ID의 순차 검토·사용자 승인이 완료됐음을 확인했습니다. 전체 Draft 최종 정합성 점검과 최종 사용자 승인은 현재 사용 가능한 크레딧 제약으로 연기했으며, Architecture·코드·DB schema·테스트·배포 구성은 시작하지 않았습니다.
+
 ## Last Updated
 
-[FACT] 2026-08-26 Asia/Seoul
+[FACT] 2026-08-28 Asia/Seoul
