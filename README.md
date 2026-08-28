@@ -24,16 +24,16 @@
 
 [FACT] Product Specification 단계 종료 commit `e9f02a0`이 local `main`과 `origin/main`에 반영됐습니다.
 
-[FACT] 전체 Workflow 6단계인 **Technical Requirements** Draft를 작성하고 검토하는 중입니다.
+[FACT] 전체 Workflow 6단계인 **Technical Requirements**의 Final Review와 사용자 최종 승인을 2026-08-29에 완료했습니다.
 
 [FACT] 사용자가 2026-08-26에 Technical Requirements 우선순위·ID 체계와 Discord reaction 기반 batch 검토 완료, 부정 feedback, 암묵적 수용률, 구조화된 누락 기사 feedback 및 recall 분류 정책을 승인했습니다.
 
 
 [FACT] Technical Requirements 순차 Requirement 검토와 사용자의 범주별 승인은 FR-001~FR-024, NFR 17개, DR-001~DR-014, EXT 25개와 VR-001~VR-011까지 완료했습니다.
 
-[FACT] Technical Requirements Draft 전체의 최종 정합성 점검과 사용자 최종 승인은 현재 사용 가능한 크레딧 제약으로 연기했습니다. Workflow 6단계는 최종 완료가 아니며 Architecture는 시작하지 않았습니다.
+[FACT] 2026-08-28에 Technical Requirements Draft 전체의 최종 정합성 점검을 완료했고 사용자가 2026-08-29에 전체 Draft를 최종 승인했습니다. Workflow 6 단계 종료 Git Review를 완료했으며 commit·push 여부 결정이 남아 있고 Architecture는 시작하지 않았습니다.
 
-[FACT] 이번 checkpoint는 작업 중단·재개를 위한 기록이며 Technical Requirements 전체 Draft는 아직 최종 승인되지 않았습니다.
+[FACT] Final Review와 최종 승인 반영 문서의 단계 종료 commit·push는 아직 수행하지 않았습니다. commit·push가 완료되거나 사용자가 이를 명시적으로 연기하기 전에는 Architecture를 시작하지 않습니다.
 
 [FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
 
@@ -100,5 +100,7 @@
 [FACT] Product Specification 완료 commit `e9f02a0`을 `origin/main`에 반영했습니다.
 
 [FACT] Technical Requirements FR 검토 완료 checkpoint commit `52ac9ee`를 local `main`과 `origin/main`에 반영했습니다.
+
+[FACT] Technical Requirements 91개 Requirement의 순차 승인 checkpoint commit `d343ac5`를 local `main`과 `origin/main`에 반영했습니다.
 
 [FACT] GitHub remote Repository는 `https://github.com/rleoprleop/news-data-pipeline.git`입니다.

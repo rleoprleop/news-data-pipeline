@@ -32,7 +32,7 @@
 
 [FACT] Technical Requirements FR 검토 완료 checkpoint commit `52ac9ee`가 local `main`과 `origin/main`에 반영됐습니다.
 
-[FACT] 전체 Workflow 6단계인 Technical Requirements Draft를 작성하고 검토하는 중입니다.
+[FACT] 전체 Workflow 6단계인 Technical Requirements의 Final Review, 사용자 최종 승인과 단계 종료 Git Review를 완료했으며 commit·push 여부 결정을 기다리고 있습니다.
 
 [FACT] 사용자가 2026-08-26에 Technical Requirements의 P0-HG·P0·P1-V 우선순위와 FR·NFR·DR·EXT·VR Requirement ID 범주를 승인했습니다.
 
@@ -42,7 +42,7 @@
 
 [FACT] Technical Requirements 순차 Requirement 검토와 사용자의 범주별 승인은 FR-001~FR-024, NFR 17개, DR-001~DR-014, EXT 25개와 VR-001~VR-011까지 완료했습니다.
 
-[FACT] Technical Requirements Draft 전체의 최종 정합성 점검과 사용자 최종 승인은 현재 사용 가능한 크레딧 제약으로 연기했습니다. Workflow 6단계는 최종 완료가 아니며 Architecture는 시작하지 않았습니다.
+[FACT] Technical Requirements Draft 전체의 최종 정합성 점검은 2026-08-28에 완료했고, 사용자는 2026-08-29에 전체 Draft를 최종 승인했습니다. 단계 종료 commit·push는 아직 수행하지 않았으며 Architecture는 시작하지 않았습니다.
 
 [FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
 
@@ -50,9 +50,9 @@
 
 ## Current Task
 
-[FACT] `docs/02-technical/requirements.md`의 FR·NFR·DR·EXT·VR 91개 Requirement ID에 대한 순차 검토와 사용자 승인을 완료했습니다.
+[FACT] `docs/02-technical/requirements.md`의 FR·NFR·DR·EXT·VR 91개 Requirement ID에 대한 순차 검토, Final Review와 Draft 전체의 사용자 최종 승인을 완료했습니다.
 
-[FACT] 현재 checkpoint는 최종 정합성 점검과 사용자 최종 승인이 연기된 상태를 기록합니다. Technical Requirements 단계는 진행 중이며 Architecture를 시작하지 않습니다.
+[FACT] Workflow 6 단계 종료 Git Review를 완료했습니다. 현재 Task는 승인 반영 변경의 commit·push 여부 결정이며, 완료되거나 사용자가 이를 명시적으로 연기하기 전에는 Architecture를 시작하지 않습니다.
 
 ## Completed
 
@@ -136,10 +136,9 @@
 
 ## In Progress
 
-- [FACT] FR 24개, NFR 17개, DR 14개, EXT 25개와 VR 11개, 총 91개 Requirement ID의 순차 검토·사용자 승인을 완료했습니다.
-- [FACT] 승인된 Requirement는 Product Specification과 AC-01~AC-24 Traceability Matrix에 연결되어 있습니다. 전체 Draft의 최종 정합성·추적성 재검토는 아직 수행하지 않았습니다.
-- [FACT] 현재 사용 가능한 크레딧 제약으로 최종 정합성 점검을 연기했습니다. 이를 기술적 해결 완료, 품질 통과 또는 Technical Requirements 최종 승인으로 해석하지 않습니다.
-- [UNKNOWN] Technical Requirements Final Review와 그 뒤 사용자 최종 승인이 필요합니다.
+- [FACT] FR 24개, NFR 17개, DR 14개, EXT 25개와 VR 11개, 총 91개 Requirement ID의 순차 검토·Final Review·사용자 최종 승인을 완료했습니다.
+- [FACT] 승인된 Requirement는 Product Specification과 AC-01~AC-24 Traceability Matrix에 연결되어 있으며, 전체 Draft의 최종 정합성·추적성 재검토를 완료했습니다.
+- [FACT] Workflow 6 단계 종료 Git Review를 완료했으며 commit·push는 아직 수행하지 않았습니다.
 - [UNKNOWN] 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위는 실제 무료 AI 후보 검증 후 결정해야 합니다.
 - [UNKNOWN] 두 번 이상의 발송 시각 동안 Discord 장애가 계속될 때 backlog 상한과 분할 정책은 아직 결정되지 않았습니다.
 - [UNKNOWN] 기사·batch·reaction의 정확한 Discord 표시와 mapping, slash command 이름·parameter와 누락 이유 응답 UI는 Interface Design에서 결정해야 합니다.
@@ -147,7 +146,7 @@
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 “Technical Requirements Final Review: 전체 Requirement, Traceability, 문서 정합성, 미결정 사항과 단계 경계를 최종 점검하고 사용자 최종 승인을 요청한다.”입니다.
+[INFERENCE] 다음 Task 하나는 “Technical Requirements 최종 승인 변경을 단계 종료 commit으로 기록하고 `origin/main`에 push할지 결정한다.”입니다.
 
 ## Important Decisions
 
@@ -226,7 +225,7 @@
 - [FACT] Raw RSS 응답은 parsing 전 변경 불가 snapshot으로 원본 계층에 보존하고 이후 처리 결과가 실제 사용한 snapshot까지 역추적 가능해야 합니다.
 - [FACT] MVP-A 기사 identity는 Raw RSS `link` 원값의 정확한 일치이며 Atom `id`·제목·내용과 URL 정규화는 identity 판정에 사용하지 않습니다.
 - [FACT] 외부 provider·model·credential·비용·약관 변경은 검증과 사용자 승인 전에 운영 경로에 활성화하지 않고, 과거 성공 결과와 지표를 소급 재분석·덮어쓰기하지 않습니다.
-- [UNKNOWN] `docs/02-technical/requirements.md` Draft 전체에 대한 사용자 최종 승인은 아직 완료되지 않았습니다.
+- [FACT] 사용자가 2026-08-29 Asia/Seoul에 `docs/02-technical/requirements.md` Draft 전체를 최종 승인했습니다.
 
 ### Git Workflow
 
@@ -371,14 +370,13 @@
 - [UNKNOWN] MVP-A 최소 추적 정보의 품질 검토 완료 이후 임시 보존·삭제 제품 정책은 결정되지 않았습니다.
 - [UNKNOWN] 월별 Insight의 전달 채널과 실행 시각이 정해지지 않았습니다.
 - [UNKNOWN] 월 경계, 발송 경계와 재수집 중첩 범위의 정확한 상태 관리 방식이 정해지지 않았습니다.
-- [UNKNOWN] 아직 미검토인 `EXT-GN-003`은 장기 검증 전 identity를 확정하지 않는 초안이어서 승인된 Raw RSS `link` 단일 identity와 충돌하며, `EXT-GN-004`와 `VR-008`은 개정 전 13시간 지연 문구를 포함하므로 각 요구사항 순차 검토에서 수정·승인이 필요합니다.
 - [FACT] 애플리케이션 코드, 데이터베이스, 테스트와 배포 환경이 없습니다.
 
 ## Technical Debt
 
 - [FACT] 구현이 시작되지 않아 코드 수준 Technical Debt는 없습니다.
 - [INFERENCE] 단계 문서의 종료 시점 상태와 프로젝트의 현재 상태를 혼동하지 않도록 이후 문서에는 historical snapshot과 current status를 더 명시적으로 구분하는 편이 안전합니다.
-- [INFERENCE] 중복 방지·상태·복구·보안 제한이 FR·NFR·DR에 계층별로 반복되어 독립 검증에는 유용하지만 문구 drift 위험이 있으므로, 전체 Draft 최종 검토에서 공통 용어를 기준으로 중복 표현을 정리하되 보장 범위와 추적성은 유지해야 합니다.
+- [INFERENCE] 중복 방지·상태·복구·보안 제한이 FR·NFR·DR에 계층별로 반복되어 독립 검증에는 유용합니다. Final Review에서는 보장 범위와 추적성을 유지하면서 상태 문구, Discord 재전송 예외, 부분 발송 조건과 traceability의 drift만 최소 범위로 정리했습니다.
 
 ## Current Risks
 
@@ -479,12 +477,22 @@
 
 [FACT] 승인된 FR·NFR·DR의 정책 정합성을 Product Specification과 대조해 직접 충돌이 없음을 확인하고, 승인 전 identity·시간 표현을 현재 정책에 맞게 동기화했습니다.
 
-[FACT] 아직 미검토인 `EXT-GN-003`, `EXT-GN-004`와 `VR-008`의 초안이 승인된 identity·시간 정책과 충돌할 수 있음을 확인해 다음 순차 검토의 명시적 확인 항목으로 남겼습니다.
+[FACT] 당시 아직 미검토였던 `EXT-GN-003`, `EXT-GN-004`와 `VR-008`의 초안이 승인된 identity·시간 정책과 충돌할 수 있음을 확인해 이후 순차 검토의 명시적 확인 항목으로 남겼고, 해당 검토와 수정을 완료했습니다.
 
-[FACT] 2026-08-28 Asia/Seoul 기준 중단된 checkpoint 작업을 재개해 working tree 대상이 동일한 4개 문서임을 확인하고 문서 형식·Requirement ID·AC 추적성과 재개 위치를 최종 검증했습니다.
+[FACT] 2026-08-28 Asia/Seoul 기준 순차 검토 중단 checkpoint를 재개할 당시 working tree 대상이 동일한 4개 문서임을 확인하고 문서 형식·Requirement ID·AC 추적성과 재개 위치를 검증했습니다. 이는 순차 검토 당시의 historical snapshot이며 현재 Final Review working tree 상태가 아닙니다.
 
-[FACT] 2026-08-28 Asia/Seoul 기준 FR 24개, NFR 17개, DR 14개, EXT 25개와 VR 11개, 총 91개 Requirement ID의 순차 검토·사용자 승인이 완료됐음을 확인했습니다. 전체 Draft 최종 정합성 점검과 최종 사용자 승인은 현재 사용 가능한 크레딧 제약으로 연기했으며, Architecture·코드·DB schema·테스트·배포 구성은 시작하지 않았습니다.
+[FACT] 2026-08-28 Asia/Seoul 기준 FR 24개, NFR 17개, DR 14개, EXT 25개와 VR 11개, 총 91개 Requirement ID의 순차 검토·사용자 승인이 완료됐음을 확인했습니다.
+
+[FACT] 2026-08-28 Asia/Seoul 기준 Technical Requirements Final Review 시작 시 `main`과 `origin/main`이 commit `d343ac5`를 가리키고 working tree가 깨끗하며, 애플리케이션 코드·테스트·실행 설정과 실행 가능한 TODO/FIXME가 없고 `git diff --check`가 통과함을 확인했습니다.
+
+[FACT] 2026-08-28 Asia/Seoul 기준 91개 Requirement ID의 고유성·범주별 개수·우선순위·검증 방법·Hard Gate·용어·상태 표현과 AC-01~AC-24 Traceability Matrix를 최종 검토했습니다. 상태 checkpoint, Discord 수락 중복 예외, 부분 발송의 미확정 조건, Markdown 표 열 수와 AC-18·AC-22 연결의 drift를 최소 범위로 수정했습니다. 재검증 결과 FR 24개·NFR 17개·DR 14개·EXT 25개·VR 11개, P0-HG 28개·P0 42개·P1-V 21개이며 ID 중복·번호 누락·잘못된 참조·필수 검증 항목 누락·표 구조 오류가 없고 Product Specification과 Matrix의 AC가 각각 24개, Hard Gate가 각각 6개로 일치했습니다.
+
+[FACT] 2026-08-28 Asia/Seoul 기준 Repository의 Markdown 로컬 링크가 모두 유효하고 historical checkpoint 잔존 문구 검색 결과가 없으며, 최종 `git diff --check`가 통과했습니다.
+
+[FACT] 2026-08-28 Asia/Seoul 기준 Product Specification의 승인 정책과 MVP-A/MVP-B 경계, 이후 Architecture·실험에서 결정할 `[UNKNOWN]`을 보존했으며, Architecture·코드·DB schema·provider 확정·테스트 구현·배포·Git commit·push를 수행하지 않았습니다.
+
+[FACT] 사용자가 2026-08-29 Asia/Seoul에 Technical Requirements Draft 전체를 최종 승인했습니다. 승인 상태를 `requirements.md`, `README.md`와 이 Context에 동기화하고 Workflow 6 단계 종료 Git Review를 완료했습니다. 변경 범위는 이 세 문서뿐이며 Requirement·AC·Hard Gate·Markdown 표·로컬 링크·stale 승인 상태 문구와 `git diff --check` 재검사가 통과했습니다. commit·push는 아직 수행하지 않았습니다.
 
 ## Last Updated
 
-[FACT] 2026-08-28 Asia/Seoul
+[FACT] 2026-08-29 Asia/Seoul
