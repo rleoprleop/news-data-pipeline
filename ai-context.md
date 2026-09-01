@@ -32,7 +32,7 @@
 
 [FACT] Technical Requirements FR 검토 완료 checkpoint commit `52ac9ee`가 local `main`과 `origin/main`에 반영됐습니다.
 
-[FACT] 전체 Workflow 6단계인 Technical Requirements의 Final Review, 사용자 최종 승인과 단계 종료 Git Review를 완료했으며 commit·push 여부 결정을 기다리고 있습니다.
+[FACT] 전체 Workflow 6단계인 Technical Requirements의 Final Review, 사용자 최종 승인과 단계 종료 Git Review를 완료했으며, 승인 반영 변경은 commit `0e8214c`로 local `main`과 `origin/main`에 반영됐습니다.
 
 [FACT] 사용자가 2026-08-26에 Technical Requirements의 P0-HG·P0·P1-V 우선순위와 FR·NFR·DR·EXT·VR Requirement ID 범주를 승인했습니다.
 
@@ -42,7 +42,9 @@
 
 [FACT] Technical Requirements 순차 Requirement 검토와 사용자의 범주별 승인은 FR-001~FR-024, NFR 17개, DR-001~DR-014, EXT 25개와 VR-001~VR-011까지 완료했습니다.
 
-[FACT] Technical Requirements Draft 전체의 최종 정합성 점검은 2026-08-28에 완료했고, 사용자는 2026-08-29에 전체 Draft를 최종 승인했습니다. 단계 종료 commit·push는 아직 수행하지 않았으며 Architecture는 시작하지 않았습니다.
+[FACT] Technical Requirements Draft 전체의 최종 정합성 점검은 2026-08-28에 완료했고, 사용자는 2026-08-29에 전체 Draft를 최종 승인했습니다. 단계 종료 commit `0e8214c`가 local `main`과 `origin/main`에 반영된 뒤 Workflow 7 Architecture의 초안 방향 검토를 시작했습니다.
+
+[FACT] `docs/02-technical/architecture.md`의 AD-01~AD-23과 전체 문서를 사용자가 2026-09-01에 최종 승인했습니다. 승인 상태와 관련 문서 동기화를 완료했으며, Workflow 7 단계 종료 Git Review와 commit·push는 아직 수행하지 않았습니다. 이 승인은 구현 승인을 뜻하지 않습니다.
 
 [FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
 
@@ -52,7 +54,7 @@
 
 [FACT] `docs/02-technical/requirements.md`의 FR·NFR·DR·EXT·VR 91개 Requirement ID에 대한 순차 검토, Final Review와 Draft 전체의 사용자 최종 승인을 완료했습니다.
 
-[FACT] Workflow 6 단계 종료 Git Review를 완료했습니다. 현재 Task는 승인 반영 변경의 commit·push 여부 결정이며, 완료되거나 사용자가 이를 명시적으로 연기하기 전에는 Architecture를 시작하지 않습니다.
+[FACT] Workflow 6 단계 종료 Git Review와 commit·push를 완료했습니다. 현재 Task는 최종 승인된 Workflow 7 Architecture 문서의 단계 종료 Git Review이며, commit·push 전에는 Workflow 8 Data / Interface Design으로 이동하지 않습니다.
 
 ## Completed
 
@@ -133,20 +135,22 @@
 - [FACT] GeekNews RSS entry의 원값 `link`를 MVP-A의 단일 논리 기사 identity로 사용하고, 같은 원값 `link`만 같은 기사로 판정하며 Atom `id`·제목·내용과 URL 정규화를 identity 판정에 사용하지 않도록 승인했습니다.
 - [FACT] 2026-08-27 checkpoint 정합성 점검에서 승인된 FR·NFR·DR 사이에 사용자 정책을 다시 결정해야 하는 직접 충돌이 없음을 확인했습니다.
 - [FACT] 사용자가 2026-08-28에 EXT-GN-001을 승인했습니다. MVP-A 수집 요청 대상은 공식 GeekNews RSS endpoint만이며 GeekNews 상세 페이지·외부 원문은 MVP-A에서 수집·분석하지 않습니다. 이후 GeekNews 상세 페이지의 게시 내용을 추가 입력으로 수집하는 범위는 MVP-A 이후에 별도로 검토합니다.
+- [FACT] 사용자가 2026-09-01에 `docs/02-technical/architecture.md`의 AD-01~AD-23과 전체 문서를 최종 승인했고, 승인 상태를 관련 문서와 Context에 동기화했습니다.
 
 ## In Progress
 
-- [FACT] FR 24개, NFR 17개, DR 14개, EXT 25개와 VR 11개, 총 91개 Requirement ID의 순차 검토·Final Review·사용자 최종 승인을 완료했습니다.
-- [FACT] 승인된 Requirement는 Product Specification과 AC-01~AC-24 Traceability Matrix에 연결되어 있으며, 전체 Draft의 최종 정합성·추적성 재검토를 완료했습니다.
-- [FACT] Workflow 6 단계 종료 Git Review를 완료했으며 commit·push는 아직 수행하지 않았습니다.
-- [UNKNOWN] 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위는 실제 무료 AI 후보 검증 후 결정해야 합니다.
+- [FACT] Architecture AD-01~AD-23과 전체 문서의 사용자 최종 승인 및 관련 문서 동기화를 완료했습니다.
+- [FACT] Workflow 7 단계 종료 Git Review와 승인 반영 commit·push는 아직 수행하지 않았습니다.
+- [UNKNOWN] 원인별 AI retry·backoff, 전체 선정 불가 판정과 지연 full result의 실제 latency는 무료 AI 후보 검증 후 결정해야 합니다.
 - [UNKNOWN] 두 번 이상의 발송 시각 동안 Discord 장애가 계속될 때 backlog 상한과 분할 정책은 아직 결정되지 않았습니다.
 - [UNKNOWN] 기사·batch·reaction의 정확한 Discord 표시와 mapping, slash command 이름·parameter와 누락 이유 응답 UI는 Interface Design에서 결정해야 합니다.
-- [UNKNOWN] Discord Application의 Gateway·HTTP interaction·주기 조회 선택과 월 0원 실행 가능성은 Architecture 전에 검증해야 합니다.
+- [UNKNOWN] 승인된 Gateway-first·triggered REST 대조가 실제 Discord 계약과 월 0원 제약에서 가능한지는 검증해야 합니다.
+- [FACT] Candidate B인 하나의 Python image·K3s 분리 역할·PostgreSQL durable work ledger, 정시 전달·처리 지연 full result·Discord backlog 분리, Recovery 확인 작업, backup 재개 gate와 독립 evaluation 실행 경계가 승인됐습니다.
+- [UNKNOWN] backup 공백 한계·RPO·RTO, CronJob 기동 오차, Discord interaction contract와 evaluation snapshot·산식은 후속 설계·실험에서 결정해야 합니다.
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 “Technical Requirements 최종 승인 변경을 단계 종료 commit으로 기록하고 `origin/main`에 push할지 결정한다.”입니다.
+[INFERENCE] 다음 Task 하나는 “Workflow 7 Architecture 단계 종료 Git Review를 수행하고 승인 문서를 commit·push할지 결정한다.”입니다.
 
 ## Important Decisions
 
@@ -161,6 +165,7 @@
 - [FACT] 승인된 Research / JTBD conclusion을 변경하려면 사용자 승인이 필요합니다.
 - [FACT] 승인된 Solution Discovery 결정을 변경하려면 사용자 승인이 필요합니다.
 - [FACT] 승인된 Product Specification 정책과 acceptance criteria를 변경하려면 사용자 승인이 필요합니다.
+- [FACT] `docs/02-technical/architecture.md`의 AD-01~AD-23과 전체 문서는 2026-09-01에 사용자 최종 승인을 받았으며, 핵심 결정을 변경하려면 별도 사용자 승인이 필요합니다.
 
 ### Solution Discovery
 
@@ -192,8 +197,8 @@
 - [FACT] 관심 주제 밖이어도 전체 IT 생태계 영향도가 높으면 전달할 수 있습니다.
 - [FACT] 홍보성 False Positive를 False Negative보다 더 심각하게 다루며 애매한 후보는 제외하지 않습니다.
 - [FACT] 저정보 RSS entry는 후보 자격을 유지하고 선정 시 `정보 제한`, 근거가 허용하는 1문장 이하 설명과 GeekNews topic link를 제공합니다.
-- [FACT] 정상 발송, 정상 0건, 부분 결과, 처리 실패 미발송과 Discord 전달 실패를 사용자 관점에서 구분합니다.
-- [FACT] AI 부분 결과는 전체 Top 10으로 표현하지 않고 후보·정상 처리·미처리 건수를 표시합니다.
+- [FACT] 정상 발송, 정상 0건, 입력 제약 결과, AI 미완료 목록 미발송, 처리 지연 full result, 전체 선정 불가 처리 실패 notice와 Discord 전달 실패를 사용자 관점에서 구분합니다.
+- [FACT] 유효 후보의 AI 처리가 미완료인 동안 기사 목록을 발송하지 않으며, 완료되면 원래 batch의 최대 10개 처리 지연 full result를 발송합니다.
 - [FACT] RSS 관찰 entry, 기존·중복 관찰, 후보 생성 불가능 입력 오류와 고유 신규 후보 수를 분리하며 입력 오류로 결과가 불완전하면 오류 수를 표시합니다.
 - [FACT] 전체 AI 실패는 신규 0건과 구분하고 Discord가 사용 가능하면 실패 사실과 미처리 건수를 알립니다.
 - [FACT] Discord 전달 실패 기사는 원래 batch의 선정 결과와 수량 요약을 재분석 없이 재사용해 다음 성공 정규 발송에서 지연 기사로 제공하며, 현재 기사와 각각 최대 10개, 총 최대 20개를 허용합니다.
@@ -205,7 +210,8 @@
 - [FACT] MVP-A 검증은 최소 2주·20개 batch·50개 후보 평가를 요구하고 표본이 부족하면 `판정 불충분`으로 기록합니다.
 - [FACT] 중요 기사 recall 90%, 암묵적 수용률 70%, RSS 근거 충실도 95%, 홍보성 False Positive 5% 이하와 False Negative 10% 이하를 초기 품질 목표로 사용합니다.
 - [FACT] 유료 AI 자동 전환, 조용한 미처리, 반복 수집·재실행 또는 자동 복구에 따른 의도되지 않은 동일 기사 중복 발송, AI 실패의 신규 0건 오표시, Discord 미수신의 성공 기록과 중대한 근거 밖 사실은 각각 0건이어야 합니다. 수락 불명확 원래 전달에 정확히 연결된 승인된 사용자의 `못 받음` 응답에 따른 1회 즉시 재전송은 별도 사용자 요청 기반 복구로 기록하며 중복 전달 Hard Gate 위반으로 계산하지 않습니다.
-- [UNKNOWN] AI fallback 세부 우선순위는 무료 AI 후보 검증 후 결정합니다.
+- [FACT] 유료·다른 provider 자동 fallback은 금지하며, 전체 선정 불가능이면 원인별 처리 실패 notice를 발송합니다.
+- [UNKNOWN] AI 원인별 retry·backoff와 전체 선정 불가능의 제공자별 판정은 무료 AI 후보 검증 후 결정합니다.
 - [UNKNOWN] 장기 Discord 장애 backlog와 feedback Interface·Discord Application 구현 방식은 이후 단계에서 결정합니다.
 
 ### Technical Requirements
@@ -226,6 +232,18 @@
 - [FACT] MVP-A 기사 identity는 Raw RSS `link` 원값의 정확한 일치이며 Atom `id`·제목·내용과 URL 정규화는 identity 판정에 사용하지 않습니다.
 - [FACT] 외부 provider·model·credential·비용·약관 변경은 검증과 사용자 승인 전에 운영 경로에 활성화하지 않고, 과거 성공 결과와 지표를 소급 재분석·덮어쓰기하지 않습니다.
 - [FACT] 사용자가 2026-08-29 Asia/Seoul에 `docs/02-technical/requirements.md` Draft 전체를 최종 승인했습니다.
+
+### Architecture
+
+- [FACT] 하나의 Python 코드베이스와 image를 K3s의 Prepare·Delivery-gate·Recovery CronJob 및 long-running Discord Gateway listener Deployment 역할로 나눕니다.
+- [FACT] PostgreSQL은 durable work ledger·lease·외부 효과 근거의 단일 제어 기준이며, 별도 queue는 도입하지 않습니다.
+- [FACT] PostgreSQL은 단일 StatefulSet replica와 PersistentVolume을 사용하고 별도 실패 영역의 논리 backup·수동 검증 restore를 사용합니다. DB 신뢰 불명 또는 backup 공백 한계 초과 시 outbound를 중지하고 검증·대조·사용자 승인 뒤에만 재개합니다.
+- [FACT] Discord feedback은 Gateway-first event와 조건부 REST 현재 상태 대조를 함께 사용합니다. 수락 불명확은 자동 재전송하지 않고 Recovery의 1시간 확인 작업과 승인 사용자 응답으로 처리합니다.
+- [FACT] Discord 전달 attempt는 10:00·22:00 KST보다 먼저 시작하지 않으며 1분 안 수락을 목표로 합니다. AI 선정이 늦게 완료되면 기존 pipeline이 원래 batch 최대 10개를 별도 처리 지연 full result로 즉시 발송합니다.
+- [FACT] 확인된 Discord 미수락 backlog는 다음 성공 정규 발송에서 가장 오래된 원래 batch 최대 10개를 현재 기사 최대 10개와 별도 구역으로 복구하며, 처리 지연 full result와 섞지 않습니다.
+- [FACT] K3s Secret encryption at rest·역할별 최소 권한·검증된 image digest·조건부 공개 registry·수동 cost kill switch를 사용하고 비용 0원 위반 뒤 자동 재개하지 않습니다.
+- [FACT] 품질 평가는 같은 Python image의 독립 command/function으로 수행하고 별도 상시 service·queue를 두지 않습니다.
+- [UNKNOWN] schema·상태 전이·lease·API payload·prompt·manifest, provider/Discord 실제 contract, backup RPO/RTO와 평가 산식은 Data / Interface Design 및 검증에서 결정합니다.
 
 ### Git Workflow
 
@@ -336,7 +354,7 @@
 - [FACT] News, Ask와 Show를 source type 또는 title prefix만으로 수집·처리 후보에서 조기 제외하지 않습니다.
 - [FACT] 사용자 승인 없이 MVP-B 기능을 MVP-A 완료 조건으로 되돌리지 않습니다.
 - [FACT] 무료 한도나 처리 제약으로 전체 AI 분석을 수행하지 못한 후보를 조용히 제외하지 않습니다.
-- [FACT] 실제 무료 AI 후보 검증 전에 보류·재시도, 제한 결과와 미발송의 정확한 조건과 우선순위를 고정하지 않습니다.
+- [FACT] 유효 후보 AI 분석이 미완료이면 기사 목록을 발송하지 않고, 전체 선정 완료 시 원래 batch의 별도 처리 지연 full result를 발송하며, 전체 선정 불가 시 원인별 처리 실패 notice를 발송합니다. 처리 지연 full result와 Discord 미수락 backlog를 섞지 않습니다. 원인별 retry·backoff와 전체 선정 불가 판정은 실제 무료 AI 검증 후 결정합니다.
 - [FACT] 장애 미발송을 신규 기사 0건 미발송과 같은 정상 상태로 기록하지 않습니다.
 - [FACT] 관심 주제 밖이라는 이유만으로 후보를 제외하지 않습니다.
 - [FACT] 홍보성이 애매한 후보를 주요 목록에서 자동 제외하지 않습니다.
@@ -357,15 +375,15 @@
 - [UNKNOWN] 중요도 점수 공식, 홍보성 label과 정확한 제외 임계값은 결정되지 않았습니다.
 - [UNKNOWN] 제외 판정의 사유와 점수를 보존할지 결정되지 않았습니다.
 - [UNKNOWN] 무료 AI 후보별 현재 할당량, 데이터 조건, 유료 전환 차단 방식과 한국어 품질을 검증하지 않았습니다.
-- [FACT] AI 실패는 정상 0건과 구분하고 부분 결과에는 후보·정상 처리·미처리 건수와 전체 Top 10이 아니라는 사실을 표시합니다.
-- [UNKNOWN] 부분 발송, 전체 미발송, 제한 결과, 보류와 재처리의 정확한 조건과 우선순위는 결정되지 않았습니다.
+- [FACT] AI 실패는 정상 0건과 구분합니다. 후보 생성 불가능 입력 오류가 있는 입력 제약 결과는 수량과 불완전 범위를 표시하지만, 유효 후보 AI 미완료 상태에서는 기사 목록을 발송하지 않습니다.
+- [FACT] 모든 유효 후보 처리가 완료되면 원래 batch의 처리 지연 full result를 발송하고, 완료 불가능이면 원인별 실패 notice를 발송합니다. 정확한 retry·backoff와 제공자별 완료 불가능 판정은 [UNKNOWN]입니다.
 - [FACT] Discord 전달 실패 기사는 저장된 원래 batch의 논리적 발송 결과와 수량 요약을 지연 기사 구간으로 재사용하고 현재 신규 결과와 별도 구간으로 발송합니다.
 - [UNKNOWN] 두 번 이상의 발송 시각 동안 Discord 장애가 지속될 때 backlog 상한과 분할 정책은 결정되지 않았습니다.
 - [FACT] MVP-A의 혼합 feedback 방식, 최소 검증 표본, 품질 목표와 Hard Gate가 결정됐습니다.
 - [FACT] 기사별 세 부정 reaction, batch별 ✅ 검토 완료, 암묵적 수용률과 구조화된 slash command 기반 누락 feedback 수단이 결정됐습니다.
 - [UNKNOWN] 기사·batch·reaction의 정확한 Discord 표시와 mapping은 Interface Design에서 결정해야 합니다.
 - [UNKNOWN] slash command의 정확한 이름·parameter·표시 언어와 누락 이유 응답 UI는 Interface Design에서 결정해야 합니다.
-- [UNKNOWN] Discord Application의 Gateway·HTTP interaction·주기 조회 선택과 월 0원 실행 가능성은 검증하지 않았습니다.
+- [FACT] Discord Application은 Gateway-first event와 조건부 REST 현재 상태 대조를 함께 사용합니다. 정확한 권한·rate limit·resume·interaction contract와 월 0원 실행 가능성은 [UNKNOWN]입니다.
 - [FACT] 수집된 후보의 추천해야 했다는 recall 누락으로, 정상 Raw RSS 관찰 범위에서도 확인되지 않은 link만 수집원·수집 범위 누락으로 분리하고 수집·처리 실패와 원인 미확정은 별도 분류합니다.
 - [UNKNOWN] MVP-A 최소 추적 정보의 품질 검토 완료 이후 임시 보존·삭제 제품 정책은 결정되지 않았습니다.
 - [UNKNOWN] 월별 Insight의 전달 채널과 실행 시각이 정해지지 않았습니다.
@@ -385,7 +403,7 @@
 - [INFERENCE] 무료 AI의 할당량·약관·모델 제공 조건 변경은 월 운영비 0원 목표를 위협합니다.
 - [INFERENCE] Raw RSS `link` 원값을 단일 identity로 사용하기로 승인했지만 장기 안정성·재사용은 아직 검증하지 않았으므로, 향후 실제 변화가 발견되면 과거 발송 경계를 유지한 새 정책 version과 사용자 승인이 필요합니다.
 - [INFERENCE] News, Ask와 Show를 모두 후보로 처리하므로 승인된 관심 주제·중요도·홍보성 원칙을 실제 AI 품질과 임계값으로 검증하지 않으면 최종 큐레이션의 품질이 낮아질 수 있습니다.
-- [INFERENCE] 모든 후보의 자격을 유지하면서 동일한 수준의 AI 처리를 보장하지 않으므로 fallback과 미처리 상태를 명확히 하지 않으면 중요한 기사 누락이 보이지 않을 수 있습니다.
+- [INFERENCE] 모든 후보의 자격을 유지하면서 provider별 retry·전체 선정 불가능 판정이 검증되지 않았으므로, 처리 지연이 무한 대기되거나 실패 notice가 너무 이르게 확정될 위험이 있습니다.
 - [INFERENCE] Discord 장애 복구 발송이 최대 20개까지 늘어나면 한 번의 메시지에서 사용자의 검토 부담이 증가할 수 있습니다.
 - [INFERENCE] Discord 장애가 여러 발송 시각 동안 지속되면 아직 정하지 않은 backlog 상한과 분할 정책 때문에 지연 기사가 누락되거나 과도하게 누적될 수 있습니다.
 - [INFERENCE] 기사별 reaction과 batch별 검토 완료를 Discord 메시지에 명확히 연결하지 못하면 feedback이 잘못된 기사나 batch에 귀속될 수 있습니다.
@@ -393,7 +411,7 @@
 - [INFERENCE] batch를 실제로 검토하지 않고 ✅ reaction을 남기면 암묵적 수용률이 과대평가될 수 있으므로 검토 완료의 의미를 사용자 안내와 지표 정의에서 유지해야 합니다.
 - [INFERENCE] 정상 Raw RSS 관찰 범위에서도 확인되지 않은 link를 후보 recall에 포함하거나 수집·처리 실패를 수집원 누락으로 합치면 수집 품질과 선정 품질을 혼동하므로 원인 범주를 계속 분리해야 합니다.
 - [INFERENCE] 월별 Insight 생성과 Raw 삭제 순서를 잘못 설계하면 장기 데이터가 손실될 수 있습니다.
-- [INFERENCE] 신규 기사 0건, 부분 실패와 재실행 시 발송 구간을 잘못 관리하면 누락 또는 중복 전달이 발생할 수 있습니다.
+- [INFERENCE] 신규 기사 0건, 입력 제약, AI 미완료, 처리 지연 full result, Discord backlog와 재실행의 발송 구간을 잘못 관리하면 누락 또는 중복 전달이 발생할 수 있습니다.
 
 ## Last Verified
 
@@ -491,8 +509,10 @@
 
 [FACT] 2026-08-28 Asia/Seoul 기준 Product Specification의 승인 정책과 MVP-A/MVP-B 경계, 이후 Architecture·실험에서 결정할 `[UNKNOWN]`을 보존했으며, Architecture·코드·DB schema·provider 확정·테스트 구현·배포·Git commit·push를 수행하지 않았습니다.
 
-[FACT] 사용자가 2026-08-29 Asia/Seoul에 Technical Requirements Draft 전체를 최종 승인했습니다. 승인 상태를 `requirements.md`, `README.md`와 이 Context에 동기화하고 Workflow 6 단계 종료 Git Review를 완료했습니다. 변경 범위는 이 세 문서뿐이며 Requirement·AC·Hard Gate·Markdown 표·로컬 링크·stale 승인 상태 문구와 `git diff --check` 재검사가 통과했습니다. commit·push는 아직 수행하지 않았습니다.
+[FACT] 사용자가 2026-08-29 Asia/Seoul에 Technical Requirements Draft 전체를 최종 승인했습니다. 승인 상태를 `requirements.md`, `README.md`와 이 Context에 동기화하고 Workflow 6 단계 종료 Git Review를 완료했습니다. 변경 범위는 이 세 문서뿐이며 Requirement·AC·Hard Gate·Markdown 표·로컬 링크·stale 승인 상태 문구와 `git diff --check` 재검사가 통과했습니다. 이후 승인 반영 변경은 commit `0e8214c`로 기록되어 local `main`과 `origin/main`에 반영됐습니다.
+
+[FACT] 2026-09-01 Asia/Seoul 기준 사용자가 AD-01~AD-23과 Architecture 문서 전체를 최종 승인했고, Architecture·Product Specification·Technical Requirements·AGENTS·README·AI Context를 현재 결정과 승인 상태에 맞게 동기화했습니다. 문서 검사에서 Requirement 91개(FR 24·NFR 17·DR 14·EXT 25·VR 11), 우선순위 P0-HG 28·P0 42·P1-V 21, AD 23개, Product·Matrix AC 각 24개의 고유성과 연속성을 확인했으며 Markdown table·fence·로컬 link·trailing whitespace와 `git diff --check` 오류가 없었습니다. Workflow 7 단계 종료 Git commit·push는 아직 수행하지 않았습니다.
 
 ## Last Updated
 
-[FACT] 2026-08-29 Asia/Seoul
+[FACT] 2026-09-01 Asia/Seoul

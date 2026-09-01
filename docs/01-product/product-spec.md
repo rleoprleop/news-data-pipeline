@@ -30,6 +30,8 @@
 
 [FACT] 사용자가 2026-08-27 Technical Requirements 순차 검토에서 예정 batch·Discord 수락 시각, Asia/Seoul 일자별 고유 신규 후보 100건 기준, 추가 월 비용 0원, Raw RSS 원본 보존과 원값 `link` 단일 identity 정책을 추가 승인했습니다.
 
+[FACT] 사용자가 2026-09-01 Architecture 검토에서 유효 후보 AI 분석 미완료 시 목록 미발송, 전체 선정 완료 뒤 별도 처리 지연 full result 발송, Discord 미수락 backlog와의 분리, 정시 attempt·1분 안 수락 목표를 승인했습니다.
+
 ## Purpose
 
 [FACT] 프로젝트명은 `IT 뉴스 데이터 파이프라인`입니다.
@@ -89,7 +91,7 @@
 - [FACT] 링크 기반 중복 방지와 신규 기사 구간·재처리 상태 관리 capability가 필요합니다.
 - [FACT] RSS 근거 제한형 분석, 중요도·관심 주제·홍보성 판단과 최대 10개 선정을 포함합니다.
 - [FACT] 매일 10:00와 22:00 KST Discord 발송을 포함합니다.
-- [FACT] 정상 0건, 부분 결과, 처리 실패 미발송과 Discord 전달 실패를 구분합니다.
+- [FACT] 정상 0건, 후보 생성 불가능 입력 오류가 있는 입력 제약 결과, AI 미완료 목록 미발송, 처리 지연 full result, 전체 선정 불가 처리 실패 notice와 Discord 전달 실패를 구분합니다.
 - [FACT] 최소 판단 근거와 결과 version을 보존합니다.
 - [INFERENCE] 최소 판단 근거와 결과 version은 적어도 해당 MVP-A feedback·품질 검토가 끝날 때까지 재검토할 수 있어야 합니다.
 - [FACT] 사용자 feedback과 첫 2~4주의 초기 사용량·지연·품질 측정을 포함합니다.
@@ -137,7 +139,7 @@
 |---|---|---|
 | 정상 발송 | [FACT] 필요한 후보 처리를 완료하고 큐레이션을 생성함 | [FACT] 최대 10개 정상 결과 발송 |
 | 정상 미발송 — 신규 0건 | [FACT] 장애가 없고 신규 후보가 없음 | [FACT] 메시지 발송 없음 |
-| 부분 결과 | [FACT] 일부 RSS entry에서 후보를 생성하지 못했거나 일부 후보만 필요한 분석을 완료함 | [FACT] 부분 결과임과 존재하는 입력 오류·처리·미처리 건수를 표시하며 전체 RSS 관찰 범위의 Top 10으로 표현하지 않음 |
+| 입력 제약 결과 | [FACT] 일부 RSS entry에서 후보를 생성하지 못했지만, 생성된 모든 유효 후보의 필요한 처리는 완료됨 | [FACT] 입력 제약과 수를 표시하며, 목록을 발송하면 전체 RSS 관찰 범위의 완전한 Top 10으로 표현하지 않음 |
 | 처리 실패 미발송 | [FACT] 정상적인 기사 목록을 생성하지 못함 | [FACT] Discord가 사용 가능하면 실패 사실과 미처리 건수를 알림 |
 | Discord 전달 실패 | [FACT] 결과는 생성됐지만 Discord에 전달되지 않음 | [FACT] 발송 성공으로 처리하지 않고 다음 성공 정규 발송에서 복구 |
 
@@ -193,7 +195,7 @@
 
 - [FACT] 정상 발송 시 매일 10:00와 22:00 KST에 최대 10개를 제공합니다.
 - [FACT] 신규 기사가 0건이면 Discord 메시지를 발송하지 않습니다.
-- [FACT] AI 실패·무료 한도·부분 처리와 Discord 장애는 신규 0건과 구분합니다.
+- [FACT] AI 실패·무료 한도·처리 미완료·처리 지연 full result와 Discord 장애는 신규 0건과 구분합니다.
 - [FACT] Discord가 메시지를 수락하지 않았다면 발송 성공으로 처리하지 않습니다.
 
 ### 7. Feedback and Measurement
@@ -236,22 +238,21 @@
 - [FACT] 제외된 기사가 있으면 `홍보성 의심 제외 N건`으로 개수를 표시합니다.
 - [FACT] MVP-A Discord 결과에는 제외 기사 전체 목록을 표시하지 않습니다.
 
-### Partial Result Notice
+### Input-constrained Result Notice
 
-[FACT] 부분 결과를 발송하는 경우 최소한 다음 사실을 명시합니다.
+[FACT] 후보 생성 불가능 입력 오류가 존재하지만 생성된 모든 유효 후보의 필요한 처리를 완료해 목록을 발송하는 경우 최소한 다음 사실을 명시합니다.
 
 - [FACT] 전체 신규 후보 수
 - [FACT] 정상 처리 수
-- [FACT] 미처리 수
 - [FACT] 후보 생성 불가능 입력 오류가 존재하면 그 사실과 수
 - [FACT] 전체 후보의 최종 Top 10이 아니라는 경고
 - [FACT] 미처리 후보가 조용히 폐기되지 않았다는 상태
 
 [INFERENCE] 사용자 표시 예시는 다음과 같습니다.
 
-> 부분 결과 — RSS 입력 오류 E건이 있어 후보를 생성하지 못했습니다. 신규 후보 N건 중 P건을 정상 처리했고 U건은 처리하지 못했으며 아래 목록은 전체 RSS 관찰 범위의 최종 Top 10이 아닙니다.
+> 입력 제약 결과 — RSS 입력 오류 E건이 있어 후보를 생성하지 못했습니다. 신규 후보 N건 중 P건을 정상 처리했으며 아래 목록은 전체 RSS 관찰 범위의 완전한 Top 10이 아닙니다.
 
-[UNKNOWN] 부분 결과 발송, 전체 미발송, 제한 결과와 보류의 정확한 조건과 우선순위는 무료 AI 후보 검증 후 결정합니다.
+[FACT] 유효 후보 중 필요한 AI 분석이 하나라도 미완료이면 기사 목록을 발송하지 않습니다. 모든 유효 후보의 필요한 처리와 선정이 완료되면, 목표 시각 이후라도 원래 batch의 지연 full result로 발송합니다. 전체 선정이 불가능하면 기사 목록 대신 처리 실패 notice를 발송합니다.
 
 ### Full AI Failure Notice
 
@@ -289,14 +290,14 @@
 - [FACT] 후보 수, 정상 처리 수와 미처리 수를 확인할 수 있어야 합니다.
 - [FACT] 미처리 후보는 정상 제외 또는 전달 완료로 처리하지 않습니다.
 - [INFERENCE] AI 복구 후 재처리할 수 있는 제품 상태를 유지해야 합니다.
-- [UNKNOWN] 정확한 재시도 횟수·간격과 fallback 우선순위는 이후 검증·설계 단계에서 결정합니다.
+- [UNKNOWN] 정확한 재시도 횟수·간격과 전체 선정 불가 판정 기준은 이후 검증·설계 단계에서 결정합니다.
 
-### Scenario 4 — Only Some Candidates Processed
+### Scenario 4 — Incomplete Candidate Processing
 
-- [FACT] 일부 후보만 처리한 배치는 완전한 정상 결과로 표시하지 않습니다.
-- [FACT] 부분 결과를 발송하면 전체 Top 10이 아님을 표시합니다.
-- [FACT] 미처리 후보 수와 처리 한계를 표시합니다.
-- [UNKNOWN] 몇 건 또는 어느 비율까지 부분 발송할지는 무료 AI 후보 검증 후 결정합니다.
+- [FACT] 유효 후보 중 필요한 AI 분석이 미완료인 batch는 기사 목록을 발송하지 않으며, 완전한 정상 결과로 표시하지 않습니다.
+- [FACT] 기존 pipeline이 모든 유효 후보의 필요한 처리와 선정까지 완료하면, 원래 batch의 지연 full result를 발송하고 지연 사실을 기록합니다.
+- [FACT] quota 소진·비용 차단·영구 오류 등으로 전체 선정이 불가능하면 처리 실패 notice에 미처리 후보 수와 원인 범주를 표시합니다.
+- [UNKNOWN] 원인별 재시도 횟수·간격과 전체 선정 불가능의 제공자별 판정 방식은 무료 AI 검증과 이후 설계에서 결정합니다.
 
 ### Scenario 5 — Discord Delivery Failure and Recovery
 
@@ -404,7 +405,7 @@
 
 ### Reliability, Latency and Cost Metrics
 
-- [FACT] 정상 발송, 정상 0건, 부분 결과, 처리 실패와 Discord 전달 실패의 배치별 수
+- [FACT] 정상 발송, 입력 제약 결과, AI 미완료 처리 실패, 지연 full result, 정상 0건과 Discord 전달 실패의 batch별 수
 - [FACT] 반복 수집·재실행 또는 자동 복구에 따른 동일 기사 의도되지 않은 중복 발송 수와, 승인된 사용자 미수신 확인 기반 즉시 재전송 수의 별도 집계
 - [FACT] 장애 이후 지연 기사 복구 수와 미복구 수
 - [FACT] Discord 수락 불명확, 사용자 수신 확인, 사용자 미수신 확인, 확인 요청 무응답, 사용자 확인 또는 추가 복구 선택에 따른 즉시 재전송 수
@@ -477,7 +478,7 @@
 ### Failure Visibility
 
 - [FACT] **AC-14**: AI 실패 또는 무료 한도 소진을 신규 0건으로 표시하지 않습니다.
-- [FACT] **AC-15**: 부분 결과는 전체 RSS 관찰 범위의 Top 10으로 표현하지 않고 신규 후보·정상 처리·미처리 건수와, 존재하는 경우 후보 생성 불가능 입력 오류 수를 표시합니다.
+- [FACT] **AC-15**: 후보 생성 불가능 입력 오류가 있는 목록은 전체 RSS 관찰 범위의 완전한 Top 10으로 표현하지 않고 신규 후보·정상 처리·입력 오류 수를 표시합니다. 유효 후보 AI 분석이 미완료이면 기사 목록을 발송하지 않습니다.
 - [FACT] **AC-16**: 전체 AI 실패 시 Discord가 사용 가능하면 실패 사실, 미처리 수와 유료 전환이 없었다는 사실을 표시합니다.
 - [FACT] **AC-17**: Discord 전달 실패는 성공으로 처리하지 않습니다.
 - [FACT] **AC-18**: 다음 성공 정규 발송은 과거 논리적 발송 결과를 재사용한 지연 기사와 현재 신규 기사를 분리하고, 각 구간에 해당 원래 batch의 상태와 수량 요약을 표시합니다. 단, 승인된 수신자가 해당 원래 batch의 미수신을 확인하거나 자동 복구 backlog의 추가 복구를 선택한 경우에는 저장된 원래 결과를 즉시 재전송할 수 있습니다.
@@ -498,28 +499,27 @@
 - [UNKNOWN] AI 제공자와 SDK
 - [UNKNOWN] 실제 한국어 요약, 중요도와 홍보성 판단 품질
 - [UNKNOWN] 무료 할당량, rate limit, 데이터 이용 조건과 유료 전환 차단 방법
-- [UNKNOWN] 부분 발송, 전체 미발송, 제한 결과, 보류와 재처리의 정확한 조건과 우선순위
-- [UNKNOWN] 몇 건 또는 어느 비율의 미처리까지 부분 발송할지
+- [UNKNOWN] 원인별 재시도·backoff, 전체 선정 불가능의 제공자별 판정과 지연 full result의 실제 latency
 
 ### Required for Technical Requirements and Design
 
 - [UNKNOWN] 데이터베이스 schema, table과 column
-- [UNKNOWN] polling 주기와 CronJob 구현
-- [UNKNOWN] API, Queue와 Worker 구조
+- [FACT] Architecture AD-01·AD-03·AD-06·AD-08에 따라 하나의 Python image를 K3s의 Prepare·Delivery-gate·Recovery CronJob과 Gateway listener Deployment 역할로 나누고, 별도 queue 없이 PostgreSQL durable work ledger를 사용합니다. 정확한 command·state·lease 구현은 [UNKNOWN]입니다.
+- [UNKNOWN] RSS polling 주기, CronJob expression·기동 지연과 role별 내부 interface
 - [UNKNOWN] 정확한 재시도 횟수와 backoff
 - [UNKNOWN] 점수 계산 알고리즘과 임계값
 - [FACT] MVP-A 기사 identity는 Raw RSS `link` 원값의 정확한 일치이며 URL 정규화는 별도 승인 전 적용하지 않습니다.
 - [UNKNOWN] GeekNews link 장기 안정성·재사용, link 유효성 검증·고유성 constraint 구현과 향후 identity 정책 변경 절차
-- [UNKNOWN] 신규 구간, 수집 중첩 범위, 부분 성공과 재처리 상태 전이
+- [UNKNOWN] 신규 구간, 수집 중첩 범위, 입력 제약·AI 미완료·처리 지연 full result·Discord 복구의 정확한 상태 전이
 - [UNKNOWN] 판단 근거, model·prompt와 결과 version의 정확한 저장 구조
 - [UNKNOWN] MVP-A 최소 추적 정보의 검토 완료 이후 임시 보존·삭제 제품 정책
 - [UNKNOWN] 기술적인 Retention 구현
-- [UNKNOWN] 인프라와 배포 방식
+- [FACT] Architecture AD-06·AD-09·AD-13~AD-16에 따라 MVP-A 실행 환경은 K3s, PostgreSQL은 StatefulSet·PersistentVolume, secret은 encryption at rest와 역할별 최소 권한, image는 검증된 digest를 사용합니다. StorageClass·registry·manifest·backup 도구와 비용 근거는 [UNKNOWN]입니다.
 - [UNKNOWN] `published` 누락·오류·미래 시각과 최신 전달 범위 밖 후보의 정확한 상태 label·사용자 표시 방식
 - [UNKNOWN] Discord 장애가 두 번 이상의 발송 시각 동안 지속될 때 backlog 상한과 분할 정책
 - [UNKNOWN] 기사·batch·reaction의 정확한 Discord 표시와 mapping
 - [UNKNOWN] slash command의 정확한 이름·parameter·표시 언어와 누락 이유 응답 UI
-- [UNKNOWN] Discord Application의 Gateway·HTTP interaction·주기 조회 선택과 월 0원 실행 방식
+- [FACT] Architecture AD-05·AD-11·AD-12·AD-21에 따라 Discord feedback은 Gateway-first event 수신과 조건부 REST 현재 상태 대조를 함께 사용합니다. 정확한 Gateway·REST·interaction contract, 권한·rate limit과 월 0원 실행 가능성은 [UNKNOWN]입니다.
 
 ## Stage Boundary
 

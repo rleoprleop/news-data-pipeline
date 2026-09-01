@@ -31,9 +31,11 @@
 
 [FACT] Technical Requirements 순차 Requirement 검토와 사용자의 범주별 승인은 FR-001~FR-024, NFR 17개, DR-001~DR-014, EXT 25개와 VR-001~VR-011까지 완료했습니다.
 
-[FACT] 2026-08-28에 Technical Requirements Draft 전체의 최종 정합성 점검을 완료했고 사용자가 2026-08-29에 전체 Draft를 최종 승인했습니다. Workflow 6 단계 종료 Git Review를 완료했으며 commit·push 여부 결정이 남아 있고 Architecture는 시작하지 않았습니다.
+[FACT] 2026-08-28에 Technical Requirements Draft 전체의 최종 정합성 점검을 완료했고 사용자가 2026-08-29에 전체 Draft를 최종 승인했습니다. 승인 반영 변경은 단계 종료 commit `0e8214c`로 기록되어 local `main`과 `origin/main`에 반영됐습니다.
 
-[FACT] Final Review와 최종 승인 반영 문서의 단계 종료 commit·push는 아직 수행하지 않았습니다. commit·push가 완료되거나 사용자가 이를 명시적으로 연기하기 전에는 Architecture를 시작하지 않습니다.
+[FACT] Workflow 7 **Architecture**의 AD-01~AD-23과 전체 문서를 2026-09-01에 사용자 최종 승인으로 완료했으며, 단계 종료 Git Review와 commit·push는 아직 수행하지 않았습니다. 이 승인은 구현 승인을 뜻하지 않습니다.
+
+[FACT] 사용자가 2026-09-01에 AD-01~AD-23의 하나의 Python image·K3s 역할 분리·PostgreSQL durable work ledger·Gateway-first feedback·정시 및 처리 지연 전달·복구·backup·평가 실행 경계를 승인했습니다.
 
 [FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
 
@@ -58,7 +60,8 @@
 - [FACT] Feedback은 batch별 검토 완료, 기사별 세 부정 reaction, 암묵적 수용, 구조화된 누락 기사 제출·사유 회신과 후보 recall·수집 범위 누락 분리를 포함합니다.
 - [FACT] 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 다룹니다.
 - [FACT] News, Ask와 Show는 모두 후보 자격을 유지하되 모든 항목에 동일한 수준의 AI 처리를 보장하지 않으며 처리하지 못한 후보를 조용히 제외하지 않습니다.
-- [FACT] 후보 처리 정책은 후보 자격 유지, 실제 무료 AI 후보 검증, 검증 결과에 따른 fallback 명세 순서로 진행합니다.
+- [FACT] 유효 후보의 AI 처리가 미완료이면 기사 목록을 발송하지 않고, 전체 선정 완료 뒤 원래 batch의 최대 10개 처리 지연 full result를 발송하며, 전체 선정 불가능이면 원인별 처리 실패 notice를 보냅니다.
+- [FACT] Discord 미수락 backlog는 처리 지연 full result와 구분하며, 다음 성공 정규 발송에서 가장 오래된 원래 batch 최대 10개와 현재 기사 최대 10개를 별도 구역으로 제공합니다.
 - [FACT] 장애나 한도 소진에 따른 미발송은 신규 기사 0건 미발송과 구분해 실패 사실과 미처리 건수를 확인할 수 있어야 합니다.
 - [FACT] 월별 Insight, 장기 결과 재사용·normalization과 자동 Retention lifecycle은 MVP-A 검증 후 MVP-B에서 다룹니다.
 - [FACT] 초기 처리 기준 `100건/일`은 Asia/Seoul 일자별 고유 신규 후보 수이며 실제 AI 요청 수와 구분합니다.
@@ -76,6 +79,7 @@
 - [docs/01-product/feature-prioritization.md](docs/01-product/feature-prioritization.md): 승인된 MVP 기능 우선순위, 후순위·제외 범위와 남은 미결정 사항
 - [docs/01-product/product-spec.md](docs/01-product/product-spec.md): 승인된 MVP-A 제품 정책, 사용자 시나리오, acceptance criteria, 지표와 기술 단계로 넘길 미결정 사항
 - [docs/02-technical/requirements.md](docs/02-technical/requirements.md): MVP-A Functional·Non-functional·Data·External Integration·Verification Requirements와 Acceptance Criteria Traceability Matrix
+- [docs/02-technical/architecture.md](docs/02-technical/architecture.md): MVP-A Architecture 초안, 승인된 핵심 결정과 후속 설계·검증 경계
 
 ## Working Principles
 
