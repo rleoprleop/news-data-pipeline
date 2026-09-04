@@ -50,6 +50,8 @@
 
 [FACT] AD-01~AD-23과 현재 Product Specification·Technical Requirements·README·AI Context의 정책 표현을 승인된 Architecture 결정에 맞게 동기화했고, 사용자가 2026-09-01 Asia/Seoul에 이 문서 전체를 최종 승인했습니다.
 
+[FACT] Workflow 7 단계 종료 commit `c993ed9`가 local `main`과 `origin/main`에 반영되어 있습니다.
+
 ## Purpose and Decision Scope
 
 [INFERENCE] 이 Architecture의 목적은 GeekNews RSS 수집부터 Discord 전달·feedback·복구·초기 품질 측정까지를 하나의 추적 가능한 흐름으로 연결하면서, 비용·중복 전달·근거 밖 생성·실패 오표시 Hard Gate를 지키는 것입니다.
@@ -434,6 +436,17 @@ logical work key
 - [UNKNOWN] 지표 산식, snapshot 시각, 품질 평가 표본·독립 evaluation 실행 시점과 보고 형식
 - [UNKNOWN] MVP-A 검증 이후 retention·월별 Insight·VACUUM·partition 정책
 
+### Workflow 8 Resolution Sync
+
+[FACT] 다음 표는 AD-01~AD-23을 변경하지 않고, Workflow 8의 항목별 승인으로 해소된 논리 설계와 실제 환경·물리 구현 검증으로 남은 사항을 구분합니다. 2026-09-04 Asia/Seoul에 전체 최종 승인된 세부 정본은 [Logical Data Model](data-model.md)과 [Logical Interface Specification](interface-spec.md)이며, 검증 추적 보완은 `VR-012`~`VR-019`입니다.
+
+| Area | Resolved logical design | Still unknown |
+| --- | --- | --- |
+| Data identity and batch flow | [FACT] Raw RSS snapshot, observation, canonical article, batch candidate, analysis, selection, delivery의 책임·관계와 identity/idempotency 경계를 항목별 승인했습니다. | [UNKNOWN] 물리 table·column·index·constraint·migration·ORM과 URL 정책 변경 절차 |
+| State and concurrency | [FACT] current work와 append-only attempt, claim·lease·fencing, selection finalization 및 불명확 외부 효과의 자동 재호출 금지 경계를 항목별 승인했습니다. | [UNKNOWN] 실제 SQL lock/isolation·constraint·token 표현, 정확한 lease·retry·backoff 값 |
+| Discord and recovery | [FACT] delivery set·segment·message·item mapping, Gateway event·제한적 REST snapshot, receipt evidence·feedback projection·recovery case 경계를 항목별 승인했습니다. | [UNKNOWN] 실제 identifier·권한·rate limit·resume·interaction transport·payload 분할·UX |
+| Operations and evaluation | [FACT] configuration binding, cost evidence·outbound gate, backup/restore record, immutable evaluation snapshot·typed result의 논리 경계를 항목별 승인했습니다. | [UNKNOWN] provider·model·prompt, backup 도구·StorageClass·RPO/RTO, metric 산식 구현·실행 시점, MVP-B lifecycle |
+
 ## Risks and Validation Experiments
 
 | Risk | Minimum experiment | Expected evidence |
@@ -469,7 +482,9 @@ logical work key
 
 [UNKNOWN] 무료 AI·Discord sandbox 검증과 K3s storage·backup·비용 검증 결과는 사용자 승인 전 확정사항이 아닙니다.
 
-[FACT] 이 문서의 승인만으로 DB schema, API contract, infrastructure, code, test 또는 deployment 구현을 시작할 수 없습니다. 다음 단계인 Data / Interface Design에서 해당 상세 항목을 별도로 설계·승인해야 합니다.
+[FACT] Architecture 승인만으로 DB schema, API contract, infrastructure, code, test 또는 deployment 구현을 시작할 수 없습니다. Workflow 8에서 논리 Data / Interface Design은 최종 승인됐지만 물리 schema·실제 외부 contract·구현은 여전히 별도 후속 승인 대상입니다.
+
+[FACT] Workflow 8 Data / Interface Design의 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`는 항목별 승인됐고, 두 논리 설계 문서 전체도 2026-09-04 Asia/Seoul에 최종 승인됐습니다. Workflow 8 단계 종료 Git Review는 아직 대기 중입니다.
 
 ## User Confirmation Checklist
 
@@ -484,4 +499,4 @@ logical work key
 
 ## Recommended Next Action
 
-[INFERENCE] 다음 한 가지 작업은 Workflow 7 단계 종료 Git Review를 수행하고 Architecture 승인 문서를 commit·push할지 결정하는 것입니다. commit·push 완료 또는 사용자의 명시적 연기 전에는 Data / Interface Design으로 이동하지 않습니다.
+[INFERENCE] 다음 한 가지 작업은 Workflow 8 단계 종료 Git Review입니다. 변경 범위·문서 검증·남은 위험과 commit 대상을 검토한 뒤 사용자 승인에 따라 commit·push하며, 완료 또는 사용자의 명시적 연기 전에는 Implementation Plan으로 이동하지 않습니다.

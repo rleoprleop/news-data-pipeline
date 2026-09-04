@@ -29,13 +29,15 @@
 [FACT] 사용자가 2026-08-26에 Technical Requirements 우선순위·ID 체계와 Discord reaction 기반 batch 검토 완료, 부정 feedback, 암묵적 수용률, 구조화된 누락 기사 feedback 및 recall 분류 정책을 승인했습니다.
 
 
-[FACT] Technical Requirements 순차 Requirement 검토와 사용자의 범주별 승인은 FR-001~FR-024, NFR 17개, DR-001~DR-014, EXT 25개와 VR-001~VR-011까지 완료했습니다.
+[FACT] Workflow 6 Technical Requirements 승인 기준선은 FR-001~FR-024, NFR 17개, DR-001~DR-014, EXT 25개와 VR-001~VR-011의 총 91개입니다.
 
 [FACT] 2026-08-28에 Technical Requirements Draft 전체의 최종 정합성 점검을 완료했고 사용자가 2026-08-29에 전체 Draft를 최종 승인했습니다. 승인 반영 변경은 단계 종료 commit `0e8214c`로 기록되어 local `main`과 `origin/main`에 반영됐습니다.
 
-[FACT] Workflow 7 **Architecture**의 AD-01~AD-23과 전체 문서를 2026-09-01에 사용자 최종 승인으로 완료했으며, 단계 종료 Git Review와 commit·push는 아직 수행하지 않았습니다. 이 승인은 구현 승인을 뜻하지 않습니다.
+[FACT] Workflow 7 **Architecture**의 AD-01~AD-23과 전체 문서를 2026-09-01에 사용자 최종 승인으로 완료했으며, 단계 종료 commit `c993ed9`가 local `main`과 `origin/main`에 반영됐습니다. 이 승인은 구현 승인을 뜻하지 않습니다.
 
 [FACT] 사용자가 2026-09-01에 AD-01~AD-23의 하나의 Python image·K3s 역할 분리·PostgreSQL durable work ledger·Gateway-first feedback·정시 및 처리 지연 전달·복구·backup·평가 실행 경계를 승인했습니다.
+
+[FACT] Workflow 8 **Data / Interface Design**에서 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`를 항목별 승인했고, 사용자는 2026-09-04에 두 논리 설계 문서 전체를 최종 승인했습니다. 현재 Technical Requirements는 총 99개이며 Workflow 8 단계 종료 Git Review는 대기 중입니다.
 
 [FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
 
@@ -79,7 +81,9 @@
 - [docs/01-product/feature-prioritization.md](docs/01-product/feature-prioritization.md): 승인된 MVP 기능 우선순위, 후순위·제외 범위와 남은 미결정 사항
 - [docs/01-product/product-spec.md](docs/01-product/product-spec.md): 승인된 MVP-A 제품 정책, 사용자 시나리오, acceptance criteria, 지표와 기술 단계로 넘길 미결정 사항
 - [docs/02-technical/requirements.md](docs/02-technical/requirements.md): MVP-A Functional·Non-functional·Data·External Integration·Verification Requirements와 Acceptance Criteria Traceability Matrix
-- [docs/02-technical/architecture.md](docs/02-technical/architecture.md): MVP-A Architecture 초안, 승인된 핵심 결정과 후속 설계·검증 경계
+- [docs/02-technical/architecture.md](docs/02-technical/architecture.md): 승인된 MVP-A Architecture 결정과 후속 설계·검증 경계
+- [docs/02-technical/data-model.md](docs/02-technical/data-model.md): 최종 승인된 MVP-A PostgreSQL 논리 데이터 모델과 상태·일관성·보존 경계
+- [docs/02-technical/interface-spec.md](docs/02-technical/interface-spec.md): 최종 승인된 MVP-A 외부·운영·역할 간 논리 interface 계약
 
 ## Working Principles
 
@@ -106,5 +110,7 @@
 [FACT] Technical Requirements FR 검토 완료 checkpoint commit `52ac9ee`를 local `main`과 `origin/main`에 반영했습니다.
 
 [FACT] Technical Requirements 91개 Requirement의 순차 승인 checkpoint commit `d343ac5`를 local `main`과 `origin/main`에 반영했습니다.
+
+[FACT] Architecture 완료 commit `c993ed9`를 local `main`과 `origin/main`에 반영했습니다.
 
 [FACT] GitHub remote Repository는 `https://github.com/rleoprleop/news-data-pipeline.git`입니다.
