@@ -48,7 +48,7 @@
 
 [FACT] Workflow 8 Data / Interface Design에서 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`를 항목별 승인했습니다. Workflow 6 승인 기준선 91개와 Workflow 8 추적성 보완 8개를 구분하며, 현재 `requirements.md`에는 총 99개 Requirement가 있습니다.
 
-[FACT] 사용자는 2026-09-04 Asia/Seoul에 `docs/02-technical/data-model.md`와 `docs/02-technical/interface-spec.md` 전체를 최종 승인했습니다. Workflow 8 단계 종료 Git Review는 아직 대기 중입니다.
+[FACT] 사용자는 2026-09-04 Asia/Seoul에 `docs/02-technical/data-model.md`와 `docs/02-technical/interface-spec.md` 전체를 최종 승인했고, Workflow 8 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐습니다.
 
 [FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
 
@@ -58,7 +58,7 @@
 
 [FACT] Workflow 6의 91개 Technical Requirement 기준선과 Draft 전체 승인, Workflow 7 Architecture 승인 및 commit·push를 완료했습니다. Workflow 8에서 승인한 `VR-012`~`VR-019` 보완 뒤 현재 Requirement는 99개입니다.
 
-[FACT] 현재 Task는 Workflow 8 Data / Interface Design 단계 종료 Git Review입니다. commit·push 완료 또는 사용자의 명시적 연기 전에는 Workflow 9 Implementation Plan으로 이동하지 않습니다.
+[FACT] Workflow 8 Data / Interface Design과 단계 종료 Git commit·push를 완료했습니다. 다음 Workflow Task는 9단계 Implementation Plan이며 아직 시작하지 않았습니다.
 
 ## Completed
 
@@ -143,11 +143,11 @@
 - [FACT] Workflow 7 Architecture 완료 commit `c993ed9`가 local `main`과 `origin/main`에 반영됐습니다.
 - [FACT] Workflow 8에서 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`를 항목별 승인했습니다.
 - [FACT] 사용자가 2026-09-04 Asia/Seoul에 Logical Data Model과 Logical Interface Specification 문서 전체를 최종 승인했습니다.
+- [FACT] Workflow 8 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐습니다.
 
 ## In Progress
 
-- [FACT] Workflow 8 논리 Data / Interface Design의 항목별 상세 검토, 요구사항 추적성 보완과 두 문서 전체 최종 승인을 완료했습니다.
-- [FACT] Workflow 8 단계 종료 Git Review와 commit·push 여부 확인이 대기 중입니다.
+- [FACT] 활성 구현 작업은 없으며 Workflow 9 Implementation Plan은 아직 시작하지 않았습니다.
 - [UNKNOWN] 최종 무료 AI provider·model·prompt, provider별 retry·backoff와 전체 선정 불가 판정은 실제 후보 검증 후 결정해야 합니다.
 - [UNKNOWN] Discord 실제 identifier·권한·rate limit·resume·interaction transport·payload 분할·UX와 장기 backlog 상한은 sandbox 검증이 필요합니다.
 - [UNKNOWN] 물리 DB schema·SQL·index·constraint·migration·ORM, lease 시간과 실제 transaction isolation은 후속 단계에서 결정합니다.
@@ -155,7 +155,7 @@
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 Workflow 8 단계 종료 Git Review에서 변경 범위·검증 결과·남은 위험과 commit 대상을 확인하고 commit·push 여부를 결정하는 것입니다.
+[INFERENCE] 다음 Task 하나는 승인된 Product Specification·Technical Requirements·Architecture·Logical Data Model·Logical Interface Specification을 기준으로 Workflow 9 Implementation Plan을 작성하고 상세 검토하는 것입니다.
 
 ## Important Decisions
 
@@ -524,7 +524,7 @@
 
 [FACT] 2026-09-01 Asia/Seoul 기준 사용자가 AD-01~AD-23과 Architecture 문서 전체를 최종 승인했고, Architecture·Product Specification·Technical Requirements·AGENTS·README·AI Context를 현재 결정과 승인 상태에 맞게 동기화했습니다. 문서 검사에서 Requirement 91개(FR 24·NFR 17·DR 14·EXT 25·VR 11), 우선순위 P0-HG 28·P0 42·P1-V 21, AD 23개, Product·Matrix AC 각 24개의 고유성과 연속성을 확인했으며 Markdown table·fence·로컬 link·trailing whitespace와 `git diff --check` 오류가 없었습니다. Workflow 7 단계 종료 Git commit·push는 아직 수행하지 않았습니다.
 
-[FACT] 2026-09-04 Asia/Seoul 기준 Architecture 완료 commit `c993ed9`가 local `main`과 `origin/main`에 반영됐음을 확인했습니다. Workflow 8 Data / Interface Design의 항목별 상세 검토와 `VR-012`~`VR-019`를 반영했고 사용자가 두 논리 설계 문서 전체를 최종 승인했습니다. 현재 Requirement 99개(FR 24·NFR 17·DR 14·EXT 25·VR 19), 우선순위 P0-HG 34·P0 44·P1-V 21과 AC-01~AC-24의 ID·추적성을 확인했으며, Markdown table·local link·trailing whitespace·Requirement reference와 `git diff --check` 오류가 없습니다. 애플리케이션 코드·DB migration·Kubernetes manifest·AI provider 연동·배포·Git commit·push는 수행하지 않았습니다.
+[FACT] 2026-09-04 Asia/Seoul 기준 Workflow 8 Data / Interface Design의 항목별 상세 검토와 `VR-012`~`VR-019`를 반영했고 사용자가 두 논리 설계 문서 전체를 최종 승인했습니다. 현재 Requirement 99개(FR 24·NFR 17·DR 14·EXT 25·VR 19), 우선순위 P0-HG 34·P0 44·P1-V 21과 AC-01~AC-24의 ID·추적성을 확인했으며, Markdown table·local link·trailing whitespace·Requirement reference와 `git diff --check` 오류가 없습니다. Workflow 8 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐고 애플리케이션 코드·DB migration·Kubernetes manifest·AI provider 연동·배포는 수행하지 않았습니다.
 
 ## Last Updated
 

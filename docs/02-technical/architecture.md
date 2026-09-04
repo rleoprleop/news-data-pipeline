@@ -484,7 +484,7 @@ logical work key
 
 [FACT] Architecture 승인만으로 DB schema, API contract, infrastructure, code, test 또는 deployment 구현을 시작할 수 없습니다. Workflow 8에서 논리 Data / Interface Design은 최종 승인됐지만 물리 schema·실제 외부 contract·구현은 여전히 별도 후속 승인 대상입니다.
 
-[FACT] Workflow 8 Data / Interface Design의 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`는 항목별 승인됐고, 두 논리 설계 문서 전체도 2026-09-04 Asia/Seoul에 최종 승인됐습니다. Workflow 8 단계 종료 Git Review는 아직 대기 중입니다.
+[FACT] Workflow 8 Data / Interface Design의 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`는 항목별 승인됐고, 두 논리 설계 문서 전체도 2026-09-04 Asia/Seoul에 최종 승인됐습니다. 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐습니다.
 
 ## User Confirmation Checklist
 
@@ -499,4 +499,4 @@ logical work key
 
 ## Recommended Next Action
 
-[INFERENCE] 다음 한 가지 작업은 Workflow 8 단계 종료 Git Review입니다. 변경 범위·문서 검증·남은 위험과 commit 대상을 검토한 뒤 사용자 승인에 따라 commit·push하며, 완료 또는 사용자의 명시적 연기 전에는 Implementation Plan으로 이동하지 않습니다.
+[INFERENCE] 다음 한 가지 작업은 승인된 Product Specification·Technical Requirements·Architecture·Logical Data Model·Logical Interface Specification을 입력으로 Workflow 9 Implementation Plan을 작성하고 상세 검토하는 것입니다. 이 단계에서는 구현 코드를 작성하지 않습니다.

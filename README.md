@@ -37,7 +37,7 @@
 
 [FACT] 사용자가 2026-09-01에 AD-01~AD-23의 하나의 Python image·K3s 역할 분리·PostgreSQL durable work ledger·Gateway-first feedback·정시 및 처리 지연 전달·복구·backup·평가 실행 경계를 승인했습니다.
 
-[FACT] Workflow 8 **Data / Interface Design**에서 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`를 항목별 승인했고, 사용자는 2026-09-04에 두 논리 설계 문서 전체를 최종 승인했습니다. 현재 Technical Requirements는 총 99개이며 Workflow 8 단계 종료 Git Review는 대기 중입니다.
+[FACT] Workflow 8 **Data / Interface Design**에서 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`를 항목별 승인했고, 사용자는 2026-09-04에 두 논리 설계 문서 전체를 최종 승인했습니다. 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐으며 현재 Technical Requirements는 총 99개입니다.
 
 [FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
 

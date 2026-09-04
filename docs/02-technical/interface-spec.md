@@ -4,7 +4,7 @@
 
 [FACT] Workflow 단계: 8. Data / Interface Design
 
-[FACT] 상태: Approved logical design — DDI-01~DDI-10, MIN-01~MIN-08 및 세부 정합성 검토를 반영해 2026-09-04 Asia/Seoul에 문서 전체 최종 승인; Workflow 8 단계 종료 Git Review 대기
+[FACT] 상태: Approved logical design — DDI-01~DDI-10, MIN-01~MIN-08 및 세부 정합성 검토를 반영해 2026-09-04 Asia/Seoul에 문서 전체 최종 승인; 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영
 
 [FACT] 작성일: 2026-09-02 Asia/Seoul
 

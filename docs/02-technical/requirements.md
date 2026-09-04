@@ -433,7 +433,7 @@
 
 [FACT] 2026-08-29 Asia/Seoul에 Workflow 6 단계 종료 Git Review를 완료했고 승인 반영 commit `0e8214c`를 local `main`과 `origin/main`에 반영했습니다. 이후 Workflow 7 Architecture 단계 종료 commit `c993ed9`도 local `main`과 `origin/main`에 반영됐습니다.
 
-[FACT] Workflow 8 세부 검토에서 `VR-012`~`VR-019`를 항목별 승인했으며, 현재 99개 Requirement와 AC-01~AC-24의 보완 traceability를 반영했습니다. 사용자는 2026-09-04 Asia/Seoul에 두 논리 설계 문서 전체를 최종 승인했으며 Workflow 8 단계 종료 Git Review는 아직 대기 중입니다.
+[FACT] Workflow 8 세부 검토에서 `VR-012`~`VR-019`를 항목별 승인했으며, 현재 99개 Requirement와 AC-01~AC-24의 보완 traceability를 반영했습니다. 사용자는 2026-09-04 Asia/Seoul에 두 논리 설계 문서 전체를 최종 승인했고 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐습니다.
 
 ## User Decisions Required
 
