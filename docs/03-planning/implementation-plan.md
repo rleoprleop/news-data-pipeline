@@ -3382,7 +3382,9 @@ logical article item scope
 | Mapping/user 불명 | 거부/불명확 evidence만 보존 | Case 완료·resend |
 | Same-scope conflict | `conflicting_receipt`, 자동 transition 중단 | 최신 수신 자동 우선·evidence 삭제 |
 
-[FACT] Exact `못 받음`의 resend authorization은 original mapping, 승인 recipient와 structured interaction identity를 묶은 logical dedupe 경계에 한 번만 생성합니다. 실제 resend는 B 전용 work claim과 WBS-17 invocation gate를 다시 통과하며 저장된 original `selection_result`와 `batch_item`만 사용합니다.
+[FACT] Exact `못 받음`의 resend authorization은 원래 message/article-or-batch mapping, 승인 recipient와 explicit missing-receipt 예외 유형을 기준으로 최대 한 번만 생성합니다. Structured interaction identity는 같은 요청의 재전달을 업무 결과에 한 번만 적용하고 원본 요청을 추적하는 기준이며, 재전송 권한의 업무 key를 나누는 값이 아닙니다. 서로 다른 interaction identity로 같은 예외를 반복·동시 요청해도 권한은 최대 1회입니다. 같은 업무 key의 `immediate_resend_authorized` event 또는 연결된 delivery가 이미 있으면 기존 결과를 조회·참조할 뿐 새 권한이나 추가 Discord 호출을 만들지 않습니다. 아직 실행되지 않은 기존 work의 처리는 기존 claim·invocation gate 계약을 따르며, 새 요청이 재실행 허가가 되지는 않습니다. 실제 resend는 B 전용 work claim과 WBS-17 invocation gate를 다시 통과하며 저장된 original `selection_result`와 `batch_item`만 사용합니다. 정본은 [Data의 1회 재전송 예외 계약](../02-technical/data-model.md)과 [Interface receipt 계약](../02-technical/interface-spec.md)입니다.
+
+[UNKNOWN] 이 논리 중복 방지 경계의 실제 unique constraint·transaction·동시성 구현은 후속 물리 설계에서 결정하며, 이번 F02 수정에서 schema·SQL 또는 구현값을 확정하지 않습니다.
 
 | Immediate-resend 결과 | 다음 처리 | 반복 제한 |
 | --- | --- | --- |
@@ -3423,6 +3425,8 @@ confirmed non-acceptance candidate
 [FACT] Recovery 실행은 RSS 수집, 외부 원문 조회, AI 분석, freshness 판단, selection 또는 summary 생성을 다시 수행하지 않습니다. Original version이 없거나 integrity를 입증할 수 없으면 fail-closed로 차단하고 현재 데이터로 재생성하지 않습니다.
 
 #### WBS-19.B6 Fault·security·rollback
+
+[INFERENCE] F02 검증은 동일 interaction 재전달의 업무 효과 중복 0건, 서로 다른 interaction identity로 같은 업무 key를 반복·동시 요청할 때 authorization 최대 1회, 이미 재전송을 시도한 뒤 새 요청의 추가 권한·호출 0건을 포함합니다. Mapping 불명확·미승인 사용자·같은 scope receipt 충돌은 기존 차단 규칙을 유지하며, invocation 결과 불명확을 새 interaction으로 우회해 재호출하지 않는지 확인합니다. 이는 후속 검증 계획이며 실제 테스트 실행 결과가 아닙니다.
 
 | Fault 경계 | 안전한 복구 | 금지 결과 |
 | --- | --- | --- |
@@ -5144,6 +5148,8 @@ confirmed non-acceptance candidate
 | PC-06 | `implementation-plan.md` | Status, strategy, traceability, milestones, risks, review state | WBS 순차 검토 완료 뒤 일부 초안·단계 문구 잔존 | PCC-01~11의 승인된 계획 정합성 수정 반영 | [FACT] 2026-09-09 승인·반영 |
 
 ## Sequential Review State
+
+[FACT] 2026-09-09 독립 감사 후 사용자가 F02 단독 수정을 승인했습니다. WBS-19.B3의 재전송 권한 업무 key와 interaction 중복 수신 기준을 분리하고 WBS-19.B6의 반복·동시 요청 검증 계획을 보완했습니다. 상위 설계·물리 schema·실제 구현은 변경하지 않았으며 다른 감사 finding과 구조 분리안은 이 승인에 포함하지 않습니다.
 
 [FACT] 2026-09-09 독립 감사 후 사용자가 F01 단독 수정을 승인했습니다. WBS-18.C/G의 accepted 선행조건을 승인된 receipt 계약에 맞춰 수정하고 WBS-18.H에 해당 검증 사례를 명시했습니다. 이는 문서 계약 수정이며 실제 테스트 실행·구현 승인이 아닙니다. 다른 감사 finding과 구조 분리안은 이 승인에 포함하지 않습니다.
 

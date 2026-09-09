@@ -2,7 +2,7 @@
 
 ## Project Status
 
-[FACT] 2026-09-09 독립 감사 후 F01 단독 문서 수정을 사용자 승인으로 반영했고, 사용자는 해당 두 파일의 commit·push도 승인했습니다. 아래 기존 단계 종료 기록과 별개로 F01 Git closure의 실제 완료 여부는 이 변경을 포함한 commit과 원격 `main`의 반영 상태로 확인합니다. Workflow 10 또는 실제 구현으로 진행하지 않았습니다.
+[FACT] 2026-09-09 독립 감사 F01에 이어 F02 단독 문서 수정을 사용자 승인으로 반영했습니다. 현재 상태는 F02 문서 반영 완료이며 Workflow 10 또는 실제 구현으로 진행하지 않았습니다. 사용자의 최신 지시에 따라 이후 Agent는 Git 확인·commit·push를 수행하지 않고 commit 메시지만 추천하며, 사용자가 직접 commit·push합니다.
 
 [FACT] 프로젝트는 전체 Workflow 1단계인 Problem Definition, 2단계인 Research / JTBD와 3단계인 Solution Discovery를 사용자 승인으로 완료했습니다.
 
@@ -62,9 +62,11 @@
 
 [FACT] Workflow 9 Implementation Plan의 WBS-01~31, SPK-01~06, Requirement/Decision traceability, milestone·approval gate와 MVP-A 기반 MVP-B incremental-entry 경계를 사용자 승인으로 확정했습니다.
 
-[FACT] 현재 Task는 사용자 승인된 F01 단독 변경의 Git closure입니다. 대상은 WBS-18.C/G의 accepted 선행조건 제거, 정확한 원래 mapping·승인 사용자 검증과 server acceptance/recipient receipt 분리 유지, WBS-18.H 검증 사례 및 이 Context 동기화뿐입니다. Commit·push 실행 승인을 받았으며 완료 여부는 실제 Git 결과로 판정합니다.
+[FACT] 현재 Task는 사용자 승인된 F02 단독 문서 수정입니다. WBS-19.B3의 재전송 권한 업무 key와 interaction 중복 수신 기준 분리, WBS-19.B6 검증 계획 및 이 Context 동기화만 포함합니다. Git 작업은 사용자가 직접 수행하며 Agent는 확인하지 않습니다.
 
 ## Completed
+
+- [FACT] F02 단독 수정 승인을 받아 재전송 권한의 원래 mapping·승인 recipient·예외 유형 기준과 interaction identity의 역할을 분리하고 반복·동시 요청 검증 계획에 반영했습니다.
 
 - [FACT] 사용자가 독립 감사 F01 단독 수정을 승인했고 WBS-18.C/G와 관련 WBS-18.H 검증 계획에 반영했습니다. 상위 Product·Requirement·Architecture·Data·Interface 설계는 변경하지 않았습니다.
 
@@ -154,7 +156,7 @@
 
 ## In Progress
 
-- [FACT] 활성 구현 작업은 없으며 F01 문서 수정 검토와 commit·push 사용자 승인을 완료했습니다. 나머지 감사 finding과 구조 분리는 적용하지 않았습니다.
+- [FACT] 활성 구현 작업은 없으며 F01·F02 문서 수정을 반영했습니다. F03~F08과 구조 분리는 적용하지 않았습니다.
 - [FACT] WBS-01 traceability 기준선, SPK-01~06 외부 검증, 물리 설계, Coding Readiness, 구현·배포·운영 검증과 MVP-B incremental discovery는 아직 실행하지 않았습니다.
 - [UNKNOWN] 최종 무료 AI provider·model·prompt, provider별 retry·backoff와 전체 선정 불가 판정은 실제 후보 검증 후 결정해야 합니다.
 - [UNKNOWN] Discord 실제 identifier·권한·rate limit·resume·interaction transport·payload 분할·UX와 장기 backlog 상한은 sandbox 검증이 필요합니다.
@@ -163,9 +165,11 @@
 
 ## Next Task
 
-[INFERENCE] F01 commit·push와 원격 반영을 확인한 뒤 다음 Task 하나는 F02의 재전송 업무 key와 interaction dedupe 분리 수정안 검토입니다. F02 적용이나 Workflow 10·외부 spike·구현은 별도 승인 없이 시작하지 않습니다.
+[INFERENCE] 다음 Task 하나는 F08의 recovery case admission과 uncertainty 전용 confirmation 조건 분리 수정안 검토입니다. 적용은 별도 승인 대상이며 Workflow 10·외부 spike·구현을 시작하지 않습니다. F02 추천 commit 메시지는 `docs: separate resend authorization from interaction deduplication`입니다.
 
 ## Important Decisions
+
+- [FACT] F02: Interaction identity는 동일 요청 재전달 방지·원본 추적 기준이고, 1회 재전송 권한은 원래 mapping·승인 recipient·예외 유형으로 제한합니다. 새 interaction이 기존 권한을 반복 실행할 근거가 되지 않습니다.
 
 - [FACT] F01: Discord server acceptance는 유효 `받음`의 선행조건이 아닙니다. Exact original attempt/message/segment/selection과 승인 recipient를 검증하고 receipt만 추가하며, 원래 server acceptance·2XX·정시 수락을 생성하지 않습니다.
 
@@ -270,6 +274,8 @@
 
 ### Git Workflow
 
+- [FACT] 2026-09-09 사용자 최신 지시가 아래 기존 절차의 Agent Git 확인·실행·결과 재확인보다 우선합니다. Agent는 Git 명령을 실행하지 않고 commit 메시지만 추천하며, 사용자가 직접 commit·push합니다. 현재 반영 상태를 추정하거나 재확인을 요구하지 않습니다.
+
 - [FACT] 각 Workflow 단계는 사용자 승인과 관련 문서 동기화 후 commit 및 push 안내 절차로 마감합니다.
 - [FACT] 단계 종료 시 변경 범위, 테스트 결과, 문서 동기화와 남은 위험을 먼저 보고합니다.
 - [FACT] 사용자가 직접 Git 명령을 실행하면 Agent가 명령을 순서대로 안내하고 결과를 확인합니다.
@@ -366,6 +372,8 @@
 
 ## Do Not Change
 
+- [FACT] F02는 기존 mapping·승인 사용자·receipt conflict·claim·invocation gate·uncertainty 보존 규칙을 완화하지 않으며 다른 감사 finding 수정은 별도 승인 대상입니다.
+
 - [FACT] F01 승인은 mapping·사용자·subject·order·conflict 검증을 약화하거나 F02~F08 및 문서 구조 분리를 적용하는 승인이 아닙니다.
 
 - [FACT] 사용자 승인 없이 MVP에 외부 원문 기사 본문 수집을 추가하지 않습니다.
@@ -389,7 +397,7 @@
 
 ## Known Issues
 
-- [FACT] 독립 감사의 F02~F08은 미수정이며 별도 승인 대상입니다. F01 문서 수정은 Discord 실제 mapping·interaction 계약 검증 완료를 뜻하지 않습니다.
+- [FACT] 독립 감사의 F03~F08은 미수정이며 별도 승인 대상입니다. F01·F02 문서 수정은 Discord 실제 mapping·interaction 및 동시성 계약 검증 완료를 뜻하지 않습니다.
 
 - [FACT] 정보가 부족한 항목은 후보 자격을 유지하고 선정 시 `정보 제한`과 근거가 허용하는 1문장 이하 설명으로 표시합니다.
 - [UNKNOWN] 실제 무료 AI 후보의 한국어 요약 품질은 검증하지 않았습니다.
@@ -419,13 +427,15 @@
 
 ## Technical Debt
 
-- [FACT] F01에서는 문서 구조 분리·중복 정본화를 수행하지 않았으며 기존 문서 유지보수 과제는 남아 있습니다.
+- [FACT] F01·F02에서는 문서 구조 분리·중복 정본화를 수행하지 않았으며 기존 문서 유지보수 과제는 남아 있습니다.
 
 - [FACT] 구현이 시작되지 않아 코드 수준 Technical Debt는 없습니다.
 - [INFERENCE] 단계 문서의 종료 시점 상태와 프로젝트의 현재 상태를 혼동하지 않도록 이후 문서에는 historical snapshot과 current status를 더 명시적으로 구분하는 편이 안전합니다.
 - [INFERENCE] 중복 방지·상태·복구·보안 제한이 FR·NFR·DR에 계층별로 반복되어 독립 검증에는 유용합니다. Final Review에서는 보장 범위와 추적성을 유지하면서 상태 문구, Discord 재전송 예외, 부분 발송 조건과 traceability의 drift만 최소 범위로 정리했습니다.
 
 ## Current Risks
+
+- [INFERENCE] F02의 논리 key가 실제 동시 요청에서 최대 1회 권한 생성을 보장하는지는 후속 unique constraint·transaction 설계와 concurrency/fault test로 검증해야 합니다.
 
 - [INFERENCE] F01 문서 조건을 수정해도 실제 adapter가 수락 불명확 상태의 유효 receipt를 처리하고 다른 scope·미승인 입력을 차단하는지는 후속 contract/fault test로 검증해야 합니다.
 
@@ -449,6 +459,8 @@
 - [INFERENCE] MVP-B에서 MVP-A data/evidence를 reset하거나 시스템을 처음부터 재생성하면 회귀 기준선과 운영 학습이 사라지므로 별도 승인된 고위험 변경이 아닌 한 data-preserving incremental evolution을 유지해야 합니다.
 
 ## Last Verified
+
+[FACT] 2026-09-09 F02의 WBS-19.B3와 Data·Interface 정본을 대조하고 승인된 단독 수정을 반영했습니다. 두 변경 문서의 표 열 수·fence·trailing whitespace·local link 및 F02 문서 조건 검사를 통과했고, Data·Interface 정본의 SHA256이 변경 전과 동일함을 확인했습니다. 현재 코드·테스트가 없어 runtime·동시성 테스트와 외부 spike는 실행하지 않았습니다. 사용자 지시에 따라 Git 상태·history·diff 확인, commit·push는 수행하지 않았습니다.
 
 [FACT] 2026-09-09 F01 작업 시작 시 `main`의 working tree가 깨끗하고 HEAD가 Workflow 9 승인 commit `e4bca33`임을 확인했습니다. Interface receipt adapter와 Data 수신 evidence 계약을 대조해 F01만 반영했습니다. 변경 두 문서의 표 열 수·fence·trailing whitespace·local link 검사, F01 선행조건 제거·안전 조건 존재 검사와 `git diff --check`가 통과했습니다. Git의 LF→CRLF 변환 안내 외 형식 오류는 없었습니다. 실행 코드·테스트가 없어 runtime test·외부 spike는 수행하지 않았고 commit·push도 실행하지 않았습니다.
 
