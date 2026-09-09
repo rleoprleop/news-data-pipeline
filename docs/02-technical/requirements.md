@@ -40,7 +40,7 @@
 
 [FACT] 2026-09-04 Workflow 8 Data / Interface Design 세부 검토에서 승인된 논리 계약의 추적성을 위해 `VR-012`~`VR-019` 8개를 보완 승인했습니다. 현재 문서는 총 99개 Requirement(P0-HG 34개, P0 44개, P1-V 21개)를 포함하지만, 이는 Workflow 6에서 승인·commit한 91개 기준선을 소급 변경하지 않습니다.
 
-[FACT] Workflow 8의 항목별 논리 결정과 추적성 보완 승인은 완료됐지만 `data-model.md`와 `interface-spec.md` 문서 전체의 최종 승인은 별도입니다.
+[FACT] Workflow 8의 항목별 논리 결정과 추적성 보완을 승인했고, 사용자는 2026-09-04 Asia/Seoul에 `data-model.md`와 `interface-spec.md` 문서 전체를 최종 승인했습니다.
 
 ## Purpose
 

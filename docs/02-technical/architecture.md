@@ -471,7 +471,7 @@ logical work key
 | Feedback and quality measurement | FR-017~024, DR-010~014, EXT-FB-001~006, VR-006~010 |
 | Scheduling, freshness and latency | NFR-PERF-001, NFR-LAT-001, NFR-LAT-002, DR-006~009, EXT-GN-006, VR-008 |
 | PostgreSQL state, idempotency and recovery | NFR-REL-001~003, NFR-DQ-002, DR-006~009, VR-004~005 |
-| Observability, security and cost controls | NFR-OBS-001~003, NFR-SEC-001~003, NFR-COST-001, VR-006·VR-009·VR-011 |
+| Observability, security and cost controls | NFR-OBS-001~002, NFR-SEC-001~002, NFR-COST-001, VR-006·VR-009·VR-011 |
 | Runtime, backup and variable external contracts | NFR-MNT-001~002, VR-001~005, VR-008~011 |
 
 ## Approval Checkpoint

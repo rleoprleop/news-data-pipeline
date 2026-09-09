@@ -50,15 +50,17 @@
 
 [FACT] 사용자는 2026-09-04 Asia/Seoul에 `docs/02-technical/data-model.md`와 `docs/02-technical/interface-spec.md` 전체를 최종 승인했고, Workflow 8 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐습니다.
 
+[FACT] Workflow 9 Implementation Plan의 WBS-01~31 항목별 검토와 PLAN-CONSISTENCY-01 전체 정합성 검토를 2026-09-09 사용자 승인으로 완료했고 `docs/03-planning/implementation-plan.md`와 관련 상태 문서를 동기화했습니다. 단계 종료 Git review·commit·push는 아직 대기 중입니다.
+
 [FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
 
 [FACT] `docs/01-product/problem.md`는 사용자가 제공한 확정 정보와 아직 검증할 항목을 분리해 기록한 초기 Problem Definition입니다.
 
 ## Current Task
 
-[FACT] Workflow 6의 91개 Technical Requirement 기준선과 Draft 전체 승인, Workflow 7 Architecture 승인 및 commit·push를 완료했습니다. Workflow 8에서 승인한 `VR-012`~`VR-019` 보완 뒤 현재 Requirement는 99개입니다.
+[FACT] Workflow 9 Implementation Plan의 WBS-01~31, SPK-01~06, Requirement/Decision traceability, milestone·approval gate와 MVP-A 기반 MVP-B incremental-entry 경계를 사용자 승인으로 확정했습니다.
 
-[FACT] Workflow 8 Data / Interface Design과 단계 종료 Git commit·push를 완료했습니다. 다음 Workflow Task는 9단계 Implementation Plan이며 아직 시작하지 않았습니다.
+[FACT] 현재 Task는 `WORKFLOW-09-GIT-REVIEW`입니다. 승인된 계획과 상태 문서의 변경 범위·검증 결과·남은 위험을 확인하고 Workflow 9 전용 commit·push 여부를 사용자에게 승인받아야 합니다.
 
 ## Completed
 
@@ -144,10 +146,12 @@
 - [FACT] Workflow 8에서 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`를 항목별 승인했습니다.
 - [FACT] 사용자가 2026-09-04 Asia/Seoul에 Logical Data Model과 Logical Interface Specification 문서 전체를 최종 승인했습니다.
 - [FACT] Workflow 8 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐습니다.
+- [FACT] Workflow 9 Implementation Plan의 WBS-01~31 순차 검토와 PLAN-CONSISTENCY-01을 2026-09-09에 사용자 승인으로 완료하고 승인된 PCC-01~16의 계획·상태 정합성 수정을 반영했습니다.
 
 ## In Progress
 
-- [FACT] 활성 구현 작업은 없으며 Workflow 9 Implementation Plan은 아직 시작하지 않았습니다.
+- [FACT] 활성 구현 작업은 없으며 Workflow 9 계획·Context 동기화는 완료했고 단계 종료 Git review·commit·push를 대기합니다.
+- [FACT] WBS-01 traceability 기준선, SPK-01~06 외부 검증, 물리 설계, Coding Readiness, 구현·배포·운영 검증과 MVP-B incremental discovery는 아직 실행하지 않았습니다.
 - [UNKNOWN] 최종 무료 AI provider·model·prompt, provider별 retry·backoff와 전체 선정 불가 판정은 실제 후보 검증 후 결정해야 합니다.
 - [UNKNOWN] Discord 실제 identifier·권한·rate limit·resume·interaction transport·payload 분할·UX와 장기 backlog 상한은 sandbox 검증이 필요합니다.
 - [UNKNOWN] 물리 DB schema·SQL·index·constraint·migration·ORM, lease 시간과 실제 transaction isolation은 후속 단계에서 결정합니다.
@@ -155,7 +159,7 @@
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 승인된 Product Specification·Technical Requirements·Architecture·Logical Data Model·Logical Interface Specification을 기준으로 Workflow 9 Implementation Plan을 작성하고 상세 검토하는 것입니다.
+[INFERENCE] 다음 Task 하나는 Workflow 9 단계 종료 Git Review입니다. 변경 범위·검증·문서 동기화·남은 위험을 확인하고 사용자 승인 뒤 Workflow 9 전용 commit·push를 완료하거나 사용자가 명시적으로 연기해야 합니다. 그 뒤 첫 실행 후보는 WBS-01 traceability 기준선이며 별도 작업 범위 확인 없이 구현이나 외부 spike를 시작하지 않습니다.
 
 ## Important Decisions
 
@@ -171,6 +175,8 @@
 - [FACT] 승인된 Solution Discovery 결정을 변경하려면 사용자 승인이 필요합니다.
 - [FACT] 승인된 Product Specification 정책과 acceptance criteria를 변경하려면 사용자 승인이 필요합니다.
 - [FACT] `docs/02-technical/architecture.md`의 AD-01~AD-23과 전체 문서는 2026-09-01에 사용자 최종 승인을 받았으며, 핵심 결정을 변경하려면 별도 사용자 승인이 필요합니다.
+- [FACT] `docs/03-planning/implementation-plan.md`의 WBS-01~31과 전체 정합성은 2026-09-09에 사용자 승인을 받았으며, 이 승인은 미래 작업의 순서·경계 승인이지 실제 구현·외부 검증·배포 승인이 아닙니다.
+- [FACT] MVP-B는 검증된 MVP-A Repository·code/schema/data·deployment·evidence를 baseline으로 reuse·extend·migrate·replace·deprecate·defer를 판정하는 versioned incremental update로 진행하며, greenfield 재생성을 기본 전략으로 사용하지 않습니다.
 
 ### Solution Discovery
 
@@ -423,6 +429,10 @@
 - [INFERENCE] 정상 Raw RSS 관찰 범위에서도 확인되지 않은 link를 후보 recall에 포함하거나 수집·처리 실패를 수집원 누락으로 합치면 수집 품질과 선정 품질을 혼동하므로 원인 범주를 계속 분리해야 합니다.
 - [INFERENCE] 월별 Insight 생성과 Raw 삭제 순서를 잘못 설계하면 장기 데이터가 손실될 수 있습니다.
 - [INFERENCE] 신규 기사 0건, 입력 제약, AI 미완료, 처리 지연 full result, Discord backlog와 재실행의 발송 구간을 잘못 관리하면 누락 또는 중복 전달이 발생할 수 있습니다.
+- [INFERENCE] 계획 파일 검토와 정합성 승인은 추적 누락·문언 충돌 위험을 줄였지만 실제 외부 계약, 물리 schema, 동시성, rate limit, backup/restore와 운영 비용 위험을 제거하지 않습니다. 각 spike·설계·구현·검증 evidence가 통과해야 닫힙니다.
+- [INFERENCE] 사용자 직접 monthly billing 확인이 누락되면 내부 telemetry가 0건이어도 비용 Hard Gate를 통과시킬 수 없습니다.
+- [INFERENCE] Workflow 13~15 Code Review·문서/Context 동기화·Git closure 전에 Deployment Readiness로 이동하면 검증 대상 artifact와 Repository 기준선이 달라질 위험이 있습니다.
+- [INFERENCE] MVP-B에서 MVP-A data/evidence를 reset하거나 시스템을 처음부터 재생성하면 회귀 기준선과 운영 학습이 사라지므로 별도 승인된 고위험 변경이 아닌 한 data-preserving incremental evolution을 유지해야 합니다.
 
 ## Last Verified
 
@@ -526,6 +536,8 @@
 
 [FACT] 2026-09-04 Asia/Seoul 기준 Workflow 8 Data / Interface Design의 항목별 상세 검토와 `VR-012`~`VR-019`를 반영했고 사용자가 두 논리 설계 문서 전체를 최종 승인했습니다. 현재 Requirement 99개(FR 24·NFR 17·DR 14·EXT 25·VR 19), 우선순위 P0-HG 34·P0 44·P1-V 21과 AC-01~AC-24의 ID·추적성을 확인했으며, Markdown table·local link·trailing whitespace·Requirement reference와 `git diff --check` 오류가 없습니다. Workflow 8 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐고 애플리케이션 코드·DB migration·Kubernetes manifest·AI provider 연동·배포는 수행하지 않았습니다.
 
+[FACT] 2026-09-09 Asia/Seoul 기준 Workflow 9 Implementation Plan의 WBS-01~31 순차 검토와 PLAN-CONSISTENCY-01 사용자 승인을 반영했습니다. Requirement 99개(FR 24·NFR 17·DR 14·EXT 25·VR 19), 우선순위 P0-HG 34·P0 44·P1-V 21, WBS 31개, AD 23개, DDI 10개와 MIN 8개의 ID·추적성 및 MVP-A/B 경계를 검토했고 구현·외부 연동·배포는 수행하지 않았습니다. Workflow 9 단계 종료 Git review·commit·push는 아직 대기 중입니다.
+
 ## Last Updated
 
-[FACT] 2026-09-04 Asia/Seoul
+[FACT] 2026-09-09 Asia/Seoul

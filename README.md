@@ -39,6 +39,8 @@
 
 [FACT] Workflow 8 **Data / Interface Design**에서 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`를 항목별 승인했고, 사용자는 2026-09-04에 두 논리 설계 문서 전체를 최종 승인했습니다. 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐으며 현재 Technical Requirements는 총 99개입니다.
 
+[FACT] Workflow 9 **Implementation Plan**의 WBS-01~31 항목별 검토와 PLAN-CONSISTENCY-01 전체 정합성 검토를 2026-09-09 사용자 승인으로 완료했습니다. 이는 계획 승인이고 구현·외부 검증·물리 schema·배포 또는 MVP-B 실행 승인이 아니며, 단계 종료 Git review·commit·push는 아직 대기 중입니다.
+
 [FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
 
 [FACT] 요구사항과 검증 항목이 승인되기 전에는 구현하지 않습니다.
@@ -84,6 +86,7 @@
 - [docs/02-technical/architecture.md](docs/02-technical/architecture.md): 승인된 MVP-A Architecture 결정과 후속 설계·검증 경계
 - [docs/02-technical/data-model.md](docs/02-technical/data-model.md): 최종 승인된 MVP-A PostgreSQL 논리 데이터 모델과 상태·일관성·보존 경계
 - [docs/02-technical/interface-spec.md](docs/02-technical/interface-spec.md): 최종 승인된 MVP-A 외부·운영·역할 간 논리 interface 계약
+- [docs/03-planning/implementation-plan.md](docs/03-planning/implementation-plan.md): 승인된 MVP-A 구현 순서·작업 단위·의존성·검증·승인 gate와 MVP-A 기반 MVP-B incremental-entry 경계
 
 ## Working Principles
 
