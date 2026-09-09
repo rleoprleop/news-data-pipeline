@@ -2,6 +2,8 @@
 
 ## Project Status
 
+[FACT] 2026-09-09 독립 감사 후 F01 단독 문서 수정을 사용자 승인으로 반영했고, 사용자는 해당 두 파일의 commit·push도 승인했습니다. 아래 기존 단계 종료 기록과 별개로 F01 Git closure의 실제 완료 여부는 이 변경을 포함한 commit과 원격 `main`의 반영 상태로 확인합니다. Workflow 10 또는 실제 구현으로 진행하지 않았습니다.
+
 [FACT] 프로젝트는 전체 Workflow 1단계인 Problem Definition, 2단계인 Research / JTBD와 3단계인 Solution Discovery를 사용자 승인으로 완료했습니다.
 
 [FACT] 전체 Workflow 4단계인 Feature Prioritization을 2026-08-25에 사용자 승인으로 완료했습니다.
@@ -60,9 +62,11 @@
 
 [FACT] Workflow 9 Implementation Plan의 WBS-01~31, SPK-01~06, Requirement/Decision traceability, milestone·approval gate와 MVP-A 기반 MVP-B incremental-entry 경계를 사용자 승인으로 확정했습니다.
 
-[FACT] 현재 Task는 `WORKFLOW-09-GIT-REVIEW`입니다. 승인된 계획과 상태 문서의 변경 범위·검증 결과·남은 위험을 확인하고 Workflow 9 전용 commit·push 여부를 사용자에게 승인받아야 합니다.
+[FACT] 현재 Task는 사용자 승인된 F01 단독 변경의 Git closure입니다. 대상은 WBS-18.C/G의 accepted 선행조건 제거, 정확한 원래 mapping·승인 사용자 검증과 server acceptance/recipient receipt 분리 유지, WBS-18.H 검증 사례 및 이 Context 동기화뿐입니다. Commit·push 실행 승인을 받았으며 완료 여부는 실제 Git 결과로 판정합니다.
 
 ## Completed
+
+- [FACT] 사용자가 독립 감사 F01 단독 수정을 승인했고 WBS-18.C/G와 관련 WBS-18.H 검증 계획에 반영했습니다. 상위 Product·Requirement·Architecture·Data·Interface 설계는 변경하지 않았습니다.
 
 - [FACT] `C:\project`가 빈 새 프로젝트 위치임을 확인했습니다.
 - [FACT] Git Repository를 처음 `master` 브랜치로 초기화한 뒤 기본 branch를 `main`으로 변경했습니다.
@@ -150,7 +154,7 @@
 
 ## In Progress
 
-- [FACT] 활성 구현 작업은 없으며 Workflow 9 계획·Context 동기화는 완료했고 단계 종료 Git review·commit·push를 대기합니다.
+- [FACT] 활성 구현 작업은 없으며 F01 문서 수정 검토와 commit·push 사용자 승인을 완료했습니다. 나머지 감사 finding과 구조 분리는 적용하지 않았습니다.
 - [FACT] WBS-01 traceability 기준선, SPK-01~06 외부 검증, 물리 설계, Coding Readiness, 구현·배포·운영 검증과 MVP-B incremental discovery는 아직 실행하지 않았습니다.
 - [UNKNOWN] 최종 무료 AI provider·model·prompt, provider별 retry·backoff와 전체 선정 불가 판정은 실제 후보 검증 후 결정해야 합니다.
 - [UNKNOWN] Discord 실제 identifier·권한·rate limit·resume·interaction transport·payload 분할·UX와 장기 backlog 상한은 sandbox 검증이 필요합니다.
@@ -159,9 +163,11 @@
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 Workflow 9 단계 종료 Git Review입니다. 변경 범위·검증·문서 동기화·남은 위험을 확인하고 사용자 승인 뒤 Workflow 9 전용 commit·push를 완료하거나 사용자가 명시적으로 연기해야 합니다. 그 뒤 첫 실행 후보는 WBS-01 traceability 기준선이며 별도 작업 범위 확인 없이 구현이나 외부 spike를 시작하지 않습니다.
+[INFERENCE] F01 commit·push와 원격 반영을 확인한 뒤 다음 Task 하나는 F02의 재전송 업무 key와 interaction dedupe 분리 수정안 검토입니다. F02 적용이나 Workflow 10·외부 spike·구현은 별도 승인 없이 시작하지 않습니다.
 
 ## Important Decisions
+
+- [FACT] F01: Discord server acceptance는 유효 `받음`의 선행조건이 아닙니다. Exact original attempt/message/segment/selection과 승인 recipient를 검증하고 receipt만 추가하며, 원래 server acceptance·2XX·정시 수락을 생성하지 않습니다.
 
 ### Workflow Approval
 
@@ -360,6 +366,8 @@
 
 ## Do Not Change
 
+- [FACT] F01 승인은 mapping·사용자·subject·order·conflict 검증을 약화하거나 F02~F08 및 문서 구조 분리를 적용하는 승인이 아닙니다.
+
 - [FACT] 사용자 승인 없이 MVP에 외부 원문 기사 본문 수집을 추가하지 않습니다.
 - [FACT] 사용자 승인 없이 시사·경제 뉴스 또는 네이버 RSS를 MVP에 추가하지 않습니다.
 - [FACT] 사용자 승인 없이 다중 AI 제공자 구현, Kafka 또는 Spark를 추가하지 않습니다.
@@ -380,6 +388,8 @@
 - [FACT] Raw RSS `link` 외 Atom `id`·제목·내용으로 기사를 병합하거나 별도 승인 없이 URL 정규화를 적용하지 않습니다.
 
 ## Known Issues
+
+- [FACT] 독립 감사의 F02~F08은 미수정이며 별도 승인 대상입니다. F01 문서 수정은 Discord 실제 mapping·interaction 계약 검증 완료를 뜻하지 않습니다.
 
 - [FACT] 정보가 부족한 항목은 후보 자격을 유지하고 선정 시 `정보 제한`과 근거가 허용하는 1문장 이하 설명으로 표시합니다.
 - [UNKNOWN] 실제 무료 AI 후보의 한국어 요약 품질은 검증하지 않았습니다.
@@ -409,11 +419,15 @@
 
 ## Technical Debt
 
+- [FACT] F01에서는 문서 구조 분리·중복 정본화를 수행하지 않았으며 기존 문서 유지보수 과제는 남아 있습니다.
+
 - [FACT] 구현이 시작되지 않아 코드 수준 Technical Debt는 없습니다.
 - [INFERENCE] 단계 문서의 종료 시점 상태와 프로젝트의 현재 상태를 혼동하지 않도록 이후 문서에는 historical snapshot과 current status를 더 명시적으로 구분하는 편이 안전합니다.
 - [INFERENCE] 중복 방지·상태·복구·보안 제한이 FR·NFR·DR에 계층별로 반복되어 독립 검증에는 유용합니다. Final Review에서는 보장 범위와 추적성을 유지하면서 상태 문구, Discord 재전송 예외, 부분 발송 조건과 traceability의 drift만 최소 범위로 정리했습니다.
 
 ## Current Risks
+
+- [INFERENCE] F01 문서 조건을 수정해도 실제 adapter가 수락 불명확 상태의 유효 receipt를 처리하고 다른 scope·미승인 입력을 차단하는지는 후속 contract/fault test로 검증해야 합니다.
 
 - [INFERENCE] 저정보 표시 정책을 구현하더라도 말줄임표 뒤의 내용을 추정하거나 제한 결과를 정상 2~3문장 결과처럼 보이게 하면 근거 없는 확장이 발생할 수 있습니다.
 - [INFERENCE] 중요도 점수 공식과 홍보성 임계값이 검증되지 않은 상태에서 세밀한 수치를 고정하면 유용한 기사가 제외되거나 홍보성 기사가 포함될 수 있습니다.
@@ -435,6 +449,8 @@
 - [INFERENCE] MVP-B에서 MVP-A data/evidence를 reset하거나 시스템을 처음부터 재생성하면 회귀 기준선과 운영 학습이 사라지므로 별도 승인된 고위험 변경이 아닌 한 data-preserving incremental evolution을 유지해야 합니다.
 
 ## Last Verified
+
+[FACT] 2026-09-09 F01 작업 시작 시 `main`의 working tree가 깨끗하고 HEAD가 Workflow 9 승인 commit `e4bca33`임을 확인했습니다. Interface receipt adapter와 Data 수신 evidence 계약을 대조해 F01만 반영했습니다. 변경 두 문서의 표 열 수·fence·trailing whitespace·local link 검사, F01 선행조건 제거·안전 조건 존재 검사와 `git diff --check`가 통과했습니다. Git의 LF→CRLF 변환 안내 외 형식 오류는 없었습니다. 실행 코드·테스트가 없어 runtime test·외부 spike는 수행하지 않았고 commit·push도 실행하지 않았습니다.
 
 [FACT] 2026-08-25 Asia/Seoul 기준 Repository 초기 상태와 사용자 제공 요구사항을 확인했습니다.
 

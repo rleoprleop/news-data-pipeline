@@ -3209,7 +3209,7 @@ logical article item scope
 | --- | --- | --- |
 | Configuration | 활성 config/application/contract version과 일치 | Append-only non-application evidence, projection 금지 |
 | Guild/channel | 승인 exact target scope와 일치 | 다른 guild/channel로 확장하지 않음 |
-| Message | WBS-17 accepted message ID와 physical mapping 존재 | Unmapped/stale event로 보존, article/batch 귀속 금지 |
+| Message | WBS-17의 원래 delivery attempt·message ID·physical mapping과 event의 exact 연결 확인; Discord server acceptance는 선행조건이 아님 | Unmapped/stale event로 보존, article/batch 귀속 금지 |
 | User/bot | 승인 사용자이고 self/bot/system event가 아님 | Feedback·receipt·review 적용 금지 |
 | Reaction/action | 승인 emoji·structured command/action과 exact match | 유사 문자열·일반 message를 의미로 추정하지 않음 |
 | Subject | Article item, batch representative 또는 system message 종류가 정확히 매핑 | 한 mapping의 의미를 다른 item/batch로 전파하지 않음 |
@@ -3253,7 +3253,7 @@ logical article item scope
 
 #### WBS-18.G Recommendation·receipt handoff
 
-[FACT] `받음`은 exact accepted article-bearing delivery와 승인 recipient가 검증된 경우 durable recipient receipt와 typed event를 만들 수 있지만 원래 WBS-17의 Discord 2XX, server acceptance, message ID 또는 정시 acceptance를 생성·수정하지 않습니다.
+[FACT] `받음`은 원래 article-bearing delivery의 `delivery_attempt`, `discord_message_mapping`, `delivery_segment`, `selection_result`와 승인 recipient를 모두 정확히 연결할 수 있을 때 durable recipient receipt와 typed `user_received` event를 만듭니다. 원래 Discord server acceptance가 불명확해도 이 조건을 충족하면 적용하며, `user_received_confirmation` 출처의 receipt evidence를 추가하고 해당 scope는 재전송하지 않습니다. Receipt만으로 원래 WBS-17의 Discord 2XX, server acceptance, message ID 또는 정시 acceptance를 생성·수정하지 않습니다. 매핑 불가·모호·미승인 사용자 요청은 거부 근거만 보존하며 receipt·전달 상태 변경·resend를 만들지 않습니다. 같은 scope의 receipt/non-receipt 충돌은 기존 conflict 계약을 유지합니다. 정본은 [Receipt adapter 계약](../02-technical/interface-spec.md)과 [수신 evidence 계약](../02-technical/data-model.md)입니다.
 
 [FACT] `못 받음`은 exact original delivery/mapping과 승인 recipient를 검증해 typed non-receipt/recovery-request evidence를 만들고 WBS-19.B에 넘길 뿐, listener가 Discord message를 직접 재전송하거나 recovery backlog를 직접 선택·변경하지 않습니다. 이미 receipt와 non-receipt가 상충하면 최신 수신만 자동 우선하지 않고 양쪽 evidence와 conflict를 보존합니다.
 
@@ -3271,6 +3271,7 @@ logical article item scope
 | Interaction | Valid/forged signature, wrong user/target/action, duplicate request, ack success/failure와 DB commit 조합 |
 | Missing/recommendation | Found/not-collected/invalid/unavailable, exact-link only, eligibility 경계, 외부 fetch·AI 0건 |
 | Recovery boundary | `받음`/`못 받음`, conflict, listener 직접 REST/retry/resend/backlog mutation 0건 |
+| F01 receipt prerequisite | Server acceptance 불명확 + exact original attempt/message/segment/selection·승인 사용자 + 유효 `받음`은 recipient receipt만 추가하고 no-resend; 원래 server uncertainty·2XX·정시 수락 evidence 불변. Mapping 불가·모호·다른 사용자 및 confirmation system message 자체의 2XX·일반 reaction만으로는 원래 article receipt를 만들지 않음 |
 
 [INFERENCE] Contract/config/permission drift, DB trust 상실, signature 실패, sequence/commit ambiguity 또는 secret/redaction 위반이 있으면 신규 effect를 fail-closed로 차단합니다. Rollback은 listener/session adapter, typed intake, validation, projection, interaction/reply를 독립 slice로 비활성화할 수 있어야 하며 이미 commit된 append-only event, receipt, request, reply/ack evidence를 삭제·수정하지 않습니다.
 
@@ -5143,6 +5144,8 @@ confirmed non-acceptance candidate
 | PC-06 | `implementation-plan.md` | Status, strategy, traceability, milestones, risks, review state | WBS 순차 검토 완료 뒤 일부 초안·단계 문구 잔존 | PCC-01~11의 승인된 계획 정합성 수정 반영 | [FACT] 2026-09-09 승인·반영 |
 
 ## Sequential Review State
+
+[FACT] 2026-09-09 독립 감사 후 사용자가 F01 단독 수정을 승인했습니다. WBS-18.C/G의 accepted 선행조건을 승인된 receipt 계약에 맞춰 수정하고 WBS-18.H에 해당 검증 사례를 명시했습니다. 이는 문서 계약 수정이며 실제 테스트 실행·구현 승인이 아닙니다. 다른 감사 finding과 구조 분리안은 이 승인에 포함하지 않습니다.
 
 [FACT] WBS-01과 WBS-02의 정의·변경안은 2026-09-07 사용자 승인을 반영했습니다.
 
