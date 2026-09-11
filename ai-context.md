@@ -1,8 +1,36 @@
 # AI Context
 
+## Active Context
+
+[FACT] 작업 시작 시 이 절만 우선 읽습니다. 다음 `## Reference Context`에서 기본 읽기를 멈추고, [작업별 탐색표](docs/task-navigation.md)의 해당 행으로 이동합니다. 필요한 계약·선행 조건은 추가 확인하되 과거 기록 전체를 기본 입력으로 삼지 않습니다.
+
+- **Project Status** — [FACT] Workflow 1~9 및 WBS-01 추적성 기준선 승인 후, 실제 검증 시작 전 지점에서 사용자 요청으로 작업을 종료합니다. Workflow 10 Coding Readiness 통과·11 기능 구현은 미진입입니다.
+- **Current Task** — [FACT] 사용자 저장 요청에 따라 검증 전 체크포인트의 진행 상황·남은 작업·커밋 메시지 추천을 정리했습니다. Git 조회·커밋·푸시는 실행하지 않으며 실제 저장 대상 선택과 커밋은 사용자가 담당합니다.
+- **Completed** — [FACT] Workflow 1~9 문서 승인, 작업별 문서 분리·탐색표, WBS-01 추적성 기준선(Requirement 99개·AC 24개)과 문서 검사기를 보존했습니다. Gemini 실험 코드 정리·중단 기록·사용자 직접 검증 원칙을 반영했습니다. 실험용 API 호출은 총 0회입니다.
+- **In Progress** — [FACT] 진행 중인 구현·실험은 없습니다. Gemini 검증은 중단됐으며 SPK-06A pass·SPK-02 실제 검증·AI 제공자 선정은 미완료입니다.
+- **Next Task** — [FACT] 사용자 재개 요청을 기다립니다. 실제 검증 단계부터는 사용자가 VS Code에서 직접 실행하며 확인합니다. SPK-01 RSS 검증은 다음 후보일 뿐 자동 착수하지 않습니다.
+- **Important Decisions** — [FACT] 사용 목적은 개인 소비자입니다. 사용자가 Gemini 테스트 중단·코드 삭제를 지시해 이전 호출 승인은 더 이상 사용하지 않습니다. 다른 제공자·로컬 AI·묶음 요청 전환은 미승인입니다. C:\secret\gemini.txt와 계정·프로젝트는 그대로 두며 키를 읽거나 출력하지 않습니다.
+- **Do Not Change** — [FACT] Git 상태·history·diff 확인과 commit·push는 하지 않습니다. 사용자가 전체 작업 완료 후 직접 한 번에 처리하며 중간 commit 메시지·결과 재확인도 생략합니다. 보고는 변경점 중심이며 중대한 위험·승인 필요 사항은 숨기지 않습니다. 승인 없이 scope·핵심 설계·유료 경로·데이터 삭제·배포로 확장하지 않습니다. 제품 Guardrail은 AGENTS 전체를 따릅니다.
+- [FACT] 현재 사용자 경계: 검증 전까지 문서·계획에서 멈춥니다. 검증 코드 작성·복원·테스트·외부 호출은 새 명시적 요청 없이 진행하지 않습니다. 이후 실제 검증 실행은 사용자가 VS Code에서 직접 담당합니다.
+- **Known Issues** — [UNKNOWN] 무료 AI의 실제 계약·품질·비용, Discord mapping·권한·rate limit·UX, 물리 schema·동시성·backup/RPO/RTO·평가 산식은 미검증 또는 미결정입니다. 관련 기능 작업 시 해당 정본의 Unknown/Deferred 절을 확인합니다. Repository 밖 deep link의 전체 사용 현황은 알 수 없습니다.
+- **Technical Debt** — [FACT] 애플리케이션 코드는 아직 없습니다. 문서 검사기는 현재 미실행 baseline 전용이므로 실제 evidence 상태·manifest 연결 시 검증 규칙을 확장해야 합니다. 기존 Reference Context는 보존합니다.
+- **Current Risks** — [FACT] Gemini 중단으로 AI 품질·처리량·운영 가능성은 미검증입니다. [UNKNOWN] 향후 AI 대안의 개인 이용 조건·0원 비용·성능과 RSS 실제 접근 조건은 별도 확인이 필요합니다.
+- **Last Verified** — [FACT] 2026-09-11 Active Context·WBS-01 승인 상태·중단 기록·문서/스크립트 파일 목록을 확인했습니다. 이번 턴은 인계 문서만 변경했으며 검증 코드·테스트·외부 호출·Git·키 파일 접근은 수행하지 않았습니다. 실제 변경/staging 목록은 미확인입니다. 과거 실험 기록을 현재 검증 완료로 취급하지 않습니다.
+- **Last Updated** — [FACT] 2026-09-11 Asia/Seoul
+
+[FACT] 이후 Task에서는 이 절의 현재 값만 갱신합니다. 새 중요한 결정은 해당 정본에 기록하고 여기에는 짧은 요약·링크를 유지합니다. 이전 내용을 전부 복제하거나 날짜별 작업 로그를 이 절에 누적하지 않습니다.
+
+## Reference Context
+
+[FACT] 아래는 선택 읽기 도입 전의 상세 Context·검토 기록을 원문 그대로 보존한 참조 영역입니다. 과거의 Current Task·Next Task·Git 상태·대기 문구는 현재 상태가 아닙니다. 기능 정책은 관련 Product·Technical 정본에서 확인하고, 아래는 결정 배경이나 과거 검증 경위가 필요할 때 ID·날짜·heading으로 찾아 읽습니다.
+
 ## Project Status
 
-[FACT] 2026-09-09 독립 감사 F01에 이어 F02 단독 문서 수정을 사용자 승인으로 반영했습니다. 현재 상태는 F02 문서 반영 완료이며 Workflow 10 또는 실제 구현으로 진행하지 않았습니다. 사용자의 최신 지시에 따라 이후 Agent는 Git 확인·commit·push를 수행하지 않고 commit 메시지만 추천하며, 사용자가 직접 commit·push합니다.
+[FACT] 2026-09-10 탐색성 보완을 반영했습니다. 사용자는 commit을 전체 작업 완료 후로 연기했으며, 중간 commit 안내 없이 변경점만 보고하도록 요청했습니다. 이 지시는 아래 과거 Git 안내 기록보다 우선합니다.
+
+[FACT] 2026-09-10 사용자가 B안의 실제 분리를 승인했습니다. 구현 계획을 진입점과 여섯 역할별 문서로 분리했으며, 본문·F01~F08·상위 설계는 보존했습니다. 변경 후 사용자 검토를 대기하며 실제 WBS 실행·구현·배포는 시작하지 않았습니다.
+
+[FACT] 2026-09-10 사용자가 남은 감사 항목을 모두 진행하고 변경 후 확인·추가 수정하도록 요청했습니다. F01·F02에 이어 F03~F08 문서 수정을 반영했으며 2026-09-10 변경 후 사용자 승인을 받아 검토를 완료했습니다. 당시 Workflow 10·실제 구현·외부 spike·문서 대규모 분리는 시작하지 않았으며, 이후 별도 승인된 B안 분리는 상단 상태를 따릅니다. Agent는 Git 확인·commit·push를 수행하지 않고 commit 메시지만 추천하며 사용자가 직접 관리합니다. 현재 Git 반영 상태는 확인하지 않았습니다.
 
 [FACT] 프로젝트는 전체 Workflow 1단계인 Problem Definition, 2단계인 Research / JTBD와 3단계인 Solution Discovery를 사용자 승인으로 완료했습니다.
 
@@ -52,7 +80,7 @@
 
 [FACT] 사용자는 2026-09-04 Asia/Seoul에 `docs/02-technical/data-model.md`와 `docs/02-technical/interface-spec.md` 전체를 최종 승인했고, Workflow 8 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐습니다.
 
-[FACT] Workflow 9 Implementation Plan의 WBS-01~31 항목별 검토와 PLAN-CONSISTENCY-01 전체 정합성 검토를 2026-09-09 사용자 승인으로 완료했고 `docs/03-planning/implementation-plan.md`와 관련 상태 문서를 동기화했습니다. 단계 종료 Git review·commit·push는 아직 대기 중입니다.
+[FACT] Workflow 9 Implementation Plan의 WBS-01~31과 PLAN-CONSISTENCY-01 기준선은 2026-09-09 사용자 승인으로 완료했습니다. 이후 독립 감사에 따른 문서 수정·사용자 확인은 별도 후속 작업이며 현재 상태는 이 문서 상단과 Current Task를 기준으로 합니다. 이전 단계 종료 당시의 Git 대기 기록을 현재 상태로 사용하지 않습니다.
 
 [FACT] 구현, 데이터베이스 스키마, 테스트와 배포 구성은 시작하지 않았습니다.
 
@@ -62,9 +90,17 @@
 
 [FACT] Workflow 9 Implementation Plan의 WBS-01~31, SPK-01~06, Requirement/Decision traceability, milestone·approval gate와 MVP-A 기반 MVP-B incremental-entry 경계를 사용자 승인으로 확정했습니다.
 
-[FACT] 현재 Task는 사용자 승인된 F02 단독 문서 수정입니다. WBS-19.B3의 재전송 권한 업무 key와 interaction 중복 수신 기준 분리, WBS-19.B6 검증 계획 및 이 Context 동기화만 포함합니다. Git 작업은 사용자가 직접 수행하며 Agent는 확인하지 않습니다.
+[FACT] 현재 Task는 `DOC-NAVIGATION-01`입니다. 분리된 여섯 문서에 목차 바로가기 34개를 추가하고 README의 한국어 역할·WBS 범위 안내를 보완했습니다. 본문 계약은 변경하지 않았으며 사용자의 중간 커밋 안내 생략·변경점 중심 보고 지시를 반영했습니다.
 
 ## Completed
+
+- [FACT] 분리 문서 여섯 개의 목차 바로가기 34개와 README 역할·WBS 범위 안내를 추가했습니다.
+
+- [FACT] 2026-09-10 B안 승인에 따라 구현 계획 진입점과 역할별 여섯 파일을 구성하고 WBS 바로가기·호환 heading·현재 상태와 역사 기록의 구분을 반영했습니다.
+
+- [FACT] 2026-09-10 문서 구조·계획 heading·참조를 조사하고 단일 파일 유지, 역할별 분리, 전면 정본화 대안과 B안의 이동 범위·보존·검증 조건을 기록했습니다.
+
+- [FACT] 2026-09-10 F03 비용 gate, F04 복수 부정 reaction, F05 crash 검증 oracle, F06 실패 notice 정시 수락, F07 현재/역사적 상태, F08 case admission/confirmation 분리의 문서 수정을 반영했습니다. F01·F02와 승인 상위 설계는 유지했습니다. 2026-09-10 상세 설명 후 사용자가 F03~F08 변경 내용을 승인했습니다.
 
 - [FACT] F02 단독 수정 승인을 받아 재전송 권한의 원래 mapping·승인 recipient·예외 유형 기준과 interaction identity의 역할을 분리하고 반복·동시 요청 검증 계획에 반영했습니다.
 
@@ -156,7 +192,9 @@
 
 ## In Progress
 
-- [FACT] 활성 구현 작업은 없으며 F01·F02 문서 수정을 반영했습니다. F03~F08과 구조 분리는 적용하지 않았습니다.
+- [FACT] B안 분리와 탐색성 보완을 반영했으며 사용자 지적 사항이 있으면 해당 부분만 후속 수정합니다. 실제 구현·외부 검증 작업은 없습니다.
+
+- [FACT] 활성 구현 작업은 없으며 F01~F08 문서 수정을 반영했습니다. F03~F08 변경 후 사용자 승인을 받아 검토를 완료했으며 활성 후속 수정 작업은 없습니다. B안 구조 분리는 이후 별도 승인으로 반영했습니다.
 - [FACT] WBS-01 traceability 기준선, SPK-01~06 외부 검증, 물리 설계, Coding Readiness, 구현·배포·운영 검증과 MVP-B incremental discovery는 아직 실행하지 않았습니다.
 - [UNKNOWN] 최종 무료 AI provider·model·prompt, provider별 retry·backoff와 전체 선정 불가 판정은 실제 후보 검증 후 결정해야 합니다.
 - [UNKNOWN] Discord 실제 identifier·권한·rate limit·resume·interaction transport·payload 분할·UX와 장기 backlog 상한은 sandbox 검증이 필요합니다.
@@ -165,9 +203,15 @@
 
 ## Next Task
 
-[INFERENCE] 다음 Task 하나는 F08의 recovery case admission과 uncertainty 전용 confirmation 조건 분리 수정안 검토입니다. 적용은 별도 승인 대상이며 Workflow 10·외부 spike·구현을 시작하지 않습니다. F02 추천 commit 메시지는 `docs: separate resend authorization from interaction deduplication`입니다.
+[INFERENCE] 다음 Task 하나는 WBS-01 추적성 기준선 작업의 입력·산출물 범위 검토입니다. 실제 외부 spike·물리 설계·코드·배포는 별도 승인 경계를 유지하며, 중간 Git 확인·실행·commit 메시지는 제공하지 않습니다.
 
 ## Important Decisions
+
+- [FACT] 사용자가 전체 완료 후 직접 한 번에 commit·push하며 중간 commit 안내와 메시지 제안을 생략합니다. Git 명령 금지와 설계·구현·배포의 별도 승인 경계는 유지합니다.
+
+- [FACT] 2026-09-10 사용자가 B안의 문서 분리 실행을 승인했습니다. 본문 이동·링크·상태 동기화에 한정하며 승인 조건 축약, README·Context 이력 대량 정리, 상위 설계 정본 변경이나 실제 구현은 포함하지 않습니다.
+
+- [FACT] F03~F08 수정은 기존 승인 계약을 유지합니다. 첫 운영월의 사전 승인 호출과 월별 실제 비용 판정, 복수 부정 reaction과 receipt conflict, 호출 시작 의도와 외부 효과, 실패 notice의 정시 전달과 처리 성공, case 연결과 confirmation/복구 실행 자격을 각각 구분합니다.
 
 - [FACT] F02: Interaction identity는 동일 요청 재전달 방지·원본 추적 기준이고, 1회 재전송 권한은 원래 mapping·승인 recipient·예외 유형으로 제한합니다. 새 interaction이 기존 권한을 반복 실행할 근거가 되지 않습니다.
 
@@ -274,7 +318,7 @@
 
 ### Git Workflow
 
-- [FACT] 2026-09-09 사용자 최신 지시가 아래 기존 절차의 Agent Git 확인·실행·결과 재확인보다 우선합니다. Agent는 Git 명령을 실행하지 않고 commit 메시지만 추천하며, 사용자가 직접 commit·push합니다. 현재 반영 상태를 추정하거나 재확인을 요구하지 않습니다.
+- [FACT] 2026-09-10 최신 지시에 따라 사용자가 전체 작업 완료 후 직접 한 번에 commit·push합니다. Agent는 Git 확인·실행·결과 재확인과 중간 commit 메시지·안내를 생략하고 변경점만 보고합니다. 아래 기존 단계별 Git 절차보다 이 지시가 우선하며, 별도 설계·구현·배포 승인 경계는 유지합니다.
 
 - [FACT] 각 Workflow 단계는 사용자 승인과 관련 문서 동기화 후 commit 및 push 안내 절차로 마감합니다.
 - [FACT] 단계 종료 시 변경 범위, 테스트 결과, 문서 동기화와 남은 위험을 먼저 보고합니다.
@@ -372,6 +416,10 @@
 
 ## Do Not Change
 
+- [FACT] B안 분리 승인은 파일 경계·탐색·상태 동기화에 한정합니다. WBS 본문·F01~F08·상위 설계 의미를 변경하거나 과거 이력을 삭제하지 않습니다.
+
+- [FACT] 2026-09-10 잔여 정합성 수정 요청은 상위 Product·Requirement·AD·DDI·MIN 변경, 물리 schema·provider 확정, 문서 대규모 분리 또는 실제 구현·배포를 허용한 것으로 해석하지 않습니다. 이번 변경 후 승인은 F03~F08 문서 수정에 한정하며 실제 구현·검증 완료로 확장하지 않습니다.
+
 - [FACT] F02는 기존 mapping·승인 사용자·receipt conflict·claim·invocation gate·uncertainty 보존 규칙을 완화하지 않으며 다른 감사 finding 수정은 별도 승인 대상입니다.
 
 - [FACT] F01 승인은 mapping·사용자·subject·order·conflict 검증을 약화하거나 F02~F08 및 문서 구조 분리를 적용하는 승인이 아닙니다.
@@ -397,7 +445,9 @@
 
 ## Known Issues
 
-- [FACT] 독립 감사의 F03~F08은 미수정이며 별도 승인 대상입니다. F01·F02 문서 수정은 Discord 실제 mapping·interaction 및 동시성 계약 검증 완료를 뜻하지 않습니다.
+- [UNKNOWN] 분리 결과의 변경 후 사용자 검토와 Repository 밖 deep link 사용 현황은 남아 있습니다.
+
+- [FACT] 독립 감사 F01~F08의 지적 문구는 문서에 반영했고 F03~F08 변경 후 사용자 승인도 완료됐습니다. 이는 Discord 실제 mapping·interaction·동시성·비용·복구·지표 검증 완료를 뜻하지 않습니다.
 
 - [FACT] 정보가 부족한 항목은 후보 자격을 유지하고 선정 시 `정보 제한`과 근거가 허용하는 1문장 이하 설명으로 표시합니다.
 - [UNKNOWN] 실제 무료 AI 후보의 한국어 요약 품질은 검증하지 않았습니다.
@@ -427,13 +477,19 @@
 
 ## Technical Debt
 
-- [FACT] F01·F02에서는 문서 구조 분리·중복 정본화를 수행하지 않았으며 기존 문서 유지보수 과제는 남아 있습니다.
+- [FACT] B안의 작업 상세·검증·승인 이력 분리를 반영했습니다. README·Context 과거 이력 정리와 의미 중복 제거는 별도 과제로 남깁니다.
+
+- [FACT] F01~F08 정합성 수정에서는 문서 구조 분리·중복 정본화를 수행하지 않았으며 기존 문서 유지보수 과제는 남아 있습니다.
 
 - [FACT] 구현이 시작되지 않아 코드 수준 Technical Debt는 없습니다.
 - [INFERENCE] 단계 문서의 종료 시점 상태와 프로젝트의 현재 상태를 혼동하지 않도록 이후 문서에는 historical snapshot과 current status를 더 명시적으로 구분하는 편이 안전합니다.
 - [INFERENCE] 중복 방지·상태·복구·보안 제한이 FR·NFR·DR에 계층별로 반복되어 독립 검증에는 유용합니다. Final Review에서는 보장 범위와 추적성을 유지하면서 상태 문구, Discord 재전송 예외, 부분 발송 조건과 traceability의 drift만 최소 범위로 정리했습니다.
 
 ## Current Risks
+
+- [INFERENCE] 문서 분리 시 본문 유실·중복 정본·끊긴 anchor·문맥 의존 참조 위험이 있으므로 원본 블록별 보존 대조와 링크 검증 없이 완료로 처리하지 않습니다.
+
+- [INFERENCE] 문서 조건 정렬만으로 실제 첫 운영월 비용 안전, 동시 요청·crash gap, mixed-scope recovery와 정시 수락 집계가 검증되지는 않습니다. 실제 구현 뒤 각 추가 검증 사례의 실행 evidence가 필요합니다.
 
 - [INFERENCE] F02의 논리 key가 실제 동시 요청에서 최대 1회 권한 생성을 보장하는지는 후속 unique constraint·transaction 설계와 concurrency/fault test로 검증해야 합니다.
 
@@ -459,6 +515,16 @@
 - [INFERENCE] MVP-B에서 MVP-A data/evidence를 reset하거나 시스템을 처음부터 재생성하면 회귀 기준선과 운영 학습이 사라지므로 별도 승인된 고위험 변경이 아닌 한 data-preserving incremental evolution을 유지해야 합니다.
 
 ## Last Verified
+
+[FACT] 2026-09-10 탐색성 보완 후 Markdown 20개의 로컬 링크 202개와 heading anchor·fence·trailing whitespace 검사를 통과했습니다. 여섯 파일에서 추가 목차를 제외한 내용이 분리 직후 기준선과 정확히 일치함을 확인했습니다. Runtime 테스트·외부 검증·Git 명령은 실행하지 않았습니다.
+
+[FACT] 2026-09-10 B안 분리 후 여섯 이동 본문 5,161줄의 원본 일치, WBS 요약 31행·상세 root 29개·SPK 6행과 비대상 기존 10개 파일 SHA256 불변을 확인했습니다. Markdown 20개·표 292개·로컬 링크 169개(heading anchor 78개)·fence·trailing whitespace 검사를 통과했습니다. 진입점은 292줄이며 본문 조건을 축약하지 않았습니다. 검사는 정적 문서 검증이며 runtime·외부 spike·배포·Git 명령은 실행하지 않았습니다. 변경 후 사용자 검토는 대기입니다.
+
+[FACT] 2026-09-10 Repository 파일 목록, README·AGENTS·AI Context, 계획의 주요 절·WBS 상세 경계와 정본 참조를 확인했습니다. 시작 시 Markdown 13개이며 코드·테스트·실행 설정은 없습니다. TODO/FIXME 검색 결과는 운영 규칙·과거 기록뿐입니다. 구조 검토 결과를 작성했으며 Git·runtime 테스트·외부 spike·문서 분리는 실행하지 않았습니다.
+
+[FACT] 2026-09-10 F03~F08 상세 설명 후 사용자 승인을 확인하고 계획·README·AI Context의 변경 후 검토 상태를 완료로 동기화했습니다. 승인 범위는 문서 수정이며 실제 WBS 실행이나 문서 구조 분리로 확대하지 않았습니다. Git 명령과 runtime 테스트는 실행하지 않았습니다.
+
+[FACT] 2026-09-10 현재 문서와 승인 Data·Interface·Requirement 계약을 대조해 F03~F08을 반영했습니다. 전체 13개 문서의 표 289개·local link 51개·heading·fence·trailing whitespace 검사와 99개 Requirement 행·31개 WBS·6개 SPK 고유 ID 수, F01·F02 보존을 포함한 문서 조건 22개·잔존 오류 문구 5개 검사를 통과했습니다. 변경 범위는 계획·README·AI Context 세 문서이며 나머지 10개 파일의 SHA256은 편집 전과 같습니다. 이 검사는 문서 검사이지 runtime 테스트가 아닙니다. 코드·동시성 테스트·외부 spike·배포는 실행하지 않았고 Git 명령도 사용하지 않았습니다. 아래 날짜별 기록은 당시 점검 snapshot이며, 특히 과거 commit·push 대기/미실행 문구는 현재 Git 상태를 뜻하지 않습니다.
 
 [FACT] 2026-09-09 F02의 WBS-19.B3와 Data·Interface 정본을 대조하고 승인된 단독 수정을 반영했습니다. 두 변경 문서의 표 열 수·fence·trailing whitespace·local link 및 F02 문서 조건 검사를 통과했고, Data·Interface 정본의 SHA256이 변경 전과 동일함을 확인했습니다. 현재 코드·테스트가 없어 runtime·동시성 테스트와 외부 spike는 실행하지 않았습니다. 사용자 지시에 따라 Git 상태·history·diff 확인, commit·push는 수행하지 않았습니다.
 
@@ -568,4 +634,4 @@
 
 ## Last Updated
 
-[FACT] 2026-09-09 Asia/Seoul
+[FACT] 2026-09-10 Asia/Seoul

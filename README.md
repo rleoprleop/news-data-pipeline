@@ -39,9 +39,9 @@
 
 [FACT] Workflow 8 **Data / Interface Design**에서 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`를 항목별 승인했고, 사용자는 2026-09-04에 두 논리 설계 문서 전체를 최종 승인했습니다. 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐으며 현재 Technical Requirements는 총 99개입니다.
 
-[FACT] Workflow 9 **Implementation Plan**의 WBS-01~31 항목별 검토와 PLAN-CONSISTENCY-01 전체 정합성 검토를 2026-09-09 사용자 승인으로 완료했습니다. 이는 계획 승인이고 구현·외부 검증·물리 schema·배포 또는 MVP-B 실행 승인이 아니며, 단계 종료 Git review·commit·push는 아직 대기 중입니다.
+[FACT] Workflow 9 **Implementation Plan**의 WBS-01~31과 PLAN-CONSISTENCY-01 기준선은 2026-09-09 사용자 승인을 받았습니다. F01·F02 수정에 이어 2026-09-10 사용자의 잔여 항목 일괄 진행 요청으로 F03~F08 문서 수정을 반영했으며 2026-09-10 변경 후 사용자 승인을 받았습니다. 이는 실제 구현·외부 검증·물리 schema·배포 또는 MVP-B 실행 승인이 아닙니다. 현재 작업 상태와 남은 미결정 사항은 [AI Context](ai-context.md)를 참조합니다.
 
-[FACT] 아직 애플리케이션 코드, 데이터베이스 스키마, 배포 구성과 테스트는 없습니다.
+[FACT] 아직 애플리케이션 코드·DB schema·배포 구성·runtime 테스트는 없습니다. WBS-01 추적성 기준선은 사용자 승인을 받았으며 실제 외부 검증은 미실행입니다.
 
 [FACT] 요구사항과 검증 항목이 승인되기 전에는 구현하지 않습니다.
 
@@ -75,6 +75,9 @@
 
 ## Documents
 
+- [작업별 읽기 경로](docs/task-navigation.md): 필요한 기능의 WBS·계약 절만 선택하는 탐색표
+- [현재 Context](ai-context.md#active-context): 작업 시작 시 우선 읽는 상태·제약·다음 작업 요약; 과거 기록은 필요할 때만 참조
+
 - [AGENTS.md](AGENTS.md): 모든 AI Agent와 기여자가 따라야 할 작업 규칙
 - [ai-context.md](ai-context.md): 현재 프로젝트 상태, 결정, 위험과 다음 작업
 - [docs/01-product/problem.md](docs/01-product/problem.md): 사용자 문제, MVP 범위, 성공 기준과 검증 항목
@@ -86,7 +89,14 @@
 - [docs/02-technical/architecture.md](docs/02-technical/architecture.md): 승인된 MVP-A Architecture 결정과 후속 설계·검증 경계
 - [docs/02-technical/data-model.md](docs/02-technical/data-model.md): 최종 승인된 MVP-A PostgreSQL 논리 데이터 모델과 상태·일관성·보존 경계
 - [docs/02-technical/interface-spec.md](docs/02-technical/interface-spec.md): 최종 승인된 MVP-A 외부·운영·역할 간 논리 interface 계약
-- [docs/03-planning/implementation-plan.md](docs/03-planning/implementation-plan.md): 승인된 MVP-A 구현 순서·작업 단위·의존성·검증·승인 gate와 MVP-A 기반 MVP-B incremental-entry 경계
+- [docs/03-planning/implementation-plan.md](docs/03-planning/implementation-plan.md): 승인된 전체 구현 순서·WBS 요약·승인 gate와 역할별 계획의 진입점
+- [design-readiness-plan.md](docs/03-planning/design-readiness-plan.md): 설계·Coding Readiness 계획 (WBS-03~09)
+- [feature-implementation-plan.md](docs/03-planning/feature-implementation-plan.md): 기능 구현 계획 (WBS-10~22)
+- [integrated-verification-plan.md](docs/03-planning/integrated-verification-plan.md): 통합 검증 계획 (WBS-23~26)
+- [release-operations-plan.md](docs/03-planning/release-operations-plan.md): 배포·운영 계획 (WBS-27~31)
+- [validation-traceability-plan.md](docs/03-planning/validation-traceability-plan.md): 외부 검증·요구사항 추적성 계획
+- [traceability-baseline.md](docs/03-planning/traceability-baseline.md): WBS-01 요구사항·AC·설계 결정·Hard Gate 추적성 기준선과 검사 방법
+- [implementation-review-history.md](docs/03-planning/implementation-review-history.md): 계획 승인·감사 이력
 
 ## Working Principles
 
@@ -94,7 +104,7 @@
 - [FACT] Small Changes: 현재 Task와 관련된 최소 범위만 변경합니다.
 - [FACT] Human in the Loop: Scope, 핵심 Architecture, 데이터 손실 가능 작업, 배포, Git commit과 Git push는 사용자 승인 없이 수행하지 않습니다.
 - [FACT] Documentation and Context Sync: 중요 결정과 구현 변경을 관련 문서와 `ai-context.md`에 반영합니다.
-- [FACT] Stage Closure: 각 Workflow 단계는 사용자 승인과 문서 동기화 후 commit 및 push 절차로 마감합니다.
+- [FACT] Stage Closure: 사용자는 전체 작업 완료 후 직접 한 번에 commit·push를 진행합니다. Agent는 Git 확인·실행·결과 재확인을 하지 않고 중간 commit 메시지·안내를 생략하며 변경점만 보고합니다. 이는 별도 설계·구현·배포 승인 경계를 생략하는 지시가 아닙니다.
 - [FACT] Branch Strategy: 문서 중심 단계는 `main`을 사용하고, 구현 이후 코드 변경은 기능 또는 수정 단위의 작업 branch와 Pull Request를 사용합니다.
 - [FACT] Kafka와 Spark는 실제 데이터 규모와 요구사항으로 필요성이 입증되기 전까지 도입하지 않습니다.
 
