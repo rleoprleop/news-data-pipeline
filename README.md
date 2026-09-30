@@ -4,46 +4,11 @@
 
 ## Project Status
 
-[FACT] 전체 개발 Workflow의 첫 단계인 **Problem Definition**은 2026-08-25에 사용자 승인을 받아 완료됐습니다.
+[FACT] Workflow 1~9와 WBS-01 추적성 기준선은 승인됐습니다. Workflow 10 Coding Readiness와 Workflow 11 기능 구현에는 진입하지 않았으며 애플리케이션 코드·DB schema·배포 구성·runtime 테스트는 없습니다.
 
-[FACT] **Research / JTBD**는 2026-08-25에 사용자 승인을 받아 완료됐습니다.
+[FACT] Gemini 무료 API를 우선 검증·사용 방향으로 유지하지만 AI 제공자의 최종 채택·activation은 미완료입니다. 2026-09-11 제한 실험은 사용자 지시로 중단됐고 실제 외부 호출은 0회이며, 새 실제 검증은 별도 승인 전 실행하지 않습니다.
 
-[FACT] **Solution Discovery**는 2026-08-25에 사용자 승인을 받아 완료됐습니다.
-
-[FACT] **Feature Prioritization**은 2026-08-25에 사용자 승인을 받아 완료됐습니다.
-
-[FACT] Feature Prioritization 단계 종료 commit `bd4b359`가 local `main`과 `origin/main`에 반영됐습니다.
-
-[FACT] 사용자가 2026-08-25의 비판적 제품 검토 후 MVP-A/MVP-B 범위 분리, 중요 기사 누락 우선, 모든 후보 자격 유지와 비무음 fallback 방향을 승인했습니다.
-
-[FACT] 위 보완 결정의 문서·Context 동기화는 commit `40d1dc8`로 local `main`과 `origin/main`에 반영됐습니다.
-
-[FACT] 전체 Workflow 5단계인 **Product Specification**은 2026-08-26에 사용자 최종 승인을 받아 완료됐습니다.
-
-[FACT] 사용자가 2026-08-26에 중요도·관심 주제, 홍보성, 저정보 entry, 실패 가시성, Discord 복구, feedback과 MVP-A 합격선 정책을 승인했고 `docs/01-product/product-spec.md` 작성을 요청했습니다.
-
-[FACT] Product Specification 단계 종료 commit `e9f02a0`이 local `main`과 `origin/main`에 반영됐습니다.
-
-[FACT] 전체 Workflow 6단계인 **Technical Requirements**의 Final Review와 사용자 최종 승인을 2026-08-29에 완료했습니다.
-
-[FACT] 사용자가 2026-08-26에 Technical Requirements 우선순위·ID 체계와 Discord reaction 기반 batch 검토 완료, 부정 feedback, 암묵적 수용률, 구조화된 누락 기사 feedback 및 recall 분류 정책을 승인했습니다.
-
-
-[FACT] Workflow 6 Technical Requirements 승인 기준선은 FR-001~FR-024, NFR 17개, DR-001~DR-014, EXT 25개와 VR-001~VR-011의 총 91개입니다.
-
-[FACT] 2026-08-28에 Technical Requirements Draft 전체의 최종 정합성 점검을 완료했고 사용자가 2026-08-29에 전체 Draft를 최종 승인했습니다. 승인 반영 변경은 단계 종료 commit `0e8214c`로 기록되어 local `main`과 `origin/main`에 반영됐습니다.
-
-[FACT] Workflow 7 **Architecture**의 AD-01~AD-23과 전체 문서를 2026-09-01에 사용자 최종 승인으로 완료했으며, 단계 종료 commit `c993ed9`가 local `main`과 `origin/main`에 반영됐습니다. 이 승인은 구현 승인을 뜻하지 않습니다.
-
-[FACT] 사용자가 2026-09-01에 AD-01~AD-23의 하나의 Python image·K3s 역할 분리·PostgreSQL durable work ledger·Gateway-first feedback·정시 및 처리 지연 전달·복구·backup·평가 실행 경계를 승인했습니다.
-
-[FACT] Workflow 8 **Data / Interface Design**에서 DDI-01~DDI-10, MIN-01~MIN-08, 세부 정합성 검토와 `VR-012`~`VR-019`를 항목별 승인했고, 사용자는 2026-09-04에 두 논리 설계 문서 전체를 최종 승인했습니다. 단계 종료 commit `8edc1a1`이 local `main`과 `origin/main`에 반영됐으며 현재 Technical Requirements는 총 99개입니다.
-
-[FACT] Workflow 9 **Implementation Plan**의 WBS-01~31과 PLAN-CONSISTENCY-01 기준선은 2026-09-09 사용자 승인을 받았습니다. F01·F02 수정에 이어 2026-09-10 사용자의 잔여 항목 일괄 진행 요청으로 F03~F08 문서 수정을 반영했으며 2026-09-10 변경 후 사용자 승인을 받았습니다. 이는 실제 구현·외부 검증·물리 schema·배포 또는 MVP-B 실행 승인이 아닙니다. 현재 작업 상태와 남은 미결정 사항은 [AI Context](ai-context.md)를 참조합니다.
-
-[FACT] 아직 애플리케이션 코드·DB schema·배포 구성·runtime 테스트는 없습니다. WBS-01 추적성 기준선은 사용자 승인을 받았으며 실제 외부 검증은 미실행입니다.
-
-[FACT] 요구사항과 검증 항목이 승인되기 전에는 구현하지 않습니다.
+[FACT] 현재 Task·승인 경계·다음 작업의 정본은 [Active Context](ai-context.md#active-context)입니다. 단계별 승인·commit 기록은 아래 `Repository State`의 역사 snapshot과 각 문서의 Status를 참조합니다.
 
 ## Product Goal
 
@@ -79,7 +44,6 @@
 - [현재 Context](ai-context.md#active-context): 작업 시작 시 우선 읽는 상태·제약·다음 작업 요약; 과거 기록은 필요할 때만 참조
 
 - [AGENTS.md](AGENTS.md): 모든 AI Agent와 기여자가 따라야 할 작업 규칙
-- [ai-context.md](ai-context.md): 현재 프로젝트 상태, 결정, 위험과 다음 작업
 - [docs/01-product/problem.md](docs/01-product/problem.md): 사용자 문제, MVP 범위, 성공 기준과 검증 항목
 - [docs/01-product/research.md](docs/01-product/research.md): JTBD 구체화, GeekNews RSS 조사 결과와 남은 검증 항목
 - [docs/01-product/solution-discovery.md](docs/01-product/solution-discovery.md): Solution Approach 비교, 승인된 Solution 결정과 남은 미결정 사항
@@ -100,30 +64,26 @@
 
 ## Working Principles
 
-- [FACT] Design Before Code: 요구사항과 설계 승인 전에는 구현하지 않습니다.
-- [FACT] Small Changes: 현재 Task와 관련된 최소 범위만 변경합니다.
-- [FACT] Human in the Loop: Scope, 핵심 Architecture, 데이터 손실 가능 작업, 배포, Git commit과 Git push는 사용자 승인 없이 수행하지 않습니다.
-- [FACT] Documentation and Context Sync: 중요 결정과 구현 변경을 관련 문서와 `ai-context.md`에 반영합니다.
-- [FACT] Stage Closure: 사용자는 전체 작업 완료 후 직접 한 번에 commit·push를 진행합니다. Agent는 Git 확인·실행·결과 재확인을 하지 않고 중간 commit 메시지·안내를 생략하며 변경점만 보고합니다. 이는 별도 설계·구현·배포 승인 경계를 생략하는 지시가 아닙니다.
-- [FACT] Branch Strategy: 문서 중심 단계는 `main`을 사용하고, 구현 이후 코드 변경은 기능 또는 수정 단위의 작업 branch와 Pull Request를 사용합니다.
-- [FACT] Kafka와 Spark는 실제 데이터 규모와 요구사항으로 필요성이 입증되기 전까지 도입하지 않습니다.
+- [FACT] 작업 규칙의 정본은 [AGENTS.md](AGENTS.md)입니다. README의 요약과 충돌하면 AGENTS 및 승인된 정본 문서를 따릅니다.
+- [FACT] Design Before Code, 현재 Task의 최소 변경, 사용자 승인 경계와 제품 Guardrail을 유지합니다.
+- [FACT] 현재 사용자 지시에 따라 Agent는 Git을 조회·실행하지 않으며, scope·핵심 설계·데이터 손실 가능 작업·배포를 승인 없이 진행하지 않습니다.
 
 ## Repository State
 
-[FACT] 2026-08-25에 `C:\project`에서 새 Git Repository를 `master` 브랜치로 초기화한 뒤 기본 branch를 `main`으로 변경했습니다.
+[FACT] 이 절은 문서에 기록된 **역사 snapshot**이며 현재 Git 상태의 정본이 아닙니다. 이번 정리에서도 Git을 조회하지 않았습니다.
 
-[FACT] Problem Definition과 Research / JTBD 문서를 최초 commit `ed74291`로 기록하고 `origin/main`에 push했습니다.
+[FACT] 2026-08-25에 `C:\project`에서 새 Git Repository를 `master` 브랜치로 초기화한 뒤 기본 branch를 `main`으로 변경했으며, 기록된 remote는 `https://github.com/rleoprleop/news-data-pipeline.git`입니다.
 
-[FACT] Solution Discovery commit `d377f1e`와 Feature Prioritization commit `bd4b359`를 `origin/main`에 반영했습니다.
-
-[FACT] MVP-A/MVP-B 범위와 fallback 방향 보완 commit `40d1dc8`을 `origin/main`에 반영했습니다.
-
-[FACT] Product Specification 완료 commit `e9f02a0`을 `origin/main`에 반영했습니다.
-
-[FACT] Technical Requirements FR 검토 완료 checkpoint commit `52ac9ee`를 local `main`과 `origin/main`에 반영했습니다.
-
-[FACT] Technical Requirements 91개 Requirement의 순차 승인 checkpoint commit `d343ac5`를 local `main`과 `origin/main`에 반영했습니다.
-
-[FACT] Architecture 완료 commit `c993ed9`를 local `main`과 `origin/main`에 반영했습니다.
-
-[FACT] GitHub remote Repository는 `https://github.com/rleoprleop/news-data-pipeline.git`입니다.
+| 단계·기록 | 승인·기록일 | 문서에 기록된 commit |
+| --- | --- | --- |
+| Problem Definition·Research / JTBD | 2026-08-25 | `ed74291` |
+| Solution Discovery | 2026-08-25 | `d377f1e` |
+| Feature Prioritization | 2026-08-25 | `bd4b359` |
+| MVP-A/MVP-B 범위·fallback 보완 | 2026-08-25 | `40d1dc8` |
+| Product Specification | 2026-08-26 | `e9f02a0` |
+| Technical Requirements FR 검토 checkpoint | 2026-08-26~28 | `52ac9ee` |
+| Technical Requirements 91개 순차 승인 checkpoint | 2026-08-26~29 | `d343ac5` |
+| Technical Requirements 최종 승인 | 2026-08-29 | `0e8214c` |
+| Architecture | 2026-09-01 | `c993ed9` |
+| Data / Interface Design | 2026-09-04 | `8edc1a1` |
+| Implementation Plan·WBS-01~31 | 2026-09-09~10 | 현재 Git 반영 상태 미확인 |

@@ -247,7 +247,7 @@
 
 ### Free AI Provider
 
-[FACT] 최종 AI 제공자는 미정이며 Gemini API는 우선 검증 후보입니다.
+[FACT] 최종 AI 제공자는 아직 확정되지 않았습니다. Gemini 무료 API를 우선 검증했지만 2026-09-14 공식 Gemini API 추가 약관의 consumer-use 제외와 확정된 개인 소비자 목적이 충돌했고 사용자가 목적 유지를 확인해 새 SPK-06A를 provider 호출 0회 `fail`, Gemini API 후보를 `rejected`로 판정했습니다. 2026-09-11 제한 실험도 사용자 지시로 중단됐고 호출은 0회입니다. Gemini 실제 검증·채택은 차단하며 다른 제공자·로컬 AI·유료 경로는 별도 사용자 승인과 change control 없이 대체하지 않습니다.
 
 [FACT] 2026-08-26 확인한 [Gemini API rate limits](https://ai.google.dev/gemini-api/docs/rate-limits)는 rate limit이 project 단위이며 model·tier에 따라 달라지고 실제 한도는 AI Studio에서 확인해야 한다고 설명합니다.
 

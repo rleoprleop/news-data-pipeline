@@ -14,7 +14,7 @@
 
 ## External Validation / Spike Plan
 
-[FACT] SPK-06A의 [사전 비용 확인 준비표](spk-06a-preflight.md)에 대상 입력·7개 비용 scope·판정 및 중단 조건을 정리했습니다. 실제 실행은 대상·설정 근거 확인 전 blocked이며 pass evidence가 아닙니다.
+[FACT] SPK-06A의 [중단된 Gemini 사전 비용 확인 기록](spk-06a-preflight.md)에 2026-09-11 대상 입력·7개 비용 scope·판정 및 중단 조건을 보존했습니다. 이 archive의 현재 상태는 `stopped/not_run`이며 pass evidence·현재 실행 계획·새 실행 승인이 아닙니다. 2026-09-14 사용자가 승인한 [새 Gemini 비용·안전 preflight](spk-06a-gemini-preflight-2026-09-14.md)는 archive와 별도 record입니다. 공식 Gemini API 추가 약관의 consumer-use 제외가 Repository의 개인 소비자 목적과 충돌했고 사용자가 목적 유지를 확인해, 새 SPK-06A는 provider 호출 0회 `fail`, Gemini API 후보는 `rejected`로 판정했습니다. SPK-02 실제 호출과 Gemini provider selection은 차단하며 다른 제공자·유료 Gemini·로컬 AI로 자동 전환하지 않습니다.
 
 [FACT] SPK-01~06은 각각 독립적으로 실행·검토·판정하는 validation task이고, WBS-02는 그 결과를 취합하는 승인 gate입니다.
 
@@ -34,11 +34,15 @@
 | ID | 검증 대상 | 검증 질문 | 최소 실험 | 성공/실패 판단 | 후속 영향 |
 | -- | ----- | ----- | ----- | -------- | ----- |
 | SPK-01 | GeekNews RSS | conditional request·항목 수·시간·update·link·허용 polling을 신뢰할 수 있는가 | 공식 조건 재확인 후 저빈도 live fetch를 여러 시점에 수행해 header·304·entry 변화·오류 비교 | 필수 입력·실패 분류와 허용 조건이 재현되면 성공; 불명확하면 관련 기능 차단 | WBS-14 HTTP·validation·retry 계약 |
-| SPK-02 | 단일 무료 AI 후보 | 품질·quota·latency·structured output·유료 차단이 적합한가 | Gemini 무료 후보를 우선 검증하고 실패 시 자동 대체 없이 사용자 결정 | 품질·근거·구조·처리량·유료 불가가 모두 증거화돼야 채택 | WBS-06·15·16 |
+| SPK-02 | 단일 무료 AI 후보 | 품질·quota·latency·structured output·유료 차단이 적합한가 | Gemini 무료 후보를 우선 검증하되 중단된 이전 run은 자동 재개하지 않음. 승인된 첫 transport는 최대 10 article을 고정 순서의 최대 5개 묶음으로 요청하고, 나머지가 0이면 마지막 묶음도 5개·나머지가 1~4일 때만 해당 수로 구성함. 한 item이라도 validation 실패면 부분 성공 없이 묶음 전체를 실패 처리하고 같은 묶음을 최대 1회만 새 attempt로 retry함. Timeout·응답 유실·quota·비용/설정 불명은 자동 retry하지 않으며 새 실행과 실제 호출은 단계별 별도 승인을 받음 | 품질·근거·구조·item 누락/혼합·request-level usage/latency·retry·유료 불가가 모두 증거화돼야 검증 transport를 판정할 수 있음. Production 묶음 요청과 Data/Interface 채택은 결과 뒤 별도 승인하며 실패 시 다른 후보로 자동 대체하지 않음 | WBS-06·15·16 |
 | SPK-03 | Discord sandbox | 수락·분할·Gateway/REST·reaction·interaction·resume을 구현할 수 있는가 | sandbox에서 분할·대표 mapping·reaction·command·resume·fault 실험 | exact mapping과 긍정적 수락 근거, 불명확 상태 구분 가능 | WBS-07·17~19 |
 | SPK-04 | K3s scheduling·storage | Cron·listener·PV·digest·Secret/RBAC가 목표를 충족하는가 | 비production namespace에서 cold start·clock·restart·PV·권한 검증 | 시간 오차·재시작 동작이 측정되고 fail-closed 가능 | WBS-03·05·08·27 |
 | SPK-05 | PostgreSQL backup/restore | SPK-04에서 확인한 storage 후보에 대해 별도 실패 영역 backup과 검증 restore가 가능한가 | SPK-04 결과 뒤 synthetic ledger backup·격리 restore·integrity·ledger/Discord 대조 및 outbound 차단 확인 | 측정 RPO/RTO·손실 범위·수동 재개 증거 확보 | WBS-08·21·28 |
 | SPK-06 | 추가 월 비용 0원 | 외부 호출 전과 전체 환경 선택 뒤 각각 비용 안전 조건을 충족하는가 | SPK-06A에서 billing·free-only·quota·유료 fallback 부재와 비용 가능 자원을 사전 확인하고, SPK-06B에서 실제 spike usage·유료 event·K3s·storage·registry·backup·monitoring coverage와 kill switch를 대조 | 06A 통과 전 비용 가능 호출 금지; 06B에서 모든 배포 전 범위가 0원·유료 사용 0건이면 WBS-28 비용 readiness 입력으로 사용 가능하며, activation은 WBS-28 `READY`와 WBS-29 별도 사용자 승인이 모두 필요; 운영월 최종 판정은 WBS-30 | WBS-03·11·20·26·28~30 |
+
+[FACT] SPK-02의 5개 묶음·전체 validation·최대 1회 retry 승인은 제한 experiment transport에만 적용합니다. 현재 DDI-02·05·09의 candidate별 AI attempt/work lineage를 변경하지 않으며, production 채택은 SPK-02 evidence 뒤 request-level invocation과 item-level candidate mapping 설계 및 별도 사용자 승인을 요구합니다.
+
+[FACT] 2026-09-14 현재 SPK-06A `fail`로 위 SPK-02 transport는 승인된 비실행 계획에 머물며 검증 코드·API key·provider 호출을 사용하지 않습니다. 개인 소비자 목적을 유지하는 동안 Gemini API 경로의 후속 evidence가 추가돼도 같은 이용 목적 계약 불일치를 해소하지 못하면 SPK-02로 진행하지 않습니다.
 
 ## Requirement Traceability Plan
 

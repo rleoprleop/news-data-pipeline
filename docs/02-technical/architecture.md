@@ -292,7 +292,7 @@ logical work key
 
 [FACT] quota 소진은 공식 오류 근거가 있을 때만 해당 상태로 기록하며, rate limit·인증·권한·네트워크·원인 불명 오류와 혼동하지 않습니다.
 
-[UNKNOWN] Gemini는 우선 검증 후보이지만, 최종 provider·model·SDK·prompt는 아직 확정하지 않습니다.
+[FACT] Gemini 무료 API는 우선 검증 후보였지만 2026-09-14 SPK-06A에서 공식 consumer-use 제외와 확정된 개인 소비자 목적의 불일치가 확인됐고 사용자가 목적 유지를 확인해 provider 호출 0회 `fail`, Gemini API 후보 `rejected`로 판정했습니다. Gemini 실제 검증·채택은 차단하며 다른 provider·로컬 AI·유료 경로로 자동 전환하지 않습니다. [UNKNOWN] 별도 사용자 승인과 change control 뒤 검토할 최종 provider·model·SDK·prompt입니다.
 
 ### Discord Delivery and Feedback
 
@@ -499,4 +499,4 @@ logical work key
 
 ## Recommended Next Action
 
-[INFERENCE] 다음 한 가지 작업은 승인된 Product Specification·Technical Requirements·Architecture·Logical Data Model·Logical Interface Specification을 입력으로 Workflow 9 Implementation Plan을 작성하고 상세 검토하는 것입니다. 이 단계에서는 구현 코드를 작성하지 않습니다.
+[FACT] 이 절이 기록했던 Workflow 9 Implementation Plan 인계는 완료됐습니다. 현재 Task·blocker·다음 작업은 [AI Context의 Active Context](../../ai-context.md#active-context)를 참조하며, Architecture 승인만으로 후속 작업을 자동 시작하지 않습니다.

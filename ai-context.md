@@ -4,19 +4,19 @@
 
 [FACT] 작업 시작 시 이 절만 우선 읽습니다. 다음 `## Reference Context`에서 기본 읽기를 멈추고, [작업별 탐색표](docs/task-navigation.md)의 해당 행으로 이동합니다. 필요한 계약·선행 조건은 추가 확인하되 과거 기록 전체를 기본 입력으로 삼지 않습니다.
 
-- **Project Status** — [FACT] Workflow 1~9 및 WBS-01 추적성 기준선 승인 후, 실제 검증 시작 전 지점에서 사용자 요청으로 작업을 종료합니다. Workflow 10 Coding Readiness 통과·11 기능 구현은 미진입입니다.
-- **Current Task** — [FACT] 사용자 저장 요청에 따라 검증 전 체크포인트의 진행 상황·남은 작업·커밋 메시지 추천을 정리했습니다. Git 조회·커밋·푸시는 실행하지 않으며 실제 저장 대상 선택과 커밋은 사용자가 담당합니다.
-- **Completed** — [FACT] Workflow 1~9 문서 승인, 작업별 문서 분리·탐색표, WBS-01 추적성 기준선(Requirement 99개·AC 24개)과 문서 검사기를 보존했습니다. Gemini 실험 코드 정리·중단 기록·사용자 직접 검증 원칙을 반영했습니다. 실험용 API 호출은 총 0회입니다.
-- **In Progress** — [FACT] 진행 중인 구현·실험은 없습니다. Gemini 검증은 중단됐으며 SPK-06A pass·SPK-02 실제 검증·AI 제공자 선정은 미완료입니다.
-- **Next Task** — [FACT] 사용자 재개 요청을 기다립니다. 실제 검증 단계부터는 사용자가 VS Code에서 직접 실행하며 확인합니다. SPK-01 RSS 검증은 다음 후보일 뿐 자동 착수하지 않습니다.
-- **Important Decisions** — [FACT] 사용 목적은 개인 소비자입니다. 사용자가 Gemini 테스트 중단·코드 삭제를 지시해 이전 호출 승인은 더 이상 사용하지 않습니다. 다른 제공자·로컬 AI·묶음 요청 전환은 미승인입니다. C:\secret\gemini.txt와 계정·프로젝트는 그대로 두며 키를 읽거나 출력하지 않습니다.
+- **Project Status** — [FACT] Workflow 1~9 및 WBS-01 추적성 기준선 승인 후 SPK-06A 공식 계약 확인을 수행했고, 개인 소비자 목적 유지와 Gemini API consumer-use 제외의 불일치로 `fail`, 후보 `rejected` 판정해 AI 실제 검증 전에 차단했습니다. Workflow 10 Coding Readiness 통과·11 기능 구현은 미진입입니다.
+- **Current Task** — [FACT] 2026-09-14 공식 Gemini API 약관·model·pricing·billing·rate limit·available-region 문서를 확인하고 새 SPK-06A에 dated evidence와 사용자 configured-state checklist를 반영했습니다. 사용자가 개인 소비자 목적 유지를 확인해 Gemini SPK-06A를 provider 호출 0회 `fail`, 후보를 `rejected`로 확정했습니다.
+- **Completed** — [FACT] Workflow 1~9 문서 승인, 작업별 문서 분리·탐색표, WBS-01 추적성 기준선(Requirement 99개·AC 24개)과 문서 검사기를 보존했습니다. Gemini 제한 실험 코드 정리·중단 기록·사용자 직접 검증 원칙을 반영했고 실험용 API 호출은 총 0회입니다. 2026-09-14 README 현재/역사 분리, Architecture 다음 작업 현행화, SPK-06A archive 표기, 구조 분리 사후 검토 완료 기록과 AGENTS 필수 Context 축소를 완료했습니다. 새 SPK-06A에는 archive 비재사용, 공식 계약·model·pricing·billing·quota·지역 확인, 사용자 configured-state checklist, 최대 5개 묶음·전체 validation·묶음당 retry 최대 1회의 비실행 SPK-02 계획과 production 채택 유보를 기록했습니다. 공식 consumer-use 제외와 개인 소비자 목적의 불일치로 `fail` 판정하고 관련 현재 문서를 동기화했습니다.
+- **In Progress** — [FACT] 진행 중인 구현·API 실험은 없습니다. Gemini SPK-02 실제 검증, production 묶음 요청 채택과 provider activation은 차단됐습니다. 최종 단일 무료 AI provider는 미정이며 대안 조사·검증은 아직 승인되지 않았습니다.
+- **Next Task** — [FACT] 사용자 선택을 기다립니다. 개인 소비자 목적에 적합한 다른 단일 무료 AI provider 후보의 계약·0원 비용·data-use 사전 조사 또는 로컬 AI 대안 검토는 별도 범위와 사용자 승인 뒤 하나씩 진행합니다. 유료 Gemini나 다른 유료 경로는 대안으로 사용하지 않습니다.
+- **Important Decisions** — [FACT] 사용자는 2026-09-14 개인 소비자 목적 유지를 확인했습니다. 공식 Gemini API consumer-use 제외와 충돌하므로 Gemini SPK-06A는 `fail`, 후보는 `rejected`, 실제 호출·채택은 차단입니다. 사용자는 fail 확인 전 SPK-02 첫 제한 transport로 request당 최대 5 candidate·묶음 전체 validation·동일 묶음 retry 최대 1회를 승인했고, 이는 향후 적합한 provider가 별도 승인될 때 재검토할 비실행 계획입니다. 전체 candidate 수의 나머지가 0이면 마지막 묶음도 5개이며 나머지가 1~4일 때만 해당 수로 구성합니다. Production Data/Interface 채택은 실제 SPK-02 결과 뒤 별도 승인합니다. 2026-09-11 제한 run과 새 preflight의 provider 호출은 모두 0회이며 이전 호출 승인은 새 실행에 사용하지 않습니다. 다른 provider·account·project·credential·model·유료 경로·로컬 AI로 자동 전환하지 않습니다. Repository 밖 사용자 지정 key file과 계정·프로젝트는 그대로 두며 키를 읽거나 출력하지 않습니다. 비활성화된 과거 단계별 Git 절차는 `docs/agent-git-policy-history.md`에 보관하며 현재 Git 작업 승인으로 사용하지 않습니다.
 - **Do Not Change** — [FACT] Git 상태·history·diff 확인과 commit·push는 하지 않습니다. 사용자가 전체 작업 완료 후 직접 한 번에 처리하며 중간 commit 메시지·결과 재확인도 생략합니다. 보고는 변경점 중심이며 중대한 위험·승인 필요 사항은 숨기지 않습니다. 승인 없이 scope·핵심 설계·유료 경로·데이터 삭제·배포로 확장하지 않습니다. 제품 Guardrail은 AGENTS 전체를 따릅니다.
 - [FACT] 현재 사용자 경계: 검증 전까지 문서·계획에서 멈춥니다. 검증 코드 작성·복원·테스트·외부 호출은 새 명시적 요청 없이 진행하지 않습니다. 이후 실제 검증 실행은 사용자가 VS Code에서 직접 담당합니다.
-- **Known Issues** — [UNKNOWN] 무료 AI의 실제 계약·품질·비용, Discord mapping·권한·rate limit·UX, 물리 schema·동시성·backup/RPO/RTO·평가 산식은 미검증 또는 미결정입니다. 관련 기능 작업 시 해당 정본의 Unknown/Deferred 절을 확인합니다. Repository 밖 deep link의 전체 사용 현황은 알 수 없습니다.
+- **Known Issues** — [FACT] Gemini API는 현재 공식 이용 목적 계약이 Repository 개인 소비자 목적과 불일치해 SPK-06A `fail`입니다. [UNKNOWN] 다른 무료 AI의 계약·품질·비용, Gemini가 아닌 대안 검토 범위, Discord mapping·권한·rate limit·UX, 물리 schema·동시성·backup/RPO/RTO·평가 산식은 미검증 또는 미결정입니다. 관련 기능 작업 시 해당 정본의 Unknown/Deferred 절을 확인합니다. Repository 밖 deep link의 전체 사용 현황은 알 수 없습니다.
 - **Technical Debt** — [FACT] 애플리케이션 코드는 아직 없습니다. 문서 검사기는 현재 미실행 baseline 전용이므로 실제 evidence 상태·manifest 연결 시 검증 규칙을 확장해야 합니다. 기존 Reference Context는 보존합니다.
-- **Current Risks** — [FACT] Gemini 중단으로 AI 품질·처리량·운영 가능성은 미검증입니다. [UNKNOWN] 향후 AI 대안의 개인 이용 조건·0원 비용·성능과 RSS 실제 접근 조건은 별도 확인이 필요합니다.
-- **Last Verified** — [FACT] 2026-09-11 Active Context·WBS-01 승인 상태·중단 기록·문서/스크립트 파일 목록을 확인했습니다. 이번 턴은 인계 문서만 변경했으며 검증 코드·테스트·외부 호출·Git·키 파일 접근은 수행하지 않았습니다. 실제 변경/staging 목록은 미확인입니다. 과거 실험 기록을 현재 검증 완료로 취급하지 않습니다.
-- **Last Updated** — [FACT] 2026-09-11 Asia/Seoul
+- **Current Risks** — [FACT] Gemini 공식 model·Standard Free pricing·South Korea availability는 확인했지만 이용 목적 계약 불일치가 우선 blocker입니다. 5개 묶음 transport의 실제 품질·구조 안정성·항목 누락/혼합·token/latency·운영 가능성은 호출하지 않아 미검증입니다. 현재 logical data model은 candidate별 AI attempt/work lineage이므로 하나의 물리 request와 여러 candidate의 production mapping은 승인되지 않았습니다. [UNKNOWN] 사용자 project의 billing/key/quota configured-state와 RSS 실제 접근 조건은 미확인이나 현재 Gemini 목적 fail을 해소하지 않습니다.
+- **Last Verified** — [FACT] 2026-09-14 공식 Gemini API Additional Terms(2026-03-23 적용), model, pricing, billing, rate limits와 available regions를 조회해 개인 소비자 목적 불일치, stable model ID `gemini-3.5-flash-lite`, Standard Free Tier input/output 무료, unpaid data-use, project 단위 quota·Pacific 자정 RPD reset, South Korea availability를 확인했습니다. 사용자의 개인 소비자 목적 유지 확인을 받아 새 SPK-06A `fail`·Gemini 후보 `rejected`·provider 호출 0회·SPK-02 차단을 관련 현재 문서에 동기화했습니다. Repository 검사기·runtime 테스트·검증 코드·API 호출·Git·키 파일 접근은 수행하지 않았습니다. 실제 변경/staging 목록은 미확인입니다.
+- **Last Updated** — [FACT] 2026-09-14 Asia/Seoul
 
 [FACT] 이후 Task에서는 이 절의 현재 값만 갱신합니다. 새 중요한 결정은 해당 정본에 기록하고 여기에는 짧은 요약·링크를 유지합니다. 이전 내용을 전부 복제하거나 날짜별 작업 로그를 이 절에 누적하지 않습니다.
 

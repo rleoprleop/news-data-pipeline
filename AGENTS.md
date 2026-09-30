@@ -124,7 +124,7 @@
 - [FACT] 월별 Insight, 장기 결과 재사용·normalization과 자동 Retention lifecycle은 MVP-A 검증 후 MVP-B에서 다룹니다.
 - [FACT] 외부 원문 기사 본문은 수집하지 않습니다.
 - [FACT] 무료 AI 제공자 하나만 연동하며 여러 제공자를 동시에 구현하지 않습니다.
-- [FACT] AI 제공자는 아직 확정되지 않았습니다. Gemini 무료 API 검증은 개인 소비자 용도 확인 후 사용자 지시로 중단했습니다. 다른 제공자·로컬 AI로 자동 전환하지 않습니다.
+- [FACT] AI 제공자는 아직 최종 확정되지 않았습니다. Gemini 무료 API를 우선 검증하던 방향은 유지했지만, 2026-09-14 공식 추가 약관의 consumer-use 제외와 확정된 개인 소비자 목적이 충돌했고 사용자가 개인 소비자 목적 유지를 확인해 새 SPK-06A를 provider 호출 0회 `fail`, Gemini API 후보를 `rejected`로 판정했습니다. Gemini 실제 검증과 provider 채택은 차단하며, 다른 제공자·로컬 AI로 자동 전환하지 않습니다. Provider 후보·검증 범위 변경은 별도 사용자 승인과 change control이 필요합니다.
 - [FACT] 유료 API 호출로 자동 전환하면 안 됩니다.
 - [FACT] 추가 월 운영비 상한은 0원입니다.
 - [FACT] 중요 기사 누락을 비중요 기사 포함보다 더 심각한 오류로 다룹니다.
@@ -167,41 +167,11 @@
 
 ## Git Rules
 
-[FACT] 현재 사용자 지시: Agent는 Git 상태·history·diff 등 모든 Git 확인과 commit·push를 실행하지 않습니다. 사용자가 전체 작업 완료 후 직접 한 번에 commit·push하며 중간 commit 메시지·안내와 결과 재확인을 생략합니다. 이는 아래 기존 단계별 Git 절차보다 우선하며 별도 설계·구현·배포 승인을 생략하지 않습니다.
-
-[FACT] 아래는 기존 단계별 Git 절차이며 현재 사용자 지시로 실행을 보류합니다.
-
-[FACT] Git commit은 사용자 승인 후에만 실행합니다.
-
-[FACT] Git push는 사용자 승인 후에만 실행합니다.
+[FACT] 현재 사용자 지시: Agent는 Git 상태·history·diff 등 모든 Git 확인과 commit·push를 실행하지 않습니다. 사용자가 전체 작업 완료 후 직접 한 번에 commit·push하며 중간 commit 메시지·안내와 결과 재확인을 생략합니다. 이는 보관된 기존 단계별 Git 절차보다 우선하며 별도 설계·구현·배포 승인을 생략하지 않습니다.
 
 [FACT] 파괴적인 Git 명령으로 사용자 변경을 되돌리지 않습니다.
 
-[FACT] Commit 검토 시 변경 범위, 테스트 결과, 문서 동기화와 남은 위험을 먼저 보고합니다.
-
-[FACT] `Development Workflow`의 각 단계가 사용자 승인과 관련 문서 동기화를 거쳐 완료되면, 다음 단계로 넘어가기 전에 Git commit 및 push 안내 절차를 실행합니다.
-
-[FACT] 단계 종료 Git 안내 절차는 다음 순서를 따릅니다.
-
-1. `git status --short --branch`로 변경 파일과 현재 branch를 확인합니다.
-2. 단계별 변경 범위, 테스트 결과, 문서 동기화와 남은 위험을 보고합니다.
-3. commit 대상과 commit message를 제안합니다.
-4. 사용자에게 commit 및 push 실행 여부를 확인합니다.
-5. 사용자가 직접 실행하는 경우 정확한 명령을 순서대로 안내하고 결과를 확인합니다.
-6. Agent가 실행하는 경우 사용자의 명시적 승인 후 commit하고 push합니다.
-7. local branch와 remote branch의 반영 상태를 확인합니다.
-
-[FACT] Commit 및 push가 완료되거나 사용자가 명시적으로 연기하기 전에는 다음 Workflow 단계로 넘어가지 않습니다.
-
-[FACT] 서로 다른 Workflow 단계의 변경사항을 하나의 commit에 함께 포함하지 않습니다.
-
-[FACT] 문서 중심의 Product 및 Design 단계는 승인된 변경을 단계별로 `main`에 commit하고 push합니다.
-
-[FACT] Feature Implementation 이후의 코드 변경은 기능 또는 수정 단위의 작업 branch에서 진행하고 Pull Request를 통해 `main`에 병합합니다.
-
-[FACT] 작업 branch는 대화나 세부 작업마다 만들지 않으며, 독립적으로 검토하거나 되돌릴 필요가 있는 기능 또는 수정 단위로 만듭니다.
-
-[FACT] Force push는 일반적인 단계 종료 절차에서 사용하지 않습니다.
+[FACT] 현재 지시로 비활성화된 기존 단계별 Git 절차는 [Git Workflow Policy History](docs/agent-git-policy-history.md)에 보관합니다. 이 링크는 해당 절차를 다시 활성화하거나 Git 작업을 승인하지 않습니다.
 
 ## End-of-Task Report
 
