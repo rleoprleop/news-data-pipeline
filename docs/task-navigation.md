@@ -12,7 +12,8 @@
 
 | 작업 | 먼저 읽을 계획·상태 | 직접 확인할 계약·추가 조건 |
 | --- | --- | --- |
-| 문서·상태·읽기 규칙 | [AGENTS](../AGENTS.md#required-start-of-task-check), [현재 상태](../ai-context.md#active-context) | 실제 수정하는 문서의 안내·참조 절만 확인; 제품 의미 변경이 없으면 무관한 기능 본문은 읽지 않음 |
+| 문서·상태·읽기 규칙·명세 최적화 | [AGENTS](../AGENTS.md#required-start-of-task-check), [현재 상태](../ai-context.md#active-context) | 실제 수정 문서의 안내·참조 절만 확인; 최적화 요청은 문서 범위에 유지하고 코드 착수 승인 요청으로 바꾸지 않음 |
+| 첫 구현 준비·Python 기반 | [WBS-10 통합 명세·실행 절차](03-planning/feature-implementation-plan.md#wbs-10--python-실행테스트-기반-상세-checkpoint); 실제 착수 때 [WBS-09 공통 진입표](03-planning/design-readiness-plan.md#wbs-09--coding-readiness-check-상세-checkpoint) 적용 | NFR-MNT-001~002·NFR-SEC-001~002, AD-01·03·06·14·23의 관련 경계; 범위 분류는 필요 시 [간소화 기준](03-planning/implementation-plan.md#incremental-implementation-scope) 참조. 후속 AI·Discord·DB·backup 상세 closure를 첫 작업 전에 정독하지 않음 |
 | 추적성·Readiness | [WBS-01 기준선](03-planning/traceability-baseline.md) · [WBS-02](03-planning/implementation-plan.md#work-breakdown-structure) · [WBS-09](03-planning/design-readiness-plan.md#wbs-09--coding-readiness-check-상세-checkpoint) | [추적성 계획](03-planning/validation-traceability-plan.md#requirement-traceability-plan), [AC 연결](02-technical/requirements.md#acceptance-criteria-traceability-matrix); 대상 ID·profile·WBS 역방향 index로 이동하고 전체 coverage 작업일 때만 전체 Requirement ID 대조 |
 | 실행 기반·설정·비용 gate | [WBS-03](03-planning/design-readiness-plan.md#wbs-03-internal-review-checkpoints) · [WBS-10](03-planning/feature-implementation-plan.md#wbs-10--python-실행테스트-기반-상세-checkpoint) · [WBS-11](03-planning/feature-implementation-plan.md#wbs-11--configurationsecretoutbound-gate-구현-상세-checkpoint) | [비용·보안 gate](02-technical/interface-spec.md#security-cost-and-operational-gate-contract); [운영 evidence](02-technical/data-model.md#operational-evidence-and-control-design) |
 | DB·데이터 소유권 | [WBS-04](03-planning/design-readiness-plan.md#wbs-04-internal-review-checkpoints) · [WBS-12](03-planning/feature-implementation-plan.md#wbs-12--postgresql-schemamigration-구현-상세-checkpoint) | [Entity·관계](02-technical/data-model.md#logical-entity-model) · [정본 소유권](02-technical/data-model.md#canonical-ownership-and-reference-only-rule); 변경 entity와 연결된 직접 관계까지 확인 |
@@ -33,6 +34,7 @@
 - [FACT] 파일 위치는 `rg --files`, 절 위치는 `rg -n '^## |^### |WBS-19|DDI-10' <대상 파일>`처럼 좁혀 찾습니다. 이어서 선택한 절의 시작부터 다음 동급/상위 heading 직전까지 읽고 필요한 상위 공통 규칙을 확인합니다. 검색 hit만 보고 수정하지 않습니다.
 - [FACT] WBS-19 복구 작업 예: Active Context → 이 표의 복구 행 → WBS-19의 관련 B checkpoint 및 공통 gate → DDI-10·수락 evidence·Interaction·외부 효과 계약 → 영향받는 WBS-17 gate → 관련 코드·테스트 순서입니다. AI·RSS·배포 문서 전체나 과거 승인 이력은 직접 의존성이 생기지 않으면 읽지 않습니다.
 - [FACT] 현재 Repository에는 애플리케이션 코드·실행 테스트가 없습니다. 코드가 생기면 실제 모듈·테스트 경로를 확인해 해당 행에 연결하고 존재하지 않는 경로를 만들거나 추정하지 않습니다.
+- [FACT] 2026-10-14 간소화 이후 WBS의 선행 조건은 [현재 적용 범위](03-planning/implementation-plan.md#incremental-implementation-scope)와 함께 읽습니다. 첫 WBS-10의 READY를 후속 기능의 READY로 재사용하지 않으며, Later 상세 결정은 관련 구현 전 완료합니다. 전체 99개 본문을 첫 작업의 기본 입력으로 다시 읽지 않습니다.
 - [FACT] 승인 경위가 필요한 경우에만 [계획 검토 이력](03-planning/implementation-review-history.md#sequential-review-state) 또는 AI Context의 Reference Context를 ID·날짜로 검색합니다. 현재 상태 판정에 과거 snapshot을 사용하지 않습니다.
 - [FACT] 전체 감사·공통 계약 변경·불명확한 영향 범위에서는 읽기 범위를 확대할 수 있습니다. 확대 이유와 읽은 범위를 구분하며, 탐색표에 없다는 이유로 필요한 검증을 생략하지 않습니다.
 - [FACT] 읽기 경로 보완은 제품 정책·설계 변경이나 새로운 WBS 실행 승인이 아닙니다. Git 확인·실행과 중간 commit 안내는 하지 않습니다.

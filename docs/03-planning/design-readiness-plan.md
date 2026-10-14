@@ -6,6 +6,8 @@
 
 [FACT] WBS 간 참조는 [전체 WBS 안내](implementation-plan.md#work-breakdown-structure), 계획 승인 경위는 [검토 이력](implementation-review-history.md#sequential-review-state)을 참조합니다. Product·Requirement·AD·DDI·MIN의 기존 정본은 변경하지 않습니다.
 
+[FACT] 2026-10-14 승인된 [구현 단위별 적용 범위](implementation-plan.md#incremental-implementation-scope)를 따릅니다. WBS-03~08 상세 checkpoint는 관련 기능 착수 때 사용할 참조입니다. 본문의 `Coding Readiness 전`·`WBS-09 blocker`·`final closure`는 해당 구현 범위에 적용하며, WBS-10 시작 전에 모든 후속 계약을 완료하라는 뜻으로 사용하지 않습니다. 관련 안전·무결성·외부 계약은 해당 구현 전 반드시 닫습니다.
+
 ## Quick Navigation
 
 - [WBS-03 Internal Review Checkpoints](#wbs-03-internal-review-checkpoints)
@@ -2299,74 +2301,37 @@ backup work·gate
 
 ### WBS-09 — Coding Readiness Check 상세 checkpoint
 
-[FACT] 관련 범위는 전체 99개 Requirement, 특히 P0-HG 34개와 VR-001·011, AD-01~23, DDI-01~10, MIN-01~08입니다. WBS-09는 Workflow 9에서 미래의 Coding Readiness 실행·판정 절차를 정의하는 계획 Task이며, 이 상세 checkpoint의 승인은 Workflow 10 통과나 production code 구현 승인이 아닙니다.
+[FACT] 착수할 WBS/하위 checkpoint의 scope와 직접 의존 계약만 확인합니다. 전체 99개 Requirement·P0-HG 34개·AC·AD/DDI/MIN의 정본과 추적 책임은 유지하며, 후속 기능의 미검증 항목을 첫 작업의 일괄 선행 조건으로 사용하지 않습니다. 첫 작업의 실제 명세·도구·검증·상태는 [WBS-10 한곳](feature-implementation-plan.md#wbs-10--python-실행테스트-기반-상세-checkpoint)에 기록합니다.
 
-| ID | Readiness 검토 범위 | 통과 evidence·조건 |
-| --- | --- | --- |
-| WBS-09.A | Source·Workflow closure | 승인 source 문서, 99개 Requirement/AC/Decision coverage, 승인된 정합성 수정, Workflow 9 문서/context 동기화와 단계 종료 Git commit/push |
-| WBS-09.B | External contract·cost | SPK-01~06 실제 dated evidence·독립 판정, 선택 provider·Discord contract·환경/비용 조건의 사용자 승인 |
-| WBS-09.C | Physical data·work contract | Schema disposition, key/type/constraint/index, transaction/isolation, work/attempt·lease/fence, migration·rollback 결정 승인 |
-| WBS-09.D | Domain·evaluation decision | RSS·AI·selection·Discord·feedback/recovery·backup·metric/evaluation의 blocking policy·contract 승인 |
-| WBS-09.E | Test·security·operations | P0-HG negative fixture, Secret/redaction, fault/E2E owner, cost/backup/kill-switch 검증과 evidence location 연결 |
-| WBS-09.F | Implementation slice·branch | WBS-10의 시작 commit, branch, 허용 변경, test·rollback·review와 완료/중단 조건 승인 |
-| WBS-09.G | Final readiness decision | Blocking check 전부 pass, 비차단 위험 사용자 수용, 최종 `READY`와 WBS-10 진입 승인 |
-
-[FACT] Workflow 9 계획 문구의 순차 승인은 WBS-01~08의 미래 실행 산출물·spike evidence·물리 결정이 완료됐다는 뜻이 아닙니다. 실제 Coding Readiness는 Workflow 9 문서가 승인·동기화·commit/push된 뒤, readiness 준비에서 WBS-01~08에 지정된 필수 산출물과 결정을 실제로 확보한 다음 WBS-09.A~G를 순서대로 판정합니다.
-
-| Final status | 의미 | 허용되는 다음 동작 |
-| --- | --- | --- |
-| `READY` | 모든 blocking check가 dated evidence로 pass이고 필요한 비차단 위험을 사용자가 명시적으로 수용 | 승인된 WBS-10 branch/slice만 시작 |
-| `NOT_READY` | 하나 이상의 blocking check가 fail·blocked·inconclusive·stale·not-run 또는 미승인 | 원인별 owner의 선행 검증·결정만 수행, production code 진입 금지 |
-
-[INFERENCE] `READY_WITH_ACCEPTED_RISK` 같은 별도 우회 상태를 만들지 않습니다. 비차단 위험 수용은 evidence·owner·검증 시점·rollback을 가진 상태에서 사용자가 `READY`를 승인하기 위한 입력이며, blocking check를 통과한 것으로 변환하지 않습니다.
-
-| Blocking category | 차단 대상 | 위험 수용만으로 우회할 수 없는 이유 |
-| --- | --- | --- |
-| P0-HG contract/evidence | 해당 보장에 의존하는 모든 구현 | 한 건의 위반도 품질 통과 후보 불가 |
-| Cost·free-only | 비용 가능 외부 호출·자원·배포 | 추가 월 비용·유료 경로 0건 계약 |
-| Secret·credential·permission | 외부 adapter와 배포 identity | 노출·과권한·잘못된 account는 사후 rollback으로 복구 불가 가능 |
-| DB integrity·data loss | Schema/migration/work/selection/delivery/evaluation | Identity·증거·중복 방지 손상 가능 |
-| External-effect uncertainty | AI·Discord·REST retry/recovery | 중복 호출·전달을 안전하게 추정할 수 없음 |
-| Unverified external contract | RSS·AI·Discord·K3s·backup 의존 구현 | Payload·수락·rate/quota·복구 semantics를 기본값으로 정할 수 없음 |
-| Physical concurrency contract | Transaction/isolation/lease/fence/finalization | Application-only check로 stale write·중복 외부 효과를 보장할 수 없음 |
-| Verification gap | Requirement·Gate expected result가 없는 구현 | 구현 완료 여부를 판정할 수 없음 |
-| Scope violation | MVP-B, Kafka·Spark, 외부 원문, 유료/다중 AI 자동 전환 | 승인되지 않은 범위·금지 기술 포함 |
-
-[INFERENCE] 비차단 위험 후보는 안전한 fail-closed 동작이 이미 승인되고 불확실성이 외부 호출·data integrity·Secret·비용·P0-HG 의미를 바꾸지 않으며, exact owner·검증 시점·영향 범위·rollback이 있을 때만 등록합니다. 단순히 구현이 어렵거나 일정이 늦어진다는 이유로 blocking 항목을 비차단으로 낮추지 않습니다.
-
-| Readiness evidence register field | 필수 내용 |
+| ID | 구현 진입 때 한 번 확인할 내용 |
 | --- | --- |
-| Check ID/category | WBS-09.A~G와 세부 blocking/non-blocking 분류 |
-| Requirement/Decision/WBS | 검증하는 상위 계약과 realization·verification owner |
-| Required evidence | 통과에 필요한 exact artifact·experiment·review 결과 |
-| Evidence location/fingerprint | Repository 경로, commit, dated external evidence 또는 비민감 환경/configuration fingerprint |
-| Status | pass·fail·blocked·inconclusive·stale·not-run |
-| Blocked scope | 완료하거나 시작할 수 없는 downstream WBS·operation |
-| Owner·due/trigger | 결정을 닫을 책임과 재검토 계기; 임의 완료일 약속은 강제하지 않음 |
-| Validity/revalidation | 계약·provider·account·configuration·image·runtime 변경과 VR-011 조건 |
-| Risk/rollback | 잔존 영향, fail-closed 동작과 되돌림·중단 방법 |
-| User approval | 판정·비차단 위험 수용·구현 진입 승인 reference |
+| WBS-09.A | 대상 scope·허용 파일·관련 Requirement/Decision·source/context 정합성; Git 조회·branch·commit/push는 현행 AGENTS에 따라 비적용 |
+| WBS-09.B | 해당 외부 operation의 유효한 contract/cost·credential/permission evidence와 필요한 SPK·사용자 승인 |
+| WBS-09.C | 해당 record·직접 참조·공통 invariant의 schema·key/type/constraint/index·transaction/isolation/lease/fence·migration/수정 복구 계약 |
+| WBS-09.D | 해당 기능의 명령·입출력·오류·정책·후속 handoff; 첫 작업은 WBS-10 명세만 적용 |
+| WBS-09.E | 완료 조건·예상 결과·negative/security/fault 검증 계획과 검증 owner·절차; 구현 후 실제 테스트는 해당 작업의 완료 조건 |
+| WBS-09.F | 도구·version·허용 파일·수정 복구/review·실행 범위와 범위 밖 중단 조건 |
+| WBS-09.G | 적용 blocker 전부 pass, 비적용 사유·원래 상태·후속 owner·진입 gate 기록, 해당 범위 실행 승인과 READY 판정 |
 
-[FACT] Evidence가 존재한다는 사실만으로 pass하지 않습니다. Artifact는 source version·환경·적용 configuration과 연결돼야 하고, 변경됐거나 유효성을 확인할 수 없으면 `stale` 또는 `inconclusive`로 판정합니다. 다른 provider·account·환경의 성공 evidence를 승인 대상에 재사용하지 않습니다.
+[FACT] 최초 기록은 대상 scope·관련 ID·check별 적용성/사유·status·필요 evidence와 위치/fingerprint·확인 일시/환경/configuration·blocked scope·결정/검증 owner·후속 entry gate·재검증 계기·잔존 위험/수정 복구·실행 승인을 포함합니다. 별도 register 문서를 만들지 않고 해당 작업의 명세/완료 기록과 이 공통 표를 참조합니다. 임의 완료일을 강제하지 않으며 같은 내용을 여러 표에 복사하지 않습니다.
 
-[FACT] 2026-09-10 문서·산출물 확인 기준으로 실제 WBS-09 진입 조건은 `NOT_READY`입니다. SPK-01~06 실행, 외부 계약·provider 선택, PostgreSQL physical design·lease/fencing, K3s/backup/RPO/RTO와 quality review·report·digest 계약의 실제 완료 evidence가 없습니다. 계획 승인·감사 문서 수정은 해당 선행 작업의 완료를 뜻하지 않습니다. Git 확인을 수행하지 않았으므로 현재 commit/push 미완료를 차단 원인으로 단정하지 않습니다.
+[FACT] Status는 `pass/fail/blocked/inconclusive/stale/not_run`을 구분합니다. 비적용은 pass가 아니며 원래 상태와 후속 owner를 유지합니다. Evidence가 있어도 source version·환경/configuration·유효성을 확인하지 못하거나 다른 provider/account/환경의 결과이면 적용 pass로 재사용하지 않습니다. 계약·runtime·configuration 변경은 VR-011에 따라 영향 범위를 재확인합니다.
 
-[FACT] `requirements.md`의 Workflow 8 승인 상태와 `architecture.md`의 NFR 참조 오류는 PLAN-CONSISTENCY-01의 PC-04·05에서 수정된 이력입니다. 현재 문서에는 2026-09-04 최종 승인과 실제 `NFR-OBS-001~002`, `NFR-SEC-001~002` 범위가 반영되어 있으므로 미수정 blocker로 중복 등록하지 않습니다. WBS-09.A의 실제 99개 coverage·source status 검증은 별도 실행해야 합니다.
+[FACT] 비용/free-only·Secret/credential/권한·DB 무결성/데이터 손실·외부 효과 불명확·실제 외부 계약·물리 동시성·필수 검증·scope/P0-HG blocker는 위험 수용으로 우회할 수 없습니다. 해당 구현 전에 충족하며, 금지 기술·숨은 MVP-B·owner 없는 UNKNOWN·missing/stale evidence를 기본값이나 accepted-risk로 덮지 않습니다.
 
-| WBS-10 branch readiness field | 요구 내용 |
+[INFERENCE] 비차단 위험은 안전한 fail-closed 동작과 영향/owner·검증 계기·수정 복구가 명확하고 외부 호출·data integrity·Secret·비용·P0-HG 의미를 바꾸지 않을 때만 사용자 수용 대상으로 둡니다. 일정 지연이나 구현 난도는 차단 조건을 낮출 근거가 아닙니다.
+
+| 판정 | 허용 범위 |
 | --- | --- |
-| Starting commit | Workflow 9/10 준비 변경이 반영된 검증된 `main` commit |
-| Branch scope | Python 실행·테스트 기반만 포함하는 독립 기능/수정 단위 |
-| Allowed files/output | Package skeleton, dependency lock, role entry-point skeleton, test harness와 필요한 최소 문서 |
-| Prohibited scope | 실제 RSS/AI/Discord 호출, schema migration, K3s deployment, 다른 feature 구현 |
-| Test entry | 외부 호출 없는 role import/startup·configuration failure와 기본 unit test 명령 |
-| Rollback/review | Branch 폐기 또는 PR revert가 다른 사용자 변경을 되돌리지 않는 범위와 review 기준 |
-| User approval | Branch name·scope·starting commit과 구현 시작의 명시적 승인 |
+| `READY` | 적용 blocker 전부 pass와 해당 구현·테스트 실행 승인 확보; 승인된 단위만 시작 |
+| `NOT_READY` | 적용 check가 fail/blocked/inconclusive/stale/not_run·미승인; 해당 결정/검증 준비만 진행 |
 
-[FACT] WBS-10 branch는 실제 Feature Implementation 변경이므로 AGENTS.md의 branch/PR 규칙을 따릅니다. WBS-09 승인 전에 branch를 생성하거나 package·dependency·test 파일을 만들지 않습니다.
+[FACT] `READY_WITH_ACCEPTED_RISK` 같은 우회 상태는 만들지 않습니다. 대상 구현·테스트 실행 승인과 READY 판정은 한 번의 진입 결정으로 기록합니다. 이미 승인된 동일 scope의 명세 적용·통상 도구 선택·구현/검증/문서 동기화마다 재승인을 요구하지 않습니다. Scope·핵심 설계·계정/권한/비용 경로·데이터 손실 가능 작업·외부 검증·배포의 별도 승인 경계는 AGENTS와 관련 계약대로 유지합니다.
 
-[INFERENCE] WBS-09 verification은 missing/stale evidence, 다른 환경 evidence, P0-HG accepted-risk 오분류, owner 없는 unknown, MVP-B 포함, 금지 기술 포함, branch scope 과다, Workflow 9 uncommitted 상태, 사용자 승인 누락 fixture마다 최종 `NOT_READY`를 기대하고, 모든 blocking pass와 명시적 비차단 위험 승인 fixture에서만 `READY`를 기대해야 합니다.
+[FACT] 첫 WBS-10은 외부 연결·DB/업무 데이터 변경이 없어 B·C가 비적용입니다. SPK-01~06·AI·selection·Discord·backup/evaluation의 원래 미검증 상태와 WBS-04~08·11~31의 관련 진입 조건을 유지합니다. 무관한 SPK 미실행으로 첫 작업을 차단하거나 첫 작업 READY로 후속 WBS·외부 호출·운영을 허용하지 않습니다. 추가 dependency·DB/네트워크·background 등 범위 확대나 새 직접 의존성이 발견되면 중단하고 적용성을 다시 판정합니다.
 
-[INFERENCE] WBS-09 완료 기준은 모든 check가 evidence register에 있고 blocking status가 모두 pass이며, owner 없는 `[UNKNOWN]`·잘못된 Requirement/Decision ID·숨은 MVP-B·금지 기술·미검증 외부 계약·무승인 branch가 0건이고, 사용자가 비차단 위험과 WBS-10 진입을 명시적으로 승인하는 것입니다.
+[FACT] 현재 사용자는 명세·개발 절차 최적화를 계속하도록 지시했습니다. 이 작업에서 구현 승인을 요청하거나 코드 단계로 자동 전환하지 않습니다. 첫 WBS-10 상태는 `NOT_READY`(구현·테스트 실행 미승인)이며 도구 선택과 준비 상태는 첫 작업 명세를 참조합니다. 향후 사용자가 해당 구현 범위의 시작을 요청하면 그 승인에 근거해 한 번 판정하고 진행합니다.
 
-[UNKNOWN] 실제 readiness register 파일·format, 증거 유효기간, 비차단 위험 threshold, WBS-10 branch 이름·starting commit, 최종 test command와 reviewer는 WBS-09 실제 실행 때 확정합니다. 이 계획 승인은 readiness pass·branch 생성·코드·외부 검증·Git commit/push를 승인한 것이 아닙니다.
+#### WBS-10 Toolchain and Execution Procedure
+
+[FACT] 기존 링크 호환성을 위한 이동 안내입니다. 첫 작업의 도구·허용 파일·가상환경 실행 절차는 [WBS-10 실행 절차](feature-implementation-plan.md#wbs-10-toolchain-and-execution-procedure)로 통합했으며 이 절에는 사본을 유지하지 않습니다.

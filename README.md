@@ -6,7 +6,9 @@
 
 [FACT] Workflow 1~9와 WBS-01 추적성 기준선은 승인됐습니다. Workflow 10 Coding Readiness와 Workflow 11 기능 구현에는 진입하지 않았으며 애플리케이션 코드·DB schema·배포 구성·runtime 테스트는 없습니다.
 
-[FACT] Gemini 무료 API를 우선 검증·사용 방향으로 유지하지만 AI 제공자의 최종 채택·activation은 미완료입니다. 2026-09-11 제한 실험은 사용자 지시로 중단됐고 실제 외부 호출은 0회이며, 새 실제 검증은 별도 승인 전 실행하지 않습니다.
+[FACT] 2026-09-14 검토 기록상 개인 소비자 목적과의 계약 불일치로 Gemini SPK-06A는 `fail`, 후보는 `rejected`입니다. 최종 무료 AI는 미정이며 실제 provider 호출은 0회입니다. 다른 provider·로컬 AI의 조사·검증·채택은 별도 승인 대상입니다.
+
+[FACT] 2026-10-14 승인한 [간소화 기준](docs/03-planning/implementation-plan.md#incremental-implementation-scope)에 따라 확정 요구사항·기술 선택을 보존하고 상세 결정을 해당 기능 착수 시점으로 나눕니다. 현재 요청은 명세·개발 절차 최적화의 계속입니다. 첫 작업의 범위·완료 조건·도구·가상환경 실행 절차는 [WBS-10 통합 명세](docs/03-planning/feature-implementation-plan.md#wbs-10--python-실행테스트-기반-상세-checkpoint) 한곳에서 관리하며 환경 생성·코드 작성은 미실행입니다.
 
 [FACT] 현재 Task·승인 경계·다음 작업의 정본은 [Active Context](ai-context.md#active-context)입니다. 단계별 승인·commit 기록은 아래 `Repository State`의 역사 snapshot과 각 문서의 Status를 참조합니다.
 

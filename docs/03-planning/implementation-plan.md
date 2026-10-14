@@ -12,6 +12,8 @@
 
 [FACT] WBS 항목별 정의는 순차 검토와 사용자 승인을 거쳐 확정하며, Workflow 10 Coding Readiness Check 통과 전 production code 구현을 시작하지 않습니다.
 
+[FACT] 2026-10-14 사용자는 요구사항과 확정된 기술 선택을 유지하고, 상세 결정·Readiness를 구현 단위별로 적용하며, 첫 작업을 외부 연결 없는 Python 실행·테스트 기반으로 하는 간소화를 승인했습니다. 아래 `Incremental Implementation Scope`가 현재 실행 순서와 선행 조건의 적용 범위입니다. 이번 승인은 문서 간소화이며 실제 Coding Readiness 통과·코드 작성·외부 검증·배포 승인이 아닙니다.
+
 ## Planning Context
 
 - [FACT] Workflow 1~8은 사용자 승인과 단계 종료 commit·push를 완료했습니다.
@@ -53,7 +55,7 @@
 
 ## Implementation Strategy
 
-[INFERENCE] 권장 순서는 `추적성 기준선 → 외부 계약 spike → 물리 설계 → Coding Readiness Check → 내부 상태 기반 → RSS → AI·선정 → Discord 전달 → feedback·recovery → 평가·backup → 통합 검증 → 배포 artifact → Workflow 13~15 Code Review·문서/Context 동기화·Git closure → Deployment Readiness → 단계별 배포·activation → 2~4주 Monitoring·Evaluation → Retrospective·MVP-A disposition → MVP-A 기반 MVP-B incremental-entry 결정`입니다.
+[FACT] 현재 순서는 `WBS-01 기준선 유지 → 첫 작업의 Readiness → Python 실행·테스트 기반 → 내부 설정·DB/work → RSS → AI·선정 → Discord 전달 → feedback·recovery → 평가·backup → 통합 검증 → 배포 준비·별도 승인 → 운영 검증·회고`입니다. 각 구현 단위 앞에서 필요한 상세 설계와 관련 외부 검증만 완료합니다. Workflow 10~14는 각 구현 단위에 적용하며, 운영 검증과 MVP-B 진입 조건은 유지합니다. Git 단계는 AGENTS의 사용자 직접 관리 지시를 따릅니다.
 
 1. [INFERENCE] 외부 계약을 먼저 검증해 retry, payload, 상태와 schema에 근거 없는 값을 고정하지 않습니다.
 2. [INFERENCE] PostgreSQL schema와 work ledger를 외부 adapter보다 먼저 확정해 `prepared → invocation_started → evidence` 경계를 일관되게 적용합니다.
@@ -64,9 +66,44 @@
 7. [INFERENCE] 관측성·비용·보안 검증은 각 Task 완료 기준에 포함하고 통합 단계에서 다시 검증합니다.
 8. [FACT] 배포 준비, 실제 배포와 2~4주 운영 검증은 별도 단계와 승인 지점입니다.
 
+## Incremental Implementation Scope
+
+[FACT] Must/Later/Deferred는 기존 P0-HG·P0·P1-V를 대체하지 않는 결정 시점 분류입니다. 99개 Requirement·AC 24개·AD-01~23·DDI-01~10·MIN-01~08의 의미·ID·추적 책임을 유지합니다. Later도 MVP-A 필수 기능이며, 해당 기능의 구현을 시작하기 전 blocking 결정을 닫습니다.
+
+| 분류 | 유지하거나 결정할 범위 | 적용 시점 |
+| --- | --- | --- |
+| Must | GeekNews 단일 RSS·한국어·RSS 근거 제한·본문 미수집·후보 자격·최신성·선정/발송/실패 정책 | 지금부터 모든 작업의 불변식 |
+| Must | 비용 0원·단일 무료 AI·Secret 보호·중복 방지·수락 증거·미처리 비무음·원본/결과/version 보존 | 해당 입력·상태·외부 효과를 처음 구현할 때부터 강제; 검증 면제 불가 |
+| Must | 하나의 Python codebase/image·PostgreSQL·K3s 역할 분리·durable ledger·별도 queue 미도입 | 확정 선택 유지; 첫 작업에서는 package·명령·테스트 기반만 구체화 |
+| Must | 최소 근거·feedback·사용량/지연/품질 측정과 기존 MVP-A 평가 기준 | 기능 범위 유지; 재현에 필요한 source event·시각·version은 해당 기능 구현부터 보존 |
+| Later | 물리 schema·migration·constraint·transaction·lease/fencing parameter | 관련 저장·work 구현 전 WBS-04·05의 해당 범위 승인 |
+| Later | AI provider/SDK·prompt·output·retry·selection policy | WBS-15~16 전 WBS-06과 관련 SPK·사용자 승인; Gemini rejected 및 대안 조사 미승인 유지 |
+| Later | Discord payload·message mapping·권한·interaction·feedback/recovery 세부 계약 | WBS-17~19 중 해당 기능 전 WBS-07·관련 SPK 승인; 전달 시점부터 후속 feedback 연결에 필요한 mapping 보존 |
+| Later | 운영 manifest·backup 도구/RPO/RTO·평가 산식 구현·report/digest 형식 | WBS-20~22·27의 해당 구현 전 확정; source lineage는 앞선 기능에서 확보; 배포/activation gate 유지 |
+| Deferred | 월별 Insight·장기 재사용·taxonomy/normalization·자동 Retention lifecycle | MVP-A 검증 후 별도 MVP-B 승인 |
+| Deferred — 기존 MVP 제외 | 다중 수집원/사용자·다중 AI·추가 UI·실시간 알림·Kafka/Spark·본문 수집 | 현재 구현에 포함하지 않음; 간소화로 재도입 승인되지 않음 |
+
+[FACT] 계획 문서의 `WBS-09 READY`, `Coding Readiness 전`, `final closure`는 이제 **착수하려는 WBS/하위 checkpoint의 실제 변경 범위와 직접 의존성**에 적용합니다. WBS-03~08·11~31의 후속 상세 checkpoint는 해당 기능 때 사용할 참조이며, 첫 WBS-10의 일괄 선행 조건이 아닙니다. 상세 수치·tool·field를 지금 추가 확정하지 않고 계약 본문은 정본을 참조합니다. 기존 checkpoint ID와 안전·무결성·외부 계약의 완료 조건은 보존합니다.
+
+[FACT] 구현 범위는 아래 묶음 전체가 아니라 하나의 검토 가능한 하위 단위로 선택합니다. 관련 schema closure는 그 단위가 생성·갱신·참조하는 record와 공통 불변식까지 포함하고, 후속 entity는 owner와 진입 조건을 남겨 Later로 유지합니다. 논리 entity별 별도 table을 만들 필요는 없습니다. 순서를 나눠도 원본·identity·constraint·append-only 이력·외부 효과 경계는 약화하지 않습니다.
+
+| 구현 순서 | 기존 WBS | 착수 전 필요한 결정·검증 | 지금 유지할 계획 수준 |
+| --- | --- | --- | --- |
+| 1. Python 실행·테스트 기반 | WBS-09 → WBS-10 | runtime/toolchain·명령/오류·허용 파일·network-free test·실행 승인 | [첫 작업 명세](feature-implementation-plan.md#wbs-10--python-실행테스트-기반-상세-checkpoint)만 구체화 |
+| 2. 내부 상태와 RSS 후보화 | WBS-03~05·11~14 | 관련 physical schema·work/transaction·gate; RSS에는 SPK-01과 입력 계약 | 설정 → 필요한 schema/work → RSS의 작은 단위로 진행 |
+| 3. AI 분석·선정 | WBS-06·15~16 | 적합한 단일 provider 승인·SPK-02/06·입출력/선정 계약·관련 schema closure | provider 문제 해소 전 호출·구현 차단 |
+| 4. Discord 전달·feedback·복구 | WBS-07·17~19 | 관련 SPK-03/04/06·실제 계약·mapping·수락·권한·동시성 | 전달 → feedback → 복구 순으로 구체화 |
+| 5. 운영·평가·통합·배포 | WBS-08·20~31 | 관련 SPK·backup/restore·evaluation 계약과 통합 evidence·별도 배포 승인 | 높은 수준의 계획 유지; 운영 전 필수 gate 전부 충족 |
+
+[FACT] 첫 작업의 비적용 검증은 `pass`로 바꾸지 않습니다. 미검증 항목은 원래 상태와 후속 owner를 유지하고 첫 작업에 비적용인 이유만 기록합니다. 범위 확대·직접 의존성 발견 시 Readiness를 다시 판정하며, 첫 작업의 `READY`가 후속 WBS나 운영을 허용하지 않습니다. 현재 Git 조회·branch 생성·commit/push는 수행하지 않고 Git closure를 Agent 작업의 선행 조건으로 요구하지 않습니다.
+
+[FACT] 대상 구현·테스트 실행 승인과 READY는 한 번의 진입 결정으로 묶습니다. 이미 승인된 동일 범위의 통상 도구 선택·구현·검증·문서 동기화마다 승인을 반복 요청하지 않습니다. 핵심 설계·범위·비용/권한·데이터 손실·외부 검증·배포의 승인 경계는 유지합니다. 문서 최적화 요청은 구현 승인으로 바꾸지 않습니다.
+
+[FACT] 현재 최적화의 완료 기준은 첫 작업의 범위·조건·실행 절차가 한 정본에 있고, 공통 진입표·추적성·탐색 경로가 일치하며, 기존 요구사항/안전 조건·참조 링크가 보존되는 것입니다. 후속 기능의 세부 설계·새 문서·새 승인 단계를 추가하는 것을 최적화 산출물로 삼지 않습니다.
+
 ## Work Breakdown Structure
 
-[INFERENCE] 아래는 구현 후보 Task이며, 물리 설계와 spike 결과가 승인되기 전에는 실제 구현 방식이 확정된 것으로 간주하지 않습니다.
+[FACT] 아래 WBS는 전체 요구사항의 책임·완료 기준 index입니다. 실제 착수 단위와 선행 조건은 위 `Incremental Implementation Scope`와 [WBS-09](design-readiness-plan.md#wbs-09--coding-readiness-check-상세-checkpoint)를 함께 적용합니다. 각 상세 checkpoint는 관련 기능 착수 때 구체화하며 전체를 다시 순차 승인하지 않습니다.
 
 | ID | 작업 단위 | 목적 | 선행 조건 | 주요 산출물 | 관련 Requirement / Decision | 완료 기준 | 위험 |
 | -- | ----- | -- | ----- | ------ | ------------------------- | ----- | -- |
@@ -78,8 +115,8 @@
 | [WBS-06](design-readiness-plan.md#wbs-06-internal-review-checkpoints) | AI 처리·선정 상세 계약 | 승인된 단일 무료 AI의 evidence-bounded 입력·version·output validation·attempt/retry와 후보·batch completion·selection/failure notice 계약 확정 | SPK-02·06, WBS-03, WBS-04.A~B baseline, WBS-05와 사용자 provider 승인 | provider/contract/cost gate, input·model·prompt·policy·output version register, 정상·저정보 validator, error/retry terminal map, candidate/batch completion matrix, selection/finalization·delivery handoff | FR-006~014, NFR-COST-001, NFR-DQ-001~002, NFR-PERF-001, NFR-REL-001~002, NFR-SEC-001, EXT-AI-001~007, VR-004·008·011·013·016~019, AD-04·08·15·17·18·20, DDI-02·05·06·09, MIN-04·06·08 | 단일 free-only 계약과 모든 후보의 정상·저정보·명시적 미처리 lineage, retry 가능/terminal·전체 선정 불가능, 최대 10개 immutable result와 current/delayed handoff를 fixture로 판정하며 유료 전환·근거 밖 사실·partial release·미처리 은폐·late result 소급 적용 경로가 없음 | provider 품질·quota·계약 변경, 저정보/실패 오분류, 재시도 폭증, partial list 유출, 중요 기사 누락 또는 평가 rubric과 운영 policy 순환 |
 | [WBS-07](design-readiness-plan.md#wbs-07-internal-review-checkpoints) | Discord 전달·feedback·recovery 상세 계약 | operation별 실제 Discord contract, logical rendering·physical mapping, server acceptance, Gateway/REST feedback, interaction와 receipt/recovery의 분리된 실행 계약 확정 | baseline: SPK-03·06, WBS-03, WBS-04.A~B, WBS-05; final closure: WBS-06.F의 immutable result·handoff와 사용자 승인 Discord contract | capability/identity/permission register, segment·rendering·message mapping, delivery attempt·acceptance matrix, Gateway event·feedback projection, bounded REST reconciliation, missing/receipt interaction, confirmation·recovery contract | FR-012~023, NFR-REL-001~003, NFR-LAT-001~002, NFR-COST-001, NFR-DQ-002, NFR-OBS-001~002, NFR-SEC-001~002, NFR-MNT-002, NFR-REC-001, NFR-TIME-001, DR-008~012, EXT-DC-001~006, EXT-FB-001~006, VR-003~005·008·009·010·011·012~013, AD-03·05·07~08·10~13·15~16·19~23, DDI-03~06·08·10, MIN-01·05·07~08 | message별 Discord 수락·recipient receipt·feedback·review·recovery의 canonical owner와 금지 전이가 분리되고, current/delayed/recovery/notice/confirmation segment·10/10/20 상한·부분 수락·상충·lost handoff를 실제 contract evidence와 fixture로 판정 가능 | sandbox 계약·권한·payload·rate limit 불일치, 수락 성공 오판, feedback/receipt 의미 혼합, 수락 불명확 자동 재전송, current/delayed/recovery 혼합 또는 장기 backlog |
 | [WBS-08](design-readiness-plan.md#wbs-08-detailed-review-checkpoints) | 운영·backup·evaluation 상세 설계 | 운영·비용 evidence, backup run·restore validation·수동 outbound recovery, metric source lineage와 사용자 요청 기반 immutable evaluation의 구현·검증 계약 확정 | baseline: SPK-04~06, WBS-03, WBS-04.A~B, WBS-05; metric/evaluation closure: WBS-06.F·07 consistency와 사용자 승인 | operational evidence·관측/alert 의미표, cost coverage·pause/resume 계약, backup/restore runbook·RPO/RTO 결정안, metric catalog, evaluation work·manifest·snapshot·typed result/report contract | FR-024, NFR-REL-002~003, NFR-PERF-001, NFR-LAT-001~002, NFR-COST-001, NFR-DQ-001~002, NFR-OBS-001~002, NFR-SEC-001~002, NFR-REC-001, NFR-TIME-001, DR-013~014, VR-001·006~011·014, AD-03·05~06·09~12·15~16·22~23, DDI-04~06·08·10, MIN-02~03·05 | 비용 범위·backup restoreability·source completeness가 evidence에 연결되고, 성공 evaluation만 immutable snapshot과 typed result를 만들며, 6개 Hard Gate의 `pass/fail/not_measurable`, 표본의 충족/판정 불충분, 품질·서비스 목표의 충족/미달/측정 불가를 독립적으로 재현하고 자동 evaluation·restore·outbound resume가 없음 | 공통 실패 영역 backup, 검증 없는 restore·자동 재개, 숨은 비용, mutable projection·누락 evidence 기반 false pass, 표본 부족의 품질 통과 또는 evaluation의 운영 source mutation |
-| [WBS-09](design-readiness-plan.md#wbs-09--coding-readiness-check-상세-checkpoint) | Coding Readiness Check | 코드 구현 진입 가능 여부 판정 | Workflow 9 계획 승인·문서/context 동기화·Git closure, WBS-01~08의 필요한 실제 산출물·spike evidence·결정 승인 | readiness evidence register, blocker·non-blocking accepted risk, WBS-10 branch/test/rollback 계획, 최종 판정 | 전체 99개, VR-001·011, 전체 P0-HG, AD-01~23, DDI-01~10, MIN-01~08 | 모든 blocking check가 dated evidence로 `pass`이고 owner 없는 미확정 계약·숨은 MVP-B 범위가 없으며 비차단 위험과 WBS-10 구현 진입을 사용자가 승인 | 계획 항목 승인만으로 실제 readiness 통과, 미해결 사항을 기본값·accepted risk로 숨김 |
-| [WBS-10](feature-implementation-plan.md#wbs-10--python-실행테스트-기반-상세-checkpoint) | Python 실행·테스트 기반 | 하나의 codebase/image와 두 runtime role·다섯 명시적 command를 수용할 최소 기반 구축 | WBS-09 실제 `READY`와 사용자 승인 WBS-10 branch/test/rollback 범위 | installable package skeleton, explicit command dispatch, 승인 runtime/dependency lock, 비민감 configuration bootstrap, network-free test harness | NFR-MNT-001~002, NFR-SEC-001~002, AD-01·03·06·14·23 | Clean checkout에서 승인 도구로 설치·test·각 command dispatch가 재현되고 미구현 command는 외부 호출·DB mutation·정상 0건 없이 fail-closed하며 실제 network 접근·ambient credential 사용 0건 | framework/plugin 과설계, 미구현 command의 false success, 실제 외부 호출·credential 오사용 또는 WBS-27 배포 범위 혼입 |
+| [WBS-09](design-readiness-plan.md#wbs-09--coding-readiness-check-상세-checkpoint) | Coding Readiness Check | 구현 단위별 코드 진입 가능 여부 판정 | 문서/context 동기화, 대상 WBS·변경 범위와 직접 의존 계약·검증; 첫 WBS-10에는 외부 SPK·DB·운영 closure 비적용 | 기존 문서 안의 scope별 readiness 기록, blocker·Later owner, test·수정 복구 범위와 최종 판정 | 전체 99개, VR-001·011, 전체 P0-HG, AD-01~23, DDI-01~10, MIN-01~08 중 해당 구현 범위 | 적용 check 전부 pass, 비적용 사유와 후속 owner 명시, 해당 범위의 READY·구현 진입 사용자 승인; 후속 WBS·운영 허가로 전용 금지 | 무관 검증의 일괄 선행 또는 관련 blocker의 비적용 위장 |
+| [WBS-10](feature-implementation-plan.md#wbs-10--python-실행테스트-기반-상세-checkpoint) | Python 실행·테스트 기반 | 하나의 codebase와 두 runtime role·다섯 명시적 command의 최소 기반 구축 | WBS-10 범위의 WBS-09 실제 `READY`와 사용자 승인 test·허용 파일·수정 복구 범위; Git 절차는 AGENTS 현행 지시 적용 | installable package, explicit command dispatch, 재현 가능한 runtime/dependency 기록, 비민감 startup validation, network-free test | NFR-MNT-001~002, NFR-SEC-001~002, AD-01·03·06·14·23 | 깨끗한 작업 복사본에서 설치·test·command dispatch 재현, 미구현 command의 명시 오류·non-zero, network·DB mutation·ambient credential·정상 업무 결과 각각 0건 | framework/plugin 과설계, false success, credential 오사용 또는 배포 범위 혼입 |
 | [WBS-11](feature-implementation-plan.md#wbs-11--configurationsecretoutbound-gate-구현-상세-checkpoint) | Configuration·Secret·outbound gate 구현 | 비용·계약·DB 신뢰·pause 상태의 operation/scope별 fail-closed 보장 | WBS-03~05·10; A~B는 WBS-12 전 가능, DB-backed C~H integration closure는 WBS-12 필요 | typed config loader, Secret handle boundary, configuration/evidence repository, operation gate, pause/kill-switch/manual-resume handoff | FR-015~016, NFR-REL-003, NFR-COST-001, NFR-OBS-001, NFR-SEC-001~002, NFR-REC-001, DR-014, EXT-AI-003~004, EXT-FB-006, VR-009·011·013·018, AD-02~04·10·13~16·22, DDI-05~06, MIN-03·05·07 | Unknown/ambient configuration 자동 선택·billing API·Secret 저장 0건, 각 외부 invocation 직전 typed gate reason/evidence 재검증, pause 뒤 신규 invocation·자동 resume 0건과 DB integration·redaction/fault test 통과 | 임시 정본·application-only gate, TOCTOU 우회, Secret 파생값 노출, in-flight 취소 추정 또는 정상화 기반 자동 resume |
 | [WBS-12](feature-implementation-plan.md#wbs-12--postgresql-schemamigration-구현-상세-checkpoint) | PostgreSQL schema·migration 구현 | 승인된 physical disposition을 임의 재해석 없이 재현 가능한 migration으로 구현 | WBS-04 final closure, WBS-05 transaction·lease 계약, WBS-09 실제 `READY`, WBS-10과 사용자 승인 WBS-12 branch/test/rollback 범위 | disposition-locked baseline migration, migration metadata·drift guard, constraints·query-index map, role boundary, upgrade·forward-fix·verification evidence | DR-001~014, NFR-DQ-002, NFR-REL-001~002, NFR-OBS-001, NFR-SEC-001, NFR-REC-001, VR-012~019, AD-02·03·09·10·13·22, DDI-01~10, MIN-01~08 | 빈 DB·반복 적용·실제 N-1 upgrade·중단/재시도·drift·권한·invariant·data-preservation test가 적용 가능한 단계별로 통과하고 application auto-migrate·무승인 destructive rollback·MVP-B schema가 없음 | Physical baseline 누락, applied migration drift, 장시간 lock·부분 backfill, application-only 무결성, 과권한 또는 데이터 손실 rollback |
 | [WBS-13](feature-implementation-plan.md#wbs-13--예정-batchdurable-work-ledger-구현-상세-checkpoint) | 예정 batch·durable work ledger 구현 | deterministic slot과 typed logical work, atomic claim·attempt, DB-time lease·fencing 및 외부 효과와 분리된 safe internal resume 제공 | WBS-05 final contract, WBS-09 실제 `READY`, WBS-11.C~H, WBS-12와 사용자 승인 WBS-13 branch/test/rollback 범위 | scheduled batch ledger, typed work admission, work item/attempt repository, claim·renew·reclaim·guarded transition, Prepare configuration binding·projection | FR-004~005·024, NFR-REL-001~003, NFR-REC-001, NFR-OBS-001, NFR-TIME-001, NFR-LAT-001, VR-004~005·013~014·017~018, AD-02·03·08·10·19, DDI-05·09, MIN-05~06 | Deterministic slot·과거 slot ledger-only, duplicate coalescing, claim+attempt atomicity, DB-time lease·token ABA/stale-write·commit-unknown 차단, immutable configuration binding과 work/domain 분리 test 통과 | Trigger-key 혼합, 중복 work·attempt, local-clock lease, stale worker write, 외부 불명확 효과 자동 재실행 또는 과거 slot 소급 pipeline |
@@ -247,10 +284,10 @@
 
 | Milestone | 완료 조건 | 사용자 승인 필요 사항 | 다음 단계 진입 조건 |
 | --------- | ----- | ------------ | ----------- |
-| M0 — Implementation Plan Approved | WBS-01~31·SPK-01~06·traceability·gate와 PLAN-CONSISTENCY-01 승인, 문서·Context 정합성 검증 | Workflow 9 계획 전체와 정합성 반영 | Workflow 9 단계 종료 Git review·commit·push |
-| M1 — External Validation Gate | SPK-01~06의 독립 판정·evidence·후속 영향과 SPK-06B 비용 coverage 기록 | provider·Discord 실제 계약·비용 조건과 fail/blocked/inconclusive 처리 | blocker 없는 상세 설계만 완료·승인 진행 |
-| M2 — Physical Design Baseline | WBS-03~08 상세안과 99개 mapping 완료 | schema·lease·retry·UX·RPO/RTO | 승인된 물리 계약 확보 |
-| M3 — Coding Readiness | Workflow 9 문서/context·commit/push closure, WBS-01~08 실제 evidence·결정 승인, 모든 blocking check `pass`, owner 없는 미확정·숨은 MVP-B 범위 없음 | 비차단 위험 수용, WBS-10 branch/test/rollback 범위와 Workflow 10 최종 `READY` 승인 | Workflow 11의 WBS-10 구현 시작 |
+| M0 — Implementation Plan Approved | 승인 기준선과 2026-10-14 간소화 반영, 문서·Context 정합성 | 구현 단위별 Readiness와 첫 작업 범위 | 첫 WBS-10의 Readiness 준비; Git은 사용자 직접 관리 |
+| M1 — External Validation Gate | 해당 외부 기능에 필요한 SPK의 독립 판정·evidence와 비용 coverage | 실제 계약·비용 조건과 fail/blocked/inconclusive 처리 | 검증된 외부 범위만 설계·구현 가능; WBS-10 비적용 |
+| M2 — Physical Design Baseline | 해당 저장·work·도메인 구현의 physical closure와 관련 mapping | 관련 schema·lease·retry·UX·RPO/RTO | 해당 범위의 승인 계약 확보; WBS-10 비적용 |
+| M3 — Coding Readiness | 대상 구현 단위의 WBS-09.A~G 적용 check 전부 pass, Later owner·재판정 조건 기록 | 비차단 위험과 해당 단위의 구현 진입 | 승인된 단위만 Workflow 11 진입; M1·M2를 먼저 요구하는 범위는 관련 외부/DB 기능 |
 | M4 — Foundation | WBS-10~14와 관련 test 통과 | schema/work/RSS PR | 내부 상태·입력 기반 안정화 |
 | M5 — Daily Value Path | WBS-15~17과 정상·0건·failure notice 통과 | AI·선정·Discord PR | 일일 경로 확보 |
 | M6 — Feedback and Recovery | WBS-18~22와 recovery·evaluation·backup 통과 | interaction·복구·운영 증거 PR | 통합 검증 가능 |
@@ -291,4 +328,4 @@
 
 ## Recommended Next Action
 
-[INFERENCE] 현재 Task·blocker·다음 작업의 정본은 [AI Context](../../ai-context.md)입니다. 구조 분리 결과와 검증 범위는 [구조 개선 검토](document-structure-review.md)를 참조합니다. WBS 실행·외부 spike·Coding Readiness·구현·배포는 자동으로 시작하지 않습니다.
+[FACT] 현재 작업은 명세·개발 절차 최적화입니다. [WBS-10 통합 명세](feature-implementation-plan.md#wbs-10--python-실행테스트-기반-상세-checkpoint)와 공통 Readiness·추적성·탐색 경로의 중복/불일치를 정리하고 위 완료 기준을 확인합니다. 현재 상태와 이후 작업은 [Active Context](../../ai-context.md#active-context)를 따르며, 구현 요청이 있을 때만 기존 도구 선택과 명세로 WBS-10 진입을 판정합니다. 선택한 도구를 다시 조사하거나 간소화 완료 뒤 코드 승인을 자동 요청하지 않습니다.

@@ -151,7 +151,7 @@
 | P-28 | WBS-03, WBS-08 | WBS-11, WBS-20, WBS-21, WBS-27, WBS-29 | SPK-01, SPK-02, SPK-03, SPK-04, SPK-05, SPK-06A, SPK-06B |
 | P-30 | WBS-08 | WBS-20, WBS-22, WBS-28, WBS-29 | - |
 
-[FACT] 모든 행의 승인 흐름은 WBS-01 기준선 검토 → WBS-02 관련 외부 계약 → WBS-03~08 관련 설계 → WBS-09 실제 READY → 해당 구현/검증 승인입니다. 배포 전 WBS-28, 별도 activation WBS-29, 실제 운영 판정 WBS-30, 결과 승인·MVP-B 진입 결정 WBS-31을 구분합니다. WBS-10은 공통 구현·테스트 기반, WBS-27은 배포 artifact 책임이며 임의 생략하지 않습니다.
+[FACT] 각 행은 [구현 단위별 적용 범위](implementation-plan.md#incremental-implementation-scope)에 따라 관련 계약·설계만 확인한 뒤, [WBS-09](design-readiness-plan.md#wbs-09--coding-readiness-check-상세-checkpoint)에서 대상 구현/검증 실행 승인과 READY를 한 번의 진입 결정으로 기록합니다. Profile 목록은 일괄 선행 조건이 아니며 비적용 항목은 원래 상태·후속 owner를 유지합니다. 배포 전 WBS-28, 별도 activation WBS-29, 실제 운영 판정 WBS-30, 결과 승인·MVP-B 진입 결정 WBS-31은 구분합니다. WBS-10은 공통 구현·테스트 기반, WBS-27은 배포 artifact 책임이며 임의 생략하지 않습니다.
 
 ## WBS Reverse Index
 
@@ -339,7 +339,7 @@
 | ID | State | Owner | Resolution / evidence |
 | --- | --- | --- | --- |
 | B-01 | resolved | WBS-01 | 2026-09-11 사용자 체크리스트 1번 승인. 각 행의 B-01은 해소 이력 reference이며 현재 blocker는 B-02·B-03 |
-| B-02 | not_run | WBS-02, WBS-03, WBS-04, WBS-05, WBS-06, WBS-07, WBS-08, WBS-09 | 관련 spike·물리/인터페이스 계약·실제 READY 미확보. 각 행 profile과 원본 WBS 선행 조건 기준으로 해소 |
+| B-02 | not_run | WBS-02, WBS-03, WBS-04, WBS-05, WBS-06, WBS-07, WBS-08, WBS-09 | 관련 spike·물리/인터페이스 계약·대상 READY 미확보. 각 행 profile과 원본 WBS 및 [2026-10-14 구현 단위별 적용 범위](implementation-plan.md#incremental-implementation-scope)로 해소. WBS-10 비적용은 이 행의 pass나 후속 blocker 해소가 아니며 원래 상태 유지 |
 | B-03 | not_run | 각 행 Verification owner | 구현·실행 evidence 미확보. 실제 suite·SPK·smoke·운영 evidence를 분리 수집 |
 | C-01 | no_contract_change | WBS-01 | Requirement/AC/AD/DDI/MIN 정본은 수정하지 않음. 현재 baseline의 ID/priority/역방향 연결 검사는 아래 자동 검사로 재현 |
 | C-02 | reviewed | WBS-01 | 사용자 기준선 승인 반영. 이후 변경 시 의미 영향 검토는 재수행하며 집합 검사는 의미적 완전성을 보장하지 않음 |

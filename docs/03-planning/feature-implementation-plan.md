@@ -6,6 +6,8 @@
 
 [FACT] WBS 간 참조는 [전체 WBS 안내](implementation-plan.md#work-breakdown-structure), 계획 승인 경위는 [검토 이력](implementation-review-history.md#sequential-review-state)을 참조합니다. Product·Requirement·AD·DDI·MIN의 기존 정본은 변경하지 않습니다.
 
+[FACT] 현재 실행 범위는 2026-10-14 승인된 [간소화 계획](implementation-plan.md#incremental-implementation-scope)을 따릅니다. WBS-10만 첫 작업 명세로 구체화하고, WBS-11~22 상세 checkpoint는 해당 기능 착수 때 사용할 참조로 둡니다. 아래 `WBS-09 READY`·physical `final closure`·선행 WBS는 대상 하위 구현과 직접 의존성에 적용하며, 전체 미래 설계의 일괄 완료를 WBS-10 선행 조건으로 사용하지 않습니다. 외부 계약·보안·DB 무결성의 관련 blocker는 해당 구현 전 그대로 충족해야 합니다.
+
 ## Quick Navigation
 
 - [WBS-10 — Python 실행·테스트 기반 상세 checkpoint](#wbs-10--python-실행테스트-기반-상세-checkpoint)
@@ -26,66 +28,64 @@
 
 ### WBS-10 — Python 실행·테스트 기반 상세 checkpoint
 
-[FACT] 관련 Requirement는 NFR-MNT-001~002, NFR-SEC-001~002이고 관련 Decision은 AD-01·03·06·14·23입니다. 선행 조건은 WBS-09의 실제 `READY`와 사용자가 승인한 starting commit·branch·test·rollback 범위이며, 직접 후속 owner는 WBS-11~13이고 image·K3s 배포 산출물은 WBS-27이 소유합니다.
+[FACT] 첫 작업의 범위·완료 조건·도구·실행 절차는 이 절 한곳에서 관리합니다. 관련 Requirement는 NFR-MNT-001~002·NFR-SEC-001~002, Decision은 AD-01·03·06·14·23입니다. 현재 사용자 요청은 명세·절차 최적화의 계속이며, 실제 구현·환경 생성·설치·테스트는 미실행입니다. WBS-10의 최종 READY·코드/테스트 실행 승인은 미확보입니다.
 
-| ID | 구현 계획 범위 | 완료 evidence·후속 owner |
-| --- | --- | --- |
-| WBS-10.A | Repository·package bootstrap | 하나의 installable Python project, 최소 source/test directory와 clean-checkout setup evidence |
-| WBS-10.B | Runtime·dependency lock | 승인 Python/build/dependency/test tool version, runtime/dev dependency 구분과 재현 가능한 lock |
-| WBS-10.C | Role·command dispatch | 두 runtime role과 Prepare·Delivery-gate·Recovery/Reconciliation·Listener·Evaluation 다섯 command의 explicit dispatch |
-| WBS-10.D | Configuration bootstrap | Secret 없는 비민감 startup input, 명시적 source·precedence handoff와 누락·불일치 fail-closed skeleton |
-| WBS-10.E | Test harness | Fake adapter, controllable clock·identity·environment와 실제 network 없는 unit/contract test entry |
-| WBS-10.F | Quality·security baseline | 승인 format/lint/type/test·secret scan 후보와 network/ambient-credential negative check |
-| WBS-10.G | Branch·rollback·handoff | File-only rollback, changed-file allowlist와 WBS-11~13 후속 책임 연결 |
+[FACT] 범위는 단일 installable Python package·작은 command dispatch·비민감 startup validation·network-free tests입니다. 후속 업무·실제 RSS/AI/Discord/REST adapter·DB schema/migration/persistence·business state transition·container/K3s 구성은 포함하지 않습니다. 외부 SPK·DB/lease·AI/Discord·backup/evaluation 상세 closure는 첫 작업에 비적용이고, 해당 후속 WBS의 원래 blocker·검증 owner는 유지합니다.
 
-[FACT] 상위 application role은 scheduled batch role과 long-running Discord listener role 두 개입니다. 하나의 role이 여러 command entry point를 가질 수 있으며, command 수를 별도 deployment service·microservice 수로 해석하지 않습니다.
-
-| Command boundary | 상위 role·형태 | WBS-10 skeleton 책임 | 실제 업무 owner |
-| --- | --- | --- | --- |
-| Prepare | Scheduled batch | Explicit dispatch, lifecycle·dependency port, 미구현 fail-closed | WBS-13~16 |
-| Delivery-gate | Scheduled batch | Explicit dispatch, target-time input port, 미구현 fail-closed | WBS-13·17 |
-| Recovery/Reconciliation | Scheduled batch | Explicit dispatch, work-claim port, 미구현 fail-closed | WBS-13·19 |
-| Gateway listener | Long-running listener | Startup/shutdown·signal hook와 event adapter port, 미구현 fail-closed | WBS-18~19 |
-| Evaluation | Independent command/function | User request·read-only dependency port, 외부 credential 없는 미구현 fail-closed | WBS-22 |
-
-[INFERENCE] Package 책임은 command dispatch, application orchestration, domain type/policy, persistence/external adapter port, runtime configuration·clock·identity와 test fixture/fake를 구분해야 합니다. 실제 directory·module 이름은 WBS-09 실제 실행에서 승인하되 별도 provider plugin framework, dependency-injection framework 또는 다섯 service scaffold를 기본값으로 도입하지 않습니다.
-
-[FACT] WBS-10은 RSS·AI·Discord·REST adapter, PostgreSQL schema/migration·실제 persistence, business state transition, container image 또는 K3s manifest를 구현하지 않습니다. Interface/port skeleton이 존재해도 실제 외부 호출·DB mutation 또는 정상 업무 결과를 만들지 않습니다.
-
-| Skeleton invocation | 요구 결과 | 금지 결과 |
-| --- | --- | --- |
-| `--help` 또는 동등한 usage 조회 | 비민감 command 목적·argument contract 표시 | Credential·환경 원문·미승인 default 표시 |
-| 필수 configuration 누락 | Typed startup/configuration error와 non-zero 종료 | 정상 0건·batch 성공·listener 정상 종료 |
-| 아직 연결되지 않은 업무 handler | 명시적 `not_implemented` 또는 readiness error와 non-zero 종료 | No-op exit 0, source/evidence row 생성 |
-| 예상하지 못한 role/command | 실행 전 validation 거부 | 다른 role 또는 default command 자동 선택 |
-| Shutdown/signal fixture | 새 업무 시작 중단과 bounded lifecycle hook 관측 | 외부 호출이 없는데 성공 work 생성 |
-
-[INFERENCE] Python version, build backend, package/dependency manager와 test·format·lint·type 도구는 WBS-09의 evidence-backed 선택 없이 문서나 code default로 고정하지 않습니다. Runtime dependency와 development-only dependency를 구분하고, 실제 필요가 증명되지 않은 web framework·ORM·task queue·plugin system·cloud SDK를 foundation dependency에 추가하지 않습니다.
-
-[FACT] Dependency lock은 같은 승인 runtime/platform 범위의 clean checkout에서 설치와 test를 재현할 수 있어야 하고 직접·전이 dependency와 source/version을 식별해야 합니다. 취약점·license·update 도구와 lock hash 정책은 WBS-09 실제 선택 전 [UNKNOWN]이며, 유료 registry·service 사용을 dependency 편의로 자동 추가하지 않습니다.
-
-[FACT] Configuration bootstrap은 실제 API key·token·webhook·interaction secret·DB password를 포함하거나 Repository의 `.env`를 신뢰 source로 자동 탐색하지 않습니다. Ambient provider credential·SDK default·cloud metadata를 자동 선택하지 않고 예상하지 못한 환경 변수는 승인 configuration으로 취급하지 않습니다. 실제 Secret 주입·활성화·rotation·outbound gate는 WBS-11이 구현합니다.
-
-[INFERENCE] Test harness는 clock, ID/UUID·randomness, environment/configuration와 외부 adapter를 명시적으로 제어할 수 있어야 합니다. 기본 unit/contract test는 실제 DNS·HTTP·socket 또는 provider SDK 호출을 금지하고 fake가 없는 outbound 시도를 실패시키며, external sandbox test는 후속 WBS의 별도 marker·환경·사용자 승인 없이는 실행하지 않습니다.
-
-| Foundation verification | 기대 결과 |
+| ID | 최소 산출물·완료 조건 |
 | --- | --- |
-| Clean checkout setup | 승인된 단일 setup 절차와 lock으로 install/test 재현 |
-| Package import | Import만으로 network·DB·credential lookup·background task 시작 0건 |
-| Command dispatch | 다섯 command가 정확한 boundary로만 dispatch되고 unknown/default fallback 0건 |
-| Fail-closed startup | 누락·불일치·미구현 상태가 non-zero이며 정상 0건/성공 결과 0건 |
-| Network canary | 기본 test suite의 실제 outbound connection attempt 0건 |
-| Credential canary | Ambient·fixture secret이 log·error·snapshot에 노출되거나 자동 사용된 경우 0건 |
-| Determinism | 고정 clock·ID 입력에서 같은 command/test 결과 재현 |
-| Scope check | Migration·Docker/K3s·실제 adapter·business implementation 포함 0건 |
+| WBS-10.A | 최소 source/test와 설치 가능한 package; 깨끗한 작업 복사본에서 같은 절차로 빌드·설치·import 재현 |
+| WBS-10.B | 아래 runtime/tool 기준과 metadata/lock·직접/전이 dependency의 source/version 기록; build backend는 exact pin |
+| WBS-10.C | 아래 다섯 command만 명시 dispatch; package와 각 command 도움말 exit 0; default command 자동 선택 없음 |
+| WBS-10.D | command 누락·unknown/잘못된 argument는 `invalid_startup_input`/exit 2, 정상 명령의 미구현 handler는 `not_implemented`/exit 3; 업무 시작 전 종료 |
+| WBS-10.E | import·CLI·tests의 DNS/HTTP/socket·DB·provider SDK·ambient credential 사용·background side effect 0건; synthetic canary 비노출 |
+| WBS-10.F | 통제한 환경·동일 인자의 exit/오류 범주 재현; 실제 tests 1건 이상과 모든 적용 negative case 통과, 실행 결과 기록 |
+| WBS-10.G | 아래 허용 파일·생성물만 변경하고 review; 수정 복구는 이번 변경에 한정, 사용자 기존 변경·설계 보존; Git 작업 없음 |
 
-[FACT] WBS-10 branch는 실제 Feature Implementation 변경이므로 WBS-09에서 승인된 starting `main` commit과 `codex/` prefix의 기능 단위 branch를 사용하고 PR review 대상으로 둡니다. 실제 branch 이름은 사용자 승인 전 [UNKNOWN]이며, 대화마다 새 branch를 만들지 않습니다.
+[FACT] scheduled batch와 long-running listener의 두 runtime role을 유지하며 Evaluation은 같은 codebase의 독립 command/function입니다. 다섯 command를 다섯 service로 분리하지 않습니다.
 
-[INFERENCE] WBS-10 rollback은 DB migration·외부 호출·배포 상태가 없는 file/branch 범위여야 합니다. Branch 폐기 또는 PR revert가 다른 사용자 변경이나 Workflow 9 문서를 되돌리지 않으며, dependency/bootstrap 변경은 하나의 검토 가능한 slice로 유지합니다.
+| CLI | 상위 role·형태 | 실제 업무를 구현할 후속 owner |
+| --- | --- | --- |
+| `prepare` | Scheduled batch | WBS-13~16 |
+| `delivery-gate` | Scheduled batch | WBS-13·17 |
+| `recovery` | Scheduled batch | WBS-13·19 |
+| `listener` | Long-running listener | WBS-18~19 |
+| `evaluate` | Independent command/function | WBS-22 |
 
-[INFERENCE] WBS-10 완료 기준은 clean-checkout setup과 승인된 quality/test command가 통과하고 import·다섯 command에서 실제 외부 호출·DB mutation·ambient credential 선택·background side effect·false success가 각각 0건이며, changed-file allowlist와 dependency inventory·test evidence가 review에 연결되는 것입니다.
+[FACT] 미구현 명령은 연결·loop·source 조회·평가를 시작하지 않고 exit 3으로 종료합니다. 성공·정상 신규 0건·업무/evidence row를 만들지 않으며, 오류/도움말에 credential·환경/미검증 argument 원문을 출력하지 않습니다. `.env`·SDK default·cloud metadata·대체 credential 자동 탐색과 실제 key file 접근도 하지 않습니다. 실제 config/Secret loader·주입/rotation·outbound gate·누락/불일치 계약은 WBS-11에서 구현합니다.
 
-[UNKNOWN] 실제 Python version, project metadata 파일, source layout, command 이름·argument·exit code, build/dependency/test/quality 도구, signal/graceful-shutdown timeout, platform matrix와 branch 이름은 WBS-09의 실제 `READY` 결정 전 확정되지 않습니다. 이 계획 승인은 파일·dependency·branch·code·test·image·manifest 생성을 승인한 것이 아닙니다.
+#### WBS-10 Toolchain and Execution Procedure
+
+| 항목 | 이미 선택한 첫 작업 기준 |
+| --- | --- |
+| Runtime | CPython 3.14.7 x64; `.python-version`은 `3.14.7`, `requires-python`은 `>=3.14,<3.15` |
+| Build·환경 | 기존 uv 0.12.13·`uv_build==0.12.13`·project 전용 `C:\project\.venv`; Python/uv 전역 설치·upgrade 없음 |
+| CLI·tests | 표준 argparse·unittest·unittest.mock; runtime/dev 추가 dependency 0개 |
+| Package·고정 | distribution `news-pipeline` 0.1.0, import `news_pipeline`; metadata + `uv.lock`, backend exact pin; 직접 만든 wheel을 `.venv`에 설치 |
+| 허용 파일 | `pyproject.toml`, `.python-version`, `uv.lock`, `.gitignore`, `src/news_pipeline/{__init__,__main__,cli}.py`, `tests/test_cli.py`, 필요 시 `tests/__init__.py`, README·Active Context |
+| 생성물 | `.venv/`, `.cache/uv/`, `.cache/wbs10-wheel/`, Python bytecode는 version 관리 대상에서 제외; cache는 package 설치 대상과 구분 |
+
+[FACT] 2026-10-14 로컬 조회에서 CPython 3.14.7·표준 unittest/venv의 존재와 uv `0.12.13 (0ebbd9274 2026-09-10 x86_64-pc-windows-msvc)`를 확인했습니다. uv SHA256은 `E43CC6CA110540AD845AD6AA1E468E224813EB1DA76E145413A262D7073D05E7`입니다. 두 interpreter의 version 조회에 `Failed to find real location` 경고가 있어 실제 환경 구성 때 interpreter/prefix·stdlib 접근을 확인합니다. 조회는 테스트 통과가 아니며, 준비 당시 `.venv`는 없었습니다. [uv bundled backend](https://docs.astral.sh/uv/concepts/build-backend/#bundled-build-backend)·[lock 검사](https://docs.astral.sh/uv/concepts/projects/sync/#checking-the-lockfile)·[unittest discovery](https://docs.python.org/3.14/library/unittest.html#test-discovery)는 같은 날 확인한 선택 근거입니다.
+
+[FACT] 아래는 구현·테스트 실행 승인 후 `C:\project`에서 사용할 절차입니다. 각 단계의 exit 0을 확인한 뒤 진행합니다. 기존 `.venv`가 있으면 임의 재생성·삭제하지 않고 version·위치를 확인하며, `.venv`의 `sys.prefix != sys.base_prefix`·system site-packages 미포함을 검증합니다. VS Code interpreter도 `.venv\Scripts\python.exe`로 지정합니다.
+
+```powershell
+$taskUv = 'C:\Users\User\.local\bin\uv.exe'
+$taskPython = 'C:\Users\User\AppData\Roaming\uv\python\cpython-3.14.7-windows-x86_64-none\python.exe'
+& $taskUv venv --python $taskPython --no-python-downloads --offline --no-config --cache-dir .cache/uv .venv
+& $taskUv lock --python .venv\Scripts\python.exe --no-python-downloads --offline --no-config --cache-dir .cache/uv
+& $taskUv lock --check --python .venv\Scripts\python.exe --no-python-downloads --offline --no-config --cache-dir .cache/uv
+& $taskUv build --wheel --python .venv\Scripts\python.exe --no-python-downloads --offline --no-config --cache-dir .cache/uv --out-dir .cache/wbs10-wheel --no-create-gitignore
+& $taskUv pip install --python .venv\Scripts\python.exe --no-python-downloads --offline --no-index --no-deps --no-config --cache-dir .cache/uv .cache/wbs10-wheel/news_pipeline-0.1.0-py3-none-any.whl
+& .\.venv\Scripts\python.exe -I -B -m unittest discover -s tests -v
+& .\.venv\Scripts\python.exe -I -B -m news_pipeline --help
+```
+
+[FACT] 사용자의 가상환경 지시에 따라 모든 package 설치는 `.venv`, 추가 build dependency는 격리된 build 환경에 한정합니다. 사용자/전역 site-packages 설치·자동 Python download·유료 registry/service는 사용하지 않습니다. Offline build가 내장 backend로 해결되지 않거나 경로/환경 검증이 실패하면 중단하고 원인을 기록합니다. 테스트는 `.venv` Python을 직접 사용해 자동 lock/sync·package 취득 없이 설치된 package의 import 위치와 파일 생성 범위까지 검증합니다.
+
+[INFERENCE] Network/DB/credential canary는 실제 명령이 실행되는 process에 적용하고, subprocess를 쓰면 자식에도 가드를 적용합니다. 부모 mock만으로 자식의 차단을 통과 처리하지 않습니다. 테스트 0건·미실행을 pass로 기록하지 않습니다. 업무 port·clock/ID 주입·listener lifecycle/signal·platform 확장·lint/type/취약점 도구는 필요한 후속 기능 때 구체화하며 빈 계층·범용 plugin/DI·web framework·ORM·queue·cloud SDK를 선행 추가하지 않습니다.
+
+[FACT] 적용성·scope·단일 실행 승인은 [공통 WBS-09](design-readiness-plan.md#wbs-09--coding-readiness-check-상세-checkpoint)로 확인합니다. 첫 작업의 미검증은 빌드/설치·위 tests이며, 해당 구현 때 실제 evidence를 남깁니다. 범위 밖 dependency·네트워크·DB·background 처리가 필요해지면 중단하고 관련 Readiness를 다시 확인합니다. 이 Windows 준비는 후속 SDK·PostgreSQL driver·Linux/K3s 배포 호환성·비용 검증을 대신하지 않습니다.
 
 ### WBS-11 — Configuration·Secret·outbound gate 구현 상세 checkpoint
 

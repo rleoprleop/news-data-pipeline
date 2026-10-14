@@ -18,6 +18,8 @@
 
 [FACT] SPK-01~06은 각각 독립적으로 실행·검토·판정하는 validation task이고, WBS-02는 그 결과를 취합하는 승인 gate입니다.
 
+[FACT] 2026-10-14 승인된 [간소화 적용 범위](implementation-plan.md#incremental-implementation-scope)에 따라 SPK 결과는 해당 외부 기능의 구현·실행 전 확인합니다. 외부 연결 없는 첫 WBS-10에는 비적용이며, 미실행·fail 상태를 pass로 바꾸지 않습니다. SPK-06A의 비용 가능 호출 전 확인, SPK-06B의 운영 전 coverage, Gemini rejected와 새 후보·검증 범위의 별도 승인 경계는 유지합니다.
+
 [INFERENCE] 각 spike evidence는 최소한 spike ID·목적, 실행 일시·환경, 비밀값을 제외한 account/project/configuration fingerprint, 확인한 공식 계약 version 또는 fingerprint, 입력 fixture·절차, redacted response/error/usage/latency, 비용 안전 근거, 판정, 알려진 한계·재검증 조건, 관련 Requirement·Decision·WBS와 후속 owner를 포함합니다.
 
 | 판정 | 의미 | 후속 처리 |
