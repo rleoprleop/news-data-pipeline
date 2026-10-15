@@ -6,6 +6,12 @@
 
 [FACT] WBS 간 참조는 [전체 WBS 안내](implementation-plan.md#work-breakdown-structure), 계획 승인 경위는 [검토 이력](implementation-review-history.md#sequential-review-state)을 참조합니다. Product·Requirement·AD·DDI·MIN의 기존 정본은 변경하지 않습니다.
 
+[FACT] 2026-10-15 전환의 공통 실행 기준은 [AGENTS의 위험 기반 테스트·리뷰·완료 규칙](../../AGENTS.md#testing)입니다. WBS-23~26은 구현 때 수집한 동일 계약·환경·source의 유효 evidence를 재사용하고 누락·변경 영향·통합 경계를 검증합니다. 기존 반복/순서/동시성·negative/fault 완료 조건은 유지하되 새 변경·실패·미해결 우려 없이 이미 유효한 검증을 중복 실행하지 않습니다. Fixture/unit pass를 실제 외부·운영 pass로 확대하지 않습니다.
+
+[FACT] 본문의 실행 전 승인·설정 확정은 대상 WBS 범위의 한 번의 진입 결정에 포함합니다. 통상 command·fixture 경로·반복 횟수·parallelism·통계 설정은 승인된 계약·자원/시간 budget 안에서 정하고 실행 근거에 기록하며 재승인을 요구하지 않습니다. 필수 기준은 낮추지 않으며 scope·핵심 설계·비용/권한·데이터 손실 위험·실제 외부 검증·배포의 변경은 기존 별도 승인을 유지합니다. 이번 문서 전환은 검증 환경·코드 생성이나 실행 승인이 아닙니다.
+
+[FACT] 결함은 원 구현 WBS·재현 근거·변경·재검증 결과에 연결합니다. 이미 승인된 구현/검증 범위 안의 결함은 같은 작업에서 수정·재검증하고, 범위 밖 변경은 owner에 반환해 별도 change control을 적용합니다. 아래 production fix 은닉 금지는 수정 자체의 금지가 아니라 미승인·미기록 변경의 금지입니다. BLOCKER/REQUIRED/DEFERRED 및 검토 종료는 AGENTS를 따릅니다.
+
 ## Quick Navigation
 
 - [WBS-23 계약·단위 테스트 closure 상세](#wbs-23-계약단위-테스트-closure-상세)
@@ -49,7 +55,7 @@
 | Scenario composition | 인접 module handoff의 local contract | 전체 Scenario/AC는 WBS-25 |
 | Capacity/time/cost | 작은 경계 fixture와 단위 계산 | 0/1/99/100/101·schedule·cost는 WBS-26 |
 
-[FACT] WBS-23에서 production defect가 발견되면 관련 구현 WBS의 defect로 반환하고 사용자 승인 branch/test/rollback 범위에서 별도 수정·재검증합니다. Test closure 변경에 production code, schema, dependency 또는 외부 configuration 수정을 숨기지 않습니다.
+[FACT] WBS-23에서 production defect가 발견되면 관련 구현 WBS에 연결하고 공통 결함 처리 기준에 따라 승인 범위 안에서 수정·재검증합니다. 범위 밖 변경만 owner에 반환하며 Agent branch/Git 작업을 요구하지 않습니다. Test closure 변경에 production code, schema, dependency 또는 외부 configuration 수정을 숨기지 않습니다.
 
 #### WBS-23.B Requirement traceability
 
@@ -136,7 +142,7 @@
 
 [FACT] Test runner의 retry 중 한 번 성공한 결과를 deterministic pass로 기록하지 않습니다. Fixed seed의 반복 실행, test order randomization, 독립 실행과 승인 parallel mode에서 결과가 일치해야 하며 실패/불일치는 보존합니다.
 
-[INFERENCE] Timezone/locale/environment order, shared DB row/cache, background task, port/file path와 global singleton 누수를 격리합니다. 실제 반복 횟수·parallelism·flaky 판정 기준은 WBS-09/23 실행 전 승인하며 기본값으로 숨기지 않습니다.
+[INFERENCE] Timezone/locale/environment order, shared DB row/cache, background task, port/file path와 global singleton 누수를 격리합니다. 실제 반복 횟수·parallelism·flaky 판정 기준은 공통 실행 기준에 따라 WBS-09/23 범위에서 정해 기록하며 기본값으로 숨기지 않습니다.
 
 #### WBS-23.J Evidence·handoff
 
@@ -144,13 +150,13 @@
 
 [INFERENCE] Coverage report는 line/branch 수치뿐 아니라 Requirement/Decision, state/transition, error/reason, boundary, forbidden mutation, external contract fixture와 P0-HG negative case의 semantic coverage를 제공합니다. 높은 line coverage가 missing behavior를 대신하지 않습니다.
 
-[FACT] 실패 case는 actual result, expected contract, 영향 Requirement/WBS, 재현 조건과 defect owner를 기록합니다. Production implementation 변경이 필요하면 WBS-23 안에서 즉시 수정하지 않고 승인된 구현 Task 범위로 반환합니다.
+[FACT] 실패 case는 actual result, expected contract, 영향 Requirement/WBS, 재현 조건과 defect owner를 기록합니다. Production implementation 변경은 공통 결함 처리 기준에 따라 승인 범위 내 수정·영향 검증을 진행하며 범위 밖 변경만 반환합니다.
 
 [FACT] WBS-23 종료 시 unit/contract owned case는 모두 deterministic pass여야 하고 skip/xfail/flaky/quarantine/blocked가 0건이어야 합니다. 남은 concurrency/fault, E2E, capacity/time/cost, spike와 운영 검증은 exact WBS/case/evidence owner에 연결된 pending 상태로 유지합니다.
 
-[INFERENCE] WBS-23 완료 기준은 unit-only 전체 Requirement pass, line-coverage-only closure, mock/contract drift, SQLite 대체, live/paid external call, production data/Secret 노출, skip/xfail/flaky retry pass와 closure 내 production fix가 각각 0건이고 WBS-23 소유 case의 deterministic evidence와 모든 잔여 검증 handoff가 완결되는 것입니다.
+[INFERENCE] WBS-23 완료 기준은 unit-only 전체 Requirement pass, line-coverage-only closure, mock/contract drift, SQLite 대체, live/paid external call, production data/Secret 노출, skip/xfail/flaky retry pass와 미승인·미기록 production fix가 각각 0건이고 WBS-23 소유 case의 deterministic evidence와 모든 잔여 검증 handoff가 완결되는 것입니다.
 
-[UNKNOWN] 실제 test framework/command, PostgreSQL test instance/container, network egress 차단 방식, fixture/golden 경로·versioning·update 승인, coverage 기준, parallel isolation·반복 횟수, contract fingerprint 연결, evidence 보존 형식과 flaky 정책은 WBS-09·10·23·27 전 사용자 승인으로 닫아야 합니다. 이 계획 승인은 실제 test/code/fixture/environment 생성·실행, external sandbox 호출 또는 production fix를 승인한 것이 아닙니다.
+[UNKNOWN] 실제 test framework/command, PostgreSQL test instance/container, network egress 차단 방식, fixture/golden 경로·versioning·update 승인, coverage 기준, parallel isolation·반복 횟수, contract fingerprint 연결, evidence 보존 형식과 flaky 정책은 해당 WBS-09·10·23·27 범위 착수 때 공통 실행 기준으로 닫습니다. 첫 WBS-10의 기존 도구 선택은 유지하고 후속 미결정을 그 선행 조건으로 삼지 않습니다. 이 계획 승인은 실제 test/code/fixture/environment 생성·실행, external sandbox 호출 또는 production fix를 승인한 것이 아닙니다.
 
 ### WBS-24 PostgreSQL concurrency·replay·fault 검증 상세
 
@@ -275,7 +281,7 @@
 
 [FACT] Failure output, SQL/error, fake request/response ledger와 test artifact에 Secret, Authorization, raw external payload, Discord identifier 또는 production data를 넣지 않습니다. Test-only credential도 canary/redaction 검사를 통과해야 합니다.
 
-[UNKNOWN] PostgreSQL test orchestration, process/thread/container kill 방식, connection loss/restart injection, barrier API, fake adapter model, worker 수·repeat/schedule set, lease fixture와 timeout/deadlock 기준은 실행 전 사용자 승인으로 닫아야 합니다.
+[UNKNOWN] PostgreSQL test orchestration, process/thread/container kill 방식, connection loss/restart injection, barrier API, fake adapter model, worker 수·repeat/schedule set, lease fixture와 timeout/deadlock 기준은 해당 범위 실행 전 공통 실행 기준에 따라 확정·기록합니다. 중단 주입은 승인된 disposable test 대상에만 한정합니다.
 
 #### WBS-24.I Evidence·defect closure
 
@@ -283,11 +289,11 @@
 
 [FACT] 핵심 assertion은 stale mutation, duplicate unauthorized invocation/effect, silent lost committed source/handoff, uncertain auto-retry, wrong late evidence attribution, partial 전체화와 restored token 사용이 각각 0건인지 직접 확인합니다. Alert/log 부재나 최종 row 수만으로 이를 추정하지 않습니다.
 
-[FACT] Deadlock, timeout, schedule-dependent failure, flakiness와 unreproduced fault는 pass가 아닙니다. Actual/expected 차이, 재현 schedule, 영향 Requirement/WBS와 defect owner를 남기고 관련 구현 WBS로 반환하며 WBS-24 closure 안에 production fix를 숨기지 않습니다.
+[FACT] Deadlock, timeout, schedule-dependent failure, flakiness와 unreproduced fault는 pass가 아닙니다. Actual/expected 차이, 재현 schedule, 영향 Requirement/WBS와 defect owner를 남기고 공통 결함 처리 기준에 따라 승인 범위 내 수정·재검증을 진행하며 범위 밖 변경만 반환합니다. WBS-24 closure 안에 production fix를 숨기지 않습니다.
 
 [INFERENCE] WBS-24 완료 기준은 actual PostgreSQL의 claim/lease/fence와 domain별 replay/crash matrix에서 두 active owner, stale mutation, silent loss, unapproved duplicate invocation, uncertain auto-retry, wrong late attribution, partial 전체화와 restored-token 재사용이 0건이고 승인 schedule의 deterministic evidence와 모든 defect handoff가 완결되는 것입니다.
 
-[UNKNOWN] 실제 PostgreSQL version/isolation, fault hook/barrier, fake adapter, process/connection interruption, worker/schedule/repeat 수, lease/test timeout, evidence format/retention은 WBS-05·09·23·24·27 전 사용자 승인으로 닫아야 합니다. 이 계획 승인은 PostgreSQL/test/fault environment나 code 생성·실행, 실제 외부 호출 또는 production fix를 승인한 것이 아닙니다.
+[UNKNOWN] 실제 PostgreSQL version/isolation, fault hook/barrier, fake adapter, process/connection interruption, worker/schedule/repeat 수, lease/test timeout, evidence format/retention은 해당 WBS-05·09·23·24·27 범위 착수 때 공통 실행 기준으로 닫습니다. 이 계획 승인은 PostgreSQL/test/fault environment나 code 생성·실행, 실제 외부 호출 또는 production fix를 승인한 것이 아닙니다.
 
 ### WBS-25 Scenario End-to-End 검증 상세
 
@@ -312,7 +318,7 @@
 
 #### WBS-25.A E2E environment
 
-[INFERENCE] E2E topology는 scheduler/batch와 listener/evaluation의 실제 application entry-point/role, 승인 PostgreSQL version/schema/role, deterministic clock, RSS/AI/Discord contract fake와 evidence collector를 명시적으로 기동합니다. 실제 process composition과 command는 WBS-09/10/25 실행 전 승인합니다.
+[INFERENCE] E2E topology는 scheduler/batch와 listener/evaluation의 실제 application entry-point/role, 승인 PostgreSQL version/schema/role, deterministic clock, RSS/AI/Discord contract fake와 evidence collector를 명시적으로 기동합니다. 실제 process composition과 command는 해당 WBS-09/10/25 범위에서 공통 실행 기준에 따라 확정·기록합니다.
 
 [FACT] 각 case는 disposable database/schema, isolated fake state, fixed configuration/contract versions와 clock를 사용합니다. 이전 Scenario의 work/event/message/usage/backlog, environment default 또는 test order가 다음 case 결과에 영향을 주지 않아야 합니다.
 
@@ -433,13 +439,13 @@
 
 [FACT] Scenario 9개와 AC 24개는 orphan 없이 actual pass evidence 또는 명시적 failed/blocked case와 owner를 가져야 합니다. Skip/xfail/flaky/quarantine, stale external fixture와 실행하지 않은 variant는 pass가 아닙니다.
 
-[FACT] 실패는 actual/expected, 영향 Scenario/AC/Requirement/WBS와 재현 evidence를 남겨 원 implementation WBS로 반환합니다. WBS-25 closure 안에 production code/schema/configuration fix를 숨기지 않고 수정 뒤 WBS-23/24 및 영향 E2E를 다시 실행합니다.
+[FACT] 실패는 actual/expected, 영향 Scenario/AC/Requirement/WBS와 재현 evidence를 남겨 공통 결함 처리 기준에 따라 승인 범위 내 수정·재검증을 진행하며 범위 밖 변경만 반환합니다. WBS-25 closure 안에 production code/schema/configuration fix를 숨기지 않고 수정 뒤 영향받는 WBS-23/24 및 E2E를 다시 실행합니다.
 
 [FACT] WBS-25 통과는 Scenario/AC application integration evidence이며 실제 external sandbox, maximum capacity/latency/cost, K3s/storage/deployment 또는 production readiness 통과가 아닙니다. 해당 evidence는 SPK와 WBS-26~30에서 별도 판정합니다.
 
-[INFERENCE] WBS-25 완료 기준은 9 Scenario·24 AC orphan, happy-path-only/최종-state-only 검증, live/paid call, scenario state/time leakage, failure→clean-zero, delayed/recovery/receipt/acceptance/Gate 의미 혼합, report 재계산, 금지 MVP-B/기술과 closure 내 production fix가 각각 0건이고 모든 variant의 source→state/evidence→user output lineage가 deterministic하게 통과하는 것입니다.
+[INFERENCE] WBS-25 완료 기준은 9 Scenario·24 AC orphan, happy-path-only/최종-state-only 검증, live/paid call, scenario state/time leakage, failure→clean-zero, delayed/recovery/receipt/acceptance/Gate 의미 혼합, report 재계산, 금지 MVP-B/기술과 미승인·미기록 production fix가 각각 0건이고 모든 variant의 source→state/evidence→user output lineage가 deterministic하게 통과하는 것입니다.
 
-[UNKNOWN] E2E process topology/command, contract fake/fingerprint, deterministic scheduler/clock, PostgreSQL reset/isolation, Scenario fixture/variant 수, Discord semantic/physical assertion, quality-review input, evidence format, runtime/parallelism/resource budget은 WBS-09·23~27 전 사용자 승인으로 닫아야 합니다. 이 계획 승인은 E2E code/environment/fixture/database/report 생성·실행, actual external 호출 또는 production fix를 승인한 것이 아닙니다.
+[UNKNOWN] E2E process topology/command, contract fake/fingerprint, deterministic scheduler/clock, PostgreSQL reset/isolation, Scenario fixture/variant 수, Discord semantic/physical assertion, quality-review input, evidence format, runtime/parallelism/resource budget은 해당 WBS-09·23~27 범위 착수 때 공통 실행 기준으로 닫습니다. 이 계획 승인은 E2E code/environment/fixture/database/report 생성·실행, actual external 호출 또는 production fix를 승인한 것이 아닙니다.
 
 ### WBS-26 용량·시간·비용 운영 전 검증 상세
 
@@ -463,7 +469,7 @@
 
 #### WBS-26.A Validation environment
 
-[INFERENCE] Environment profile은 source revision/image/dependency, Python/PostgreSQL version/configuration, CPU/memory/storage/DB limits, process role/concurrency, network/fake/actual external mode, clock/timezone, warm-up/cache, test data distribution과 실행 host를 기록합니다. 실제 값은 WBS-09/26 실행 전 사용자 승인합니다.
+[INFERENCE] Environment profile은 source revision/image/dependency, Python/PostgreSQL version/configuration, CPU/memory/storage/DB limits, process role/concurrency, network/fake/actual external mode, clock/timezone, warm-up/cache, test data distribution과 실행 host를 기록합니다. 실제 값은 WBS-09/26 범위에서 공통 실행 기준에 따라 확정·기록하며 실제 외부 호출 budget·대상·비용 조건은 별도 승인을 유지합니다.
 
 [FACT] WBS-26은 production data/account/credential·live Discord target을 사용하지 않습니다. Actual free-provider 실험은 SPK-06A가 pass하고 사용자가 exact account/project/model, non-billable configuration, call/token/time budget과 stop condition을 승인한 별도 run만 허용합니다.
 
@@ -570,7 +576,7 @@
 
 [FACT] 실행하지 않은 actual 100건, K3s 환경, 2주·20 scheduled batch 또는 monthly billing 결과를 추정 pass로 채우지 않습니다. Fail/blocked/inconclusive/not-measurable과 101 overflow unknown을 보고서에서 생략하지 않습니다.
 
-[INFERENCE] 처리시간/usage 표본은 승인 통계 요약을 사용하되 average 하나로 tail/error를 숨기지 않습니다. 실제 percentile/repetition/confidence 기준은 test budget과 requirement를 바꾸지 않는 범위에서 실행 전 승인합니다.
+[INFERENCE] 처리시간/usage 표본은 승인 통계 요약을 사용하되 average 하나로 tail/error를 숨기지 않습니다. 실제 percentile/repetition/confidence 기준은 test budget과 requirement를 바꾸지 않는 범위에서 공통 실행 기준에 따라 정해 기록합니다.
 
 #### WBS-26.I Evidence·deployment handoff
 
@@ -578,8 +584,8 @@
 
 [FACT] WBS-27에는 image/build/runtime 차이, K3s role/manifest/resource/storage/network/clock/schedule smoke owner를, WBS-28에는 blocking unknown·cost/backup/security/runbook 승인 owner를, WBS-29에는 실제 deployment smoke, WBS-30에는 2~4주·20 batch·50 candidate와 monthly billing 최종 evidence owner를 넘깁니다.
 
-[FACT] Capacity/latency/cost defect가 production code/configuration 변경을 요구하면 영향 WBS-14~22로 반환해 승인 범위에서 수정하고 WBS-23~26의 영향 suite를 다시 실행합니다. WBS-26 closure 안에 production fix, dependency/setting 변경 또는 유료 resource 선택을 숨기지 않습니다.
+[FACT] Capacity/latency/cost defect가 production code/configuration 변경을 요구하면 영향 WBS-14~22에 연결하고 공통 결함 처리 기준에 따라 승인 범위 내에서 수정·재검증하며 범위 밖 변경만 반환합니다. WBS-23~26의 영향 suite를 다시 실행하고 WBS-26 closure 안에 production fix, dependency/setting 변경 또는 유료 resource 선택을 숨기지 않습니다.
 
-[INFERENCE] WBS-26 완료 기준은 candidate/entry/request count 혼합, 0/1/99/100/101 silent loss, synthetic/limited actual 외삽, budget 초과/paid fallback, 30분·1분·13시간·pipeline/recovery 지표 혼합, predeploy의 K3s/95%/monthly 비용 false pass와 closure 내 production fix가 각각 0건이고 실행한 범위의 evidence와 WBS-27~30 pending handoff가 완결되는 것입니다.
+[INFERENCE] WBS-26 완료 기준은 candidate/entry/request count 혼합, 0/1/99/100/101 silent loss, synthetic/limited actual 외삽, budget 초과/paid fallback, 30분·1분·13시간·pipeline/recovery 지표 혼합, predeploy의 K3s/95%/monthly 비용 false pass와 미승인·미기록 production fix가 각각 0건이고 실행한 범위의 evidence와 WBS-27~30 pending handoff가 완결되는 것입니다.
 
 [UNKNOWN] 최종 free provider/model/quota/reset, actual call/token/time budget, 100건 초과 policy, representative input distribution, CPU/memory/DB budget, environment comparability, clock/scheduler/Discord timing precision, warm-up/repetition/statistics, user billing confirmation schedule와 K3s performance delta 기준은 SPK-02·04·06, WBS-06·08·09·26~30에서 사용자 승인으로 닫아야 합니다. 이 계획 승인은 workload/environment/actual external call, K3s deployment, 비용·성능 결과 또는 production fix를 승인한 것이 아닙니다.

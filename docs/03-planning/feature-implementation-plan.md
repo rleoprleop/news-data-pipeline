@@ -8,6 +8,8 @@
 
 [FACT] 현재 실행 범위는 2026-10-14 승인된 [간소화 계획](implementation-plan.md#incremental-implementation-scope)을 따릅니다. WBS-10만 첫 작업 명세로 구체화하고, WBS-11~22 상세 checkpoint는 해당 기능 착수 때 사용할 참조로 둡니다. 아래 `WBS-09 READY`·physical `final closure`·선행 WBS는 대상 하위 구현과 직접 의존성에 적용하며, 전체 미래 설계의 일괄 완료를 WBS-10 선행 조건으로 사용하지 않습니다. 외부 계약·보안·DB 무결성의 관련 blocker는 해당 구현 전 그대로 충족해야 합니다.
 
+[FACT] 2026-10-15 전환 이후 각 작업은 기존 WBS 절에서 목적, 입력·출력/주요 계약, 범위·제외 범위, 완료 조건, 핵심 검증 방법만 확인합니다. 이미 있는 내용은 정본 경로·절·ID를 참조하고 빠진 필수 결정만 보완하며 별도 기능 명세 파일·빈 추상화·후속 상세 설계를 추가하지 않습니다. 실행·테스트·리뷰·완료 및 발견 사항 분류는 [AGENTS](../../AGENTS.md#development-workflow)를 적용합니다. WBS-11~22 계약·식별자·후속 책임은 유지합니다.
+
 ## Quick Navigation
 
 - [WBS-10 — Python 실행·테스트 기반 상세 checkpoint](#wbs-10--python-실행테스트-기반-상세-checkpoint)
@@ -28,7 +30,7 @@
 
 ### WBS-10 — Python 실행·테스트 기반 상세 checkpoint
 
-[FACT] 첫 작업의 범위·완료 조건·도구·실행 절차는 이 절 한곳에서 관리합니다. 관련 Requirement는 NFR-MNT-001~002·NFR-SEC-001~002, Decision은 AD-01·03·06·14·23입니다. 현재 사용자 요청은 명세·절차 최적화의 계속이며, 실제 구현·환경 생성·설치·테스트는 미실행입니다. WBS-10의 최종 READY·코드/테스트 실행 승인은 미확보입니다.
+[FACT] 첫 작업의 범위·완료 조건·도구·실행 절차는 이 절 한곳에서 관리합니다. 관련 Requirement는 NFR-MNT-001~002·NFR-SEC-001~002, Decision은 AD-01·03·06·14·23입니다. 현재 사용자 요청은 개발 프로세스 전환만이며, 실제 구현·환경 생성·설치·애플리케이션 테스트는 미실행입니다. WBS-10의 최종 READY·코드/테스트 실행 승인은 미확보이며 문서 전환 완료로 상태를 올리지 않습니다.
 
 [FACT] 범위는 단일 installable Python package·작은 command dispatch·비민감 startup validation·network-free tests입니다. 후속 업무·실제 RSS/AI/Discord/REST adapter·DB schema/migration/persistence·business state transition·container/K3s 구성은 포함하지 않습니다. 외부 SPK·DB/lease·AI/Discord·backup/evaluation 상세 closure는 첫 작업에 비적용이고, 해당 후속 WBS의 원래 blocker·검증 owner는 유지합니다.
 

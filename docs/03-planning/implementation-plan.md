@@ -10,9 +10,11 @@
 
 [FACT] 이 문서는 애플리케이션 코드, DB migration·SQL schema, 실제 외부 API contract, Kubernetes manifest 또는 배포를 구현하거나 확정하지 않습니다.
 
-[FACT] WBS 항목별 정의는 순차 검토와 사용자 승인을 거쳐 확정하며, Workflow 10 Coding Readiness Check 통과 전 production code 구현을 시작하지 않습니다.
+[FACT] WBS 항목별 계획 정의는 기존 승인 기준선으로 유지합니다. 각 구현 단위는 Workflow 10 Coding Readiness Check 통과 전 production code 구현을 시작하지 않으며, 승인된 계획 전체의 순차 검토·승인을 반복하지 않습니다.
 
 [FACT] 2026-10-14 사용자는 요구사항과 확정된 기술 선택을 유지하고, 상세 결정·Readiness를 구현 단위별로 적용하며, 첫 작업을 외부 연결 없는 Python 실행·테스트 기반으로 하는 간소화를 승인했습니다. 아래 `Incremental Implementation Scope`가 현재 실행 순서와 선행 조건의 적용 범위입니다. 이번 승인은 문서 간소화이며 실제 Coding Readiness 통과·코드 작성·외부 검증·배포 승인이 아닙니다.
+
+[FACT] 2026-10-15 사용자가 승인한 개발 프로세스 전환은 [AGENTS의 작업별 흐름·준비 조건](../../AGENTS.md#development-workflow)을 공통 실행 규칙으로 적용합니다. 상세 checkpoint는 계약·완료 책임을 보존하며 새 승인 단계로 증식하지 않습니다. 이번 문서 전환은 WBS-10의 READY·DONE 또는 구현 실행 승인이 아닙니다.
 
 ## Planning Context
 
@@ -85,7 +87,7 @@
 
 [FACT] 계획 문서의 `WBS-09 READY`, `Coding Readiness 전`, `final closure`는 이제 **착수하려는 WBS/하위 checkpoint의 실제 변경 범위와 직접 의존성**에 적용합니다. WBS-03~08·11~31의 후속 상세 checkpoint는 해당 기능 때 사용할 참조이며, 첫 WBS-10의 일괄 선행 조건이 아닙니다. 상세 수치·tool·field를 지금 추가 확정하지 않고 계약 본문은 정본을 참조합니다. 기존 checkpoint ID와 안전·무결성·외부 계약의 완료 조건은 보존합니다.
 
-[FACT] 구현 범위는 아래 묶음 전체가 아니라 하나의 검토 가능한 하위 단위로 선택합니다. 관련 schema closure는 그 단위가 생성·갱신·참조하는 record와 공통 불변식까지 포함하고, 후속 entity는 owner와 진입 조건을 남겨 Later로 유지합니다. 논리 entity별 별도 table을 만들 필요는 없습니다. 순서를 나눠도 원본·identity·constraint·append-only 이력·외부 효과 경계는 약화하지 않습니다.
+[FACT] 구현 범위는 아래 묶음 전체가 아니라 기존 WBS의 검토 가능한 작업 단위로 선택합니다. 추가 세분화는 독립적인 구현·검증에 필요한 경우로 한정합니다. 관련 schema closure는 그 단위가 생성·갱신·참조하는 record와 공통 불변식까지 포함하고, 후속 entity는 owner와 진입 조건을 남겨 Later로 유지합니다. 논리 entity별 별도 table을 만들 필요는 없습니다. 순서를 나눠도 원본·identity·constraint·append-only 이력·외부 효과 경계는 약화하지 않습니다.
 
 | 구현 순서 | 기존 WBS | 착수 전 필요한 결정·검증 | 지금 유지할 계획 수준 |
 | --- | --- | --- | --- |
@@ -97,7 +99,7 @@
 
 [FACT] 첫 작업의 비적용 검증은 `pass`로 바꾸지 않습니다. 미검증 항목은 원래 상태와 후속 owner를 유지하고 첫 작업에 비적용인 이유만 기록합니다. 범위 확대·직접 의존성 발견 시 Readiness를 다시 판정하며, 첫 작업의 `READY`가 후속 WBS나 운영을 허용하지 않습니다. 현재 Git 조회·branch 생성·commit/push는 수행하지 않고 Git closure를 Agent 작업의 선행 조건으로 요구하지 않습니다.
 
-[FACT] 대상 구현·테스트 실행 승인과 READY는 한 번의 진입 결정으로 묶습니다. 이미 승인된 동일 범위의 통상 도구 선택·구현·검증·문서 동기화마다 승인을 반복 요청하지 않습니다. 핵심 설계·범위·비용/권한·데이터 손실·외부 검증·배포의 승인 경계는 유지합니다. 문서 최적화 요청은 구현 승인으로 바꾸지 않습니다.
+[FACT] 대상 구현·테스트 실행 승인과 READY는 한 번의 진입 결정으로 묶습니다. 이미 승인된 동일 범위의 통상 도구 선택·구현·검증·범위 내 결함 수정·문서 동기화마다 승인을 반복 요청하지 않습니다. 발견 사항의 BLOCKER/REQUIRED/DEFERRED 분류와 완료 판정은 AGENTS를 따르며 기존 우선순위·필수 요구를 낮추지 않습니다. 핵심 설계·범위·비용/권한·데이터 손실·외부 검증·배포의 승인 경계는 유지합니다. 문서 전환 요청은 구현 승인으로 바꾸지 않습니다.
 
 [FACT] 현재 최적화의 완료 기준은 첫 작업의 범위·조건·실행 절차가 한 정본에 있고, 공통 진입표·추적성·탐색 경로가 일치하며, 기존 요구사항/안전 조건·참조 링크가 보존되는 것입니다. 후속 기능의 세부 설계·새 문서·새 승인 단계를 추가하는 것을 최적화 산출물로 삼지 않습니다.
 
@@ -288,11 +290,11 @@
 | M1 — External Validation Gate | 해당 외부 기능에 필요한 SPK의 독립 판정·evidence와 비용 coverage | 실제 계약·비용 조건과 fail/blocked/inconclusive 처리 | 검증된 외부 범위만 설계·구현 가능; WBS-10 비적용 |
 | M2 — Physical Design Baseline | 해당 저장·work·도메인 구현의 physical closure와 관련 mapping | 관련 schema·lease·retry·UX·RPO/RTO | 해당 범위의 승인 계약 확보; WBS-10 비적용 |
 | M3 — Coding Readiness | 대상 구현 단위의 WBS-09.A~G 적용 check 전부 pass, Later owner·재판정 조건 기록 | 비차단 위험과 해당 단위의 구현 진입 | 승인된 단위만 Workflow 11 진입; M1·M2를 먼저 요구하는 범위는 관련 외부/DB 기능 |
-| M4 — Foundation | WBS-10~14와 관련 test 통과 | schema/work/RSS PR | 내부 상태·입력 기반 안정화 |
-| M5 — Daily Value Path | WBS-15~17과 정상·0건·failure notice 통과 | AI·선정·Discord PR | 일일 경로 확보 |
-| M6 — Feedback and Recovery | WBS-18~22와 recovery·evaluation·backup 통과 | interaction·복구·운영 증거 PR | 통합 검증 가능 |
-| M7 — Integrated Verification | WBS-23~26과 AC·VR·Gate evidence 완료 | 결함 수정·재검증 결과와 남은 비차단 risk | WBS-27 배포 artifact 준비 진입 |
-| M7.5 — Release Candidate Closure | WBS-27 artifact 검증 뒤 Workflow 13 Code Review, Workflow 14 문서·Context 동기화, Workflow 15 Git Review·commit·push 완료 | review 지적·문서 동기화·commit/push 범위 | WBS-28 Deployment Readiness 실행 |
+| M4 — Foundation | WBS-10~14와 관련 test 통과 | 기존 승인 밖 schema/work/RSS 계약 변경만 별도 승인 | 내부 상태·입력 기반 안정화 |
+| M5 — Daily Value Path | WBS-15~17과 정상·0건·failure notice 통과 | 기존 승인 밖 AI·선정·Discord 계약/실행 변경만 별도 승인 | 일일 경로 확보 |
+| M6 — Feedback and Recovery | WBS-18~22와 recovery·evaluation·backup 통과 | 기존 승인 밖 interaction·복구·운영 계약/실행 변경만 별도 승인 | 통합 검증 가능 |
+| M7 — Integrated Verification | WBS-23~26과 AC·VR·Gate evidence 완료 | 범위 내 수정·재검증은 재승인하지 않음; 변경된 승인 경계·비차단 risk 수용은 별도 | WBS-27 배포 artifact 준비 진입 |
+| M7.5 — Release Candidate Closure | WBS-27 artifact 검증 뒤 Workflow 13 Code Review·필수 수정/재검증, Workflow 14 문서·Context 동기화 완료; Agent Git 절차 비활성 | 기존 승인 범위를 바꾸는 사항만 별도 승인; Git은 사용자 직접 관리 | 검증한 source/artifact 연결을 보존해 WBS-28 진입; Agent Git closure를 요구하지 않음 |
 | M8 — Deployment Readiness | WBS-28의 artifact·target·security·cost·backup·runbook blocker가 모두 통과해 `READY` | 비차단 risk와 별도 WBS-29 단계별 실행안 | Workflow 16의 WBS-29 staged deployment 시작 |
 | M9 — Staged Deployment | WBS-29 publish→suspended apply→internal smoke→bounded sandbox smoke→별도 activation을 완료하고 `activated_monitoring` baseline 인계 | 각 mutation 단계, activation과 필요한 rollback/stop | WBS-30 Monitoring 시작 |
 | M10 — MVP-A Validation | 최소 2주 AND 20 scheduled batch AND 50 candidate 충족 뒤, 또는 최대 4주 cutoff에서 별도 사용자 evaluation request로 Gate·품질·서비스·비용 결과 생성 | monthly billing 확인, 결과 해석과 `accepted_pass`·`not_met`·`inconclusive` disposition | WBS-31 Retrospective 실행 |
@@ -310,7 +312,7 @@
 - [INFERENCE] 장기 backlog 상한은 기본값을 숨겨 구현하지 않고 WBS-07 사용자 결정으로 남겨야 합니다.
 - [INFERENCE] backup 성공만 확인하고 restore·ledger/Discord reconciliation을 생략하면 중복 외부 효과를 막을 수 없습니다.
 - [INFERENCE] 비용 0원 검증 실패 시 유료·관리형 서비스로 자동 대체하지 않고 outbound를 차단합니다.
-- [INFERENCE] WBS-27 뒤 Workflow 13~15 closure를 생략하면 review되지 않거나 문서·commit과 다른 artifact가 Deployment Readiness에 들어갈 수 있습니다.
+- [INFERENCE] WBS-27 뒤 Code Review·필수 수정/재검증·문서 동기화와 검증 source/artifact 연결을 생략하면 다른 artifact가 Deployment Readiness에 들어갈 수 있습니다. Agent Git 절차는 요구하지 않으며 배포 baseline에 필요한 Git 식별값은 사용자가 제공한 값과 확인 범위를 구분합니다.
 - [INFERENCE] WBS-28의 blocker를 일반 risk acceptance로 우회하면 미검증 비용·보안·backup 조건으로 실제 mutation이 시작될 수 있습니다.
 - [INFERENCE] WBS-29의 publish·apply·smoke·activation 승인을 하나로 합치면 중간 실패에서 stop/rollback 범위와 외부 효과가 불명확해집니다.
 - [INFERENCE] WBS-30의 monitoring 시작과 evaluation request를 같은 사전 승인으로 묶으면 실제 표본·cutoff 확인 전 평가가 고정되거나 운영 evidence 수집이 불필요하게 지연됩니다.
@@ -328,4 +330,4 @@
 
 ## Recommended Next Action
 
-[FACT] 현재 작업은 명세·개발 절차 최적화입니다. [WBS-10 통합 명세](feature-implementation-plan.md#wbs-10--python-실행테스트-기반-상세-checkpoint)와 공통 Readiness·추적성·탐색 경로의 중복/불일치를 정리하고 위 완료 기준을 확인합니다. 현재 상태와 이후 작업은 [Active Context](../../ai-context.md#active-context)를 따르며, 구현 요청이 있을 때만 기존 도구 선택과 명세로 WBS-10 진입을 판정합니다. 선택한 도구를 다시 조사하거나 간소화 완료 뒤 코드 승인을 자동 요청하지 않습니다.
+[FACT] 현재 상태와 다음 작업은 [Active Context](../../ai-context.md#active-context)를 따릅니다. WBS-10 구현을 별도로 요청하면 기존 [통합 명세](feature-implementation-plan.md#wbs-10--python-실행테스트-기반-상세-checkpoint)·도구 선택으로 공통 Readiness를 한 번 판정합니다. 새로운 명세 작성·도구 재조사·전체 계획 재승인을 선행 조건으로 추가하지 않으며, 문서 전환 완료 뒤 코드 승인을 자동 요청하지 않습니다.

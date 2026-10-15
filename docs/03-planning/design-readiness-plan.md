@@ -8,6 +8,8 @@
 
 [FACT] 2026-10-14 승인된 [구현 단위별 적용 범위](implementation-plan.md#incremental-implementation-scope)를 따릅니다. WBS-03~08 상세 checkpoint는 관련 기능 착수 때 사용할 참조입니다. 본문의 `Coding Readiness 전`·`WBS-09 blocker`·`final closure`는 해당 구현 범위에 적용하며, WBS-10 시작 전에 모든 후속 계약을 완료하라는 뜻으로 사용하지 않습니다. 관련 안전·무결성·외부 계약은 해당 구현 전 반드시 닫습니다.
 
+[FACT] 2026-10-15 프로세스 전환에 따라 WBS-03~08은 관련 구현 직전에 부족한 필수 결정만 보완하는 참조로 사용합니다. 기존 승인 결정·계약을 다시 작성하거나 checkpoint마다 새 승인 절차를 만들지 않습니다. 실질적 변경과 위험한 실행의 승인 경계는 [AGENTS](../../AGENTS.md#scope-and-change-control)를 따릅니다.
+
 ## Quick Navigation
 
 - [WBS-03 Internal Review Checkpoints](#wbs-03-internal-review-checkpoints)
@@ -2313,7 +2315,9 @@ backup work·gate
 | WBS-09.F | 도구·version·허용 파일·수정 복구/review·실행 범위와 범위 밖 중단 조건 |
 | WBS-09.G | 적용 blocker 전부 pass, 비적용 사유·원래 상태·후속 owner·진입 gate 기록, 해당 범위 실행 승인과 READY 판정 |
 
-[FACT] 최초 기록은 대상 scope·관련 ID·check별 적용성/사유·status·필요 evidence와 위치/fingerprint·확인 일시/환경/configuration·blocked scope·결정/검증 owner·후속 entry gate·재검증 계기·잔존 위험/수정 복구·실행 승인을 포함합니다. 별도 register 문서를 만들지 않고 해당 작업의 명세/완료 기록과 이 공통 표를 참조합니다. 임의 완료일을 강제하지 않으며 같은 내용을 여러 표에 복사하지 않습니다.
+[FACT] A~G는 새 gate 없이 네 준비 질문으로 묶어 확인합니다: 목표 명확성(A·D), 필수 계약·제약(B·C·D·F), 현재 blocker 부재(G 및 적용 B·C), 완료 검증 가능성(E). 실행 승인이 있고 네 조건을 충족하면 추가 설계 검토 없이 해당 구현에 진입합니다.
+
+[FACT] 최초 기록은 기존 작업 절에 scope·관련 ID·질문별 결과/적용성·근거 참조·실행 승인을 짧게 남깁니다. 필요한 evidence의 위치/fingerprint·확인 일시/환경/configuration·blocked scope·결정/검증 owner·후속 entry gate·재검증 계기·잔존 위험/수정 복구는 해당 계약의 기존 기록을 참조하며 중복 작성하지 않습니다. 외부 연결·업무 데이터 변경이 없는 첫 WBS-10은 B·C 비적용 사유와 원래 후속 owner를 참조하면 충분합니다. 적용 안전 검증의 증거를 생략하거나 별도 register·관리 파일·임의 완료일을 추가하지 않습니다.
 
 [FACT] Status는 `pass/fail/blocked/inconclusive/stale/not_run`을 구분합니다. 비적용은 pass가 아니며 원래 상태와 후속 owner를 유지합니다. Evidence가 있어도 source version·환경/configuration·유효성을 확인하지 못하거나 다른 provider/account/환경의 결과이면 적용 pass로 재사용하지 않습니다. 계약·runtime·configuration 변경은 VR-011에 따라 영향 범위를 재확인합니다.
 
@@ -2326,11 +2330,11 @@ backup work·gate
 | `READY` | 적용 blocker 전부 pass와 해당 구현·테스트 실행 승인 확보; 승인된 단위만 시작 |
 | `NOT_READY` | 적용 check가 fail/blocked/inconclusive/stale/not_run·미승인; 해당 결정/검증 준비만 진행 |
 
-[FACT] `READY_WITH_ACCEPTED_RISK` 같은 우회 상태는 만들지 않습니다. 대상 구현·테스트 실행 승인과 READY 판정은 한 번의 진입 결정으로 기록합니다. 이미 승인된 동일 scope의 명세 적용·통상 도구 선택·구현/검증/문서 동기화마다 재승인을 요구하지 않습니다. Scope·핵심 설계·계정/권한/비용 경로·데이터 손실 가능 작업·외부 검증·배포의 별도 승인 경계는 AGENTS와 관련 계약대로 유지합니다.
+[FACT] `READY_WITH_ACCEPTED_RISK` 같은 우회 상태는 만들지 않습니다. 대상 구현·테스트 실행 승인과 READY 판정은 한 번의 진입 결정으로 기록합니다. 이미 승인된 동일 scope의 명세 적용·통상 도구 선택·구현/검증/범위 내 결함 수정/문서 동기화마다 재승인을 요구하지 않습니다. Scope·핵심 설계·계정/권한/비용 경로·데이터 손실 가능 작업·외부 검증·배포의 별도 승인 경계는 AGENTS와 관련 계약대로 유지합니다.
 
 [FACT] 첫 WBS-10은 외부 연결·DB/업무 데이터 변경이 없어 B·C가 비적용입니다. SPK-01~06·AI·selection·Discord·backup/evaluation의 원래 미검증 상태와 WBS-04~08·11~31의 관련 진입 조건을 유지합니다. 무관한 SPK 미실행으로 첫 작업을 차단하거나 첫 작업 READY로 후속 WBS·외부 호출·운영을 허용하지 않습니다. 추가 dependency·DB/네트워크·background 등 범위 확대나 새 직접 의존성이 발견되면 중단하고 적용성을 다시 판정합니다.
 
-[FACT] 현재 사용자는 명세·개발 절차 최적화를 계속하도록 지시했습니다. 이 작업에서 구현 승인을 요청하거나 코드 단계로 자동 전환하지 않습니다. 첫 WBS-10 상태는 `NOT_READY`(구현·테스트 실행 미승인)이며 도구 선택과 준비 상태는 첫 작업 명세를 참조합니다. 향후 사용자가 해당 구현 범위의 시작을 요청하면 그 승인에 근거해 한 번 판정하고 진행합니다.
+[FACT] 현재 사용자는 개발 프로세스 전환만 승인했으며 WBS-10 구현은 별도로 시작합니다. 문서 수정 완료로 READY·DONE을 부여하지 않습니다. 첫 WBS-10 상태는 `NOT_READY`(구현·테스트 실행 미승인)이며 기존 통합 명세·도구 선택을 유지합니다. 향후 사용자가 해당 구현 범위의 시작을 요청하면 그 승인에 근거해 한 번 판정하고 진행합니다.
 
 #### WBS-10 Toolchain and Execution Procedure
 
